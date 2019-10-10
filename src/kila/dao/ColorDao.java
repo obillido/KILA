@@ -27,7 +27,7 @@ public class ColorDao {
 			pstmt.setString(2, color);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				return 1;
+				return rs.getInt("colnum");
 			}
 			return 0;
 		}catch(SQLException se) {
@@ -58,4 +58,5 @@ public class ColorDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
+
 }
