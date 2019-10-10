@@ -49,4 +49,21 @@ public class MemberDao {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	public int update(MemberVo vo) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="update member set pwd=? where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,vo.getPwd());
+			pstmt.setString(2,vo.getId());
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
 }

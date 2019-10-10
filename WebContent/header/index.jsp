@@ -23,10 +23,10 @@
    <li><a href="${pageContext.request.contextPath }/header/join">회원가입</a></li>
    <c:choose>
       <c:when test="${not empty sessionScope.id}">
-         <li>
-         <a href="${pageContext.request.contextPath }/header/logout">로그아웃</a></li>
+         <li><a href="${pageContext.request.contextPath }/header/logout">로그아웃</a></li>
+         <li><a href="${pageContext.request.contextPath }/header/mypage.jsp">마이페이지</a></li>
       </c:when>
-      <c:otherwise><%--로그인 안 한 경우 --%>
+      <c:otherwise>
          <li><a href="${pageContext.request.contextPath }/header/login">로그인</a></li>
       </c:otherwise>
    </c:choose>
