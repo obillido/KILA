@@ -12,6 +12,7 @@
 	String cpage=request.getParameter("cpage");
 	if(hpage==null) hpage="basicHeader.jsp";
 	if(cpage==null) cpage="basicContent.jsp";
+	String aaa;
 %>
 <div id="wrap">
 	<div id="header">
@@ -23,6 +24,7 @@
 	<div id="footer">
 		<jsp:include page="footer.jsp"/>
 	</div>
+
 </div>
 </body>
 </html>
