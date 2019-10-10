@@ -14,6 +14,7 @@
 	if(cpage==null) cpage="basicContent.jsp";
 	String bb="";
 	String aa="";
+	String cc="";
 %>
 <div id="wrap">
 	<div id="header">
