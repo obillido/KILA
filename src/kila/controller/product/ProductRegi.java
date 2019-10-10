@@ -28,9 +28,10 @@ public class ProductRegi extends HttpServlet{
 		
 		int n=ProductDao.getInstance().insert(cname, pcode, pname, price, color, size, cnt);
 		if(n>0) {
-			
+			resp.sendRedirect(req.getContextPath()+"/product/list");
 		}else {
-			
+			req.setAttribute("msg", "등록실패");
+			req.getRequestDispatcher("/admin/productRegi.jsp").forward(req, resp);
 		}
 	}
 }

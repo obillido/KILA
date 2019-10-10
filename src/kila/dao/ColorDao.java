@@ -31,7 +31,7 @@ public class ColorDao {
 			}
 			return 0;
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ColorDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
@@ -52,7 +52,7 @@ public class ColorDao {
 			pstmt.setLong(5, vo.getFilesize());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ColorDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);

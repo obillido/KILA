@@ -25,7 +25,7 @@ public class ProductRegDao {
 			pstmt.setInt(2, vo.getCnt());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ProductRegDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);

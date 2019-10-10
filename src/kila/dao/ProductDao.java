@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import kila.vo.ColorVo;
@@ -34,7 +35,7 @@ public class ProductDao {
 			}
 			return 0;
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ProductDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
@@ -95,7 +96,7 @@ public class ProductDao {
 			}
 			return 1;
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ProductDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);
@@ -114,7 +115,7 @@ public class ProductDao {
 			pstmt.setInt(3, vo.getIcnt());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ProductDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);
@@ -133,11 +134,30 @@ public class ProductDao {
 			pstmt.setString(3, size);
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ProductDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);
 		}
+	}
+	
+	public ArrayList<ProductVo> getList(){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from ";
+			
+			
+		}catch(SQLException se) {
+			System.out.println("ProductDAO:"+se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+		
+		return null;
 	}
 	
 }

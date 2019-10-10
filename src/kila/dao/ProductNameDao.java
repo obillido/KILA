@@ -30,7 +30,7 @@ public class ProductNameDao {
 			}
 			return 0;
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ProductNameDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
@@ -50,7 +50,7 @@ public class ProductNameDao {
 			pstmt.setInt(4, vo.getPrice());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ProductNameDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);
