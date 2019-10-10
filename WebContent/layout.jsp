@@ -12,6 +12,7 @@
 	String cpage=request.getParameter("cpage");
 	if(hpage==null) hpage="basicHeader.jsp";
 	if(cpage==null) cpage="basicContent.jsp";
+	String bb="";
 %>
 <div id="wrap">
 	<div id="header">
