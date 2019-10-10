@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#container {
+  height: 400px;
+  width: 400px;
+  position: relative;
+}
+#image {
+  position: absolute;
+  height: 400px;
+  width: 400px;
+}
+#text {
+  z-index: 100;
+  position: absolute;
+  color: blac;
+  font-size: 24px;
+  font-weight: bold;
+  left: 30%;
+  top: 40%;
+}
+</style>
+<script type="text/javascript">
+    function select(e){
+    	var img=e.target;
+    	img.style.opacity="0.5";
+    	img.nextSibling.nextSibling.innerHTML="자세하게 보기"
+    	img.style.cursor="pointer";
+    }
+    function unselect(e){
+    	var img=e.target;
+    	img.style.opacity="1";
+    	img.nextSibling.nextSibling.innerHTML=""
+    }
+</script>
+</head>
+<body>
+<div id="container">
+  <img src="../images/1.jpg" id="image" onmouseover="select(event)" onmouseout="unselect(event)">
+  <span id="text">
+  </span>
+</div>
+<div id="container">
+  <img src="../images/1.jpg" id="image" onmouseover="select(event)" onmouseout="unselect(event)">
+  <p id="text">
+  </p>
+</div>
+</body>
+</html>
