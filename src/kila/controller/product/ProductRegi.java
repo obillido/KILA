@@ -18,6 +18,7 @@ public class ProductRegi extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
 		String cname=req.getParameter("cname");
 		String pcode=req.getParameter("pcode");
 		String pname=req.getParameter("pname");
