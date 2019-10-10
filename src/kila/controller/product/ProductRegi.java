@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kila.dao.ProductDao;
+
 @WebServlet("/product/productRegi")
 public class ProductRegi extends HttpServlet{
 	@Override
@@ -17,6 +19,18 @@ public class ProductRegi extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cname=req.getParameter("cname");
-		String productname=req.getParameter("productname");
+		String pcode=req.getParameter("pcode");
+		String pname=req.getParameter("pname");
+		int price=Integer.parseInt(req.getParameter("price"));
+		String[] color=req.getParameterValues("color");
+		String[] size=req.getParameterValues("size");
+		int cnt=Integer.parseInt(req.getParameter("cnt"));
+		
+		int n=ProductDao.getInstance().insert(cname, pcode, pname, price, color, size, cnt);
+		if(n>0) {
+			
+		}else if(n==-1){
+			String msg="";
+		}
 	}
 }
