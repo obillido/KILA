@@ -9,7 +9,7 @@ drop table review;
 drop sequence payment_seq;
 drop table payment;
 drop sequence pr_seq;
-drop table product_registration;
+drop table product_reg;
 
 drop sequence product_seq;
 drop table product;
@@ -96,7 +96,7 @@ create table product
 create sequence product_seq;
 
 
-create table product_registration
+create table product_reg
 (
     regnum number(10) primary key,
     pnum references product(pnum),
