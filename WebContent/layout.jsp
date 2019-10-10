@@ -13,6 +13,7 @@
 	if(hpage==null) hpage="basicHeader.jsp";
 	if(cpage==null) cpage="basicContent.jsp";
 	String bb="";
+	String aa="";
 %>
 <div id="wrap">
 	<div id="header">
