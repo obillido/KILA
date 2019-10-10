@@ -12,8 +12,10 @@
 	label{
 		display:inline-block;
 		width:100px;
-		height:20px;
+		height:30px;
 	}
+	select{height:25px;}
+	#cnt{width:60px;}
 </style>
 
 
@@ -23,13 +25,11 @@
 	<select id="cname">
 		<option value="down_jacket">다운자켓</option>
 		<option value="jacket">자켓</option>
-		<option value="longsleeved_tshirts">긴팔티셔츠</option>
-		<option value="longpants">긴바지</option>
-		<option value="shortsleeved_tshirts">반팔티셔츠</option>
-		<option value="shortpants">반바지</option>
+		<option value="tshirts">티셔츠</option>
+		<option value="pants">바지</option>
 	</select>
 	<br>
-	<label for="product name">상품명</label>
+	<label for="product name">상품코드</label>
 	<input type="text" id="pname">
 	<br>
 	<label for="color">색상</label>
@@ -45,6 +45,7 @@
 	<input type="checkbox" name="size" value="XL"> XL
 	<br>
 	<label for="count">수량</label>
+	<input type="text" id="cnt">
 	<br>
 	<input type="submit" value="등록">
 </form>

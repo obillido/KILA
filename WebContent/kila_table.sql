@@ -59,14 +59,16 @@ create table buyer
     coin number(10),
     primary key(cid)
 );
-
+-- status 1 : 회원
+-- status 2 : 탈퇴신청회원
+-- status 3 : 탈퇴완료회원
 
 
 
 
 create table product_name
 (
-    productname varchar2(30) primary key,
+    pcode varchar2(30) primary key,
     cname varchar2(20) not null,
     pname varchar2(30) not null,
     price number(10)
@@ -75,7 +77,7 @@ create table product_name
 create table color
 (
     colnum number(10) primary key,
-    pnnum references product_name(pnnum),
+    pcode references product_name(pcode),
     color varchar2(15),
     orgfilename varchar2(50),
     savefilename varchar2(50),
@@ -115,13 +117,13 @@ create table payment
     status number(1) default 1
 );
 create sequence payment_seq;
--- 1 : ��ǰ�غ���
--- 2 : �����
--- 3 : ��ۿϷ�
--- 4 : ����Ȯ��
--- 5 : ��������
--- 6 : ȯ�ҿ�û
--- 7 : ȯ�ҿϷ�
+-- 1 : 배송준비
+-- 2 : 배송중
+-- 3 : 배송완료
+-- 4 : 구매확정
+-- 5 : 배송전취소
+-- 6 : 환불요청
+-- 7 : 환불완료
 
 
 create table review

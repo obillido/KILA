@@ -16,6 +16,7 @@ public class ProductRegi extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		String cname=req.getParameter("cname");
+		String productname=req.getParameter("productname");
 	}
 }
