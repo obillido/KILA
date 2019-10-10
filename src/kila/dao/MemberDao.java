@@ -1,0 +1,29 @@
+package kila.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import jdbc.JdbcUtil;
+import kila.vo.MemberVo;
+
+public class MemberDao {
+	public int insert(MemberVo vo) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="insert into member values(?,?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,vo.getId());
+			pstmt.setString(2,vo.getPwd());
+			pstmt.setString(3,vo.getType());
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
+}
