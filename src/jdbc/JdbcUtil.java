@@ -13,7 +13,7 @@ public class JdbcUtil {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			String url="jdbc:oracle:thin:@192.168.0.21:1521:xe";
-			con=DriverManager.getConnection(url,"scott","tiger");
+			con=DriverManager.getConnection(url,"kila","kila");
 			return con;
 		}catch(ClassNotFoundException ce) {
 			System.out.println(ce.getMessage());
