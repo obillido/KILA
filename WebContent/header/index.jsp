@@ -8,13 +8,49 @@
 <title>index.jsp</title>
 <style type="text/css">
    *{margin:0px;padding:0px;}
+   #event{position:absolute;top:30px;left:30px;}
    #homelogo{text-align:center;}
    #right{position:absolute;top:30px;left:1500px;}
    #right ul li{list-style:none;display:inline-block;margin-right:10px;}
    #right ul li a{text-decoration:none;}
 </style>
+<script type="text/javascript">
+   var xhr=null;
+   var word=null;
+   var event=null;
+   window.onload=function(){
+	   word=new Array();
+	   event=document.getElementById("event");
+	   xhr=new XMLHttpRequest();
+	   xhr.onreadystatechange=callback;
+	   xhr.open('get','eventdata.jsp',true);
+	   xhr.send();
+   }
+   function callback(){
+	   if(xhr.readyState==4 && xhr.status==200){
+		   var obj=JSON.parse(xhr.responseText);
+		   var str="";
+		   for(var i=0;i<4;i++){
+			   str=obj.events[i].name;
+			   word[i]=str;
+		   }
+	   }
+   }
+   var i=0;	
+   var interval=setInterval(function(){	
+	   if(i>3){
+		   i=0;		
+	   }
+	   event.innerHTML=word[i];
+	   i++;
+	   }, 2000);
+   setTimeout(function(){
+	   clearInterval(interval);
+	  }, 20000);
+</script>
 </head>
 <body>
+<div id="event"></div>
 <div id="homelogo">
    <h1>KILA 로고 이미지</h1>
 </div>
