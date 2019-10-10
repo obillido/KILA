@@ -1,4 +1,4 @@
-package kila.dao;
+package kila.controller;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import kila.dao.MemberDao;
 import kila.vo.MemberVo;
 
-@WebServlet("header/join")
+@WebServlet("/header/join")
 public class JoinController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
