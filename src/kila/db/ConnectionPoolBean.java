@@ -22,9 +22,9 @@ public class ConnectionPoolBean{
 		}catch(ClassNotFoundException cnfe){
            System.out.println(cnfe.getMessage());
 		}
-		url = "jdbc:oracle:thin:@localhost:1521:XE";
-		usr = "scott";
-		pwd = "tiger";
+		url = "jdbc:oracle:thin:@192.168.0.21:1521:XE";
+		usr = "kila";
+		pwd = "kila";
 		h = new HashMap<Connection,Boolean>();
 		for(int i=0; i<5; i++)
 		{
