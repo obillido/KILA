@@ -11,7 +11,7 @@ drop table payment;
 drop sequence pr_seq;
 drop table product_registration;
 
-drop sequence product_Seq;
+drop sequence product_seq;
 drop table product;
 drop sequence color_seq;
 drop table color;
