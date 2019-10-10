@@ -19,7 +19,7 @@ public class ProductNameDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from productname where pcode=?";
+		String sql="select * from product_name where pcode=?";
 		try {
 			con=JdbcUtil.getConn();
 			pstmt=con.prepareStatement(sql);
@@ -30,7 +30,7 @@ public class ProductNameDao {
 			}
 			return 0;
 		}catch(SQLException se) {
-			System.out.println("ProductNameDAO:"+se.getMessage());
+			System.out.println("ProductNameDAO:isExist:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
@@ -42,7 +42,7 @@ public class ProductNameDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="insert into productname values(?,?,?,?)";
+			String sql="insert into product_name values(?,?,?,?)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getPcode());
 			pstmt.setString(2, vo.getCname());
@@ -50,7 +50,7 @@ public class ProductNameDao {
 			pstmt.setInt(4, vo.getPrice());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
-			System.out.println("ProductNameDAO:"+se.getMessage());
+			System.out.println("ProductNameDAO:insert:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);
