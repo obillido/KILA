@@ -70,7 +70,7 @@ create table product_name
 (
     pcode varchar2(30) primary key,
     cname varchar2(20) not null,
-    pname varchar2(30) not null,
+    pname varchar2(50) not null,
     price number(10)
 );
 

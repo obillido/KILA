@@ -149,8 +149,14 @@ public class ProductDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select * from ";
-			
+			String sql="select pn.pcode, cname, pname, price, color, psize, icnt from product_name pn, color, product " + 
+						"where pn.pcode=color.pcode and color.colnum=product.colnum " + 
+						"order by pcode;";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				
+			}
 			
 		}catch(SQLException se) {
 			System.out.println("ProductDAO:list:"+se.getMessage());

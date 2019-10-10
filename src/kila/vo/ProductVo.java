@@ -13,7 +13,7 @@ public class ProductVo {
 		this.psize = psize;
 		this.icnt = icnt;
 	}
-
+	
 	public int getPnum() {
 		return pnum;
 	}
