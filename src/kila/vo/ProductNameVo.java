@@ -1,27 +1,25 @@
 package kila.vo;
 
 public class ProductNameVo {
-	private int pnnnum;
+	private String productname;
 	private String cname;
 	private String pname;
 	private int price;
 	
 	public ProductNameVo() {}
-	public ProductNameVo(int pnnnum, String cname, String pname, int price) {
-		this.pnnnum = pnnnum;
+	public ProductNameVo(String productname, String cname, String pname, int price) {
+		this.productname = productname;
 		this.cname = cname;
 		this.pname = pname;
 		this.price = price;
 	}
 
-	public int getPnnnum() {
-		return pnnnum;
+	public String getProductname() {
+		return productname;
 	}
-
-	public void setPnnnum(int pnnnum) {
-		this.pnnnum = pnnnum;
+	public void setProductname(String productname) {
+		this.productname = productname;
 	}
-
 	public String getCname() {
 		return cname;
 	}

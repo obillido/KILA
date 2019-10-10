@@ -67,12 +67,11 @@ create table buyer
 
 create table product_name
 (
-    pnnum number(10) primary key,
+    productname varchar2(30) primary key,
     cname varchar2(20) not null,
     pname varchar2(30) not null,
     price number(10)
 );
-create sequence pname_seq;
 
 create table color
 (
@@ -117,13 +116,13 @@ create table payment
     status number(1) default 1
 );
 create sequence payment_seq;
--- 1 : »óÇ°ÁØºñÁß
--- 2 : ¹è¼ÛÁß
--- 3 : ¹è¼Û¿Ï·á
--- 4 : ±¸¸ÅÈ®Á¤
--- 5 : ¹è¼ÛÀüÃë¼Ò
--- 6 : È¯ºÒ¿äÃ»
--- 7 : È¯ºÒ¿Ï·á
+-- 1 : ï¿½ï¿½Ç°ï¿½Øºï¿½ï¿½ï¿½
+-- 2 : ï¿½ï¿½ï¿½ï¿½ï¿½
+-- 3 : ï¿½ï¿½Û¿Ï·ï¿½
+-- 4 : ï¿½ï¿½ï¿½ï¿½È®ï¿½ï¿½
+-- 5 : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+-- 6 : È¯ï¿½Ò¿ï¿½Ã»
+-- 7 : È¯ï¿½Ò¿Ï·ï¿½
 
 
 create table review
