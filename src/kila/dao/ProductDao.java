@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import jdbc.JdbcUtil;
 import kila.vo.ColorVo;
 import kila.vo.ProductNameVo;
+import kila.vo.ProductRegVo;
 import kila.vo.ProductVo;
 
 public class ProductDao {
@@ -29,7 +30,7 @@ public class ProductDao {
 			pstmt.setString(2, size);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				return 1;
+				return rs.getInt("pnum");
 			}
 			return 0;
 		}catch(SQLException se) {
@@ -57,23 +58,23 @@ public class ProductDao {
 			}else if(pn1>0) {
 				ColorDao cdao=ColorDao.getInstance();
 				for(int i=0; i<color.length; i++) {
-					int cn=cdao.isExist(pcode, color[i]);
-					if(cn==0) {
+					int colnum=cdao.isExist(pcode, color[i]);
+					if(colnum==0) {
 						// 색상 테이블 삽입
 						if(cdao.insert(new ColorVo(0, pcode, color[i], null, null, 0))<=0) {
 							return -1;
 						}
-					}else if(cn>0) {
+					}else if(colnum>0) {
 						for(int j=0; j<size.length; j++) {
-							int pn=isExist(cn,size[j]);
-							if(pn==0) {
+							int pnum=isExist(colnum,size[j]);
+							if(pnum==0) {
 								// Product Table Insert
-								if(insert(new ProductVo(0, cn, size[j], cnt))<=0) {
+								if(insert(new ProductVo(0, colnum, size[j], cnt))<=0) {
 									return -1;
 								}
-							}else if(pn>0){
+							}else if(pnum>0){
 								// Product Table Update (icnt)
-								if(update(cn,size[j],cnt)<=0) {
+								if(update(colnum,size[j],cnt)<=0) {
 									return -1;
 								}
 							}else {
@@ -81,6 +82,9 @@ public class ProductDao {
 							}
 							
 							// 상품등록테이블 insert
+							if(ProductRegDao.getInstance().insert(new ProductRegVo(0, pnum, cnt, null))<=0){
+								return -1;
+							}
 						}
 					}else {
 						return -1;

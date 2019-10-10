@@ -14,7 +14,7 @@ import kila.dao.ProductDao;
 public class ProductRegi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		resp.sendRedirect(req.getContextPath()+"/admin/productRegi.jsp");
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,8 +29,8 @@ public class ProductRegi extends HttpServlet{
 		int n=ProductDao.getInstance().insert(cname, pcode, pname, price, color, size, cnt);
 		if(n>0) {
 			
-		}else if(n==-1){
-			String msg="";
+		}else {
+			
 		}
 	}
 }
