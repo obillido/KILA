@@ -2,16 +2,16 @@ package kila.vo;
 
 public class ColorVo {
 	private int colnum;
-	private int pnnum;
+	private String pcode;
 	private String color;
 	private String orgfilename;
 	private String savefilename;
 	private long filesize;
 	
 	public ColorVo() {}
-	public ColorVo(int colnum, int pnnum, String color, String orgfilename, String savefilename, long filesize) {
+	public ColorVo(int colnum, String pcode, String color, String orgfilename, String savefilename, long filesize) {
 		this.colnum = colnum;
-		this.pnnum = pnnum;
+		this.pcode = pcode;
 		this.color = color;
 		this.orgfilename = orgfilename;
 		this.savefilename = savefilename;
@@ -26,14 +26,12 @@ public class ColorVo {
 		this.colnum = colnum;
 	}
 
-	public int getPnnum() {
-		return pnnum;
+	public String getPcode() {
+		return pcode;
 	}
-
-	public void setPnnum(int pnnum) {
-		this.pnnum = pnnum;
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
 	}
-
 	public String getColor() {
 		return color;
 	}
