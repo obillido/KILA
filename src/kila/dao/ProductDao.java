@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import kila.vo.ColorVo;
+import kila.vo.ProductInfoVo;
 import kila.vo.ProductNameVo;
 import kila.vo.ProductRegVo;
 import kila.vo.ProductVo;
@@ -143,7 +144,7 @@ public class ProductDao {
 		}
 	}
 	
-	public ArrayList<ProductVo> getList(){
+	public ArrayList<ProductInfoVo> getList(){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -151,21 +152,27 @@ public class ProductDao {
 			con=JdbcUtil.getConn();
 			String sql="select pn.pcode, cname, pname, price, color, psize, icnt from product_name pn, color, product " + 
 						"where pn.pcode=color.pcode and color.colnum=product.colnum " + 
-						"order by pcode;";
+						"order by pcode";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
+			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
 			while(rs.next()) {
-				
+				list.add(new ProductInfoVo(
+						rs.getString("pcode"), 
+						rs.getString("cname"), 
+						rs.getString("pname"), 
+						rs.getInt("price"), 
+						rs.getString("color"), 
+						rs.getString("psize"), 
+						rs.getInt("icnt")));
 			}
-			
+			return list;
 		}catch(SQLException se) {
 			System.out.println("ProductDAO:list:"+se.getMessage());
 			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
 		}
-		
-		return null;
 	}
 	
 }
