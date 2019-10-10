@@ -15,7 +15,6 @@ drop sequence product_Seq;
 drop table product;
 drop sequence color_seq;
 drop table color;
-drop sequence pname_seq;
 drop table product_name;
 
 drop table buyer;
