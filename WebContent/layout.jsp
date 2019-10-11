@@ -8,14 +8,15 @@
 </head>
 <body>
 <%
-	String hpage=request.getParameter("hpage");
 	String cpage=request.getParameter("cpage");
-	if(hpage==null) hpage="basicHeader.jsp";
 	if(cpage==null) cpage="basicContent.jsp";
 %>
 <div id="wrap">
 	<div id="header">
-		<jsp:include page="<%=hpage %>"/>
+		<jsp:include page="/header/index.jsp"/>
+	</div>
+	<div id="category">
+		<jsp:include page="/header/category.html"/>
 	</div>
 	<div id="content">
 		<jsp:include page="<%=cpage %>"/>

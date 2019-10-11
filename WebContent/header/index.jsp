@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>index.jsp</title>
+
 <style type="text/css">
    *{margin:0px;padding:0px;}
    #event{position:absolute;top:30px;left:30px;}
@@ -13,7 +9,9 @@
    #right{position:absolute;top:30px;left:1500px;}
    #right ul li{list-style:none;display:inline-block;margin-right:10px;}
    #right ul li a{text-decoration:none;}
+	a{color:black;}
 </style>
+
 <script type="text/javascript">
    var xhr=null;
    var word=null;
@@ -23,7 +21,7 @@
 	   event=document.getElementById("event");
 	   xhr=new XMLHttpRequest();
 	   xhr.onreadystatechange=callback;
-	   xhr.open('get','eventdata.jsp',true);
+	   xhr.open('get','${pageContext.request.contextPath}/header/eventdata.jsp',true);
 	   xhr.send();
    }
    function callback(){
@@ -48,8 +46,8 @@
 	   clearInterval(interval);
 	  }, 20000);
 </script>
-</head>
-<body>
+
+
 <div id="event"></div>
 <div id="homelogo">
    <img src="${pageContext.request.contextPath }/header/KilaLogo.png">
@@ -70,5 +68,3 @@
    <li><a href="${pageContext.request.contextPath }/header/shopping">주문배송</a></li>
 </ul>
 </div>
-</body>
-</html>
