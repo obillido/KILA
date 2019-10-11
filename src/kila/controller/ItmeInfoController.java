@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kila.dao.ItemInfoDao;
-import kila.vo.ItemInfoColorVo;
 import kila.vo.ItemInfoSizeVo;
 import kila.vo.ItemInfoVo;
 import kila.vo.ProductInfoVo;
@@ -24,11 +23,9 @@ public class ItmeInfoController extends HttpServlet{
 		int colnum=24;
 		ItemInfoDao dao=ItemInfoDao.getInstance();
 		ItemInfoVo vo=dao.productInfos(pcode, colnum);
-		ArrayList<ItemInfoColorVo> list=dao.productInfoColor(pcode);
-		ArrayList<ItemInfoSizeVo> list2=dao.productInfoSize(colnum);
+		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		req.setAttribute("vo", vo);
 		req.setAttribute("list",list);
-		req.setAttribute("list2", list2);
 		req.getRequestDispatcher("/layout.jsp?cpage=/kimyungi/ItemInfo.jsp").forward(req, resp);
 	}
 }
