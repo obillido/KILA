@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>category.html</title>
 <style type="text/css">
    *{margin:0px;padding:0px;}
    #category{text-align:center;padding:30px;}
@@ -23,8 +18,8 @@
 	   product.style.display="none";
    }
 </script>
-</head>
-<body>
+
+
 <div id="category">
    <ul>
       <li onmouseover="showProduct()" onmouseup="noProduct()">PRODUCT</li>
@@ -35,13 +30,10 @@
 </div>
 <div id="product">
 <ul>
-   <li><a href="">자켓</a></li>
-   <li><a href="">맨투맨/후디</a></li>
-   <li><a href="">긴팔티셔츠</a></li>
-   <li><a href="">반팔티셔츠</a></li>
-   <li><a href="">롱팬츠</a></li>
-   <li><a href="">숏팬츠</a></li>
+   <li><a href="/KILA/layout.jsp?cpage=/content/productList/productListLayout.jsp">전체보기</a></li>
+   <li><a href="/KILA/layout.jsp?cpage=/content/productList/productListLayout.jsp?category=down_jacket">다운자켓</a></li>
+   <li><a href="/KILA/layout.jsp?cpage=/content/productList/productListLayout.jsp?category=jacket">자켓</a></li>
+   <li><a href="/KILA/layout.jsp?cpage=/content/productList/productListLayout.jsp?category=tshirts">티셔츠</a></li>
+   <li><a href="/KILA/layout.jsp?cpage=/content/productList/productListLayout.jsp?category=pants">바지</a></li>
 </ul>
 </div>
-</body>
-</html>

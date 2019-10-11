@@ -22,7 +22,7 @@ public class ProductList extends HttpServlet{
 		//관리자 일때
 		ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList();
 		req.setAttribute("list", list);
-		req.getRequestDispatcher("/admin/productList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/layout.jsp?cpage=/admin/productList.jsp").forward(req, resp);
 		*/
 
 		
@@ -30,7 +30,6 @@ public class ProductList extends HttpServlet{
 		String category=req.getParameter("category");
 		ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getListC(category);
 		req.setAttribute("list", list);
-		req.getRequestDispatcher("/content/productList/productListLayout.jsp").forward(req, resp);
-		
+		req.getRequestDispatcher("/layout.jsp?cpage=/content/productList/productListLayout.jsp").forward(req, resp);
 	}
 }
