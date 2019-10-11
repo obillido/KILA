@@ -42,9 +42,11 @@ public class UpdateController extends HttpServlet{
 		BuyerDao dao2=new BuyerDao();
 		int n2=dao2.update(vo2);
 		if(n>0 && n2>0) {
-			System.out.println("성공");
+			req.setAttribute("code","회원수정성공");
+			req.getRequestDispatcher("/header/updateSuccess.jsp").forward(req,resp);
 		}else {
-			System.out.println("실패");
+			req.setAttribute("code","회원수정실패");
+			req.getRequestDispatcher("/header/updateFail.jsp").forward(req,resp);
 		}
 	}
 }
