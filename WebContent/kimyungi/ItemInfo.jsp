@@ -6,7 +6,7 @@
 <h1>기본 상품정보페이지</h1><br>
 <div style="width: 650px;height: 500px;">
 <div style="width: 200px;height: 200px; float: left;">
-<img id="img1" src="/KILA/images/DJ_FS2DJB4003X_OWH.PNG" style="width: 300px;height: 350px" onmouseover="imageZoom('img1', 'zoom')">
+<img id="img1" src="${pageContext.request.contextPath }/upload/${savefilename }" style="width: 300px;height: 350px" onmouseover="imageZoom('img1', 'zoom')">
 </div>
 <div id="zoom" style="float: right; width: 300px;height: 300px; text-align: left;">
 	<b>KILA|${vo.pcode }</b><br><hr><br>
