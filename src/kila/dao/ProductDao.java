@@ -152,7 +152,7 @@ public class ProductDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select pn.pcode, cname, pname, price, color, psize, icnt from product_name pn, color, product " + 
+			String sql="select pn.pcode, savefilename, cname, pname, price, color, psize, icnt from product_name pn, color, product " + 
 						"where pn.pcode=color.pcode and color.colnum=product.colnum " + 
 						"order by pcode";
 			pstmt=con.prepareStatement(sql);
@@ -164,7 +164,8 @@ public class ProductDao {
 						rs.getString("cname"), 
 						rs.getString("pname"), 
 						rs.getInt("price"), 
-						rs.getString("color"), 
+						rs.getString("color"),
+						rs.getString("savefilename"),
 						rs.getString("psize"), 
 						rs.getInt("icnt")));
 			}

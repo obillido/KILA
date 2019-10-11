@@ -19,7 +19,7 @@ public class ProductInfoDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from product_name p,color c,product d,product_reg r where p.pcode=c.pcode and d.colnum=c.colnum and r.pnum=d.pnum and pcode=?";
+		String sql="select * from product_name p,color c,savefilename, product d,product_reg r where p.pcode=c.pcode and d.colnum=c.colnum and r.pnum=d.pnum and pcode=?";
 		try {
 			con=JdbcUtil.getConn();
 			pstmt=con.prepareStatement(sql);
@@ -27,7 +27,7 @@ public class ProductInfoDao {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				ProductInfoVo vo=new ProductInfoVo(rs.getString("pcode"),rs.getString("cname"), 
-						rs.getString("pname"),rs.getInt("price"),rs.getString("color"), 
+						rs.getString("pname"),rs.getInt("price"),rs.getString("color"), rs.getString("savefilename"),
 						rs.getString("psize"),rs.getInt("icnt"));
 				return vo;
 			}
