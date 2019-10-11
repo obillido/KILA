@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kila.dao.BuyerDao;
 import kila.dao.MemberDao;
+import kila.vo.BuyerVo;
 import kila.vo.MemberVo;
 
 @WebServlet("/header/join")
@@ -22,11 +24,16 @@ public class JoinController extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		String id=req.getParameter("id");
 		String pwd=req.getParameter("pwd");
-		String type=req.getParameter("type");
-		MemberVo vo=new MemberVo(id,pwd,type);
+		String phone=req.getParameter("phone");
+		String addr=req.getParameter("addr");
+		String email=req.getParameter("email");
+		MemberVo vo=new MemberVo(id,pwd,"B");
 		MemberDao dao=new MemberDao();
 		int n=dao.insert(vo);
-		if(n>0) {
+		BuyerVo vo2=new BuyerVo(id,phone,addr, email,"Welcome",1,0);
+		BuyerDao dao2=new BuyerDao();
+		int n2=dao2.insert(vo2);
+		if(n>0 && n2>0) {
 			req.setAttribute("code","success");
 		}else {
 			req.setAttribute("code","fail");

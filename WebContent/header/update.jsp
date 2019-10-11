@@ -18,6 +18,18 @@
       <td><input type="text" name="pwd" value="${sessionScope.pwd}"></td>
    </tr>
    <tr>
+      <th>전화번호</th>
+      <td><input type="text" name="phone" value="${info.phone}"></td>
+   </tr>
+   <tr>
+      <th>주소</th>
+      <td><input type="text" name="addr" value="${info.addr}"></td>
+   </tr>
+   <tr>
+      <th>이메일</th>
+      <td><input type="text" name="email" value="${info.email}"></td>
+   </tr>
+   <tr>
       <td colspan="2">
          <input type="submit" value="수정완료">
       </td>

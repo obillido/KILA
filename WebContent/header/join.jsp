@@ -34,7 +34,9 @@ function success(){
    <input type="button" value="중복검사" onclick="checkId()">
    <span id="checkId" style="color:red;font-size:12px"></span><br>
    비밀번호 <input type="password" name="pwd"><br>
-   타입 <input type="text" name="type"><br>
+   전화번호 <input type="text" name="phone"><br>
+   주소 <input type="text" name="addr"><br>
+   이메일 <input type="text" name="email"><br>
    <input type="submit" value="회원가입">
 </form>
 </body>
