@@ -19,19 +19,15 @@
 <c:choose>
 <c:when test="${not empty list}">
 	<c:forEach var="vo" items="${list}">
-		<div>
-			<div name="item">
-				<img src="${pageContext.request.contextPath}/upload/${vo.savefilename}" width="200">
-			</div>
-			<div name="info">
-				<h3>${vo.pname}</h3>
-				<h3>${vo.color}</h3>
-				<h3>${vo.price}</h3>
-			</div>
-			<div style="clear: both;"></div>
-			<br>
-		</div>
+		<div name="item">
+			<img src="${pageContext.request.contextPath}/upload/${vo.savefilename}" width="200">
+			<h4>${vo.pname}</h4>
+			<h4>${vo.color}</h4>
+			<h4>${vo.price}</h4>
+		</div>		
+		
 	</c:forEach>
+	<div style="clear: both;"></div>
 </c:when>
 <c:otherwise>
 	<h3>등록된 제품이 없습니다.</h3>

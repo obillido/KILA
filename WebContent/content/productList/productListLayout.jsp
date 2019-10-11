@@ -18,7 +18,7 @@
 	#category a{padding-left:10px;}
 	#list{
 		float:left;
-		width:600px;
+		width:1200px;
 	}
 	
 	a{text-decoration:none;}
@@ -31,11 +31,15 @@
 	
 	#list a{color:grey;}
 	
-	#list div[name=item]{float:left;}
-	#list div[name=info]{
+	#list div[name=item]{
 		float:left;
-		padding-left:20px;
-		line-height:30px;
+		padding-right:50px;
+		padding-bottom:50px;
+	}
+	#list div[name=item] h4{
+		line-height:5px;
+		padding-left:10px;
+		
 	}
 </style>
 

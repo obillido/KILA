@@ -26,6 +26,7 @@
 		<th>사이즈</th>
 		<th>재고수량</th>
 	</tr>
+
 	<c:forEach var="vo" items="${list}">
 	<tr>
 		<td>${vo.pcode }</td>

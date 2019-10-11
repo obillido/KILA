@@ -24,11 +24,13 @@ public class ProductList extends HttpServlet{
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/admin/productList.jsp").forward(req, resp);
 		*/
+
 		
 		//구매자일때
 		String category=req.getParameter("category");
 		ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getListC(category);
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/content/productList/productListLayout.jsp").forward(req, resp);
+		
 	}
 }
