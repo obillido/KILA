@@ -19,6 +19,7 @@ public class ItmeInfoController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int colnum=Integer.parseInt(req.getParameter("colnum"));
+		System.out.println(colnum);
 		ItemInfoDao dao=ItemInfoDao.getInstance();
 		ItemInfoVo vo=dao.productInfos(colnum);
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
