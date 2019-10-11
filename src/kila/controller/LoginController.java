@@ -25,9 +25,9 @@ public class LoginController extends HttpServlet{
 		
 		BuyerDao bd=new BuyerDao();
 		int status=bd.getStatus(id);
-		System.out.println("status:" + status);
 		if(status==3) {
-			req.setAttribute("errMsg","이미 탈퇴한 회원입니다.");
+			req.getRequestDispatcher("/header/loginFail.jsp").forward(req,resp);
+			return;
 		}
 		
 		MemberDao dao=new MemberDao();

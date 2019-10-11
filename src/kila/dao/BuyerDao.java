@@ -72,20 +72,26 @@ public class BuyerDao {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
-	public int getStatus(String cid) {
+	public int getStatus(String id) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
+		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
 			String sql="select status from buyer where cid=?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1,cid);
-			return pstmt.executeUpdate();
+			pstmt.setString(1,id);
+			rs=pstmt.executeQuery();
+			int status=0;
+			if(rs.next()) {
+				status=rs.getInt("status");
+			}
+			return status;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
 		}finally {
-			JdbcUtil.close(con,pstmt,null);
+			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
 }
