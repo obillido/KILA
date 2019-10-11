@@ -8,7 +8,5 @@
    <b>KILA|${vo.pcode }</b>
    <h2>${vo.pname }</h2>
    가격:<span style='color:red'>${vo.price }</span><br>
-   색상:${vo.color }<br>
-   사이즈:${vo.psize }<br>
-   수량:${vo.icnt }
+   색상:
 </div>

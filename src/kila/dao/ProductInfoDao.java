@@ -67,7 +67,7 @@ public class ProductInfoDao {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
-	public ArrayList<ItemInfoSizeVo> productInfoColor(int colnum) {
+	public ArrayList<ItemInfoSizeVo> productInfoSize(int colnum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
