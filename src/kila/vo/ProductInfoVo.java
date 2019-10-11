@@ -12,12 +12,13 @@ public class ProductInfoVo {
 	
 	public ProductInfoVo() {}
 
-	public ProductInfoVo(String cname, String pname, int price, String color, int icnt) {
+	public ProductInfoVo(String pcode, String cname, String pname, int price, String color, String savefilename) {
+		this.pcode = pcode;
 		this.cname = cname;
 		this.pname = pname;
 		this.price = price;
 		this.color = color;
-		this.icnt = icnt;
+		this.savefilename = savefilename;
 	}
 	
 	public ProductInfoVo(String pcode, String cname, 

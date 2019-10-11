@@ -11,6 +11,7 @@ import kila.controller.ItmeInfoController;
 import kila.vo.ItemInfoColorVo;
 import kila.vo.ItemInfoSizeVo;
 import kila.vo.ItemInfoVo;
+import kila.vo.ProductInfoVo;
 
 public class ProductInfoDao {
 	private static ProductInfoDao instance=new ProductInfoDao();
@@ -89,4 +90,73 @@ public class ProductInfoDao {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	
+	
+
+
+	public ArrayList<ProductInfoVo> getList(){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select pn.pcode, cname, pname, price, color, savefilename, psize, icnt from product_name pn, color, product " + 
+						"where pn.pcode=color.pcode and color.colnum=product.colnum " + 
+						"order by pcode, pname, color, psize";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
+			while(rs.next()) {
+				list.add(new ProductInfoVo(
+						rs.getString("pcode"), 
+						rs.getString("cname"), 
+						rs.getString("pname"), 
+						rs.getInt("price"), 
+						rs.getString("color"),
+						rs.getString("savefilename"),
+						rs.getString("psize"), 
+						rs.getInt("icnt")));
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println("ProductInfoDAO:list:"+se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	
+	public ArrayList<ProductInfoVo> getListC(String category){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String cwhere="and cname='"+category+"' ";
+			if(category.equals("all")) cwhere="";
+			String sql="select pn.pcode, cname, pname, price, color, savefilename " + 
+					   "from product_name pn, color " + 
+					   "where pn.pcode=color.pcode "+cwhere+ 
+					   "order by pcode, pname, color";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
+			while(rs.next()) {
+				list.add(new ProductInfoVo(
+						rs.getString("pcode"), 
+						rs.getString("cname"), 
+						rs.getString("pname"), 
+						rs.getInt("price"), 
+						rs.getString("color"),
+						rs.getString("savefilename")));
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println("ProductInfoDAO:list:cate:"+se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	
 }
