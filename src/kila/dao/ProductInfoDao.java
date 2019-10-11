@@ -107,8 +107,11 @@ public class ProductInfoDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
+			String cwhere="and cname="+category+" ";
+			if(category.equals("all")) cwhere="";
+			
 			String sql="select pn.pcode, cname, pname, price, color, savefilename, psize, icnt from product_name pn, color, product " + 
-						"where pn.pcode=color.pcode and color.colnum=product.colnum and cname=" +category+" "+ 
+						"where pn.pcode=color.pcode and color.colnum=product.colnum "+cwhere+ 
 						"order by pcode, pname, color, psize";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
