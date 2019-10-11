@@ -18,11 +18,9 @@ import kila.vo.ProductInfoVo;
 public class ItmeInfoController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//String pcode=req.getParameter("pcode");
-		String pcode="DJ2POB3103x";
 		int colnum=24;
 		ItemInfoDao dao=ItemInfoDao.getInstance();
-		ItemInfoVo vo=dao.productInfos(pcode, colnum);
+		ItemInfoVo vo=dao.productInfos(colnum);
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		req.setAttribute("vo", vo);
 		req.setAttribute("list",list);

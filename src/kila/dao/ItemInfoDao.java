@@ -17,16 +17,15 @@ public class ItemInfoDao {
 		return instance;
 	}
 
-	public ItemInfoVo productInfos(String pcode,int colnum) {
+	public ItemInfoVo productInfos(int colnum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from product_name p,color c where p.pcode=c.pcode and p.pcode=? and c.colnum=?";
+		String sql="select * from product_name p,color c where p.pcode=c.pcode and c.colnum=?";
 		try {
 			con=JdbcUtil.getConn();
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, pcode);
-			pstmt.setInt(2, colnum);
+			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				ItemInfoVo vo=new ItemInfoVo(rs.getString("pcode"), 
