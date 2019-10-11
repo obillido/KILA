@@ -25,11 +25,11 @@
 			</div>
 			<div name="info">
 				<h3>${vo.pname}</h3>
-				<h3>${vo.price}</h3>
 				<h3>${vo.color}</h3>
+				<h3>${vo.price}</h3>
 			</div>
-			<div></div>
-			<br><br><br>
+			<div style="clear: both;"></div>
+			<br>
 		</div>
 	</c:forEach>
 </c:when>

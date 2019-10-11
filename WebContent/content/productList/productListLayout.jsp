@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,15 +8,14 @@
 </head>
 <body>
 
-<c:set var="cp" value="${pageContext.request.contextPath}/product/list"/>
-
 <style type="text/css">
 	#category{
 		float:left;
-		width:200px;
-		padding-left:10px;
+		width:300px;
+		padding:10px 30px;
 		line-height:30px;
 	}
+	#category a{padding-left:10px;}
 	#list{
 		float:left;
 		width:600px;

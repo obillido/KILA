@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<c:set var="cp" value="${pageContext.request.contextPath}/product/list"/>
+
 <h1>카테고리</h1>
+
 <a href="${cp}?category=all">전체보기</a><br>
 <a href="${cp}?category=down_jacket">다운자켓</a><br>
 <a href="${cp}?category=jacket">자켓</a><br>
