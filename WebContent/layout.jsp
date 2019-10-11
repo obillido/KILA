@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>KILA</title>
+
+<style type="text/css">
+	
+</style>
+
+
 </head>
 <body>
 <%
