@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import kila.vo.ColorVo;
+import kila.vo.ProductInfoVo;
 
 public class ColorDao {
 	private static ColorDao instance=new ColorDao();
@@ -58,5 +60,5 @@ public class ColorDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
-
+	
 }
