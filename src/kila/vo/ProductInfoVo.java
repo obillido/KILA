@@ -13,6 +13,17 @@ public class ProductInfoVo {
 	public ProductInfoVo() {}
 
 	public ProductInfoVo(String pcode, String cname, 
+			String pname, int price, String color, 
+			String psize, int icnt) {
+		this.pcode = pcode;
+		this.cname = cname;
+		this.pname = pname;
+		this.price = price;
+		this.color = color;
+		this.psize = psize;
+		this.icnt = icnt;
+	}
+	public ProductInfoVo(String pcode, String cname, 
 			String pname, int price, String color, String savefilename,
 			String psize, int icnt) {
 		this.pcode = pcode;
