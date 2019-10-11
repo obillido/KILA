@@ -5,6 +5,7 @@ public class ProductInfoVo {
 	private String cname;
 	private String pname;
 	private int price;
+	private int colnum;
 	private String color;
 	private String savefilename;
 	private String psize;
@@ -12,11 +13,12 @@ public class ProductInfoVo {
 	
 	public ProductInfoVo() {}
 
-	public ProductInfoVo(String pcode, String cname, String pname, int price, String color, String savefilename) {
+	public ProductInfoVo(String pcode, String cname, String pname, int price, int colnum, String color, String savefilename) {
 		this.pcode = pcode;
 		this.cname = cname;
 		this.pname = pname;
 		this.price = price;
+		this.colnum = colnum;
 		this.color = color;
 		this.savefilename = savefilename;
 	}
@@ -75,6 +77,14 @@ public class ProductInfoVo {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	
+	public int getColnum() {
+		return colnum;
+	}
+
+	public void setColnum(int colnum) {
+		this.colnum = colnum;
 	}
 
 	public String getColor() {

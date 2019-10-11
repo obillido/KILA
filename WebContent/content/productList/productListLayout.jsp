@@ -11,14 +11,14 @@
 <style type="text/css">
 	#category{
 		float:left;
-		width:300px;
+		width:200px;
 		padding:10px 30px;
 		line-height:30px;
 	}
 	#category a{padding-left:10px;}
 	#list{
 		float:left;
-		width:1200px;
+		width:1000px;
 	}
 	
 	a{text-decoration:none;}
@@ -33,7 +33,7 @@
 	
 	#list div[name=item]{
 		float:left;
-		padding-right:50px;
+		padding-right:30px;
 		padding-bottom:50px;
 	}
 	#list div[name=item] h4{

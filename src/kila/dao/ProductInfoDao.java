@@ -85,7 +85,7 @@ public class ProductInfoDao {
 			con=JdbcUtil.getConn();
 			String cwhere="and cname='"+category+"' ";
 			if(category.equals("all")) cwhere="";
-			String sql="select pn.pcode, cname, pname, price, color, savefilename " + 
+			String sql="select pn.pcode, cname, pname, price, colnum, color, savefilename " + 
 					   "from product_name pn, color " + 
 					   "where pn.pcode=color.pcode "+cwhere+ 
 					   "order by pcode, pname, color";
@@ -98,6 +98,7 @@ public class ProductInfoDao {
 						rs.getString("cname"), 
 						rs.getString("pname"), 
 						rs.getInt("price"), 
+						rs.getInt("colnum"),
 						rs.getString("color"),
 						rs.getString("savefilename")));
 			}

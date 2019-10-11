@@ -19,13 +19,14 @@
 <c:choose>
 <c:when test="${not empty list}">
 	<c:forEach var="vo" items="${list}">
+		<a href="${pageContext.request.contextPath}/iteminfo?colnum=${vo.colnum}">
 		<div name="item">
-			<img src="${pageContext.request.contextPath}/upload/${vo.savefilename}" width="200">
+			<img src="${pageContext.request.contextPath}/upload/${vo.savefilename}" width="220">
 			<h4>${vo.pname}</h4>
 			<h4>${vo.color}</h4>
 			<h4>${vo.price}</h4>
-		</div>		
-		
+		</div>
+		</a>
 	</c:forEach>
 	<div style="clear: both;"></div>
 </c:when>
