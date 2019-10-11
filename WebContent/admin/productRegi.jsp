@@ -9,7 +9,6 @@
 <body>
 <%
 	String msg=request.getParameter("msg");
-	if(msg==null) msg="";
 %>
 
 
@@ -25,7 +24,8 @@
 
 <h1>상품등록 <%=msg %></h1>
 <form method="post" onsubmit="return check();"
-	action="${pageContext.request.contextPath}/product/productRegi">
+	action="${pageContext.request.contextPath}/product/productRegi"
+	enctype="multipart/form-data">
 	<label for="category">카테고리</label>
 	<select name="cname">
 		<option value="select">선택</option>
@@ -49,12 +49,12 @@
 	<input type="checkbox" name="color" value="WHITE"> WHITE  
 	<input type="checkbox" name="color" value="NAVY"> NAVY  
 	<input type="checkbox" name="color" value="GREY"> GREY  
+	<div id="fileupload"></div>
 	<br>
 	<label for="size">사이즈</label>
 	<input type="checkbox" name="size" value="S"> S 
 	<input type="checkbox" name="size" value="M"> M
 	<input type="checkbox" name="size" value="L"> L
-	<input type="checkbox" name="size" value="XL"> XL
 	<br>
 	<label for="count">수량</label>
 	<input type="text" name="cnt">
@@ -63,13 +63,31 @@
 </form>
 
 <script type="text/javascript">
-	msg();
-	function msg(){
+	window.onload=function msg(){
 		if(<%=msg%>!=null){
 			alert(<%=msg%>);
 		}
 	}
-
+	
+	var clr=document.getElementsByName("color");
+	for(var i=0; i<clr.length;i++){
+		clr[i].addEventListener('click',function(e){
+			var fu=document.getElementById("fileupload");
+			if(this.checked==true){
+				var div=document.createElement("div");
+				div.innerHTML="<label for='fileupload'>"+this.value+"</label>" + 
+							  "<input type='file' name='pfile'>";
+				div.setAttribute("id", "color_"+this.value)
+				div.setAttribute("name","file");
+				fu.appendChild(div);
+			}else{
+				var child=document.getElementById("color_"+this.value);
+				fu.removeChild(child);
+			}
+		});
+	}
+	
+	
 	function check(){
 		var cc;
 		

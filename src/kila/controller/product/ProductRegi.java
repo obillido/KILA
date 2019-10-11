@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+
 import kila.dao.ProductDao;
 
 @WebServlet("/product/productRegi")
@@ -19,6 +21,7 @@ public class ProductRegi extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		
 		String cname=req.getParameter("cname");
 		String pcode=req.getParameter("pcode");
 		String pname=req.getParameter("pname");
