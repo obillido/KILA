@@ -5,6 +5,10 @@
 <img src="/KILA/images/1.png">
 </div>
 <div class="wrap">
-    <img class="target" src="/KILA/images/1.png" />
-				 width="80" height="100">
+   <b>KILA|${vo.pcode }</b>
+   <h2>${vo.pname }</h2>
+   가격:<span style='color:red'>${vo.price }</span><br>
+   색상:${vo.color }<br>
+   사이즈:${vo.psize }<br>
+   수량:${vo.icnt }
 </div>

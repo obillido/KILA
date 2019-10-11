@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import kila.vo.ProductInfoVo;
@@ -15,23 +16,49 @@ public class ProductInfoDao {
 		return instance;
 	}
 	
-	public ProductInfoVo productInfos(String pcode) {
+	public ProductInfoVo productInfos(String pcode,int colnum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from product_name p,color c,savefilename, product d,product_reg r where p.pcode=c.pcode and d.colnum=c.colnum and r.pnum=d.pnum and pcode=?";
+		String sql="select * from product_name p,color c,product d,product_reg r where p.pcode=c.pcode and d.colnum=c.colnum and r.pnum=d.pnum and p.pcode=? and c.colnum=?";
+		try {
+			con=JdbcUtil.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, pcode);
+			pstmt.setInt(2, colnum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				ProductInfoVo vo=new ProductInfoVo(rs.getString("pcode"),rs.getString("cname"), 
+						rs.getString("pname"),rs.getInt("price"),rs.getString("color"), 
+						rs.getString("psize"),rs.getInt("icnt"));
+				return vo;
+			}
+			return null;
+		}catch(SQLException se) {
+			System.out.println("ProductNameDAO:productInfos:"+se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	public ArrayList<ProductInfoVo> productInfoColor(String pcode) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from product_name p,color c where p.pcode=c.pcode and p.pcode=?";
 		try {
 			con=JdbcUtil.getConn();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, pcode);
 			rs=pstmt.executeQuery();
-			if(rs.next()) {
+			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
+			while(rs.next()) {
 				ProductInfoVo vo=new ProductInfoVo(rs.getString("pcode"),rs.getString("cname"), 
-						rs.getString("pname"),rs.getInt("price"),rs.getString("color"), rs.getString("savefilename"),
+						rs.getString("pname"),rs.getInt("price"),rs.getString("color"), 
 						rs.getString("psize"),rs.getInt("icnt"));
-				return vo;
+				list.add(vo);
 			}
-			return null;
+			return list;
 		}catch(SQLException se) {
 			System.out.println("ProductNameDAO:productInfos:"+se.getMessage());
 			return null;

@@ -15,9 +15,11 @@ import kila.vo.ProductInfoVo;
 public class ItmeInfoController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String pcode=req.getParameter("pcode");
+		//String pcode=req.getParameter("pcode");
+		String pcode="DJ2POB3103x";
+		int colnum=24;
 		ProductInfoDao dao=ProductInfoDao.getInstance();
-		ProductInfoVo vo=dao.productInfos(pcode);
+		ProductInfoVo vo=dao.productInfos(pcode,colnum);
 		req.setAttribute("vo", vo);
 		req.getRequestDispatcher("/layout.jsp?cpage=/kimyungi/ItemInfo.jsp").forward(req, resp);
 	}
