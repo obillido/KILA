@@ -33,8 +33,12 @@
 	
 	#list a{color:grey;}
 	
-	#list div[name=item]{flost:left;}
-	#list div[name=info]{float:left; color:red;}
+	#list div[name=item]{float:left;}
+	#list div[name=info]{
+		float:left;
+		padding-left:20px;
+		line-height:30px;
+	}
 </style>
 
 <div>

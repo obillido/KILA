@@ -19,16 +19,17 @@
 <c:choose>
 <c:when test="${not empty list}">
 	<c:forEach var="vo" items="${list}">
-		<div name="itemInfo">
+		<div>
 			<div name="item">
 				<img src="${pageContext.request.contextPath}/upload/${vo.savefilename}" width="200">
 			</div>
 			<div name="info">
-				<label for="product name">${vo.pname}</label>
-				<label for="price">${vo.price}</label>
-				<label for="color">${vo.color}</label>
+				<h3>${vo.pname}</h3>
+				<h3>${vo.price}</h3>
+				<h3>${vo.color}</h3>
 			</div>
-			<br>
+			<div></div>
+			<br><br><br>
 		</div>
 	</c:forEach>
 </c:when>
