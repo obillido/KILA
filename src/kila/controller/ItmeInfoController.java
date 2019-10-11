@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kila.dao.ProductInfoDao;
+import kila.dao.ItemInfoDao;
 import kila.vo.ItemInfoColorVo;
 import kila.vo.ItemInfoSizeVo;
 import kila.vo.ItemInfoVo;
@@ -22,7 +22,7 @@ public class ItmeInfoController extends HttpServlet{
 		//String pcode=req.getParameter("pcode");
 		String pcode="DJ2POB3103x";
 		int colnum=24;
-		ProductInfoDao dao=ProductInfoDao.getInstance();
+		ItemInfoDao dao=ItemInfoDao.getInstance();
 		ItemInfoVo vo=dao.productInfos(pcode, colnum);
 		ArrayList<ItemInfoColorVo> list=dao.productInfoColor(pcode);
 		ArrayList<ItemInfoSizeVo> list2=dao.productInfoSize(colnum);
