@@ -94,7 +94,7 @@ public class ProductInfoDao {
 			}
 			return list;
 		}catch(SQLException se) {
-			System.out.println("ProductDAO:list:"+se.getMessage());
+			System.out.println("ProductInfoDAO:list:"+se.getMessage());
 			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
@@ -107,9 +107,8 @@ public class ProductInfoDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String cwhere="and cname="+category+" ";
+			String cwhere="and cname='"+category+"' ";
 			if(category.equals("all")) cwhere="";
-			
 			String sql="select pn.pcode, cname, pname, price, color, savefilename, psize, icnt from product_name pn, color, product " + 
 						"where pn.pcode=color.pcode and color.colnum=product.colnum "+cwhere+ 
 						"order by pcode, pname, color, psize";
@@ -129,7 +128,7 @@ public class ProductInfoDao {
 			}
 			return list;
 		}catch(SQLException se) {
-			System.out.println("ProductDAO:list:"+se.getMessage());
+			System.out.println("ProductInfoDAO:list:cate:"+se.getMessage());
 			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);

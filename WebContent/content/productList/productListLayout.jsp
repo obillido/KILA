@@ -17,7 +17,7 @@
 		<jsp:include page="category.jsp"/>	
 	</div>
 	<div>
-		<jsp:include page="product/productList?category=<%=category %>"/>
+		<jsp:include page="productList.jsp"/>
 	</div>
 </div>
 

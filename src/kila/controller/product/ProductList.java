@@ -18,12 +18,18 @@ import kila.vo.ProductVo;
 public class ProductList extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		/*
+		//관리자 일때
 		ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList();
 		req.setAttribute("list", list);
-		//관리자 일때
-		//req.getRequestDispatcher("/admin/productList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/productList.jsp").forward(req, resp);
+		*/
+		
 		
 		//구매자일때
-		req.getRequestDispatcher("/content/productList/productList.jsp").forward(req, resp);
+		String category=req.getParameter("category");
+		ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList(category);
+		req.setAttribute("list", list);
+		req.getRequestDispatcher("/content/productList/productListLayout.jsp").forward(req, resp);
 	}
 }
