@@ -152,9 +152,9 @@ public class ProductDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select pn.pcode, savefilename, cname, pname, price, color, psize, icnt from product_name pn, color, product " + 
+			String sql="select pn.pcode, cname, pname, price, color, savefilename, psize, icnt from product_name pn, color, product " + 
 						"where pn.pcode=color.pcode and color.colnum=product.colnum " + 
-						"order by pcode";
+						"order by pcode, pname, color, psize";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();

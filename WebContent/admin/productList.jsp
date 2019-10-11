@@ -9,9 +9,13 @@
 </head>
 <body>
 
+<style type="text/css">
+	table{text-align:center;}
+</style>
+
 <h1>물품목록</h1>
 
-<table border="1" width="700">
+<table border="1" width="1000">
 	<tr>
 		<th>상품코드</th>
 		<th>카테고리</th>
@@ -29,7 +33,7 @@
 		<td>${vo.pname }</td>
 		<td>${vo.price }</td>
 		<td>${vo.color }</td>
-		<td><img src="${pageContext.request.contextPath}/upload/${vo.savefilename }" width="100"></td>
+		<td><img src="${pageContext.request.contextPath}/upload/${vo.savefilename }" width="200"></td>
 		<td>${vo.psize }</td>
 		<td>${vo.icnt }</td>
 	</tr>
