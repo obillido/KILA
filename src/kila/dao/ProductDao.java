@@ -43,7 +43,9 @@ public class ProductDao {
 		}
 	}
 	
-	public int insert(String cname, String pcode, String pname, int price, String[] color, String[] size, int cnt) {
+	public int insert(String cname, String pcode, String pname, int price, 
+			String[] color, String[] orgfilename, String[] savefilename, 
+			Long[] filesize, String[] psize, int cnt) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -65,7 +67,7 @@ public class ProductDao {
 				int colnum=cdao.isExist(pcode, color[i]);
 				if(colnum==0) {
 					// 색상 테이블 삽입
-					if(cdao.insert(new ColorVo(0, pcode, color[i], null, null, 0))<=0) {
+					if(cdao.insert(new ColorVo(0, pcode, color[i], orgfilename[i], savefilename[i], filesize[i]))<=0) {
 						return -1;
 					}
 					colnum=cdao.isExist(pcode,color[i]);
@@ -73,19 +75,19 @@ public class ProductDao {
 					return -1;
 				}
 
-				for(int j=0; j<size.length; j++) {
-					int pnum=isExist(colnum,size[j]);
+				for(int j=0; j<psize.length; j++) {
+					int pnum=isExist(colnum,psize[j]);
 					if(pnum==0) {
 						// Product Table Insert
-						int nn=insert(new ProductVo(0, colnum, size[j], cnt));
+						int nn=insert(new ProductVo(0, colnum, psize[j], cnt));
 						System.out.println(nn);
 						if(nn<=0) {
 							return -1;
 						}
-						pnum=isExist(colnum,size[j]);
+						pnum=isExist(colnum,psize[j]);
 					}else if(pnum>0){
 						// Product Table Update (icnt)
-						if(update(colnum,size[j],cnt)<=0) {
+						if(update(colnum,psize[j],cnt)<=0) {
 							return -1;
 						}
 					}else {

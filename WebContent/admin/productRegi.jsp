@@ -9,6 +9,7 @@
 <body>
 <%
 	String msg=request.getParameter("msg");
+	if(msg==null) msg="";
 %>
 
 
@@ -62,13 +63,7 @@
 	<input type="submit" value="등록">
 </form>
 
-<script type="text/javascript">
-	window.onload=function msg(){
-		if(<%=msg%>!=null){
-			alert(<%=msg%>);
-		}
-	}
-	
+<script type="text/javascript">	
 	var clr=document.getElementsByName("color");
 	for(var i=0; i<clr.length;i++){
 		clr[i].addEventListener('click',function(e){
@@ -76,12 +71,11 @@
 			if(this.checked==true){
 				var div=document.createElement("div");
 				div.innerHTML="<label for='fileupload'>"+this.value+"</label>" + 
-							  "<input type='file' name='pfile'>";
-				div.setAttribute("id", "color_"+this.value)
-				div.setAttribute("name","file");
+							  "<input type='file' name='file_"+this.value+"'>";
+				div.setAttribute("name","file_"+this.value);
 				fu.appendChild(div);
 			}else{
-				var child=document.getElementById("color_"+this.value);
+				var child=document.getElementsByName("file_"+this.value)[0];
 				fu.removeChild(child);
 			}
 		});
