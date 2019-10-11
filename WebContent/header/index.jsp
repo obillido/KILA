@@ -52,7 +52,7 @@
 <body>
 <div id="event"></div>
 <div id="homelogo">
-   <h1>KILA 로고 이미지</h1>
+   <img src="${pageContext.request.contextPath }/header/KilaLogo.png">
 </div>
 <div id="right">
 <ul>

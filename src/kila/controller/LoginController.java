@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kila.dao.BuyerDao;
 import kila.dao.MemberDao;
 
 @WebServlet("/header/login")
@@ -19,8 +20,16 @@ public class LoginController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id=req.getParameter("id");
+		String id=req.getParameter("id");		
 		String pwd=req.getParameter("pwd");
+		
+		BuyerDao bd=new BuyerDao();
+		int status=bd.getStatus(id);
+		System.out.println("status:" + status);
+		if(status==3) {
+			req.setAttribute("errMsg","이미 탈퇴한 회원입니다.");
+		}
+		
 		MemberDao dao=new MemberDao();
 		boolean result=dao.isMember(id,pwd);
 		if(result) { 

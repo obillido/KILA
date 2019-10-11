@@ -33,7 +33,7 @@ public class BuyerDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="update buyer set phone=?,addr=?,email=? where id=?";
+			String sql="update buyer set phone=?,addr=?,email=? where cid=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,vo.getPhone());
 			pstmt.setString(2,vo.getAddr());
@@ -70,6 +70,22 @@ public class BuyerDao {
 			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	public int getStatus(String cid) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select status from buyer where cid=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,cid);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
 		}
 	}
 }
