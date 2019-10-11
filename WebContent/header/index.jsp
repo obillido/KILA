@@ -9,7 +9,7 @@
    #right{position:absolute;top:30px;left:1500px;}
    #right ul li{list-style:none;display:inline-block;margin-right:10px;}
    #right ul li a{text-decoration:none;}
-	a{color:black;}
+   a{color:black;}
 </style>
 
 <script type="text/javascript">

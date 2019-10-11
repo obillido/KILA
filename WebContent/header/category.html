@@ -7,21 +7,41 @@
    *{margin:0px;padding:0px;}
    #category{text-align:center;padding:30px;}
    #category ul li{list-style:none;display:inline-block;margin-right:30px;}
+   #category ul li a{text-decoration:none;}
+   #product{width:400px;height:300px;background-color:#A7EEFF;text-align:center;
+            position:absolute;top:265px;left:620px;display:none;}
+   #product ul li{list-style:none;margin-right:30px;padding:20px;}
+   #product ul li a{text-decoration:none;}
 </style>
 <script type="text/javascript">
    function showProduct(){
-	   
+	   var product=document.getElementById("product");
+	   product.style.display="inline";
+   }
+   function noProduct(){
+	   var product=document.getElementById("product");
+	   product.style.display="none";
    }
 </script>
 </head>
 <body>
 <div id="category">
    <ul>
-      <li onmouseover="">EVENT</li>
-      <li onmouseover="showProduct()">PRODUCT</li>
-      <li onmouseover="">NEW</li>
-      <li onmouseover="">BEST</li>
+      <li onmouseover="showProduct()" onmouseup="noProduct()">PRODUCT</li>
+      <li><a href="">NEW</a></li>
+      <li><a href="">BEST</a></li>
+      <li><a href="/KILA/header/event.html">EVENT</a></li>
    </ul>
+</div>
+<div id="product">
+<ul>
+   <li><a href="">자켓</a></li>
+   <li><a href="">맨투맨/후디</a></li>
+   <li><a href="">긴팔티셔츠</a></li>
+   <li><a href="">반팔티셔츠</a></li>
+   <li><a href="">롱팬츠</a></li>
+   <li><a href="">숏팬츠</a></li>
+</ul>
 </div>
 </body>
 </html>
