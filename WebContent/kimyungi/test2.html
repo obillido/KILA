@@ -28,8 +28,8 @@
     function select(e){
     	var img=e.target;
     	img.style.opacity="0.5";
-    	img.nextSibling.nextSibling.innerHTML="자세하게 보기"
     	img.style.cursor="pointer";
+    	img.nextSibling.nextSibling.innerHTML="자세하게 보기"
     }
     function unselect(e){
     	var img=e.target;
@@ -39,10 +39,10 @@
 </script>
 </head>
 <body>
-<div id="container">
-  <img src="../images/1.jpg" id="image" onmouseover="select(event)" onmouseout="unselect(event)">
-  <span id="text">
-  </span>
+<div id="container" onmouseover="select(event)" onmouseout="unselect(event)">
+  <img src="../images/1.jpg" id="image">
+  <div id="text">
+  </div>
 </div>
 <div id="container">
   <img src="../images/1.jpg" id="image" onmouseover="select(event)" onmouseout="unselect(event)">
