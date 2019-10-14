@@ -64,4 +64,27 @@ public class ItemInfoDao {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	public ItemInfoSizeVo productInfoSize2(int colnum,int psize) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from product where psize=? and colnum=?";
+		try {
+			con=JdbcUtil.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, psize);
+			pstmt.setInt(2, colnum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				ItemInfoSizeVo vo = new ItemInfoSizeVo(rs.getInt("psize"), rs.getInt("icnt"));
+				return vo;
+			}
+			return null;
+		}catch(SQLException se) {
+			System.out.println("ProductNameDAO:productInfos:"+se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
 }
