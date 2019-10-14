@@ -14,9 +14,6 @@
 		width:100%; height:70px;
 		margin-top:30px;
 	}
-	#layCategory{
-		margin-top:30px;
-	}
 </style>
 
 
@@ -30,6 +27,7 @@
 	<div id="layHeader">
 		<jsp:include page="/header/index.jsp"/>
 	</div>
+	<div style="height:20px;"></div>
 	<div id="layCategory">
 		<jsp:include page="/header/category.html"/>
 	</div>
