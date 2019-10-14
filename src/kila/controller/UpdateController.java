@@ -13,7 +13,6 @@ import kila.dao.BuyerDao;
 import kila.dao.MemberDao;
 import kila.vo.BuyerVo;
 import kila.vo.MemberVo;
-import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 @WebServlet("/header/update")
 public class UpdateController extends HttpServlet{

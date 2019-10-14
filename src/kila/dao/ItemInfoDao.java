@@ -53,7 +53,7 @@ public class ItemInfoDao {
 			rs=pstmt.executeQuery();
 			ArrayList<ItemInfoSizeVo> list=new ArrayList<ItemInfoSizeVo>();
 			while(rs.next()) {
-				ItemInfoSizeVo vo = new ItemInfoSizeVo(rs.getString("psize"), rs.getInt("icnt"));
+				ItemInfoSizeVo vo = new ItemInfoSizeVo(rs.getInt("psize"), rs.getInt("icnt"));
 				list.add(vo);
 			}
 			return list;
