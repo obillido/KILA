@@ -45,7 +45,7 @@ public class EventDao {
 				String title=rs.getString("title");
 				String content=rs.getString("content");
 				String orgfilename=rs.getString("orgfilename");
-				String savefilename=rs.getString("savafilename");
+				String savefilename=rs.getString("savefilename");
 				long filesize=rs.getLong("filesize");
 				EventVo vo=new EventVo(num,title,content,orgfilename,savefilename,filesize);
 				list.add(vo);
