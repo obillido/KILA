@@ -77,18 +77,28 @@ public class ProductInfoDao {
 		}
 	}
 	
-	public ArrayList<ProductInfoVo> getListC(String category){
+	public ArrayList<ProductInfoVo> getListC(String category, int order){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
 			String cwhere="and cname='"+category+"' ";
+			
+			String owhere="";
+			switch(order) {
+			case 1: owhere="pcode"; break; // 나중에 수정히기 : 판매순
+			case 2: owhere="pname"; break; // 나중에 수정히기 : 신상순
+			case 3: owhere="price asc"; break;
+			case 4: owhere="price desc"; break;
+			default: System.out.println("ProductInfoDao:getListC:???");break;
+			}
+			
 			if(category.equals("all") || category==null || category.equals("")) cwhere="";
 			String sql="select pn.pcode, cname, pname, price, colnum, color, savefilename " + 
 					   "from product_name pn, color " + 
 					   "where pn.pcode=color.pcode "+cwhere+ 
-					   "order by pcode, pname, color";
+					   "order by "+owhere+", color";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
