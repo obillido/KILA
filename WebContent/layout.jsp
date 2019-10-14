@@ -9,29 +9,20 @@
 <style type="text/css">
     *{margin:0px;padding:0px;}
     #wrap{width:100%;}
-    #content{width:100%;}
-    #footer{width:100%;}
 </style>
 
 </head>
 <body>
 <%
 	String cpage=request.getParameter("cpage");
-	if(cpage==null) cpage="home.jsp";
+	if(cpage==null) cpage="main.jsp";
 %>
 <div id="wrap">
-	<div id="header1">
-		<jsp:include page="/header/index.jsp"/>
-	</div>
-	<div id="header2">
-		<jsp:include page="/header/category.html"/>
-	</div>
-	<div id="content">
-		<jsp:include page="<%=cpage %>"/>
-	</div>
-	<div id="footer">
-		<jsp:include page="footer.jsp"/>
-	</div>
+	<jsp:include page="/header/header.jsp"/>
+	
+	<jsp:include page="<%=cpage %>"/>
+
+	<jsp:include page="footer.jsp"/>
 </div>
 </body>
 </html>

@@ -17,7 +17,7 @@ import kila.vo.MemberVo;
 public class JoinController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath() + "/header/join.jsp");
+		resp.sendRedirect(req.getContextPath() + "/layout.jsp?cpage=/header/join.jsp");
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

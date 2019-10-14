@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<script type="text/javascript">
 var xhr=null;
 function checkId(){
 	xhr=new XMLHttpRequest();
@@ -133,8 +134,8 @@ function signup(){
 	alert("회원가입을 축하합니다.");
 }
 </script>
-</head>
-<body>
+
+
 <form method="post" action="${pageContext.request.contextPath }/header/join" onsubmit="signup()">
    아이디 <input type="text" name="id" id="id">
    <input type="button" value="중복검사" onclick="checkId()">
