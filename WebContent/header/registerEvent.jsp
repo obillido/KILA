@@ -11,7 +11,7 @@
    request.setCharacterEncoding("utf-8");
    String title=request.getParameter("title");
    String content=request.getParameter("content");
-   
+   content;
 
 %>
 <form method="post" action="registerEvent.jsp">
