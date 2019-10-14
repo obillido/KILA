@@ -4,11 +4,10 @@
 
 <style type="text/css">
    *{margin:0px;padding:0px;}
-   #event{float:left; margin:20px 0px 0px 30px; width:350px; height:20px; color:#B9062F; background-color:#FAFAA0; text-align:center;text-decoration:overline;text-shadow:black;}
-   #homelogo{float:left; margin:20px 0px 0px 80px; width:50%; text-align:center;}
+   #event{float:left; margin:50px 0px 0px 30px; width:350px; height:20px; color:#FFFA82;background-color:#00008C; text-align:center;text-shadow:black;}
+   #homelogo{float:left; margin:20px 0px 0px 70px; width:50%; text-align:center;}
    #homelogo img{width:150px;}
    #right{float:right; margin-top:50px; margin-right:50px; text-align:right;}
-  
    #right ul li{list-style:none;display:inline-block;margin-right:10px;}
    #right ul li a{text-decoration:none;}
    a{color:black;}
@@ -59,10 +58,10 @@
 </div>
 <div id="right">
 <ul>
-   <li><a href="${cp}/header/join">회원가입</a></li>
+   <li><a href="${pageContext.request.contextPath}/header/join">회원가입</a></li>
    <c:choose>
       <c:when test="${not empty sessionScope.id}">
-         <li><a href="${cp}/header/logout">로그아웃</a></li>
+         <li><a href="${pageContext.request.contextPath}/header/logout">로그아웃</a></li>
          <c:choose>
             <c:when test="${sessionScope.id=='admin'}">
                <li><a href="${cp}/header/adminpage.jsp">관리자페이지</a></li>
@@ -73,10 +72,10 @@
          </c:choose>
       </c:when>
       <c:otherwise>
-         <li><a href="${cp}/header/login">로그인</a></li>
+         <li><a href="${pageContext.request.contextPath}/header/login">로그인</a></li>
       </c:otherwise>
    </c:choose>
-   <li><a href="${cp}/header/center">고객센터</a></li>
-   <li><a href="${cp}/header/shopping">주문배송</a></li>
+   <li><a href="${pageContext.request.contextPath}/header/center">고객센터</a></li>
+   <li><a href="${pageContext.request.contextPath}/header/shopping">주문배송</a></li>
 </ul>
 </div>

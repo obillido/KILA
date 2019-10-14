@@ -7,7 +7,11 @@
 <title>KILA</title>
 
 <style type="text/css">
-	
+    *{margin:0px;padding:0px;}
+    #header1{width:100%;height:15%;}
+    #header2{width:100%;height:15%;}
+    #content{width:100%;height:70%;}
+    #footer{width:100%;height:;}
 </style>
 
 
@@ -18,10 +22,10 @@
 	if(cpage==null) cpage="home.jsp";
 %>
 <div id="wrap">
-	<div id="header">
+	<div id="header1">
 		<jsp:include page="/header/index.jsp"/>
 	</div>
-	<div>
+	<div id="header2">
 		<jsp:include page="/header/category.html"/>
 	</div>
 	<div id="content">
