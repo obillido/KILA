@@ -16,5 +16,6 @@
       <h1>가입에 실패했습니다.</h1>
    </c:otherwise>
 </c:choose>
+<a href="${pageContext.request.contextPath }/home">홈으로</a>
 </body>
 </html>
