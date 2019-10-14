@@ -38,11 +38,11 @@
 	}
 </script>
 <div style="text-align: center;">
-<div style="text-align: center; width: 500px;height: 500px; display: inline-block;">
+<div style="text-align: center; display: inline-block;">
 <h1>기본 상품정보페이지</h1><br>
-<div style="width: 650px;height: 500px;">
-<div style="width: 200px;height: 200px; float: left;">
-<img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="width: 300px;height: 450px">
+<div>
+<div style="width: 400px;height: 500px; float: left;">
+<img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="width: 350px;height: 400px">
 </div>
 <div id="zoom" style="float: right; width: 300px;height: 300px; text-align: left;">
 	<b>KILA|${vo.pcode }</b><br><hr><br>
@@ -66,5 +66,8 @@
    </form>
 </div>
 </div>
+</div>
+<div>
+여기인가?
 </div>
 </div>
