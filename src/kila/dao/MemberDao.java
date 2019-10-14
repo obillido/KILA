@@ -27,7 +27,7 @@ public class MemberDao {
 			JdbcUtil.close(con,pstmt,null);
 		}
 	}
-	public boolean isMember(String id,String pwd) {
+	public String isMember(String id,String pwd) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -39,12 +39,12 @@ public class MemberDao {
 			pstmt.setString(2,pwd);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				return true;
+				return rs.getString("type");
 			}
-			return false;
+			return null;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
-			return false;
+			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
 		}

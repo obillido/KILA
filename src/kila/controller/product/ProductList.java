@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kila.dao.ProductDao;
 import kila.dao.ProductInfoDao;
@@ -18,8 +19,9 @@ import kila.vo.ProductVo;
 public class ProductList extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String type=req.getParameter("type");
-		if(type==null) {
+		HttpSession session=req.getSession();
+		String type=(String)session.getAttribute("type");
+		if(type.equals("B")) {
 			//구매자일때
 			String category=req.getParameter("category");
 			String torder=req.getParameter("order");
@@ -27,7 +29,6 @@ public class ProductList extends HttpServlet{
 			if(torder!=null) {
 				order=Integer.parseInt(torder);
 			}
-			
 			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getListC(category,order);
 			req.setAttribute("list", list);
 			req.getRequestDispatcher("/layout.jsp?cpage=/content/productList/productList.jsp").forward(req, resp);

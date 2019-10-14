@@ -31,11 +31,12 @@ public class LoginController extends HttpServlet{
 		}
 		
 		MemberDao dao=new MemberDao();
-		boolean result=dao.isMember(id,pwd);
-		if(result) { 
+		String type=dao.isMember(id,pwd);
+		if(type!=null) { 
 			HttpSession session=req.getSession(); 
 			session.setAttribute("id",id);
 			session.setAttribute("pwd",pwd);
+			session.setAttribute("type",type);
 			resp.sendRedirect(req.getContextPath() + "/home");
 		}else { 
 			req.setAttribute("errMsg","아이디 또는 비밀번호가 맞지 않습니다.");

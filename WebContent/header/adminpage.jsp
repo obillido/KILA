@@ -9,7 +9,7 @@
 <div>
    <ul>
       <li><a href="${cp}/product/productRegi">상품등록</a></li>
-      <li><a href="${cp}/product/list?type=A">상품목록</a></li>
+      <li><a href="${cp}/product/list">상품목록</a></li>
       <li><a href="">결제목록</a></li>
       <li><a href="${cp}/header/registerEvent.jsp">이벤트작성하기</a></li>
       <li><a href="${cp}/home.jsp">홈으로</a></li>

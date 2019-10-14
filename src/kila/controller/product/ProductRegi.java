@@ -18,7 +18,7 @@ import kila.dao.ProductDao;
 public class ProductRegi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath()+"/admin/productRegi.jsp");
+		resp.sendRedirect(req.getContextPath()+"/layout.jsp?cpage=/admin/productRegi.jsp");
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
