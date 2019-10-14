@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>registerEvent.jsp</title>
-</head>
-<body>
 <form method="post" action="${pageContext.request.contextPath }/header/registerEventOk.jsp" enctype="multipart/form-data">
    제목 <input type="text" name="title"><br>
    내용<br>
@@ -15,5 +8,3 @@
    <input type="submit" value="등록">
    <input type="reset" value="취소">
 </form>
-</body>
-</html>

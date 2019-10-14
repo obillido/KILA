@@ -3,19 +3,14 @@
 <%@page import="kila.dao.EventDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>eventList.jsp</title>
+
 <script type="text/javascript">
 function bigger(e){
     var option="width=1000, height=800, top=300, left=500, location=no";
     window.open("${pageContext.request.contextPath }/header/eventDetail.html","event",option);    
 }
 </script>
-</head>
-<body>
+
 <table border="1" width="1700">
 <tr>
    <th>제목</th>
@@ -37,5 +32,3 @@ function bigger(e){
 </tr>
 </table>
 <a href="${pageContext.request.contextPath }/home">홈으로</a>
-</body>
-</html>

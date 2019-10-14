@@ -5,13 +5,7 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>registerEventOk.jsp</title>
-</head>
-<body>
+
 <%
    String saveDirectory=application.getRealPath("/eventUploaded");
    MultipartRequest mr=new MultipartRequest(
@@ -40,5 +34,3 @@
    <li>저장된 파일명: <%=saveFileName %><br>
 </ul>
 <a href="${pageContext.request.contextPath }/home">홈으로</a>
-</body>
-</html>

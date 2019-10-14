@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>join.jsp</title>
-<script type="text/javascript">
+
 var xhr=null;
 function checkId(){
 	xhr=new XMLHttpRequest();
@@ -156,5 +151,3 @@ function signup(){
    <span id="checkEmail" style="color:red;font-size:12px"></span><br>
    <input type="submit" value="회원가입">
 </form>
-</body>
-</html>
