@@ -158,6 +158,22 @@
 	</div>
 </div>
 
+<br><br>
+<c:if test="${startPageNum!=1}">
+	<a href="${pageContext.request.contextPath}/product/list?pageNum=${startPageNum-1}&order=${order}"></a>
+</c:if>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 	var xhr=null;

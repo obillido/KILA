@@ -5,9 +5,9 @@
 <style type="text/css">
    *{margin:0px;padding:0px;}
    #event{float:left; margin:50px 0px 0px 30px; width:350px; height:20px; color:#FFFA82;background-color:#00008C; text-align:center;text-shadow:black;}
-   #homelogo{float:left; margin:20px 0px 0px 120px; width:50%; text-align:center;}
-   #homelogo img{width:150px;}
-   #right{float:right; margin-top:50px; margin-right:80px; text-align:right;}
+   #homelogo{float:left; width:50%; text-align:center;}
+   #homelogo img{width:150px; margin-top:30px;}
+   #right{float:right;}
    #right ul li{list-style:none;display:inline-block;margin-right:10px;}
    #right ul li a{text-decoration:none;}
    a{color:black;}
@@ -50,7 +50,7 @@
 </script>
 
 
-<c:set var="cp" value="${pageContext.request.contextPath}/layout.jsp?cpage="/>
+<c:set var="cpp" value="${pageContext.request.contextPath}/layout.jsp?cpage="/>
 
 <div id="event"></div>
 <div id="homelogo">
@@ -64,10 +64,10 @@
          <li><a href="${pageContext.request.contextPath}/header/logout">로그아웃</a></li>
          <c:choose>
             <c:when test="${sessionScope.id=='admin'}">
-               <li><a href="${cp}/header/adminpage.jsp">관리자페이지</a></li>
+               <li><a href="${cpp}/header/adminpage.jsp">관리자페이지</a></li>
             </c:when>
             <c:otherwise>
-               <li><a href="${cp}/header/mypage.jsp">마이페이지</a></li>
+               <li><a href="${cpp}/header/mypage.jsp">마이페이지</a></li>
             </c:otherwise>
          </c:choose>
       </c:when>

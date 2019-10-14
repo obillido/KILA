@@ -77,7 +77,7 @@ public class ProductInfoDao {
 		}
 	}
 	
-	public ArrayList<ProductInfoVo> getListC(String category, int order){
+	public ArrayList<ProductInfoVo> getListC(int startRow, int endRow, String category, int order){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -95,11 +95,16 @@ public class ProductInfoDao {
 			}
 			
 			if(category.equals("all") || category==null || category.equals("")) cwhere="";
-			String sql="select pn.pcode, cname, pname, price, colnum, color, savefilename " + 
+			String sql="select * from "+
+						"(select aa.*,rownum rnum " +
+						"from (select pn.pcode, cname, pname, price, colnum, color, savefilename " + 
 					   "from product_name pn, color " + 
 					   "where pn.pcode=color.pcode "+cwhere+ 
-					   "order by "+owhere+", color";
+					   "order by "+owhere+", color) aa " +
+					   ") where rnum between ? and ?";
 			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
 			while(rs.next()) {
@@ -116,6 +121,33 @@ public class ProductInfoDao {
 		}catch(SQLException se) {
 			System.out.println("ProductInfoDAO:list:cate:"+se.getMessage());
 			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	
+	
+	public int getCount(String category) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			
+			
+			String sql="select count(*) from";
+			
+			
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}else {
+				return -1;
+			}
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
 		}

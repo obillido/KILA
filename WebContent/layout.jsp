@@ -8,10 +8,9 @@
 
 <style type="text/css">
     *{margin:0px;padding:0px;}
-    #header1{width:85%;height:10%;position:absolute;top:0px;left:0x;float:left;}
-    #header2{width:85%;height:5%;position:absolute;top:100x;left:0px;float:left;}
-    #content{width:85%;height:80%;position:absolute;top:120px;left:0px;float:left;}
-    #footer{width:85%;height:5%;position:absolute;top:850px;left:0px;float:left;}
+    #wrap{width:100%;}
+    #content{width:100%;}
+    #footer{width:100%;}
 </style>
 
 </head>
