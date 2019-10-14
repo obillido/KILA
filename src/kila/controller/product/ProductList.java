@@ -29,7 +29,7 @@ public class ProductList extends HttpServlet{
 			if(torder!=null) {
 				order=Integer.parseInt(torder);
 			}
-			
+
 			String spageNum=req.getParameter("pageNum");
 			int pageNum=1;
 			if(spageNum!=null) {
@@ -37,13 +37,15 @@ public class ProductList extends HttpServlet{
 			}
 			int endRow=pageNum*8;
 			int startRow=endRow-7;
+			
 			ProductInfoDao dao=ProductInfoDao.getInstance();
-			int pageCount=(int)Math.ceil(dao.getCount(category)/5.);
+			int pageCount=(int)Math.ceil(dao.getCount(category)/8.);
 			int startPageNum=(pageNum-1)/4*4+1;
 			int endPageNum=startPageNum+4;
 			if(endPageNum>pageCount) {
 				endPageNum=pageCount;
 			}
+			System.out.println(pageCount);
 			
 			ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order);
 			

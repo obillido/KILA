@@ -3,11 +3,19 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 
 <style type="text/css">
+	#content{
+		width:100%; 
+		min-width:1200px;
+		border:2px solid red;
+	}
+
 	#categoryList{
 		float:left;
-		width:200px;
+		width:150px;
 		padding:10px 30px;
 		line-height:30px;
+		
+		border:2px solid black;
 	}
 	#categoryList a{
 		padding-left:10px;
@@ -28,10 +36,12 @@
 		width:1000px;
 	}
 	
+	
 	#order a{
 		color:grey;
 		text-decoration:none;
 	}
+	
 	
 	#search{
 		float:right;
@@ -40,6 +50,12 @@
 		background-color:white;
 	}
 	
+	
+	#productList{
+		
+		
+		border:2px solid green;
+	}
 	#list div[name=item]{
 		float:left;
 		width:220px; height:320px;
@@ -53,8 +69,8 @@
 
 
 	#paging{
-		width:500px;
-		border:2px solid red;
+		width:100px; height:100px;
+		border:2px solid blue;
 	}
 	#paging a{
 		text-decoration:none;
@@ -68,13 +84,13 @@
 <c:set var="cplist" value="${pageContext.request.contextPath}/product/list"/>
 
 
+<div id="content">
+
 <div id="categoryList">
 	<h1>카테고리</h1>
 	<br>
 <%
-	System.out.println(category);
 	if(category==null || category.equals("all")){
-		System.out.println("in:"+category);
 %>
 	<a href="${cplist}?category=all" style="color:red; text-decoration:underline;">전체보기</a><br>
 	<a href="${cplist}?category=down_jacket">다운자켓</a><br>
@@ -171,7 +187,7 @@
 
 <br><br>
 
-<c:set var="cpco" value="${cplist}?=category=${category}&order=${order}"/>
+<c:set var="cpco" value="${cplist}?category=${category}&order=${order}"/>
 
 <div id="paging">
 	<c:if test="${startPageNum!=1}">
@@ -194,7 +210,7 @@
 	</c:if>
 </div>
 
-
+</div>
 
 
 
