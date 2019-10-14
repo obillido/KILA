@@ -21,7 +21,7 @@
 	<div id="header">
 		<jsp:include page="/header/index.jsp"/>
 	</div>
-	<div id="category">
+	<div>
 		<jsp:include page="/header/category.html"/>
 	</div>
 	<div id="content">
