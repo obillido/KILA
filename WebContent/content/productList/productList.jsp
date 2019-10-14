@@ -46,7 +46,8 @@
 	<a href="${cp}?category=all">전체보기</a><br>
 	<a href="${cp}?category=down_jacket">다운자켓</a><br>
 	<a href="${cp}?category=jacket">자켓</a><br>
-	<a href="${cp}?category=tshirts">티셔츠</a><br>
+	<a href="${cp}?category=longsleeves">긴팔티셔츠</a><br>
+	<a href="${cp}?category=shortsleeves">반팔티셔츠</a><br>
 	<a href="${cp}?category=pants">바지</a><br>
 </div>
 

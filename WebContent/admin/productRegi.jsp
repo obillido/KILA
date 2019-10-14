@@ -32,7 +32,8 @@
 		<option value="select">선택</option>
 		<option value="down_jacket">다운자켓</option>
 		<option value="jacket">자켓</option>
-		<option value="tshirts">티셔츠</option>
+		<option value="longsleeves">긴팔티셔츠</option>
+		<option value="shortsleeves">반팔티셔츠</option>
 		<option value="pants">바지</option>
 	</select>
 	<br>

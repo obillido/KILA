@@ -22,9 +22,14 @@ public class ProductList extends HttpServlet{
 		if(!type.equals("A")) {
 			//구매자일때
 			String category=req.getParameter("category");
+			String torder=req.getParameter("order");
+			int order=1;
+			if(torder!=null) {
+				order=Integer.parseInt(torder);
+			}
 			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getListC(category);
 			req.setAttribute("list", list);
-			req.getRequestDispatcher("/layout.jsp?cpage=/content/productList/productListLayout.jsp").forward(req, resp);
+			req.getRequestDispatcher("/layout.jsp?cpage=/content/productList/productList.jsp").forward(req, resp);
 		}else {
 			//관리자 일때
 			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList();

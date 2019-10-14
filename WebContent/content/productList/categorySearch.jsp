@@ -33,10 +33,10 @@
 				<label for="BLACK">BLACK</label>
 				<input type="checkbox" name="color" value="WHITE">
 				<label for="WHITE">WHITE</label>
-				<input type="checkbox" name="color" value="GREY">
-				<label for="GREY">GREY</label>
-				<input type="checkbox" name="color" value="NAVY">
-				<label for="NAVY">NAVY</label>	
+				<input type="checkbox" name="color" value="RED">
+				<label for="RED">RED</label>
+				<input type="checkbox" name="color" value="GREEN">
+				<label for="GREEN">GREEN</label>	
 			</div>
 		</div>
 		<div id="price">
@@ -57,14 +57,16 @@
 			<input type="checkbox" id="sizeAll" value="all" onclick="allSelect('size')">
 			<label for="allSizeSelect">All</label>
 			<div name="list">
-				<input type="checkbox" name="size" value="S">
-				<label for="S">S</label>
-				<input type="checkbox" name="size" value="M">
-				<label for="M">M</label>
-				<input type="checkbox" name="size" value="L">
-				<label for="L">L</label>
-				<input type="checkbox" name="size" value="XL">
-				<label for="XL">XL</label>
+				<input type="checkbox" name="size" value="90">
+				<label for="90">90</label>
+				<input type="checkbox" name="size" value="95">
+				<label for="95">95</label>
+				<input type="checkbox" name="size" value="100">
+				<label for="100">100</label>
+				<input type="checkbox" name="size" value="150">
+				<label for="105">105</label>
+				<input type="checkbox" name="size" value="110">
+				<label for="110">110</label>
 			</div>
 		</div>	
 	</div>
