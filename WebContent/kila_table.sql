@@ -29,7 +29,7 @@ drop table member;
 
 create table member
 (
-    id varchar2(10) primary key,
+    id varchar2(12) primary key,
     pwd varchar2(16) not null,
     type char(1) check(type in('A','B'))
 );
@@ -38,21 +38,21 @@ create table member
 
 create table rank
 (
-    rank varchar2(7) primary key,
-    minamount number(8),
+    rank varchar2(10) primary key,
+    minamount number(10),
     maxamount number(10)
 );
-insert into rank values('Welcome',0,100000);
-insert into rank values('Silver',100000,200000);
-insert into rank values('Gold',200000,500000);
-insert into rank values('VIP',500000,1000000);
-insert into rank values('VVIP',1000000,100000000);
+insert into rank values('Welcome',0,200000);
+insert into rank values('Silver',200000,500000);
+insert into rank values('Gold',500000,1000000);
+insert into rank values('VIP',1000000,2000000);
+insert into rank values('VVIP',2000000,100000000);
 
 create table buyer
 (
     cid references member(id),
     phone char(11),
-    addr varchar2(50),
+    addr varchar2(100),
     email varchar2(30),
     rank references rank(rank),
     status number(1),
@@ -68,9 +68,9 @@ create table buyer
 
 create table product_name
 (
-    pcode varchar2(30) primary key,
+    pcode varchar2(50) primary key,
     cname varchar2(20) not null,
-    pname varchar2(50) not null,
+    pname varchar2(100) not null,
     price number(10)
 );
 
@@ -79,8 +79,8 @@ create table color
     colnum number(10) primary key,
     pcode references product_name(pcode),
     color varchar2(15),
-    orgfilename varchar2(50),
-    savefilename varchar2(50),
+    orgfilename varchar2(100),
+    savefilename varchar2(100),
     filesize number(30)
 );
 create sequence color_seq;
@@ -90,7 +90,7 @@ create table product
 (
     pnum number(10) primary key,
     colnum references color(colnum),
-    psize char(1) check(psize in('S','M','L')),
+    psize char(2) check(psize in('S','M','L','XL')),
     icnt number(10)
 );
 create sequence product_seq;
@@ -145,8 +145,8 @@ create table inquiry
     inum number(10) primary key,
     cid references buyer(cid),
     pnum references product(pnum),
-    title varchar2(50),
-    content varchar2(500),
+    title varchar2(100),
+    content varchar2(1000),
     ref number(10),
     lev number(10),
     step number(10),
@@ -161,10 +161,10 @@ create sequence inquiry_seq;
 create table event
 (
     enum number(10) primary key,
-    title varchar2(50),
-    content varchar2(500),
-    orgfilename varchar2(50),
-    savefilename varchar2(50),
+    title varchar2(100),
+    content varchar2(1000),
+    orgfilename varchar2(100),
+    savefilename varchar2(100),
     filesize number(30)
 );
 create sequence event_seq;
