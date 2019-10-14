@@ -5,9 +5,9 @@
 <style type="text/css">
    *{margin:0px;padding:0px;}
    #event{float:left; margin:50px 0px 0px 30px; width:350px; height:20px; color:#FFFA82;background-color:#00008C; text-align:center;text-shadow:black;}
-   #homelogo{float:left; margin:20px 0px 0px 70px; width:50%; text-align:center;}
+   #homelogo{float:left; margin:20px 0px 0px 120px; width:50%; text-align:center;}
    #homelogo img{width:150px;}
-   #right{float:right; margin-top:50px; margin-right:50px; text-align:right;}
+   #right{float:right; margin-top:50px; margin-right:80px; text-align:right;}
    #right ul li{list-style:none;display:inline-block;margin-right:10px;}
    #right ul li a{text-decoration:none;}
    a{color:black;}
