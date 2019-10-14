@@ -48,14 +48,16 @@
 	<label for="color">색상</label>
 	<input type="checkbox" name="color" value="BLACK"> BLACK 
 	<input type="checkbox" name="color" value="WHITE"> WHITE  
-	<input type="checkbox" name="color" value="NAVY"> NAVY  
-	<input type="checkbox" name="color" value="GREY"> GREY  
+	<input type="checkbox" name="color" value="RED"> RED  
+	<input type="checkbox" name="color" value="GREEN"> GREEN 
 	<div id="fileupload"></div>
 	<br>
 	<label for="size">사이즈</label>
-	<input type="checkbox" name="size" value="S"> S 
-	<input type="checkbox" name="size" value="M"> M
-	<input type="checkbox" name="size" value="L"> L
+	<input type="checkbox" name="size" value="90"> 90 
+	<input type="checkbox" name="size" value="95"> 95
+	<input type="checkbox" name="size" value="100"> 100
+	<input type="checkbox" name="size" value="105"> 105
+	<input type="checkbox" name="size" value="110"> 110
 	<br>
 	<label for="count">수량</label>
 	<input type="text" name="cnt">

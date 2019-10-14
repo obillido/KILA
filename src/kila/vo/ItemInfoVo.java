@@ -10,7 +10,6 @@ public class ItemInfoVo {
 	public ItemInfoVo() {}
 
 	public ItemInfoVo(String pcode, String pname, int price, String savefilename, String color) {
-		super();
 		this.pcode = pcode;
 		this.pname = pname;
 		this.price = price;

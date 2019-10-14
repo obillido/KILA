@@ -20,7 +20,7 @@ public class ProductDao {
 		return instance;
 	}
 	
-	public int isExist(int colnum, String size) {
+	public int isExist(int colnum, int psize) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -29,7 +29,7 @@ public class ProductDao {
 			String sql="select * from product where colnum=? and psize=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
-			pstmt.setString(2, size);
+			pstmt.setInt(2, psize);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt("pnum");
@@ -45,7 +45,7 @@ public class ProductDao {
 	
 	public int insert(String cname, String pcode, String pname, int price, 
 			String[] color, String[] orgfilename, String[] savefilename, 
-			Long[] filesize, String[] psize, int cnt) {
+			Long[] filesize, int[] psize, int cnt) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -61,7 +61,6 @@ public class ProductDao {
 			}else if(pn1<0) {
 				return -1;
 			}
-			
 			ColorDao cdao=ColorDao.getInstance();
 			for(int i=0; i<color.length; i++) {
 				int colnum=cdao.isExist(pcode, color[i]);
@@ -80,7 +79,6 @@ public class ProductDao {
 					if(pnum==0) {
 						// Product Table Insert
 						int nn=insert(new ProductVo(0, colnum, psize[j], cnt));
-						System.out.println(nn);
 						if(nn<=0) {
 							return -1;
 						}
@@ -116,7 +114,7 @@ public class ProductDao {
 			String sql="insert into product values(product_seq.nextval,?,?,?)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1,vo.getColnum());
-			pstmt.setString(2, vo.getPsize());
+			pstmt.setInt(2, vo.getPsize());
 			pstmt.setInt(3, vo.getIcnt());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
@@ -127,7 +125,7 @@ public class ProductDao {
 		}
 	}
 	
-	public int update(int colnum, String size, int cnt) {
+	public int update(int colnum, int psize, int cnt) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
@@ -136,7 +134,7 @@ public class ProductDao {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, cnt);
 			pstmt.setInt(2, colnum);
-			pstmt.setString(3, size);
+			pstmt.setInt(3, psize);
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println("ProductDAO:update:"+se.getMessage());

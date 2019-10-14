@@ -47,8 +47,11 @@ public class ProductRegi extends HttpServlet{
 			savefilename[i]=mr.getFilesystemName(fn);
 			filesize[i]=mr.getFile(fn).length();
 		}
-		
-		String[] psize=mr.getParameterValues("size");
+		String[] size=mr.getParameterValues("size");
+		int[] psize=new int[size.length];
+		for(int i=0; i<size.length; i++) {
+			psize[i]=Integer.parseInt(size[i]);
+		}
 		int cnt=Integer.parseInt(mr.getParameter("cnt"));
 		
 		int n=ProductDao.getInstance().insert(

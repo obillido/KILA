@@ -90,7 +90,7 @@ create table product
 (
     pnum number(10) primary key,
     colnum references color(colnum),
-    psize char(2) check(psize in('S','M','L','XL')),
+    psize number(3) check(psize in(90,95,100,105,110)),
     icnt number(10)
 );
 create sequence product_seq;
