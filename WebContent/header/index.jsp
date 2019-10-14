@@ -4,9 +4,11 @@
 
 <style type="text/css">
    *{margin:0px;padding:0px;}
-   #event{position:absolute;top:30px;left:30px;}
-   #homelogo{text-align:center;}
-   #right{position:absolute;top:30px;left:1500px;}
+   #event{float:left; width:350px; height:50px; border:1px solid red;}
+   #homelogo{float:left; width:50%; text-align:center; border:1px solid black;}
+   #homelogo img{width:150px;}
+   #right{float:right; margin-top:20px; margin-right:50px; text-align:right; border:1px solid black;}
+  
    #right ul li{list-style:none;display:inline-block;margin-right:10px;}
    #right ul li a{text-decoration:none;}
    a{color:black;}
@@ -32,6 +34,7 @@
 			   str=obj.events[i].name;
 			   word[i]=str;
 		   }
+		   event.innerHTML=word[0];
 	   }
    }
    var i=0;	

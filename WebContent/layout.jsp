@@ -7,7 +7,13 @@
 <title>KILA</title>
 
 <style type="text/css">
-	
+	#wrap{
+		width:100%;
+	}
+	#header{
+		width:100%; height:70px;
+		margin-top:30px;
+	}
 </style>
 
 
