@@ -18,14 +18,26 @@
 		color:red;
 		text-decoration:underline;
 	}
+	#categoryList a:active{
+		color:red;
+		text-decoration:underline;
+	}
 	
 	#productList{
 		float:left;
 		width:1000px;
 	}
+	
 	#order a{
 		color:grey;
 		text-decoration:none;
+	}
+	
+	#search{
+		float:right;
+		width:100px; height:30px;
+		margin-right:50px;
+		background-color:white;
 	}
 	
 	#list div[name=item]{
@@ -48,27 +60,80 @@
 <div id="categoryList">
 	<h1>카테고리</h1>
 	<br>
-	<a href="${cp}?category=all">전체보기</a><br>
+<%
+	System.out.println(category);
+	if(category==null || category.equals("all")){
+		System.out.println("in:"+category);
+%>
+	<a href="${cp}?category=all" style="color:red; text-decoration:underline;">전체보기</a><br>
 	<a href="${cp}?category=down_jacket">다운자켓</a><br>
 	<a href="${cp}?category=jacket">자켓</a><br>
 	<a href="${cp}?category=longsleeves">긴팔티셔츠</a><br>
 	<a href="${cp}?category=shortsleeves">반팔티셔츠</a><br>
 	<a href="${cp}?category=pants">바지</a><br>
+<%
+	}else if(category.equals("down_jacket")){
+%>
+	<a href="${cp}?category=all">전체보기</a><br>
+	<a href="${cp}?category=down_jacket" style="color:red; text-decoration:underline;">다운자켓</a><br>
+	<a href="${cp}?category=jacket">자켓</a><br>
+	<a href="${cp}?category=longsleeves">긴팔티셔츠</a><br>
+	<a href="${cp}?category=shortsleeves">반팔티셔츠</a><br>
+	<a href="${cp}?category=pants">바지</a><br>
+<%
+	}else if(category.equals("jacket")){
+%>
+	<a href="${cp}?category=all">전체보기</a><br>
+	<a href="${cp}?category=down_jacket">다운자켓</a><br>
+	<a href="${cp}?category=jacket" style="color:red; text-decoration:underline;">자켓</a><br>
+	<a href="${cp}?category=longsleeves">긴팔티셔츠</a><br>
+	<a href="${cp}?category=shortsleeves">반팔티셔츠</a><br>
+	<a href="${cp}?category=pants">바지</a><br>
+<%
+	}else if(category.equals("longsleeves")){
+%>
+	<a href="${cp}?category=all">전체보기</a><br>
+	<a href="${cp}?category=down_jacket">다운자켓</a><br>
+	<a href="${cp}?category=jacket">자켓</a><br>
+	<a href="${cp}?category=longsleeves" style="color:red; text-decoration:underline;">긴팔티셔츠</a><br>
+	<a href="${cp}?category=shortsleeves">반팔티셔츠</a><br>
+	<a href="${cp}?category=pants">바지</a><br>
+<%
+	}else if(category.equals("shortsleeves")){
+%>
+	<a href="${cp}?category=all">전체보기</a><br>
+	<a href="${cp}?category=down_jacket">다운자켓</a><br>
+	<a href="${cp}?category=jacket">자켓</a><br>
+	<a href="${cp}?category=longsleeves">긴팔티셔츠</a><br>
+	<a href="${cp}?category=shortsleeves" style="color:red; text-decoration:underline;">반팔티셔츠</a><br>
+	<a href="${cp}?category=pants">바지</a><br>
+<%
+	}else if(category.equals("pants")){
+%>
+	<a href="${cp}?category=all">전체보기</a><br>
+	<a href="${cp}?category=down_jacket">다운자켓</a><br>
+	<a href="${cp}?category=jacket">자켓</a><br>
+	<a href="${cp}?category=longsleeves">긴팔티셔츠</a><br>
+	<a href="${cp}?category=shortsleeves">반팔티셔츠</a><br>
+	<a href="${cp}?category=pants" style="color:red; text-decoration:underline;">바지</a><br>
+<%
+	}
+%>
 </div>
 
 
 <div id="productList">
+	<h1>상품목록</h1>
+	<br>
 	<div id="order">
-		<h1>상품목록</h1>
-		<br>
-
 		<a href="${cp}?category=<%=category%>&order=1">판매순</a>
 		<a href="${cp}?category=<%=category%>&order=2">신상품순</a>
 		<a href="${cp}?category=<%=category%>&order=3">낮은가격순</a>
 		<a href="${cp}?category=<%=category%>&order=4">높은가격순</a>
 	</div>
 	
-	<div id="search"></div>
+	<input type="button" id="search" value="검색조건" onclick="showSearchWindow()">	
+	<div id="searchWindow"></div>
 	<br><br>
 	
 	<div id="list">
@@ -92,3 +157,15 @@
 		</c:choose>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	var xhr=null;
+	function showSearchWindow(){
+		
+	}
+	function success(){
+		
+	}
+	
+</script>

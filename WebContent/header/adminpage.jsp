@@ -9,9 +9,9 @@
 <body>
 <div>
    <ul>
-      <li><a href="">상품등록하기</a></li>
-      <li><a href="">상품목록보기</a></li>
-      <li><a href="">결제목록보기</a></li>
+      <li><a href="">상품등록</a></li>
+      <li><a href="">상품목록</a></li>
+      <li><a href="">결제목록</a></li>
       <li><a href="${pageContext.request.contextPath }/header/registerEvent.jsp">이벤트작성하기</a></li>
       <li><a href="${pageContext.request.contextPath }/home">홈으로</a></li>
    </ul>

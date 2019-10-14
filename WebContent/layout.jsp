@@ -15,7 +15,7 @@
 <body>
 <%
 	String cpage=request.getParameter("cpage");
-	if(cpage==null) cpage="basicContent.jsp";
+	if(cpage==null) cpage="home.jsp";
 %>
 <div id="wrap">
 	<div id="header">
