@@ -68,6 +68,64 @@
 </div>
 </div>
 <div>
-여기인가?
+<span style="font-size: 15px">REVIEW | 문의글 혹은 악의적인 비방글은 무통보 삭제된다는 점 유의해주세요^^</span><br>
+<textarea rows="10" cols="93"onKeyUp="javascript:fnChkByte(this,'500')"></textarea>
+ <br><c:forEach begin="1" end="105">&nbsp</c:forEach><span id="byteInfo">0</span>/500bytes<br>
+ <button type="button" style="width: 150px;"><img src="${pageContext.request.contextPath }/upload/camera_icon.png" width="30px" height="25px" >+사진추가</button>
+ <select style="width: 350px; height: 35px; font-size: 20px; display: inline-block;">
+ 	<option value="5">★★★★★아주 좋아요!</option>
+ 	<option value="4">★★★★☆맘에 들어요.</option>
+ 	<option value="3">★★★☆☆보통이에요...</option>
+ 	<option value="2">★★☆☆☆그냥 그래요...</option>
+ 	<option value="1">★☆☆☆☆별로에요...</option>
+ </select>
+ <button type="button" style="background-color:pink; width: 150px"><img src="${pageContext.request.contextPath }/upload/pencil.png" width="30px" height="25px">리뷰등록하기</button>
+ 
+<script type="text/javascript">
+ function fnChkByte(obj, maxByte)
+ {
+     var str = obj.value;
+     var str_len = str.length;
+
+
+     var rbyte = 0;
+     var rlen = 0;
+     var one_char = "";
+     var str2 = "";
+
+
+     for(var i=0; i<str_len; i++)
+     {
+         one_char = str.charAt(i);
+         if(escape(one_char).length > 4)
+         {
+             rbyte += 3;//한글3Byte
+         }
+         else
+         {
+             rbyte++;//영문 등 나머지 1Byte
+         }
+
+
+         if(rbyte <= maxByte)
+         {
+             rlen = i+1;//return할 문자열 갯수
+        }
+      }
+
+
+      if(rbyte > maxByte)
+      {
+   alert("리뷰의 길이는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
+   str2 = str.substr(0,rlen);                                  //문자열 자르기
+  obj.value = str2;
+   fnChkByte(obj, maxByte);
+      }
+      else
+      {
+         document.getElementById('byteInfo').innerText = rbyte;
+      }
+ }
+ </script> 
 </div>
 </div>
