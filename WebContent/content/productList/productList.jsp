@@ -3,38 +3,47 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 
 <style type="text/css">
-	#category{
+	#categoryList{
 		float:left;
 		width:200px;
 		padding:10px 30px;
 		line-height:30px;
 	}
-	#category a{padding-left:10px;}
-	#list{
-		float:left;
-		width:1000px;
+	#categoryList a{
+		padding-left:10px;
+		text-decoration:none;
+		color:black;
 	}
-	
-	a{text-decoration:none;}
-	
-	#category a{color:black;}
-	#category a:hover{
+	#categoryList a:hover{
 		color:red;
 		text-decoration:underline;
 	}
 	
-	#list a{color:grey;}
+	#productList{
+		float:left;
+		width:1000px;
+	}
+	#order a{
+		color:grey;
+		text-decoration:none;
+	}
 	
 	#list div[name=item]{
 		float:left;
-		width:220px; height:300px;
-		padding-right:30px;
-		padding-bottom:50px;
+		width:220px; height:320px;
+		margin-bottom:50px;
+		margin-right:30px
 	}
+	#list div[name=item] p{
+		padding:2px 10px;
+	}
+
 </style>
 
 
+<%	String category=request.getParameter("category");	%>
 <c:set var="cp" value="${pageContext.request.contextPath}/product/list"/>
+
 
 <div id="categoryList">
 	<h1>카테고리</h1>
@@ -51,9 +60,8 @@
 <div id="productList">
 	<div id="order">
 		<h1>상품목록</h1>
-		<%
-			String category=request.getParameter("category");
-		%>
+		<br>
+
 		<a href="${cp}?category=<%=category%>&order=1">판매순</a>
 		<a href="${cp}?category=<%=category%>&order=2">신상품순</a>
 		<a href="${cp}?category=<%=category%>&order=3">낮은가격순</a>
@@ -69,10 +77,10 @@
 			<c:forEach var="vo" items="${list}">
 				<a href="${pageContext.request.contextPath}/iteminfo?colnum=${vo.colnum}">
 				<div name="item">
-					<img src="${pageContext.request.contextPath}/upload/${vo.savefilename}">
-					<h4>${vo.pname}</h4>
-					<h4>${vo.color}</h4>
-					<h4>${vo.price}</h4>
+					<img src="${pageContext.request.contextPath}/upload/${vo.savefilename}" width="220">
+					<p>${vo.pname}</p>
+					<p>${vo.color}</p>
+					<p>${vo.price}</p>
 				</div>
 				</a>
 			</c:forEach>
