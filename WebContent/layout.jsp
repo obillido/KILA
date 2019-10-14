@@ -10,8 +10,11 @@
 	#wrap{
 		width:100%;
 	}
-	#header{
+	#layHeader{
 		width:100%; height:70px;
+		margin-top:30px;
+	}
+	#layCategory{
 		margin-top:30px;
 	}
 </style>
@@ -24,16 +27,16 @@
 	if(cpage==null) cpage="basicContent.jsp";
 %>
 <div id="wrap">
-	<div id="header">
+	<div id="layHeader">
 		<jsp:include page="/header/index.jsp"/>
 	</div>
-	<div id="category">
+	<div id="layCategory">
 		<jsp:include page="/header/category.html"/>
 	</div>
-	<div id="content">
+	<div id="layContent">
 		<jsp:include page="<%=cpage %>"/>
 	</div>
-	<div id="footer">
+	<div id="layFooter">
 		<jsp:include page="footer.jsp"/>
 	</div>
 </div>

@@ -4,10 +4,10 @@
 
 <style type="text/css">
    *{margin:0px;padding:0px;}
-   #event{float:left; width:350px; height:50px; border:1px solid red;}
-   #homelogo{float:left; width:50%; text-align:center; border:1px solid black;}
+   #event{float:left; width:350px; height:50px;}
+   #homelogo{float:left; width:50%; text-align:center;}
    #homelogo img{width:150px;}
-   #right{float:right; margin-top:20px; margin-right:50px; text-align:right; border:1px solid black;}
+   #right{float:right; margin-top:20px; margin-right:50px; text-align:right;}
   
    #right ul li{list-style:none;display:inline-block;margin-right:10px;}
    #right ul li a{text-decoration:none;}
