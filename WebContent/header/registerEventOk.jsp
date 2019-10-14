@@ -13,10 +13,10 @@
 </head>
 <body>
 <%
-   String path=application.getRealPath("/eventUploaded");
+   String saveDirectory=application.getRealPath("/eventUploaded");
    MultipartRequest mr=new MultipartRequest(
 		   request,
-		   path,
+		   saveDirectory,
 		   1024*1024*5,
 		   "utf-8",
 		   new DefaultFileRenamePolicy()
@@ -33,7 +33,6 @@
    dao.insert(vo);
 %>
 <h1>이벤트 작성 완료</h1>
-업로드 경로: <%=path %><br>
 <ul>
    <li>제목: <%=title %><br>
    <li>내용: <%=content %><br>
