@@ -51,7 +51,7 @@
 </script>
 
 
-<c:set var="c" value="${pageContext.request.contextPath}/layout.jsp?cpage="/>
+<c:set var="cp" value="${pageContext.request.contextPath}/layout.jsp?cpage="/>
 
 <div id="event"></div>
 <div id="homelogo">
