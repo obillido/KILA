@@ -58,7 +58,12 @@
    <c:choose>
       <c:when test="${not empty sessionScope.id}">
          <li><a href="${pageContext.request.contextPath }/header/logout">로그아웃</a></li>
-         <li><a href="${pageContext.request.contextPath }/header/mypage.jsp">마이페이지</a></li>
+         <c:when test="${sessionScope.id=='admin'}">
+            <li><a href="${pageContext.request.contextPath }/header/mypage.jsp">관리자페이지</a></li>
+         </c:when>
+         <c:otherwise>
+            <li><a href="${pageContext.request.contextPath }/header/mypage.jsp">마이페이지</a></li>
+         </c:otherwise>
       </c:when>
       <c:otherwise>
          <li><a href="${pageContext.request.contextPath }/header/login">로그인</a></li>
