@@ -55,7 +55,7 @@
 
 <div id="event"></div>
 <div id="homelogo">
-   <img src="${cp}/header/KilaLogo.png">
+   <img src="${pageContext.request.contextPath}/header/KilaLogo.png">
 </div>
 <div id="right">
 <ul>
