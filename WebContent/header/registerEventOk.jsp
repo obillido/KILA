@@ -39,5 +39,6 @@
    <li>전송된 파일명: <%=orgFileName %><br>
    <li>저장된 파일명: <%=saveFileName %><br>
 </ul>
+<a href="${pageContext.request.contextPath }/home">홈으로</a>
 </body>
 </html>
