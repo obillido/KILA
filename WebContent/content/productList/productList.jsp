@@ -12,7 +12,7 @@
 <a href="${cp}?category=<%=category%>&order=4">높은가격순</a>
 
 <div id="search"></div>
-
+dd
 <br><br>
 
 
