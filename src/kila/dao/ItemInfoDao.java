@@ -30,7 +30,7 @@ public class ItemInfoDao {
 			if(rs.next()) {
 				ItemInfoVo vo=new ItemInfoVo(rs.getString("pcode"), 
 						rs.getString("pname"),rs.getInt("price"),rs.getString("savefilename"),
-						rs.getString("color"));
+						rs.getString("color"),colnum);
 				return vo;
 			}
 			return null;

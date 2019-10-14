@@ -7,13 +7,7 @@
 <title>KILA</title>
 
 <style type="text/css">
-	#wrap{
-		width:100%;
-	}
-	#layHeader{
-		width:100%; height:70px;
-		margin-top:30px;
-	}
+	
 </style>
 
 
@@ -24,17 +18,16 @@
 	if(cpage==null) cpage="basicContent.jsp";
 %>
 <div id="wrap">
-	<div id="layHeader">
+	<div id="header">
 		<jsp:include page="/header/index.jsp"/>
 	</div>
-	<div style="height:20px;"></div>
-	<div id="layCategory">
+	<div id="category">
 		<jsp:include page="/header/category.html"/>
 	</div>
-	<div id="layContent">
+	<div id="content">
 		<jsp:include page="<%=cpage %>"/>
 	</div>
-	<div id="layFooter">
+	<div id="footer">
 		<jsp:include page="footer.jsp"/>
 	</div>
 </div>

@@ -6,15 +6,18 @@ public class ItemInfoVo {
 	private int price;
 	private String savefilename;
 	private String color;
+	private int colnum;
 	
 	public ItemInfoVo() {}
 
-	public ItemInfoVo(String pcode, String pname, int price, String savefilename, String color) {
+	public ItemInfoVo(String pcode, String pname, int price, String savefilename, String color, int colnum) {
+		super();
 		this.pcode = pcode;
 		this.pname = pname;
 		this.price = price;
 		this.savefilename = savefilename;
 		this.color = color;
+		this.colnum = colnum;
 	}
 
 	public String getPcode() {
@@ -55,5 +58,13 @@ public class ItemInfoVo {
 
 	public void setColor(String color) {
 		this.color = color;
-	};
+	}
+
+	public int getColnum() {
+		return colnum;
+	}
+
+	public void setColnum(int colnum) {
+		this.colnum = colnum;
+	}
 }
