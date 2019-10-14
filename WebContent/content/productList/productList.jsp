@@ -27,13 +27,9 @@
 	
 	#list div[name=item]{
 		float:left;
+		width:220px; height:300px;
 		padding-right:30px;
 		padding-bottom:50px;
-	}
-	#list div[name=item] h4{
-		line-height:5px;
-		padding-left:10px;
-		
 	}
 </style>
 
@@ -73,7 +69,7 @@
 			<c:forEach var="vo" items="${list}">
 				<a href="${pageContext.request.contextPath}/iteminfo?colnum=${vo.colnum}">
 				<div name="item">
-					<img src="${pageContext.request.contextPath}/upload/${vo.savefilename}" width="220">
+					<img src="${pageContext.request.contextPath}/upload/${vo.savefilename}">
 					<h4>${vo.pname}</h4>
 					<h4>${vo.color}</h4>
 					<h4>${vo.price}</h4>
