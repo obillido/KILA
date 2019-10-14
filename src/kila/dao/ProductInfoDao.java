@@ -139,7 +139,6 @@ public class ProductInfoDao {
 			String sql="select count(*) cnt " + 
 					   "from product_name pn, color " + 
 					   "where pn.pcode=color.pcode "+cwhere;
-			System.out.println(sql);
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
