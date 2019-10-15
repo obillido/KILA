@@ -87,6 +87,18 @@
 		blackground-color:blue;
 	}
 	
+	#searchWindow div[name=circle]{
+		display:inline-block;
+		width:30px; height:30px;
+		-webkit-border-radius:15px;
+		-moz-border-radius:15px;
+	}
+	.circle1{
+		background-color:#FE9A2E;
+	}
+	.circle2{
+		background-color:#01DFA5;
+	}
 	
 	
 	
@@ -242,9 +254,15 @@
 					<span><input type="checkbox" name="psize" value="110"> 110</span>
 					<hr>
 					<label for="price range">가격범위</label>
-					<input type="text" name="price" value="${minPrice}">
+					<input type="text" name="price" value="${minPrice}" onkeyup="checkRange()">
 					 ~ 
-					<input type="text" name="price" value="${minPrice}">
+					<input type="text" name="price" value="${maxPrice}" onkeyup="checkRange()">
+		
+					<hr>
+					<div name="circle" class="circle1"></div>
+					<div name="circle" class="circle2"></div>
+					
+					
 		
 					<div id="button">
 						<input type="submit" value="검색하기">

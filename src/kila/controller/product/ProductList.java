@@ -61,8 +61,6 @@ public class ProductList extends HttpServlet{
 		}
 		
 		
-		
-		
 		ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order);
 		
 		Point pr=dao.getPriceRange(category);
