@@ -8,8 +8,6 @@
 		min-width:1220px;
 	}
 	
-	a{text-underline-position:under;}
-
 	#categoryList{
 		float:left;
 		width:130px;
@@ -24,11 +22,10 @@
 	#categoryList a:hover{
 		color:red;
 		text-decoration:underline;
+		text-underline-position:under;
 	}
-	#categoryList a:active{
-		color:red;
-		text-decoration:underline;
-	}
+
+
 	
 	#productList{
 		float:left;
