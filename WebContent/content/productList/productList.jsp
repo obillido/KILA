@@ -37,7 +37,6 @@
 		float:left;
 	}
 	#order a{
-		
 		color:grey;
 		text-decoration:none;
 	}
@@ -50,22 +49,36 @@
 		background-color:white;
 	}
 	#searchWindow{
-		display:inline;
-		float:left;
-		border:1px solid grey;
-	}
-	#searchWindow input[type=checkbox]{
+		width:90%;
 		display:inline-block;
-		width:15px; height:15px;
-		border:1px solid red;
-		background-color:white;
-		color:red;
+		float:left;
+		line-height:50px;
+		border:2px solid grey;
+		margin:10px 20px;
 	}
-	#searchWindow th{width:150px;}
-	#searchWindow td{
-		width:100px;
-		border:1px solid black;
+	#searchWindow label{
+		display:inline-block;
+		width:200px;
+		text-align:center;
 	}
+	#searchWindow span{
+		display:inline-block;
+		width:90px;
+	}
+	#searchWindow input[type=checkbox] {
+		display:inline-block;
+		width:20px; height:20px;
+		background-color:red;
+	}
+	#searchWindow input[type=text]{
+		display:inline-block;
+		width:100px; height:25px;
+	}
+	.black{background:url("/images/black.png")no-repeat;}
+	
+	
+	
+	
 	
 	
 	#list div[name=item]{
@@ -180,33 +193,25 @@
 		
 		<input type="button" id="search" value="검색조건" onclick="displaySearchWindow()">	
 		<div id="searchWindow" >
-			<table>
-				<tr>
-					<th>색상</th>
-					<td><input type="checkbox" name="color" value="ALL" onclick="selectAll()">ALL</td>
-					<td><input type="checkbox" name="color" value="BLACK">BLACK</td>
-					<td><input type="checkbox" name="color" value="WHITE">WHITE</td>
-					<td><input type="checkbox" name="color" value="RED">RED</td>
-					<td><input type="checkbox" name="color" value="GREEN">GREEN</td>
-				</tr>
-				<tr>
-					<th>사이즈</th>
-					<td><input type="checkbox" name="psize" value="ALL">ALL</td>
-					<td><input type="checkbox" name="psize" value="90">90</td>
-					<td><input type="checkbox" name="psize" value="95">95</td>
-					<td><input type="checkbox" name="psize" value="100">100</td>
-					<td><input type="checkbox" name="psize" value="105">105</td>
-					<td><input type="checkbox" name="psize" value="110">110</td>
-				</tr>
-				<tr>
-					<th>가격범위</th>
-					<td colspan="6">
-						<input type="text" name="price">
-						~
-						<input type="text" name="price">
-					</td>
-				</tr>	
-			</table>
+			<label for="color">색상</label>
+			<span><input type="checkbox" name="color" value="ALL" onclick="selectAll()"> ALL</span>
+			<span><input type="checkbox" name="color" value="BLACK" class="black"> BLACK</span>
+			<span><input type="checkbox" name="color" value="WHITE" class="white"> WHITE</span>
+			<span><input type="checkbox" name="color" value="RED" class="red"> RED</span>
+			<span><input type="checkbox" name="color" value="GREEN" class="green"> GREEN</span>
+			<hr>
+			<label for="psize">사이즈</label>
+			<span><input type="checkbox" name="psize" value="ALL" onclick="selectAll()"> ALL</span>
+			<span><input type="checkbox" name="psize" value="90"> 90</span>
+			<span><input type="checkbox" name="psize" value="95"> 95</span>
+			<span><input type="checkbox" name="psize" value="100"> 100</span>
+			<span><input type="checkbox" name="psize" value="105"> 105</span>
+			<span><input type="checkbox" name="psize" value="110"> 110</span>
+			<hr>
+			<label for="price range">가격범위</label>
+			<input type="text" name="price">
+			 ~ 
+			<input type="text" name="price">
 		</div>
 		<br><br>
 		
