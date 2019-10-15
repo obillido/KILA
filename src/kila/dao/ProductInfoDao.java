@@ -86,22 +86,29 @@ public class ProductInfoDao {
 			String cwhere="";
 			if(!category.equals("all")) cwhere="and cname='"+category+"' ";
 			
-			String owhere="";
+			String otable=" ";
+			String owhere=" ";
+			String orderby=" ";
+			String oselect=" ";
 			switch(order) {
-			case 1: owhere="pcode"; break; // 나중에 수정히기 : 판매순
-			case 2: owhere="pname"; break; // 나중에 수정히기 : 신상순
-			case 3: owhere="price asc"; break;
-			case 4: owhere="price desc"; break;
+			case 1: orderby=" pcode "; break; // 나중에 수정히기 : 판매순
+			case 2: otable=", (select pnum, min(regdate) mr from product_reg group by pnum) pr ";
+					owhere=" and product.colnum=color.colnum and pr.pnum=product.pnum ";
+					oselect=", mr ";
+					orderby="mr desc"; 
+					break;
+			case 3: orderby=" price asc "; break;
+			case 4: orderby=" price desc "; break;
 			default: System.out.println("ProductInfoDao:getListC:???");break;
 			}
 			
 			if(category.equals("all") || category==null || category.equals("")) cwhere="";
 			String sql="select * from "+
 						"(select aa.*,rownum rnum " +
-						"from (select pn.pcode, cname, pname, price, colnum, color, savefilename " + 
-					   "from product_name pn, color " + 
-					   "where pn.pcode=color.pcode "+cwhere+ 
-					   "order by "+owhere+", color) aa " +
+						"from (select distinct pn.pcode, cname, pname, price, color.colnum, color, savefilename " + oselect +
+					   "from product_name pn, color, product " + otable +
+					   "where product.icnt>0 and pn.pcode=color.pcode "+cwhere+ owhere +
+					   "order by "+orderby+", color) aa " +
 					   ") where rnum between ? and ?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);

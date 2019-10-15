@@ -49,6 +49,16 @@
 		margin-right:50px;
 		background-color:white;
 	}
+	#searchWindow{
+		display:inline;
+	}
+	#searchWindow input[type=checkbox]{
+		display:inline-block;
+		width:20px; height:20px;
+		border:2px solid red;
+		background:white;
+	}
+	
 	
 	
 	#list div[name=item]{
@@ -158,9 +168,44 @@
 			<a href="${cplist}?category=${category}&order=4">높은가격순</a>
 		</div>
 		
-		<input type="button" id="search" value="검색조건" onclick="showSearchWindow()">	
-		<div id="searchWindow"></div>
+		
+		
+		
+		<input type="button" id="search" value="검색조건" onclick="displaySearchWindow()">	
+		<div style="float:none;">
+		<div id="searchWindow" >
+			<table>
+				<tr>
+					<td>색상</td>
+					<td><input type="checkbox" name="color" value="ALL" onclick="selectAll()">ALL</td>
+					<td><input type="checkbox" name="color" value="BLACK">BLACK</td>
+					<td><input type="checkbox" name="color" value="WHITE">WHITE</td>
+					<td><input type="checkbox" name="color" value="RED">RED</td>
+					<td><input type="checkbox" name="color" value="GREEN">GREEN</td>
+				</tr>
+				<tr>
+					<td>사이즈</td>
+					<td><input type="checkbox" name="psize" value="ALL">ALL</td>
+					<td><input type="checkbox" name="psize" value="90">90</td>
+					<td><input type="checkbox" name="psize" value="95">95</td>
+					<td><input type="checkbox" name="psize" value="100">100</td>
+					<td><input type="checkbox" name="psize" value="105">105</td>
+					<td><input type="checkbox" name="psize" value="110">110</td>
+				</tr>
+				<tr>
+					<td>가격범위</td>
+					<td colspan="6">
+						<input type="text" name="price">
+						~
+						<input type="text" name="price">
+					</td>
+				</tr>	
+			</table>
+		</div>
 		<br><br>
+		
+		
+		
 		
 		<div id="list">
 			<c:choose>
@@ -190,6 +235,7 @@
 		<c:set var="cpco" value="${cplist}?category=${category}&order=${order}"/>
 		
 		<div id="paging">
+		<c:if test="${pageCount!=0}">
 			<c:if test="${startPageNum!=1}">
 				<a href="${cpco}&pageNum=${startPageNum-1}">이전</a>
 			</c:if>
@@ -208,6 +254,8 @@
 			<c:if test="${endPageNum!=pageCount}">
 				<a href="${cpco}&pageNum=${endPageNum+1}">다음</a>
 			</c:if>
+		
+		</c:if>
 		</div>
 	
 	</div>
@@ -219,12 +267,14 @@
 
 
 <script type="text/javascript">
-	var xhr=null;
-	function showSearchWindow(){
-		
-	}
-	function success(){
-		
+	
+	function displaySearchWindow(){
+		var sw=document.getElementById("searchWindow");
+		if(sw.style.display=="inline"){
+			sw.style.display="none";	
+		}else{
+			sw.style.display="inline";
+		}
 	}
 	
 </script>

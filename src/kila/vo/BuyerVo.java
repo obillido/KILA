@@ -8,9 +8,10 @@ public class BuyerVo {
 	private String rank;
 	private int status;
 	private int coin;
+	private String bname;
 	
 	public BuyerVo() {}
-	public BuyerVo(String cid, String phone, String addr, String email, String rank, int status, int coin) {
+	public BuyerVo(String cid, String phone, String addr, String email, String rank, int status, int coin, String name) {
 		this.cid = cid;
 		this.phone = phone;
 		this.addr = addr;
@@ -18,6 +19,7 @@ public class BuyerVo {
 		this.rank = rank;
 		this.status = status;
 		this.coin = coin;
+		this.bname = bname;
 	}
 
 	public String getCid() {
@@ -74,6 +76,12 @@ public class BuyerVo {
 
 	public void setCoin(int coin) {
 		this.coin = coin;
+	}
+	public String getBname() {
+		return bname;
+	}
+	public void setBname(String bname) {
+		this.bname = bname;
 	}
 	
 }

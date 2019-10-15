@@ -57,6 +57,7 @@ create table buyer
     rank references rank(rank),
     status number(1),
     coin number(10),
+    bname varchar2(20),
     primary key(cid)
 );
 -- status 1 : 회원
