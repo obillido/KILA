@@ -34,10 +34,11 @@ public class UpdateController extends HttpServlet{
 		String phone=req.getParameter("phone");
 		String addr=req.getParameter("addr");
 		String email=req.getParameter("email");
+		String bname=req.getParameter("bname");
 		MemberVo vo=new MemberVo(id,pwd,null);
 		MemberDao dao=new MemberDao();
 		int n=dao.update(vo);
-		BuyerVo vo2=new BuyerVo(id,phone,addr,email,null,0,0);
+		BuyerVo vo2=new BuyerVo(id,phone,addr,email,null,0,0,bname);
 		BuyerDao dao2=new BuyerDao();
 		int n2=dao2.update(vo2);
 		if(n>0 && n2>0) {

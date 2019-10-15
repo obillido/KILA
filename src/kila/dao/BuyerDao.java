@@ -14,12 +14,13 @@ public class BuyerDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="insert into buyer values(?,?,?,?,'Welcome',1,0)";
+			String sql="insert into buyer values(?,?,?,?,'Welcome',1,0,?)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,vo.getCid());
 			pstmt.setString(2,vo.getPhone());
 			pstmt.setString(3,vo.getAddr());
 			pstmt.setString(4,vo.getEmail());
+			pstmt.setString(5,vo.getBname());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
@@ -33,12 +34,13 @@ public class BuyerDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="update buyer set phone=?,addr=?,email=? where cid=?";
+			String sql="update buyer set phone=?,addr=?,email=?,bname=? where cid=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,vo.getPhone());
 			pstmt.setString(2,vo.getAddr());
 			pstmt.setString(3,vo.getEmail());
-			pstmt.setString(4,vo.getCid());
+			pstmt.setString(4, vo.getBname());
+			pstmt.setString(5,vo.getCid());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
@@ -62,7 +64,8 @@ public class BuyerDao {
 				String phone=rs.getString("phone");
 				String addr=rs.getString("addr");
 				String email=rs.getString("email");
-				vo=new BuyerVo(cid,phone,addr,email,null,0,0);
+				String bname=rs.getString("bname");
+				vo=new BuyerVo(cid,phone,addr,email,null,0,0,bname);
 			}
 			return vo;
 		}catch(SQLException se) {

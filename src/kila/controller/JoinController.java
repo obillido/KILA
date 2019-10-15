@@ -27,10 +27,11 @@ public class JoinController extends HttpServlet{
 		String phone=req.getParameter("phone");
 		String addr=req.getParameter("addr");
 		String email=req.getParameter("email");
+		String bname=req.getParameter("bname");
 		MemberVo vo=new MemberVo(id,pwd,"B");
 		MemberDao dao=new MemberDao();
 		int n=dao.insert(vo);
-		BuyerVo vo2=new BuyerVo(id,phone,addr, email,"Welcome",1,0);
+		BuyerVo vo2=new BuyerVo(id,phone,addr, email,"Welcome",1,0,bname);
 		BuyerDao dao2=new BuyerDao();
 		int n2=dao2.insert(vo2);
 		if(n>0 && n2>0) {

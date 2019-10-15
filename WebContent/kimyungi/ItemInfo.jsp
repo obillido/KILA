@@ -29,13 +29,19 @@
 		sig=true;
 		var cntsr=document.getElementById("cntsr");
 		document.getElementById("btn1").disabled = false;
-		btn2=document.getElementById("btn2").disabled = false;;
+		btn2=document.getElementById("btn2").disabled = false;
 		cntsr.style.display="block";
 		var vcnt=document.getElementById("vcnt");
 		var sps=document.getElementById("sps");
 		vcnt.value=icnt;
 		sps.value=psize;
 	}
+	function rinsert(id){
+		if(id==""){
+			alert("회원만 리뷰가 가능합니다.");
+		}
+	}
+
 </script>
 <div style="text-align: center;">
 <div style="text-align: center; display: inline-block;">
@@ -50,7 +56,7 @@
    가격:<span style='color:red'>${vo.price }</span><br><br><hr><br>
    색상:${vo.color }<br><br><hr><br>
    사이즈: <c:forEach var="si" items="${list }">
-   		<a href="javascript:viewcnt(${si.icnt },${si.psize },event)">${si.psize}</a>	
+   		<a href="javascript:viewcnt(${si.icnt },${si.psize })">${si.psize}</a>	
    			</c:forEach>
    		<br><br><hr><br>
    <form method="post" action="${pageContext.request.contextPath }/kila/payment">
@@ -69,18 +75,16 @@
 </div>
 <div>
 <span style="font-size: 15px">REVIEW | 문의글 혹은 악의적인 비방글은 무통보 삭제된다는 점 유의해주세요^^</span><br>
-<textarea rows="10" cols="93"onKeyUp="javascript:fnChkByte(this,'500')"></textarea>
+<textarea rows="10" cols="93"onKeyUp="javascript:fnChkByte(this,'500')" <%if(session.getAttribute("id")==null) {%> disabled="disabled"<%} %>></textarea>
  <br><c:forEach begin="1" end="105">&nbsp</c:forEach><span id="byteInfo">0</span>/500bytes<br>
- <button type="button" style="width: 150px;"><img src="${pageContext.request.contextPath }/upload/camera_icon.png" width="30px" height="25px" >+사진추가</button>
- <select style="width: 350px; height: 35px; font-size: 20px; display: inline-block;">
+ <select style="width: 450px; height: 35px; font-size: 20px; display: inline-block;">
  	<option value="5">★★★★★아주 좋아요!</option>
  	<option value="4">★★★★☆맘에 들어요.</option>
  	<option value="3">★★★☆☆보통이에요...</option>
  	<option value="2">★★☆☆☆그냥 그래요...</option>
  	<option value="1">★☆☆☆☆별로에요...</option>
  </select>
- <button type="button" style="background-color:pink; width: 150px"><img src="${pageContext.request.contextPath }/upload/pencil.png" width="30px" height="25px">리뷰등록하기</button>
- 
+ <button type="button" style="background-color:pink; width: 200px" onclick="rinsert('${id}')"><img src="${pageContext.request.contextPath }/upload/pencil.png" width="30px" height="25px">리뷰등록하기</button>
 <script type="text/javascript">
  function fnChkByte(obj, maxByte)
  {

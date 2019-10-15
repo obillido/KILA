@@ -19,4 +19,13 @@
 		<h1 style="display: inline-block;">총 결제금액: <span style="color: red;">${vo.price * cnt }</span></h1></th>
 	</tr>
 </table>
+	<br>
+	<h2>주문자 정보</h2>
+	이름${vo2.cid }<br>
+	휴대폰 번호<br>
+	E-MAIL<br>
+	<h2>배송지 정보</h2>
+	이름<br>
+	휴대폰 번호<br>
+	주소<br>
 </div>
