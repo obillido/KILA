@@ -135,10 +135,17 @@ function signup(){
 }
 </script>
 
+<style type="text/css">
+    *{margin:0px;padding:0px;}
+    #div{padding:200px 0px 0px 800px;}
+    #btn1{background-color:white;color:black;border:1px solid black;}
+    #btn2{background-color:white;color:black;margin-left:235px;margin-top:20px;border:1px solid black;}
+</style>
 
+<div id="div">
 <form method="post" action="${pageContext.request.contextPath }/header/join" onsubmit="signup()">
    아이디 <input type="text" name="id" id="id">
-   <input type="button" value="중복검사" onclick="checkId()">
+   <input type="button" value="중복검사" onclick="checkId()" id="btn1">
    <span id="checkId" style="color:red;font-size:12px"></span><br>
    비밀번호 <input type="password" name="pwd" id="pwd" onkeyup="checkPwd()">
    <span id="checkPwd" style="color:red;font-size:12px"></span><br>
@@ -150,5 +157,6 @@ function signup(){
    <span id="checkAddr" style="color:red;font-size:12px"></span><br>
    이메일 <input type="text" name="email" id="email" onkeyup="checkEmail()">
    <span id="checkEmail" style="color:red;font-size:12px"></span><br>
-   <input type="submit" value="회원가입">
+   <input type="submit" value="회원가입" id="btn2">
 </form>
+</div>

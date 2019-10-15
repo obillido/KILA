@@ -58,4 +58,31 @@ public class EventDao {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	public EventVo detail(int evnum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from event where enum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,evnum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				String title=rs.getString("title");
+				String content=rs.getString("content");
+				String orgfilename=rs.getString("orgfilename");
+				String savefilename=rs.getString("savefilename");
+				long filesize=rs.getLong("filesize");
+				EventVo vo=new EventVo(evnum,title,content,orgfilename,savefilename,filesize);
+				return vo;
+			}
+			return null;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
 }

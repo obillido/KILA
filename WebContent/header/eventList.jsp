@@ -11,7 +11,13 @@ function bigger(e){
 }
 </script>
 
-<table border="1" width="1700">
+<style type="text/css">
+    *{margin:0px;padding:0px;}
+    #div{padding:200px 0px 0px 400px;}
+</style>
+
+<div id="div">
+<table border="1" width="1200" style="background-color:#EBFBFF;">
 <tr>
    <th>제목</th>
    <th>내용</th>
@@ -22,13 +28,14 @@ function bigger(e){
 	   for(EventVo ev:list){
 %>
       <tr>
-         <td><%=ev.getTitle() %></td>
+         <td><a href="${pageContext.request.contextPath }/header/eventDetail?num=<%=ev.getEvnum()%>"><%=ev.getTitle() %></a></td>
          <td><%=ev.getContent() %></td>
-         <td><img src="${pageContext.request.contextPath }/eventUploaded/<%=ev.getOrgfilename() %>" width="400" height="400" onclick="bigger(event)""></td>
+         <td><img src="${pageContext.request.contextPath }/eventUploaded/<%=ev.getOrgfilename() %>" width="200" height="200" onclick="bigger(event)""></td>
       </tr>	 
 <%  
 	   }
 %>
 </tr>
 </table>
+</div>
 <a href="${pageContext.request.contextPath }/home">홈으로</a>
