@@ -40,7 +40,7 @@ public class ProductList extends HttpServlet{
 			
 			ProductInfoDao dao=ProductInfoDao.getInstance();
 			int pageCount=(int)Math.ceil(dao.getCount(category)/8.);
-			int startPageNum=(pageNum-1)/4*4+1;
+			int startPageNum=(pageNum-1)/5*5+1;
 			int endPageNum=startPageNum+4;
 			if(endPageNum>pageCount) {
 				endPageNum=pageCount;
@@ -48,6 +48,7 @@ public class ProductList extends HttpServlet{
 			
 			ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order);
 			
+			req.setAttribute("category", category);
 			req.setAttribute("pageNum",pageNum);
 			req.setAttribute("pageCount",pageCount);
 			req.setAttribute("startPageNum", startPageNum);

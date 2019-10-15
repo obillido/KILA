@@ -7,7 +7,6 @@
 <title>KILA</title>
 
 <style type="text/css">
-    *{margin:0px;padding:0px;}
     #wrap{width:100%;}
 </style>
 

@@ -9,11 +9,9 @@
 
 	#categoryList{
 		float:left;
-		width:150px;
+		width:130px;
 		padding:10px 30px;
 		line-height:30px;
-		
-		border:2px solid black;
 	}
 	#categoryList a{
 		padding-left:10px;
@@ -31,11 +29,15 @@
 	
 	#productList{
 		float:left;
-		width:1000px;
+		width:970px;
 	}
 	
 	
+	#order{
+		float:left;
+	}
 	#order a{
+		
 		color:grey;
 		text-decoration:none;
 	}
@@ -49,16 +51,11 @@
 	}
 	
 	
-	#productList{
-		
-		
-		border:2px solid green;
-	}
 	#list div[name=item]{
 		float:left;
 		width:220px; height:320px;
-		margin-bottom:50px;
-		margin-right:30px
+		margin-right:20px;
+		margin-bottom:20px;
 	}
 	#list div[name=item] p{
 		padding:2px 10px;
@@ -67,10 +64,9 @@
 
 
 	#paging{
-		width:100%;
+		width:95%;
 		text-align:center;
 		font-size:30px;
-		border:2px solid blue;
 	}
 	#paging a{
 		text-decoration:none;
@@ -189,6 +185,7 @@
 	
 	
 		<br><br>
+		
 		
 		<c:set var="cpco" value="${cplist}?category=${category}&order=${order}"/>
 		
