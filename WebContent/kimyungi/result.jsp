@@ -21,11 +21,11 @@
 </table>
 	<br>
 	<h2>주문자 정보</h2>
-	이름${vo2.cid }<br>
-	휴대폰 번호<br>
-	E-MAIL<br>
+	이름${vo2.bname }<br>
+	휴대폰 번호${vo2.phone }<br>
+	E-MAIL${vo2.email }<br>
 	<h2>배송지 정보</h2>
-	이름<br>
-	휴대폰 번호<br>
-	주소<br>
+	이름${vo2.bname }<br>
+	휴대폰 번호${vo2.phone }<br>
+	주소${vo2.addr }<br>
 </div>
