@@ -19,6 +19,10 @@
       <td><input type="text" name="pwd" value="${sessionScope.pwd}"></td>
    </tr>
    <tr>
+      <th>이름</th>
+      <td><input type="text" name="bname" value="${info.bname}"></td>
+   </tr>
+   <tr>
       <th>전화번호</th>
       <td><input type="text" name="phone" value="${info.phone}"></td>
    </tr>

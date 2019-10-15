@@ -123,6 +123,16 @@ function checkEmail(){
    span.innerHTML="";
    return true;
 }
+function checkName(){
+	var name=document.getElementById("name").value;
+	var span=document.getElementById("checkName");
+	if(name==null || name==""){
+		span.innerHTML="이름을 정확히 입력해 주세요.";
+		return false;
+	}
+	span.innerHTML="";
+	return true;
+}
 function signup(){
 	if(!checkId()) return false;
 	if(!checkPwd()) return false;
@@ -130,6 +140,7 @@ function signup(){
 	if(!checkPhone()) return false;
 	if(!checkAddr()) return false;
 	if(!checkEmail()) return false;
+	if(!checkName()) return false;
 	return true;
 	alert("회원가입을 축하합니다.");
 }
@@ -151,6 +162,8 @@ function signup(){
    <span id="checkPwd" style="color:red;font-size:12px"></span><br>
    비밀번호 확인<input type="password" id="chkPwd" onkeyup="checkPwd2()">
    <span id="checkPwd2" style="color:red;font-size:12px"></span><br>
+   이름 <input type="text" name="name" id="name" onkeyup="checkName()">
+   <span id="checkName" style="color:red;font-size:12px"></span><br>
    전화번호 <input type="text" name="phone" id="phone" onkeyup="checkPhone()">
    <span id="checkPhone" style="color:red;font-size:12px"></span><br>
    주소 <input type="text" name="addr" id="addr" onkeyup="checkAddr()">

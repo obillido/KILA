@@ -11,7 +11,7 @@ public class BuyerVo {
 	private String bname;
 	
 	public BuyerVo() {}
-	public BuyerVo(String cid, String phone, String addr, String email, String rank, int status, int coin, String name) {
+	public BuyerVo(String cid, String phone, String addr, String email, String rank, int status, int coin, String bname) {
 		this.cid = cid;
 		this.phone = phone;
 		this.addr = addr;
