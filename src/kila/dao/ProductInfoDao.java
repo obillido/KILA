@@ -1,5 +1,6 @@
 package kila.dao;
 
+import java.awt.Point;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,9 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
-import kila.controller.ItmeInfoController;
 import kila.vo.ItemInfoSizeVo;
-import kila.vo.ItemInfoVo;
 import kila.vo.ProductInfoVo;
 
 public class ProductInfoDao {
@@ -44,38 +43,6 @@ public class ProductInfoDao {
 	
 	
 
-
-	public ArrayList<ProductInfoVo> getList(){
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try {
-			con=JdbcUtil.getConn();
-			String sql="select pn.pcode, cname, pname, price, color, savefilename, psize, icnt from product_name pn, color, product " + 
-						"where pn.pcode=color.pcode and color.colnum=product.colnum " + 
-						"order by pcode, pname, color, psize";
-			pstmt=con.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
-			while(rs.next()) {
-				list.add(new ProductInfoVo(
-						rs.getString("pcode"), 
-						rs.getString("cname"), 
-						rs.getString("pname"), 
-						rs.getInt("price"), 
-						rs.getString("color"),
-						rs.getString("savefilename"),
-						rs.getString("psize"), 
-						rs.getInt("icnt")));
-			}
-			return list;
-		}catch(SQLException se) {
-			System.out.println("ProductInfoDAO:list:"+se.getMessage());
-			return null;
-		}finally {
-			JdbcUtil.close(con,pstmt,rs);
-		}
-	}
 	
 	public ArrayList<ProductInfoVo> getListC(int startRow, int endRow, String category, int order){
 		Connection con=null;
@@ -156,6 +123,31 @@ public class ProductInfoDao {
 		}catch(SQLException se) {
 			System.out.println("ProductInfoDAO:getCount:"+se.getMessage());
 			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	
+	
+	public Point getPriceRange(String category) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String cwhere="";
+			if(!category.equals("all")) cwhere=" where cname='"+category+"' ";
+			String sql="select min(price) minP, max(price) maxP from product_name" + cwhere;
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			Point pp=null;
+			if(rs.next()) {
+				pp=new Point(rs.getInt("minP"), rs.getInt("maxP"));
+			}
+			return pp;
+		}catch(SQLException se) {
+			System.out.println("ProductInfoDAO:getPriceRange"+se.getMessage());
+			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
 		}

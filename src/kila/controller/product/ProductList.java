@@ -1,5 +1,6 @@
 package kila.controller.product;
 
+import java.awt.Point;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,48 +20,62 @@ import kila.vo.ProductVo;
 public class ProductList extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session=req.getSession();
-		String type=(String)session.getAttribute("type");
-		if(type==null ||type.equals("B")) {
-			//구매자일때
-			String category=req.getParameter("category");
-			String torder=req.getParameter("order");
-			int order=1;
-			if(torder!=null) {
-				order=Integer.parseInt(torder);
-			}
-
-			String spageNum=req.getParameter("pageNum");
-			int pageNum=1;
-			if(spageNum!=null) {
-				pageNum=Integer.parseInt(spageNum);
-			}
-			int endRow=pageNum*8;
-			int startRow=endRow-7;
-			
-			ProductInfoDao dao=ProductInfoDao.getInstance();
-			int pageCount=(int)Math.ceil(dao.getCount(category)/8.);
-			int startPageNum=(pageNum-1)/5*5+1;
-			int endPageNum=startPageNum+4;
-			if(endPageNum>pageCount) {
-				endPageNum=pageCount;
-			}
-			
-			ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order);
-			
-			req.setAttribute("category", category);
-			req.setAttribute("pageNum",pageNum);
-			req.setAttribute("pageCount",pageCount);
-			req.setAttribute("startPageNum", startPageNum);
-			req.setAttribute("endPageNum", endPageNum);
-			req.setAttribute("order",order);
-			req.setAttribute("list", list);
-			req.getRequestDispatcher("/layout.jsp?cpage=/content/productList/productList.jsp").forward(req, resp);
-		}else {
-			//관리자 일때
-			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList();
-			req.setAttribute("list", list);
-			req.getRequestDispatcher("/layout.jsp?cpage=/admin/productList.jsp").forward(req, resp);
+		String category=req.getParameter("category");
+		String torder=req.getParameter("order");
+		int order=1;
+		if(torder!=null) {
+			order=Integer.parseInt(torder);
 		}
+
+		String spageNum=req.getParameter("pageNum");
+		int pageNum=1;
+		if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		}
+		int endRow=pageNum*8;
+		int startRow=endRow-7;
+		
+		ProductInfoDao dao=ProductInfoDao.getInstance();
+		int pageCount=(int)Math.ceil(dao.getCount(category)/8.);
+		int startPageNum=(pageNum-1)/5*5+1;
+		int endPageNum=startPageNum+4;
+		if(endPageNum>pageCount) {
+			endPageNum=pageCount;
+		}
+		
+		
+		String[] colors=req.getParameterValues("color");
+		String colorVal=req.getParameter("colorVal");
+		if(colorVal!=null) {
+			colors=colorVal.split("%");
+		}
+		String[] psizes=req.getParameterValues("psize");
+		String sizeVal=req.getParameter("sizeVal");
+		if(sizeVal!=null) {
+			psizes=sizeVal.split("%");
+		}
+		String[] priceRange=req.getParameterValues("price");
+		String priceVal=req.getParameter("priceVal");
+		if(priceVal!=null) {
+			priceRange=priceVal.split("%");
+		}
+		
+		
+		
+		
+		ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order);
+		
+		Point pr=dao.getPriceRange(category);
+		
+		req.setAttribute("category", category);
+		req.setAttribute("pageNum",pageNum);
+		req.setAttribute("pageCount",pageCount);
+		req.setAttribute("startPageNum", startPageNum);
+		req.setAttribute("endPageNum", endPageNum);
+		req.setAttribute("order",order);
+		req.setAttribute("list", list);
+		req.setAttribute("minPrice", pr.x);
+		req.setAttribute("maxPrice", pr.y);
+		req.getRequestDispatcher("/layout.jsp?cpage=/content/productList/productList.jsp").forward(req, resp);
 	}
 }

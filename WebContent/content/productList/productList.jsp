@@ -43,14 +43,13 @@
 		color:grey;
 		text-decoration:none;
 	}
-
 	
 	
 	
 	#search{
 		float:right;
 		width:100px; height:30px;
-		margin-right:50px;
+		margin-right:70px;
 		background-color:white;
 	}
 	#searchWindow{
@@ -59,7 +58,7 @@
 		float:left;
 		line-height:50px;
 		border:2px solid grey;
-		margin:10px 20px;
+		margin:10px 25px;
 	}
 	#searchWindow label{
 		display:inline-block;
@@ -68,7 +67,7 @@
 	}
 	#searchWindow span{
 		display:inline-block;
-		width:90px;
+		width:100px;
 	}
 	#searchWindow input[type=checkbox] {
 		display:inline-block;
@@ -78,7 +77,15 @@
 		display:inline-block;
 		width:100px; height:25px;
 	}
-	
+	#searchWindow #button{
+		text-align:center;
+	}
+	#searchWindow #button input{
+		width:150px; height:40px;
+		font-size:20px;
+		margin:30px 20px 20px 20px;
+		blackground-color:blue;
+	}
 	
 	
 	
@@ -217,29 +224,36 @@
 		
 		
 		<input type="button" id="search" value="검색조건" onclick="displaySearchWindow()">	
-		<form method="post" action="">
-		<div id="searchWindow" >
-			<label for="color">색상</label>
-			<span><input type="checkbox" name="color" value="ALL" onclick="selectAll()"> ALL</span>
-			<span><input type="checkbox" name="color" value="BLACK" class="black"> BLACK</span>
-			<span><input type="checkbox" name="color" value="WHITE" class="white"> WHITE</span>
-			<span><input type="checkbox" name="color" value="RED" class="red"> RED</span>
-			<span><input type="checkbox" name="color" value="GREEN" class="green"> GREEN</span>
-			<hr>
-			<label for="psize">사이즈</label>
-			<span><input type="checkbox" name="psize" value="ALL" onclick="selectAll()"> ALL</span>
-			<span><input type="checkbox" name="psize" value="90"> 90</span>
-			<span><input type="checkbox" name="psize" value="95"> 95</span>
-			<span><input type="checkbox" name="psize" value="100"> 100</span>
-			<span><input type="checkbox" name="psize" value="105"> 105</span>
-			<span><input type="checkbox" name="psize" value="110"> 110</span>
-			<hr>
-			<label for="price range">가격범위</label>
-			<input type="text" name="price">
-			 ~ 
-			<input type="text" name="price">
-		</div>
-		</form>
+			<form method="post" action="${cplist}">
+				<div id="searchWindow" >
+					<label for="color">색상</label>
+					<span><input type="checkbox" id="all_color" onclick="selectAll('color')"> ALL</span>
+					<span><input type="checkbox" name="color" value="BLACK"> BLACK</span>
+					<span><input type="checkbox" name="color" value="WHITE"> WHITE</span>
+					<span><input type="checkbox" name="color" value="RED"> RED</span>
+					<span><input type="checkbox" name="color" value="GREEN"> GREEN</span>
+					<hr>
+					<label for="psize">사이즈</label>
+					<span><input type="checkbox" id="all_psize" onclick="selectAll('psize')"> ALL</span>
+					<span><input type="checkbox" name="psize" value="90"> 90</span>
+					<span><input type="checkbox" name="psize" value="95"> 95</span>
+					<span><input type="checkbox" name="psize" value="100"> 100</span>
+					<span><input type="checkbox" name="psize" value="105"> 105</span>
+					<span><input type="checkbox" name="psize" value="110"> 110</span>
+					<hr>
+					<label for="price range">가격범위</label>
+					<input type="text" name="price" value="${minPrice}">
+					 ~ 
+					<input type="text" name="price" value="${minPrice}">
+		
+					<div id="button">
+						<input type="submit" value="검색하기">
+						<input type="button" value="닫기" onclick="displaySearchWindow()">
+					</div>
+					<input type="hidden" name="category" value="${category}">
+					<input type="hidden" name="order" value="${order}">
+				</div>
+			</form>
 		<br><br>
 		
 		
@@ -268,6 +282,8 @@
 	
 	
 		<br><br>
+		
+		
 		
 		
 		<c:set var="cpco" value="${cplist}?category=${category}&order=${order}"/>
@@ -308,10 +324,24 @@
 	
 	function displaySearchWindow(){
 		var sw=document.getElementById("searchWindow");
-		if(sw.style.display=="inline"){
+		if(sw.style.display!="none"){
 			sw.style.display="none";	
 		}else{
 			sw.style.display="inline";
+		}
+	}
+	
+	function selectAll(sel){
+		var chk=document.getElementById("all_"+sel);
+		var all=document.getElementsByName(sel);
+		if(chk.checked==true){
+			for(var i=0; i<all.length; i++){
+				all[i].checked=true;
+			}
+		}else{
+			for(var i=0; i<all.length; i++){
+				all[i].checked=false;
+			}			
 		}
 	}
 	

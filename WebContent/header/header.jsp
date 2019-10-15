@@ -38,7 +38,7 @@
 	}
 	
 	
-		#category{
+	#category{
 		width:100%;
 		text-align:center;
 		margin-top:20px;
