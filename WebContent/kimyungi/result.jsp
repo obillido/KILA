@@ -5,12 +5,12 @@
 <h2>CHECKOUT</h2>
 <table style="display: inline-block;">
 	<tr style="background-color: pink;">
-		<th width="10"></th><th width="300">상품정보</th><th width="120">수량</th>
+		<th width="300">상품정보</th><th width="120">수량</th>
 		<th width="150">상품금액</th><th width="150">쿠폰할인</th>
 		<th width="150">할인합계</th><th width="150">결제금액</th>
 	</tr>
 	<tr>
-		<th><input type="checkbox"></th><th><div><img width="100px" style="float: left;" src="${pageContext.request.contextPath }/upload/${vo.savefilename }"></div><br>KILA | ${vo.pcode }<br>${vo.pname }<br>${vo.color }/${psize }</th>
+		<th><div><img width="100px" style="float: left;" src="${pageContext.request.contextPath }/upload/${vo.savefilename }"></div><br>KILA | ${vo.pcode }<br>${vo.pname }<br>${vo.color }/${psize }</th>
 		<th>${cnt }</th><th>${vo.price }</th><th>0원</th><th>0원</th><th>${vo.price * cnt }</th>
 	</tr>
 	<tr>
