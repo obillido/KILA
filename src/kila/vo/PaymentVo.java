@@ -9,15 +9,17 @@ public class PaymentVo {
 	private int cnt;
 	private Date paydate;
 	private int status;
+	private String paymethod;
 	
 	public PaymentVo() {}
-	public PaymentVo(int paynum, String bid, int pnum, int cnt, Date paydate, int status) {
+	public PaymentVo(int paynum, String bid, int pnum, int cnt, Date paydate, int status, String paymethod) {
 		this.paynum = paynum;
 		this.bid = bid;
 		this.pnum = pnum;
 		this.cnt = cnt;
 		this.paydate = paydate;
 		this.status = status;
+		this.paymethod = paymethod;
 	}
 
 	public int getPaynum() {
@@ -67,5 +69,12 @@ public class PaymentVo {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public String getPaymethod() {
+		return paymethod;
+	}
+	public void setPaymethod(String paymethod) {
+		this.paymethod = paymethod;
+	}
+	
 	
 }

@@ -115,7 +115,8 @@ create table payment
     pnum references product(pnum),
     cnt number(10) not null,
     paydate date not null,
-    status number(1) default 1
+    status number(1) default 1,
+    paymethod varchar2(30)
 );
 create sequence payment_seq;
 -- 1 : 배송준비

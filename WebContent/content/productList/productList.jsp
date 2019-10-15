@@ -4,8 +4,11 @@
 
 <style type="text/css">
 	#content{
+		width:100%;
 		min-width:1220px;
 	}
+	
+	a{text-underline-position:under;}
 
 	#categoryList{
 		float:left;
@@ -40,6 +43,8 @@
 		color:grey;
 		text-decoration:none;
 	}
+
+	
 	
 	
 	#search{
@@ -68,13 +73,11 @@
 	#searchWindow input[type=checkbox] {
 		display:inline-block;
 		width:20px; height:20px;
-		background-color:red;
 	}
 	#searchWindow input[type=text]{
 		display:inline-block;
 		width:100px; height:25px;
 	}
-	.black{background:url("/images/black.png")no-repeat;}
 	
 	
 	
@@ -182,16 +185,39 @@
 		<h1>상품목록</h1>
 		<br>
 		<div id="order">
-			<a href="${cplist}?category=${category}&order=1">판매순</a>
-			<a href="${cplist}?category=${category}&order=2">신상품순</a>
-			<a href="${cplist}?category=${category}&order=3">낮은가격순</a>
-			<a href="${cplist}?category=${category}&order=4">높은가격순</a>
+		<c:choose>
+			<c:when test="${empty order || order==1}">
+				<a href="${cplist}?category=${category}&order=1" style="text-decoration:underline;">판매순</a>
+				<a href="${cplist}?category=${category}&order=2">신상품순</a>
+				<a href="${cplist}?category=${category}&order=3">낮은가격순</a>
+				<a href="${cplist}?category=${category}&order=4">높은가격순</a>
+			</c:when>
+			<c:when test="${order==2}">
+				<a href="${cplist}?category=${category}&order=1">판매순</a>
+				<a href="${cplist}?category=${category}&order=2" style="text-decoration:underline;">신상품순</a>
+				<a href="${cplist}?category=${category}&order=3">낮은가격순</a>
+				<a href="${cplist}?category=${category}&order=4">높은가격순</a>
+			</c:when>
+			<c:when test="${order==3}">
+				<a href="${cplist}?category=${category}&order=1">판매순</a>
+				<a href="${cplist}?category=${category}&order=2">신상품순</a>
+				<a href="${cplist}?category=${category}&order=3" style="text-decoration:underline;">낮은가격순</a>
+				<a href="${cplist}?category=${category}&order=4">높은가격순</a>
+			</c:when>
+			<c:when test="${order==4}">
+				<a href="${cplist}?category=${category}&order=1">판매순</a>
+				<a href="${cplist}?category=${category}&order=2">신상품순</a>
+				<a href="${cplist}?category=${category}&order=3">낮은가격순</a>
+				<a href="${cplist}?category=${category}&order=4" style="text-decoration:underline;">높은가격순</a>
+			</c:when>
+		</c:choose>
 		</div>
 		
 		
 		
 		
 		<input type="button" id="search" value="검색조건" onclick="displaySearchWindow()">	
+		<form method="post" action="">
 		<div id="searchWindow" >
 			<label for="color">색상</label>
 			<span><input type="checkbox" name="color" value="ALL" onclick="selectAll()"> ALL</span>
@@ -213,6 +239,7 @@
 			 ~ 
 			<input type="text" name="price">
 		</div>
+		</form>
 		<br><br>
 		
 		
