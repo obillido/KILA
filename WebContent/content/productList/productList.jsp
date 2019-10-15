@@ -51,14 +51,21 @@
 	}
 	#searchWindow{
 		display:inline;
+		float:left;
+		border:1px solid grey;
 	}
 	#searchWindow input[type=checkbox]{
 		display:inline-block;
-		width:20px; height:20px;
-		border:2px solid red;
-		background:white;
+		width:15px; height:15px;
+		border:1px solid red;
+		background-color:white;
+		color:red;
 	}
-	
+	#searchWindow th{width:150px;}
+	#searchWindow td{
+		width:100px;
+		border:1px solid black;
+	}
 	
 	
 	#list div[name=item]{
@@ -172,11 +179,10 @@
 		
 		
 		<input type="button" id="search" value="검색조건" onclick="displaySearchWindow()">	
-		<div style="float:none;">
 		<div id="searchWindow" >
 			<table>
 				<tr>
-					<td>색상</td>
+					<th>색상</th>
 					<td><input type="checkbox" name="color" value="ALL" onclick="selectAll()">ALL</td>
 					<td><input type="checkbox" name="color" value="BLACK">BLACK</td>
 					<td><input type="checkbox" name="color" value="WHITE">WHITE</td>
@@ -184,7 +190,7 @@
 					<td><input type="checkbox" name="color" value="GREEN">GREEN</td>
 				</tr>
 				<tr>
-					<td>사이즈</td>
+					<th>사이즈</th>
 					<td><input type="checkbox" name="psize" value="ALL">ALL</td>
 					<td><input type="checkbox" name="psize" value="90">90</td>
 					<td><input type="checkbox" name="psize" value="95">95</td>
@@ -193,7 +199,7 @@
 					<td><input type="checkbox" name="psize" value="110">110</td>
 				</tr>
 				<tr>
-					<td>가격범위</td>
+					<th>가격범위</th>
 					<td colspan="6">
 						<input type="text" name="price">
 						~
@@ -235,7 +241,7 @@
 		<c:set var="cpco" value="${cplist}?category=${category}&order=${order}"/>
 		
 		<div id="paging">
-		<c:if test="${pageCount!=0}">
+		<c:if test="${not empty pageCount}">
 			<c:if test="${startPageNum!=1}">
 				<a href="${cpco}&pageNum=${startPageNum-1}">이전</a>
 			</c:if>

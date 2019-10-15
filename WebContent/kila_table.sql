@@ -133,7 +133,8 @@ create table review
     paynum references payment(paynum),
     content varchar2(500),
     rpoint number(1),
-    regdate date
+    regdate date,
+    savefilename varchar2(100)
 );
 create sequence review_seq;
 

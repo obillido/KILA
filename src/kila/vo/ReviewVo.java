@@ -8,14 +8,16 @@ public class ReviewVo {
 	private String content;
 	private int rpoint;
 	private Date regdate;
+	private String savefilename;
 	
 	public ReviewVo() {}
-	public ReviewVo(int rnum, int paynum, String content, int rpoint, Date regdate) {
+	public ReviewVo(int rnum, int paynum, String content, int rpoint, Date regdate, String savefilename) {
 		this.rnum = rnum;
 		this.paynum = paynum;
 		this.content = content;
 		this.rpoint = rpoint;
 		this.regdate = regdate;
+		this.savefilename = savefilename;
 	}
 
 	public int getRnum() {
@@ -57,5 +59,12 @@ public class ReviewVo {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	public String getSavefilename() {
+		return savefilename;
+	}
+	public void setSavefilename(String savefilename) {
+		this.savefilename = savefilename;
+	}
+	
 	
 }
