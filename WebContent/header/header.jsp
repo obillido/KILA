@@ -13,6 +13,7 @@
 	}
 	#event{
 		float:left;
+		text-align:left;
 		margin-left:20px;
 		margin-top:15px;
 		width:350px; height:20px;

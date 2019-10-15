@@ -83,7 +83,8 @@ public class ProductInfoDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String cwhere="and cname='"+category+"' ";
+			String cwhere="";
+			if(!category.equals("all")) cwhere="and cname='"+category+"' ";
 			
 			String owhere="";
 			switch(order) {
@@ -119,7 +120,7 @@ public class ProductInfoDao {
 			}
 			return list;
 		}catch(SQLException se) {
-			System.out.println("ProductInfoDAO:list:cate:"+se.getMessage());
+			System.out.println("ProductInfoDAO:getListC"+se.getMessage());
 			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
@@ -133,20 +134,20 @@ public class ProductInfoDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			
-			
-			String sql="select count(*) from";
-			
-			
+			String cwhere="";
+			if(!category.equals("all")) cwhere="and cname='"+category+"' ";
+			String sql="select count(*) cnt " + 
+					   "from product_name pn, color " + 
+					   "where pn.pcode=color.pcode "+cwhere;
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				return rs.getInt(1);
+				return rs.getInt("cnt");
 			}else {
 				return -1;
 			}
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("ProductInfoDAO:getCount:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
