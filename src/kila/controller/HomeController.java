@@ -12,6 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath() + "/layout.jsp?cpage=home.jsp");
+		resp.sendRedirect(req.getContextPath() + "/layout.jsp?cpage=main.jsp");
 	}
 }

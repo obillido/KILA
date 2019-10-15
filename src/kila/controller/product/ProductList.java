@@ -45,7 +45,6 @@ public class ProductList extends HttpServlet{
 			if(endPageNum>pageCount) {
 				endPageNum=pageCount;
 			}
-			System.out.println(pageCount);
 			
 			ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order);
 			
