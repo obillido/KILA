@@ -7,7 +7,7 @@ function checkId(){
 	xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=success;
 	var id=document.getElementById("id").value;
-	xhr.open('get','checkId.jsp?id=' + id,true);
+	xhr.open('get','/KILA/header/checkId.jsp?id=' + id,true);
 	xhr.send();
 	
 	if(id.length<6){
