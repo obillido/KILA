@@ -1,10 +1,28 @@
+<%@page import="java.io.PrintWriter"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="kila.vo.EventVo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="kila.dao.EventDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-{
-	"events" : [
-		{"e" : "1", "name" : "[이벤트] 신규가입시 10,000원 쿠폰 즉시 발급"}, 
-		{"e" : "2", "name" : "[이벤트] 가을맞이 자켓 50% 할인 행사 중"},
-		{"e" : "3", "name" : "[공지사항] 할로윈데이 이벤트 당첨자 결과 발표"},
-		{"e" : "4", "name" : "[이벤트] 카카오 친추하고 무료배송 쿠폰 받자"}
-	]
-}
+    
+<%
+   EventDao dao=new EventDao();
+   ArrayList<EventVo> list=dao.list();
+   
+   JSONArray arr=new JSONArray();
+   for(int i=0;i<list.size();i++){
+	   EventVo vo=list.get(i);
+	   JSONObject json=new JSONObject();
+	   json.put("title",vo.getTitle());
+	   json.put("content",vo.getContent());
+	   arr.put(json);
+   }
+   response.setContentType("text/plain;charset=utf-8");
+   PrintWriter pw=response.getWriter();
+   pw.print(arr.toString());
+%>
+
+
+

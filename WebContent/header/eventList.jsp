@@ -4,13 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<script type="text/javascript">
-function bigger(e){
-    var option="width=1000, height=800, top=300, left=500, location=no";
-    window.open("${pageContext.request.contextPath }/header/eventDetail.html","event",option);    
-}
-</script>
-
 <style type="text/css">
     *{margin:0px;padding:0px;}
     #div{padding:200px 0px 0px 400px;}
@@ -30,7 +23,7 @@ function bigger(e){
       <tr>
          <td><a href="${pageContext.request.contextPath }/header/eventDetail?num=<%=ev.getEvnum()%>"><%=ev.getTitle() %></a></td>
          <td><%=ev.getContent() %></td>
-         <td><img src="${pageContext.request.contextPath }/eventUploaded/<%=ev.getOrgfilename() %>" width="200" height="200" onclick="bigger()"></td>
+         <td><img src="${pageContext.request.contextPath }/eventUploaded/<%=ev.getOrgfilename() %>" width="200" height="200"></td>
       </tr>	 
 <%  
 	   }
