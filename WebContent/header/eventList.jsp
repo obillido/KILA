@@ -30,7 +30,7 @@ function bigger(e){
       <tr>
          <td><a href="${pageContext.request.contextPath }/header/eventDetail?num=<%=ev.getEvnum()%>"><%=ev.getTitle() %></a></td>
          <td><%=ev.getContent() %></td>
-         <td><img src="${pageContext.request.contextPath }/eventUploaded/<%=ev.getOrgfilename() %>" width="200" height="200" onclick="bigger(event)""></td>
+         <td><img src="${pageContext.request.contextPath }/eventUploaded/<%=ev.getOrgfilename() %>" width="200" height="200" onclick="bigger()"></td>
       </tr>	 
 <%  
 	   }

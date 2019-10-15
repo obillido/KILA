@@ -24,5 +24,9 @@
 	<jsp:include page="footer.jsp"/>
 </div>
 
+<div style="position:fixed;bottom:50px;right:70px;">
+<a href="#"><img src="/KILA/header/topBtn.png" width="70px" height="40px"></a>
+</div>
+
 </body>
 </html>
