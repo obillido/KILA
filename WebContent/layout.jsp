@@ -18,9 +18,9 @@
 %>
 <div id="wrap">
 	<jsp:include page="/header/header.jsp"/>
-	
-	<jsp:include page="<%=cpage %>"/>
 
+	<jsp:include page="<%=cpage %>"/>
+   
 	<jsp:include page="footer.jsp"/>
 </div>
 </body>

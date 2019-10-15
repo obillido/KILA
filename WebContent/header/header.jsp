@@ -123,7 +123,7 @@
 
 	<div id="homelogo">
 		<div id="event"></div>
-		<img src="${cp}/header/KilaLogo.png">
+		<a href="${pageContext.request.contextPath }/home"><img src="${cp}/header/KilaLogo.png"></a>
 		<div id="right">
 		<ul>
 		   <li><a href="${cp}/header/join">회원가입</a></li>

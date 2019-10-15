@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>eventDetail.jsp</title>
+
 <style type="text/css">
     *{margin:0px;padding:0px;}
     #div{padding:200px 0px 0px 400px;}
 </style>
-</head>
-<body>
+
 <div id="div">
 <table border="2" width="1100" style="background-color:#EBFBFF;">
    <tr>
@@ -27,5 +22,4 @@
    </tr>
 </table>
 </div>
-</body>
-</html>
+
