@@ -73,9 +73,8 @@
    var xhr=null;
    var word=null;
    var event=null;
+   var json=null;
    window.onload=function(){
-	   word=new Array();
-	   event=document.getElementById("event");
 	   xhr=new XMLHttpRequest();
 	   xhr.onreadystatechange=callback;
 	   xhr.open('get','${pageContext.request.contextPath}/header/eventdata.jsp',true);
@@ -83,10 +82,13 @@
    }
    function callback(){
 	   if(xhr.readyState==4 && xhr.status==200){
-		   var obj=JSON.parse(xhr.responseText);
+		   word=new Array();
+		   event=document.getElementById("event");
+		   var data=xhr.responseText;
+		   json=JSON.parse(data);
 		   var str="";
-		   for(var i=0;i<4;i++){
-			   str=obj.events[i].name;
+		   for(var i=0;i<json.length;i++){
+			   str=json[i].title + " " + json[i].content;
 			   word[i]=str;
 		   }
 		   event.innerHTML=word[0];
@@ -94,7 +96,7 @@
    }
    var i=0;	
    var interval=setInterval(function(){	
-	   if(i>3){
+	   if(i>=json.length){
 		   i=0;		
 	   }
 	   event.innerHTML=word[i];

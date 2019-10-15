@@ -7,7 +7,7 @@
     pageEncoding="UTF-8"%>
 
 <%
-   String saveDirectory=application.getRealPath("/KILA/eventUploaded");
+   String saveDirectory=application.getRealPath("eventUploaded");
    MultipartRequest mr=new MultipartRequest(
 		   request,
 		   saveDirectory,
