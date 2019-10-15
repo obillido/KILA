@@ -8,6 +8,10 @@
 
 
 <style type="text/css">
+	#content{
+		width:100%;
+	}
+
 	label{
 		display:inline-block;
 		width:100px;
@@ -17,48 +21,60 @@
 	#cnt{width:60px;}
 </style>
 
-<h1>상품등록 <%=msg %></h1>
-<form method="post" onsubmit="return check();"
-	action="${pageContext.request.contextPath}/product/productRegi"
-	enctype="multipart/form-data">
-	<label for="category">카테고리</label>
-	<select name="cname">
-		<option value="select">선택</option>
-		<option value="down_jacket">다운자켓</option>
-		<option value="jacket">자켓</option>
-		<option value="longsleeves">긴팔티셔츠</option>
-		<option value="shortsleeves">반팔티셔츠</option>
-		<option value="pants">바지</option>
-	</select>
-	<br>
-	<label for="pcode">상품코드</label>
-	<input type="text" name="pcode">
-	<br>
-	<label for="pcode">상품명</label>
-	<input type="text" name="pname">
-	<br>
-	<label for="price">개당 가격</label>
-	<input type="text" name="price">
-	<br>
-	<label for="color">색상</label>
-	<input type="checkbox" name="color" value="BLACK"> BLACK 
-	<input type="checkbox" name="color" value="WHITE"> WHITE  
-	<input type="checkbox" name="color" value="RED"> RED  
-	<input type="checkbox" name="color" value="GREEN"> GREEN 
-	<div id="fileupload"></div>
-	<br>
-	<label for="size">사이즈</label>
-	<input type="checkbox" name="size" value="90"> 90 
-	<input type="checkbox" name="size" value="95"> 95
-	<input type="checkbox" name="size" value="100"> 100
-	<input type="checkbox" name="size" value="105"> 105
-	<input type="checkbox" name="size" value="110"> 110
-	<br>
-	<label for="count">수량</label>
-	<input type="text" name="cnt">
-	<br>
-	<input type="submit" value="등록">
-</form>
+
+<div id="content">
+	<br><br>
+	
+	<h1>상품등록 <%=msg %></h1>
+	
+	<br><br>
+	
+	<form method="post" onsubmit="return check();"
+		action="${pageContext.request.contextPath}/product/productRegi"
+		enctype="multipart/form-data">
+		<label for="category">카테고리</label>
+		<select name="cname">
+			<option value="select">선택</option>
+			<option value="down_jacket">다운자켓</option>
+			<option value="jacket">자켓</option>
+			<option value="longsleeves">긴팔티셔츠</option>
+			<option value="shortsleeves">반팔티셔츠</option>
+			<option value="pants">바지</option>
+		</select>
+		<br>
+		<label for="pcode">상품코드</label>
+		<input type="text" name="pcode">
+		<br>
+		<label for="pcode">상품명</label>
+		<input type="text" name="pname">
+		<br>
+		<label for="price">개당 가격</label>
+		<input type="text" name="price">
+		<br>
+		<label for="color">색상</label>
+		<input type="checkbox" name="color" value="BLACK"> BLACK 
+		<input type="checkbox" name="color" value="WHITE"> WHITE  
+		<input type="checkbox" name="color" value="RED"> RED  
+		<input type="checkbox" name="color" value="GREEN"> GREEN 
+		<div id="fileupload"></div>
+		<br>
+		<label for="size">사이즈</label>
+		<input type="checkbox" name="size" value="90"> 90 
+		<input type="checkbox" name="size" value="95"> 95
+		<input type="checkbox" name="size" value="100"> 100
+		<input type="checkbox" name="size" value="105"> 105
+		<input type="checkbox" name="size" value="110"> 110
+		<br>
+		<label for="count">수량</label>
+		<input type="text" name="cnt">
+		<br>
+		<input type="submit" value="등록">
+	</form>
+
+</div>
+
+
+
 
 <script type="text/javascript">	
 	var clr=document.getElementsByName("color");
