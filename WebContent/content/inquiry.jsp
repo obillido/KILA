@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    
 <style type="text/css">
 	#inquiry{
 		text-align:center;
@@ -11,12 +13,17 @@
 		text-align:left;
 	}
 	#selectOption select{
-		height:25px;
+		height:30px;
+		margin-bottom:5px;
 	}
 	#selectOption input[type=checkbox]{
 		display:inline-block;
-		height:50px;
-		
+		width:25px; height:25px;
+	}
+	#selectOption input[type=button]{
+		width:100px; height:40px;
+		font-size:20px;
+		margin-bottom:10px;
 	}
 
 </style>
@@ -42,6 +49,20 @@
 		<input type="button" value="문의하기" name="inquiryButton">
 	</div>
 	<hr>
+	
+	<div id="content">
+	<c:choose>
+		<c:when test="${not empty list}">
+			<c:forEach var="vo" items=${list}>
+				
+			</c:forEach>
+		</c:when>
+		<c:otherwise>
+			<p>작성된 상품 문의글이 없습니다.</p>
+		</c:otherwise>	
+	</c:choose>
+	</div>
+	
 </div>
 
 
