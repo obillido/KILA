@@ -10,10 +10,12 @@
 		<th width="40"></th><th width="300">상품정보</th><th width="120">수량</th>
 		<th width="150">상품금액</th><th width="150">주문금액</th><th width=150></th>
 	</tr>
+	<c:forEach var="li" items="${list }">
 	<tr>
-		<th><input type="checkbox"></th><th><div><img width="100px" style="float: left;" src="${pageContext.request.contextPath }/upload/${vo.savefilename }"></div><br>KILA | ${vo.pcode }<br>${vo.pname }<br>${vo.color }/${psize }</th>
-		<th>${cnt }</th><th>${vo.price }</th><th>${vo.price * cnt }</th><th><input type="button" style="width: 120px; height: 35px; background-color: black; color: white; margin-bottom: 10px;" value="주문하기"><br><input type="button" style="width: 120px; height: 35px; background-color: white;" value="삭제하기"></th>
+		<th><input type="checkbox"></th><th><div><img width="100px" style="float: left;" src="${pageContext.request.contextPath }/upload/${li.savefilename }"></div><br>KILA | ${li.pcode }<br>${li.pname }<br>${li.color }/${li.psize }</th>
+		<th>${li.cnt }</th><th>${li.price }</th><th>${li.price * li.cnt }</th><th><input type="button" style="width: 120px; height: 35px; background-color: black; color: white; margin-bottom: 10px;" value="주문하기"><br><input type="button" style="width: 120px; height: 35px; background-color: white;" value="삭제하기"></th>
 	</tr>
+	</c:forEach>
 	<tr>
 		<th height="100" colspan="7" style="background-color: skyblue;">상품합계 : ${vo.price * cnt } + 배송비 : <span style="color: red;">0</span>
 		<c:forEach begin="1" end="80">&nbsp</c:forEach>

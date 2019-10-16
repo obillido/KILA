@@ -69,6 +69,7 @@
    		<br><br><hr><br>
    <form method="post" action="${pageContext.request.contextPath }/kila/payment" onsubmit="return logcheck('${id}')">
    <input type="hidden" name="scolnum" value=${vo.colnum }>
+   <input type="hidden" name="cmd" value="insert">
    <div id=cntsr style="display: none;">
    재고:<input type="text" id="vcnt" readonly="readonly" style="border-style: none; font-size: 16px;width:30px">
    (<input type="text" id="sps" name="spsize" readonly="readonly"  style="border-style: none; font-size: 16px;width:30px">)<br><br><hr>
@@ -101,14 +102,10 @@
  {
      var str = obj.value;
      var str_len = str.length;
-
-
      var rbyte = 0;
      var rlen = 0;
      var one_char = "";
      var str2 = "";
-
-
      for(var i=0; i<str_len; i++)
      {
          one_char = str.charAt(i);
@@ -120,15 +117,11 @@
          {
              rbyte++;//영문 등 나머지 1Byte
          }
-
-
          if(rbyte <= maxByte)
          {
              rlen = i+1;//return할 문자열 갯수
         }
       }
-
-
       if(rbyte > maxByte)
       {
    alert("리뷰의 길이는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
