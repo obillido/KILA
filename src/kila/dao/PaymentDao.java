@@ -150,4 +150,49 @@ public class PaymentDao {
 			JdbcUtil.close(con,pstmt,null);
 		}
 	}
+	public int confirmOrder(int paynum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="update payment set status=4 where paynum=? and status<=3";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,paynum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
+	public ArrayList<PaymentVo> getRefundList() {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<PaymentVo> list=new ArrayList<PaymentVo>();
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from payment where status>=11";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				int paynum=rs.getInt("paynum");
+				String bid=rs.getString("bid");
+				int pnum=rs.getInt("pnum");
+				int cnt=rs.getInt("cnt");
+				Date paydate=rs.getDate("paydate");
+				int status=rs.getInt("status");
+				String paymethod=rs.getString("paymethod");
+				PaymentVo vo=new PaymentVo(paynum, bid, pnum, cnt, paydate, status, paymethod);
+				list.add(vo);
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
 }

@@ -22,6 +22,7 @@ public class PurchasedController extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		HttpSession s=req.getSession();
 		String id=(String)s.getAttribute("id");
+		
 		PaymentDao dao=PaymentDao.getInstance();
 		
 		MyPaymentVo mpv=new MyPaymentVo();

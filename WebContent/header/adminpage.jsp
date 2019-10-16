@@ -19,6 +19,7 @@
       <li><a href="${cp}/product/list">상품목록</a></li>
       <li><a href="">결제목록</a></li>
       <li><a href="${cp}/header/registerEvent">이벤트작성하기</a></li>
+      <li><a href="${cp}/header/refundList">환불요청목록</a></li>
       <li><a href="${cp}/home">홈으로</a></li>
    </ul>
 </div>

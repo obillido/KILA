@@ -30,5 +30,4 @@
 %>
 </tr>
 </table>
-<a href="${pageContext.request.contextPath }/home">홈으로</a>
 </div>
