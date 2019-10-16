@@ -6,13 +6,14 @@
     #div{padding:200px 0px 0px 350px;}
     #div h2{text-align:center;margin-right:350px;}
     #div hr{margin-right:325px;}
-    #t1{width:200px;height:30px;}
-    #t2{width:30px;height:30px;}
-    #t3{width:40px;height:30px;}
-    #t4{width:40px;height:30px;}
-    #t5{width:100px;height:30px;}
+    #t1{width:30px;height:30px;}
+    #t2{width:100px;height:30px;}
+    #t3{width:30px;height:30px;}
+    #t4{width:30px;height:30px;}
+    #t5{width:50px;height:30px;}
     #t6{width:50px;height:30px;}
-    #t7{width:50px;height:30px;}
+    #t7{width:30px;height:30px;}
+    #t8{width:100px;height:30px;}
     #t8 a{text-decoration:none;color:black;}
     #firstline{background-color:#C0FFFF}
     table{text-align:center;}
@@ -49,7 +50,7 @@
          	      <td id="t8">환불완료</td>
          	   </c:when>
          	   <c:when test="${list.status!=7}">
-         	      <td id="t8"><a href="${pageContext.request.contextPath }/header/confirmOrder?paynum=${list.paynum}">환불요청접수</a></td>
+         	      <td id="t8"><a href="${pageContext.request.contextPath }/header/confirmOrder?paynum=${list.paynum}">환불요청 접수하기</a></td>
          	   </c:when>
          	</c:choose>
          </tr>
