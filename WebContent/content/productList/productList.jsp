@@ -194,7 +194,7 @@
 	
 
 
-	<c:set var="cpsearch" value="${pageContext.request.contextPath}/product/list?category=${category}&colorVal=${colorVal}&sizeVal=${sizeVal}&sizeVal=${sizeVal}"/>
+	<c:set var="cpsearch" value="${pageContext.request.contextPath}/product/list?category=${category}&colorVal=${colorVal}&sizeVal=${sizeVal}&priceVal=${priceVal}"/>
 
 	<div id="productList">
 		<h1>상품목록</h1>

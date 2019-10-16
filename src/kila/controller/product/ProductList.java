@@ -20,6 +20,9 @@ import kila.vo.ProductVo;
 public class ProductList extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		ProductInfoDao dao=ProductInfoDao.getInstance();
+		
 		String category=req.getParameter("category");
 		String torder=req.getParameter("order");
 		int order=1;
@@ -52,10 +55,15 @@ public class ProductList extends HttpServlet{
 				}
 			}
 		}
+		
+
+		Point pr=dao.getPriceRange(category);
 		String priceVal=req.getParameter("priceVal");
 		if(priceVal==null) {
 			String pr1=req.getParameter("price1");
 			String pr2=req.getParameter("price2");
+			if(pr1==null) pr1=String.valueOf(pr.x);
+			if(pr2==null) pr2=String.valueOf(pr.y);
 			priceVal=pr1+div+pr2;
 		}
 
@@ -69,7 +77,6 @@ public class ProductList extends HttpServlet{
 		int endRow=pageNum*8;
 		int startRow=endRow-7;
 		
-		ProductInfoDao dao=ProductInfoDao.getInstance();
 		int pageCount=(int)Math.ceil(dao.getCount(category,colorVal,sizeVal,priceVal, div)/8.);
 		int startPageNum=(pageNum-1)/5*5+1;
 		int endPageNum=startPageNum+4;
@@ -80,7 +87,6 @@ public class ProductList extends HttpServlet{
 		
 		ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order,colorVal,sizeVal,priceVal,div);
 		
-		Point pr=dao.getPriceRange(category);
 		
 		req.setAttribute("category", category);
 		req.setAttribute("pageNum",pageNum);
