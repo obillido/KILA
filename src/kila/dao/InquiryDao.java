@@ -46,4 +46,26 @@ public class InquiryDao {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	
+	public int insert(InquiryVo vo) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="insert into inquiry values(inquiry_seq.nextval,?,?,?,?,?,?,sysdate)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, vo.getId());
+			pstmt.setInt(2, vo.getColnum());
+			pstmt.setInt(3, vo.getInqtype());
+			pstmt.setString(4, vo.getTitle());
+			pstmt.setString(5, vo.getContent());
+			pstmt.setInt(6, vo.getRef());
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt);
+		}
+	}
 }

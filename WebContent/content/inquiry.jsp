@@ -29,6 +29,32 @@
 	#inquiryList{
 		text-align:center;
 	}
+	
+	
+	#contentList span{
+		display:inline-block;
+		font-size:30px;
+	}
+	.state{
+		display:inline-block;
+		width:100px;
+	}
+	.inqtype{
+		display:inline-block;
+		width:100px;
+	}
+	.title{
+		display:inline-block;
+		width:200px; 
+	}
+	.name{
+		display:inline-block;
+		width:100px;
+	}
+	.regdate{
+		display:inline-block;
+		width:100px;
+	}
 
 </style>
 
@@ -59,13 +85,22 @@
 		<c:when test="${not empty inqList}">
 			<c:forEach var="vo" items="${inqList}">
 				<div name="contentList">
-					<label>${vo.ref}</label>
-					<label>${vo.inqtype}</label>
-					<label>${vo.title}</label>
-					<label>${vo.id}</label>
-					<label>${vo.regdate}</label>
+					<c:choose>
+						<c:when test="${vo.ref=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
+						<c:when test="${vo.ref=='2'}"><span class="state" style="color:red;">완료</span></c:when>
+					</c:choose>
+					<span class="inqtype">
+						<c:choose>
+							<c:when test="${vo.inqtype=='1'}">사이즈</c:when>
+							<c:when test="${vo.inqtype=='2'}">배송</c:when>
+							<c:when test="${vo.inqtype=='3'}">재입고</c:when>
+							<c:when test="${vo.inqtype=='4'}">기타</c:when>
+						</c:choose>
+					</span>
+					<span class="title">${vo.title}</span>
+					<span class="name">${vo.id}</span>
+					<span class="regdate">${vo.regdate}</span>
 				</div>
-				<p>??</p>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
