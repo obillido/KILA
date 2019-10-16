@@ -1,6 +1,7 @@
 package kila.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,8 +38,8 @@ public class CartController extends HttpServlet{
 			req.setAttribute("colnum", colnum);
 			req.setAttribute("cnt", cnt);
 			req.setAttribute("psize", psize);
-			CartVo vo2=dao2.list(id);
-			req.setAttribute("vo", vo2);
+			ArrayList<CartVo> list=dao2.list(id);
+			req.setAttribute("list", list);
 			req.getRequestDispatcher("/kimyungi/result2.jsp").forward(req, resp);
 		}else {
 			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
