@@ -92,7 +92,7 @@
 			   str=json[i].title + " " + json[i].content;
 			   word[i]=str;
 		   }
-		   event.innerHTML="<a href='/KILA/header/eventDetail?num=" + json[0].evnum + "'>" + word[0] + "</a>";
+		   event.innerHTML="<a href='${pageContext.request.contextPath}/header/eventDetail?num=" + json[0].evnum + "'>" + word[0] + "</a>";
 	   }
    }
    var i=0;	
@@ -100,7 +100,7 @@
 	   if(i>=json.length){
 		   i=0;		
 	   }
-	   event.innerHTML="<a href='/KILA/header/eventDetail?num=" + json[i].evnum + "'>" + word[i] + "</a>";
+	   event.innerHTML="<a href='${pageContext.request.contextPath}/header/eventDetail?num=" + json[i].evnum + "'>" + word[i] + "</a>";
 	   i++;
 	   }, 2000);
    setTimeout(function(){
