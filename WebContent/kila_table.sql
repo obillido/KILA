@@ -147,13 +147,11 @@ create sequence review_seq;
 create table inquiry
 (
     inum number(10) primary key,
-    cid references buyer(cid),
+    id references member(id),
     pnum references product(pnum),
     title varchar2(100),
     content varchar2(1000),
     ref number(10),
-    lev number(10),
-    step number(10),
     regdate date
 );
 create sequence inquiry_seq;
