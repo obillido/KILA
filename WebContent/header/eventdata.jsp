@@ -17,6 +17,7 @@
 	   JSONObject json=new JSONObject();
 	   json.put("title",vo.getTitle());
 	   json.put("content",vo.getContent());
+	   json.put("evnum",vo.getEvnum());
 	   arr.put(json);
    }
    response.setContentType("text/plain;charset=utf-8");

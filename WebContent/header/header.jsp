@@ -18,6 +18,7 @@
 		margin-top:15px;
 		width:350px; height:20px;
 	}
+	#event a{text-decoration:none;color:black;}
 	#homelogo img{
 		width:150px; 
 		margin:30px 80px 10px 30px;
@@ -91,7 +92,7 @@
 			   str=json[i].title + " " + json[i].content;
 			   word[i]=str;
 		   }
-		   event.innerHTML=word[0];
+		   event.innerHTML="<a href='/KILA/header/eventDetail?num=" + json[0].evnum + "'>" + word[0] + "</a>";
 	   }
    }
    var i=0;	
@@ -99,7 +100,7 @@
 	   if(i>=json.length){
 		   i=0;		
 	   }
-	   event.innerHTML=word[i];
+	   event.innerHTML="<a href='/KILA/header/eventDetail?num=" + json[i].evnum + "'>" + word[i] + "</a>";
 	   i++;
 	   }, 2000);
    setTimeout(function(){
@@ -163,12 +164,12 @@
 	</div>
 	<div id="product">
 	<ul>
-	   <li><a href="${cpl}/product/list?category=all">전체보기</a></li>
-	   <li><a href="${cpl}/product/list?category=down_jacket">다운자켓</a></li>
-	   <li><a href="${cpl}/product/list?category=jacket">자켓</a></li>
-	   <li><a href="${cpl}/product/list?category=longsleeves">긴팔티셔츠</a></li>
-	   <li><a href="${cpl}/product/list?category=shortsleeves">반팔티셔츠</a></li>
-	   <li><a href="${cpl}/product/list?category=pants">바지</a></li>
+	   <li><a href="${cp}/product/list?category=all">전체보기</a></li>
+	   <li><a href="${cp}/product/list?category=down_jacket">다운자켓</a></li>
+	   <li><a href="${cp}/product/list?category=jacket">자켓</a></li>
+	   <li><a href="${cp}/product/list?category=longsleeves">긴팔티셔츠</a></li>
+	   <li><a href="${cp}/product/list?category=shortsleeves">반팔티셔츠</a></li>
+	   <li><a href="${cp}/product/list?category=pants">바지</a></li>
 	</ul>
 	</div>
 
