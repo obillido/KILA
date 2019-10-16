@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">    
     *{margin:0px;padding:0px;}
     #div{padding:200px 0px 0px 350px;}
@@ -13,8 +13,7 @@
     #t5{width:100px;height:30px;}
     #t6{width:50px;height:30px;}
     #t7{width:50px;height:30px;}
-    #t6 a{text-decoration:none;color:black;}
-    #t7 a{text-decoration:none;color:black;}
+    #t8 a{text-decoration:none;color:black;}
     #firstline{background-color:#C0FFFF}
     table{text-align:center;}
     a{margin-top:10px;}
@@ -34,7 +33,7 @@
          <th id="t5">결제일</th>
          <th id="t6">결제수단</th>
          <th id="t7">상태</th>
-         
+         <th id="t8">환불여부</th>
       </tr>
       <c:forEach var="list" items="${info }">
          <tr>
@@ -43,11 +42,17 @@
             <td id="t3">${list.pnum }</td>
             <td id="t4">${list.cnt }</td>
             <td id="t5">${list.paydate }</td>
-            <td id="t5">${list.paymethod }</td>
-            <td id="t5">${list.status }</td>
+            <td id="t6">${list.paymethod }</td>
+            <td id="t7">${list.status }</td>
+            <c:choose>
+         	   <c:when test="${list.status==7}">
+         	      <td id="t8">환불완료</td>
+         	   </c:when>
+         	   <c:when test="${list.status!=7}">
+         	      <td id="t8"><a href="${pageContext.request.contextPath }/header/confirmOrder?paynum=${list.paynum}">환불요청접수</a></td>
+         	   </c:when>
+         	</c:choose>
          </tr>
       </c:forEach>
    </table>
-   <br>  
-   <a href="${pageContext.request.contextPath }/home">홈으로</a>
 </div>

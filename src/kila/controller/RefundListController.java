@@ -19,20 +19,9 @@ public class RefundListController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PaymentDao dao=PaymentDao.getInstance();
 		ArrayList<PaymentVo> list=dao.getRefundList();
-		PaymentVo vo=new PaymentVo();
-		for(int i=0;i<list.size();i++) {
-			int paynum=list.get(i).getPaynum();
-			String bid=list.get(i).getBid();
-			int pnum=list.get(i).getPnum();
-			int cnt=list.get(i).getCnt();
-			Date paydate=list.get(i).getPaydate();
-			int status=list.get(i).getStatus();
-			String paymethod=list.get(i).getPaymethod();
-			vo=new PaymentVo(paynum, bid, pnum, cnt, paydate, status, paymethod);
-			list.add(vo);
-			System.out.println("paynum:" + paynum);
-		}
+	
 		req.setAttribute("info",list);
-		req.getRequestDispatcher("/header/refund.jsp").forward(req,resp);
+		req.setAttribute("cpage", "/header/refund.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 	}
 }
