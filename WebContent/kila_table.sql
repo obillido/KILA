@@ -148,7 +148,7 @@ create table inquiry
 (
     inum number(10) primary key,
     id references member(id),
-    pnum references product(pnum),
+    colnum references product(colnum),
     title varchar2(100),
     content varchar2(1000),
     ref number(10),
