@@ -17,7 +17,8 @@ import kila.vo.MemberVo;
 public class JoinController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath() + "/layout.jsp?cpage=/header/join.jsp");
+		req.setAttribute("cpage", "/header/join.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,6 +40,7 @@ public class JoinController extends HttpServlet{
 		}else {
 			req.setAttribute("code","fail");
 		}
-		req.getRequestDispatcher("/header/result.jsp").forward(req,resp);
+		req.setAttribute("cpage", "/header/result.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

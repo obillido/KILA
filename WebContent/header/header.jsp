@@ -159,7 +159,7 @@
 	      <li onmouseover="showProduct()" onmouseup="noProduct()">PRODUCT</li>
 	      <li><a href="" style="color:#B90000;">NEW</a></li>
 	      <li><a href="" style="color:#B90000;">BEST</a></li>
-	      <li><a href="${cpl}/header/eventList.jsp" style="color:#00008C;">EVENT</a></li>
+	      <li><a href="${cp}/header/eventList.jsp" style="color:#00008C;">EVENT</a></li>
 	   </ul>
 	</div>
 	<div id="product">

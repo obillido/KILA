@@ -17,7 +17,8 @@ public class ShoppingController extends HttpServlet{
 		HttpSession session=req.getSession();
 		String id=(String)session.getAttribute("id");
 		if(id==null) {
-			resp.sendRedirect(req.getContextPath() + "/header/login");
+			req.setAttribute("cpage", "/header/login.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		}else {
 			
 		}

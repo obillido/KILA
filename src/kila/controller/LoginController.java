@@ -16,7 +16,8 @@ import kila.dao.MemberDao;
 public class LoginController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath() + "/layout.jsp?cpage=/header/login.jsp");
+		req.setAttribute("cpage", "/header/login.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
