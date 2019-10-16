@@ -50,8 +50,7 @@
 			<option value="4">기타</option>
 		</select>
 		<input type="checkbox" name="chkMyInquiry" value="only"> 내 문의글만 보기
-		<input type="button" value="문의하기" name="inquiryButton" 
-			onclick="location.href='${pageContext.request.contextPath}/inquiry/registration?colnum=${colnum}'">
+		<input type="button" value="문의하기" name="inquiryButton" onclick="showInquiryReg('${id}',${vo.colnum})">
 	</div>
 	<hr>
 	
@@ -76,6 +75,21 @@
 	</div>
 	
 </div>
+
+
+
+
+
+<script type="text/javascript">
+	function showInquiryReg(id,colnum){
+		if(id==null){
+			alert("로그인 후 이용가능합니다.");
+		}else{
+			location.href="/KILA/inquiry/registration?colnum="+colnum;
+		}
+	}
+
+</script>
 
 
 

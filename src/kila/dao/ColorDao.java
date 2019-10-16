@@ -33,7 +33,7 @@ public class ColorDao {
 			}
 			return 0;
 		}catch(SQLException se) {
-			System.out.println("ColorDAO:"+se.getMessage());
+			System.out.println("ColorDAO:isExist"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
@@ -54,10 +54,36 @@ public class ColorDao {
 			pstmt.setLong(5, vo.getFilesize());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
-			System.out.println("ColorDAO:"+se.getMessage());
+			System.out.println("ColorDAO:insert"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
+	
+	public String[] getProductInfo(int colnum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select pname, color from color, product_name pn "
+					+ "where color.pcode=pn.pcode and colnum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, colnum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				String[] str= {rs.getString("color"),rs.getString("pname")};
+				return str;
+			}else {
+				return null;
+			}
+		}catch(SQLException se) {
+			System.out.println("ColorDAO:getProductInfo"+se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+
 }
