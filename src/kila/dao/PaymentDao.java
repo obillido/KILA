@@ -5,10 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import kila.vo.BuyerVo;
 import kila.vo.ColorVo;
+import kila.vo.MyPaymentVo;
 import kila.vo.PaymentVo;
 
 public class PaymentDao {
@@ -62,13 +64,13 @@ public class PaymentDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
+		PaymentVo vo=null;
 		try {
 			con=JdbcUtil.getConn();
 			String sql="select * from payment where bid=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,bid);
 			rs=pstmt.executeQuery();
-			PaymentVo vo=null;
 			while(rs.next()) {
 				int paynum=rs.getInt("paynum");
 				int pnum=rs.getInt("pnum");
@@ -76,9 +78,40 @@ public class PaymentDao {
 				Date paydate=rs.getDate("paydate");
 				int status=rs.getInt("status");
 				String paymethod=rs.getString("paymethod");
-				vo=new PaymentVo(paynum,bid,pnum,cnt,paydate,status,paymethod);
+				if(status!=8) {
+					vo=new PaymentVo(paynum,bid,pnum,cnt,paydate,status,paymethod);
+				}
 			}
 			return vo;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	public String getPname(int pnum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select pname " + 
+					   "from product_name " + 
+					   "where pcode=(select pcode " + 
+					   "             from color " + 
+					   "             where colnum=(select colnum " + 
+					   "                           from product " + 
+					   "                           where pnum=?)" + 
+					   "             )";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,pnum);
+			rs=pstmt.executeQuery();
+			String pname=null;
+			if(rs.next()) {
+				pname=rs.getString("pname");
+			}
+			return pname;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
