@@ -24,7 +24,7 @@ public class PaymentController2 extends HttpServlet{
 		int pnum=dao.getProductnum(colnum);
 		int cnt = Integer.parseInt(req.getParameter("cnt"));
 		String paymethod = req.getParameter("paymethod");
-		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 0, paymethod);
+		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 1, paymethod);
 		int n=dao.insert(vo);
 		if(n>0) {
 			req.getRequestDispatcher("/kimyungi/result2.jsp").forward(req, resp);

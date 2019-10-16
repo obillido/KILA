@@ -42,12 +42,13 @@ public class PaymentDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="insert into payment values(payment_seq.nextval,?,?,?,sysdate,1,?)";
+			String sql="insert into payment values(payment_seq.nextval,?,?,?,sysdate,?,?)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getBid());
 			pstmt.setInt(2, vo.getPnum());
 			pstmt.setInt(3, vo.getCnt());
-			pstmt.setString(4, vo.getPaymethod());
+			pstmt.setInt(4, vo.getStatus());
+			pstmt.setString(5, vo.getPaymethod());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println("PaymentDAO:"+se.getMessage());

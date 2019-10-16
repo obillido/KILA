@@ -126,6 +126,7 @@ create sequence payment_seq;
 -- 5 : 배송전취소
 -- 6 : 환불요청
 -- 7 : 환불완료
+-- 8 : 장바구니
 
 
 create table review
