@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kila.dao.BuyerDao;
+import kila.dao.CartDao;
 import kila.dao.ItemInfoDao;
 import kila.dao.PaymentDao;
 import kila.vo.BuyerVo;
+import kila.vo.CartVo;
 import kila.vo.ItemInfoVo;
 import kila.vo.PaymentVo;
 
@@ -27,7 +29,7 @@ public class CartController extends HttpServlet{
 		int psize=Integer.parseInt(req.getParameter("spsize"));
 		int cnt = Integer.parseInt(req.getParameter("pcnt"));
 		PaymentDao dao=PaymentDao.getInstance();
-		ItemInfoDao dao2=ItemInfoDao.getInstance();
+		CartDao dao2=CartDao.getInstance();
 		int pnum=dao.getProductnum(colnum);
 		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 8, null);
 		int n=dao.insert(vo);
@@ -35,7 +37,7 @@ public class CartController extends HttpServlet{
 			req.setAttribute("colnum", colnum);
 			req.setAttribute("cnt", cnt);
 			req.setAttribute("psize", psize);
-			ItemInfoVo vo2=dao2.productInfos(colnum);
+			CartVo vo2=dao2.list(id);
 			req.setAttribute("vo", vo2);
 			req.getRequestDispatcher("/kimyungi/result2.jsp").forward(req, resp);
 		}else {
