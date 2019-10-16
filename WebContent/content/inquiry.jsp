@@ -7,7 +7,7 @@
 		text-align:center;
 		margin-top:100px;
 		float:left;
-		width:800px;
+		min-width:800px;
 	}
 	#selectOption{
 		text-align:left;
@@ -24,6 +24,10 @@
 		width:100px; height:40px;
 		font-size:20px;
 		margin-bottom:10px;
+	}
+	
+	#inquiryList{
+		text-align:center;
 	}
 
 </style>
@@ -46,15 +50,23 @@
 			<option value="4">기타</option>
 		</select>
 		<input type="checkbox" name="chkMyInquiry" value="only"> 내 문의글만 보기
-		<input type="button" value="문의하기" name="inquiryButton">
+		<input type="button" value="문의하기" name="inquiryButton" 
+			onclick="location.href='${pageContext.request.contextPath}/inquiry/registration?colnum=${colnum}'">
 	</div>
 	<hr>
 	
-	<div id="content">
+	<div id="inquiryList">
 	<c:choose>
-		<c:when test="${not empty list}">
-			<c:forEach var="vo" items="${list}">
-				
+		<c:when test="${not empty inqList}">
+			<c:forEach var="vo" items="${inqList}">
+				<div name="contentList">
+					<label>${vo.ref}</label>
+					<label>${vo.inqtype}</label>
+					<label>${vo.title}</label>
+					<label>${vo.id}</label>
+					<label>${vo.regdate}</label>
+				</div>
+				<p>??</p>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
