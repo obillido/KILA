@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
-	var sig=false
+	var sig=false;
+	var sig2=false;
 	function cancle(target){
-		if(sig==false){
-		alert("회원 개인정보 수집 이용에 대해 동의를 해주셔야 결제진행이 가능합니다.");
+		if(!sig){
+		alert("개인정보 수집 이용에 대해 동의를 해주셔야 결제진행이 가능합니다.");
 		target.checked=false;
+		}else{
+			sig2=true;
 		}
 	}
 	function cancler(target){
@@ -14,6 +17,17 @@
 			sig=true;
 		}else{
 			sig=false;
+		}
+	}
+	function checkyo(){
+		if(!sig){
+			alert("개인정보 수집 이용에 대해 동의를 해주셔야 결제진행이 가능합니다.");
+			return false;
+		}else if(!sig2){
+			alert("결제방식을 선택해주세요.")
+			return false;
+		}else{
+			return true;
 		}
 	}
 </script>
@@ -68,11 +82,14 @@
 	<div style="width: 1040px; margin: auto;">
 	<h2>결제방법</h2>
 	<hr style="border:solid 1px;">
-	<form method="post" action="${pageContext.request.contextPath }/kila/payment2">
+	<form method="post" action="${pageContext.request.contextPath }/kila/payment2" onsubmit="return checkyo()">
 	<input type="hidden" name="cnt" value=${cnt }>
 	<input type="hidden" name="colnum" value=${vo.colnum }>
 	<input type="radio" name="paymethod" value="네이버페이" onclick="cancle(this)"><b>네이버페이</b> <input type="radio" name="paymethod" value="신용카드" onclick="cancle(this)"><b>신용카드</b> <input type="radio" name="paymethod" value="무통장입금(가상계좌)" onclick="cancle(this)"><b>무통장입금(가상계좌)</b> <input type="radio" name="paymethod" value="무통장입금(에스크로)" onclick="cancle(this)"><b>무통장입금(에스크로)</b> <input type="radio" name="paymethod" value="실시간계좌이체" onclick="cancle(this)"><b>실시간계좌이체</b> <input type="radio" name="paymethod" value="PAYCO" onclick="cancle(this)"><b>PAYCO</b> <input type="radio" name="paymethod" value="스마일페이" onclick="cancle(this)"><b>스마일페이</b> <input type="radio" name="paymethod" value="카카오페이" onclick="cancle(this)"> <b>카카오페이</b>
-	<input type="submit"><button type="reset">취소하기</button>
+	<br><br>
+	<div>
+	<input type="reset" style="width: 100px; height: 40px" value="취소"><input type="submit" style="width: 300px; height: 40px; margin-right: 100px; color: white; background-color: red" value="결제">
+	</div>
 	</form>
 	</div>
 </div>
