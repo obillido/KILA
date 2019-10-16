@@ -41,6 +41,14 @@
 			alert("회원만 리뷰가 가능합니다.");
 		}
 	}
+	function logcheck(id){
+		if(id==""){
+			alert("로그인을 해주셔야 결제가 가능합니다.");
+			return false;
+		}else{
+			return true;
+		}
+	}
 
 </script>
 <div style="text-align: center;">
@@ -56,10 +64,10 @@
    가격:<span style='color:red'>${vo.price }</span><br><br><hr><br>
    색상:${vo.color }<br><br><hr><br>
    사이즈: <c:forEach var="si" items="${list }">
-   		<a href="javascript:viewcnt(${si.icnt },${si.psize })">${si.psize}</a>	
+   		<a href="javascript:viewcnt(${si.icnt },${si.psize })" style="text-decoration: none;">${si.psize}</a>	
    			</c:forEach>
    		<br><br><hr><br>
-   <form method="post" action="${pageContext.request.contextPath }/kila/payment">
+   <form method="post" action="${pageContext.request.contextPath }/kila/payment" onsubmit="return logcheck('${id}')">
    <input type="hidden" name="scolnum" value=${vo.colnum }>
    <div id=cntsr style="display: none;">
    재고:<input type="text" id="vcnt" readonly="readonly" style="border-style: none; font-size: 16px;width:30px">
@@ -67,7 +75,7 @@
    </div>
    <div style="text-align: center;"><br>
    <input type="button" value="-" id="btnminus" onclick="decreaseValue()"><input type="text" id="count" name="pcnt" value=1 readonly="readonly" style="border-style: none; text-align: center;"><input type="button" id="btnplus" value="+" onclick="IncreaseValue()"></div><br>
-   <input type="button" value="CART" id="btn1" style="width: 145px; height: 40px" disabled="disabled">
+   <input type="submit" value="CART" id="btn1" style="width: 145px; height: 40px" disabled="disabled" formaction="${pageContext.request.contextPath }/home">
    <input type="submit" value="BUY" id="btn2" style="width: 145px; height: 40px" disabled="disabled">
    </form>
 </div>
