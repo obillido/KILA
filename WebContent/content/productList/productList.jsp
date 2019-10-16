@@ -234,7 +234,6 @@
 		<%
 			String colorVal=(String)request.getAttribute("colorVal");
 			String[] cchk={"BLACK","WHITE","RED","GREEN"};	
-			System.out.println(colorVal);
 			if(colorVal!=null){
 				String[] colors=colorVal.split("/");
 				for(int i=0; i<colors.length; i++){
@@ -252,6 +251,26 @@
 					cchk[j]="unchecked";
 				}
 			}
+			
+			String sizeVal=(String)request.getAttribute("sizeVal");
+			String[] schk={"90","95","100","105","110"};	
+			if(sizeVal!=null){
+				String[] sizes=sizeVal.split("/");
+				for(int i=0; i<sizes.length; i++){
+					System.out.println(sizes[i]);
+					for(int j=0; j<schk.length; j++){
+						if(sizes[i].equals(schk[j])){
+							schk[j]="checked";
+							break;
+						}
+					}
+				}
+			}
+			for(int j=0; j<schk.length; j++){
+				if(!schk[j].equals("checked")){
+					schk[j]="unchecked";
+				}
+			}
 		%>
 		
 		<input type="button" id="search" value="검색조건" onclick="displaySearchWindow()">	
@@ -266,11 +285,11 @@
 					<hr>
 					<label for="psize">사이즈</label>
 					<span><input type="checkbox" id="all_psize" onclick="selectAll('psize')"> ALL</span>
-					<span><input type="checkbox" name="psize" value="90"> 90</span>
-					<span><input type="checkbox" name="psize" value="95"> 95</span>
-					<span><input type="checkbox" name="psize" value="100"> 100</span>
-					<span><input type="checkbox" name="psize" value="105"> 105</span>
-					<span><input type="checkbox" name="psize" value="110"> 110</span>
+					<span><input type="checkbox" <%=schk[0]%> name="psize" value="90"> 90</span>
+					<span><input type="checkbox" <%=schk[1]%> name="psize" value="95"> 95</span>
+					<span><input type="checkbox" <%=schk[2]%> name="psize" value="100"> 100</span>
+					<span><input type="checkbox" <%=schk[3]%> name="psize" value="105"> 105</span>
+					<span><input type="checkbox" <%=schk[4]%> name="psize" value="110"> 110</span>
 					<hr>
 					<label for="price range">가격범위</label>
 					<input type="text" name="price1" value="${minPrice}" onkeyup="checkRange()">

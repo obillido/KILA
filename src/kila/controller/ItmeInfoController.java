@@ -24,6 +24,7 @@ public class ItmeInfoController extends HttpServlet{
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		req.setAttribute("vo", vo);
 		req.setAttribute("list",list);
-		req.getRequestDispatcher("/layout.jsp?cpage=/kimyungi/ItemInfo.jsp").forward(req, resp);
+		req.setAttribute("cpage", "/kimyungi/ItemInfo.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }
