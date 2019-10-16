@@ -1,6 +1,7 @@
 package kila.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,6 +56,34 @@ public class PaymentDao {
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);
+		}
+	}
+	public PaymentVo getInfo(String bid) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from payment where bid=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,bid);
+			rs=pstmt.executeQuery();
+			PaymentVo vo=null;
+			while(rs.next()) {
+				int paynum=rs.getInt("paynum");
+				int pnum=rs.getInt("pnum");
+				int cnt=rs.getInt("cnt");
+				Date paydate=rs.getDate("paydate");
+				int status=rs.getInt("status");
+				String paymethod=rs.getString("paymethod");
+				vo=new PaymentVo(paynum,bid,pnum,cnt,paydate,status,paymethod);
+			}
+			return vo;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
 }

@@ -7,6 +7,12 @@
 </style>
 
 <div id="div">
+<%
+         
+%>
+
+
+
    <table width="500px" height="400px">
       <tr>
          <th>주문한 상품명</th>
