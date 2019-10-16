@@ -6,6 +6,7 @@
 	#content{
 		width:100%;
 		min-width:1220px;
+		text-align:left;
 	}
 	
 	#categoryList{
