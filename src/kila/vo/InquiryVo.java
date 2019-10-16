@@ -4,26 +4,21 @@ import java.sql.Date;
 
 public class InquiryVo {
 	private int inum;
-	private String cid;
-	private int pnum;
+	private String id;
+	private int colnum;
 	private String title;
 	private String content;
 	private int ref;
-	private int lev;
-	private int step;
 	private Date regdate;
 	
 	public InquiryVo() {}
-	public InquiryVo(int inum, String cid, int pnum, String title, String content, int ref, int lev, int step,
-			Date regdate) {
+	public InquiryVo(int inum, String id, int colnum, String title, String content, int ref, Date regdate) {
 		this.inum = inum;
-		this.cid = cid;
-		this.pnum = pnum;
+		this.id = id;
+		this.colnum = colnum;
 		this.title = title;
 		this.content = content;
 		this.ref = ref;
-		this.lev = lev;
-		this.step = step;
 		this.regdate = regdate;
 	}
 
@@ -35,20 +30,20 @@ public class InquiryVo {
 		this.inum = inum;
 	}
 
-	public String getCid() {
-		return cid;
+	public String getId() {
+		return id;
 	}
 
-	public void setCid(String cid) {
-		this.cid = cid;
+	public void setId(String cid) {
+		this.id = id;
 	}
 
-	public int getPnum() {
-		return pnum;
+	public int getColnum() {
+		return colnum;
 	}
 
-	public void setPnum(int pnum) {
-		this.pnum = pnum;
+	public void setColnum(int pnum) {
+		this.colnum = pnum;
 	}
 
 	public String getTitle() {
@@ -73,22 +68,6 @@ public class InquiryVo {
 
 	public void setRef(int ref) {
 		this.ref = ref;
-	}
-
-	public int getLev() {
-		return lev;
-	}
-
-	public void setLev(int lev) {
-		this.lev = lev;
-	}
-
-	public int getStep() {
-		return step;
-	}
-
-	public void setStep(int step) {
-		this.step = step;
 	}
 
 	public Date getRegdate() {

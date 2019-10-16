@@ -22,13 +22,21 @@ public class InquiryDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select * from inquiry where "
-		
+			String sql="select * from inquiry where colnum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, colnum);
+			rs=pstmt.executeQuery();
 			ArrayList<InquiryVo> list=new ArrayList<InquiryVo>();
-			
-			
-			
-			
+			while(rs.next()) {
+				list.add(new InquiryVo(
+						rs.getInt("inum"), 
+						rs.getString("id"), 
+						colnum, 
+						rs.getString("title"), 
+						rs.getString("content"), 
+						rs.getInt("ref"), 
+						rs.getDate("regdate")));
+			}
 			return list;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());

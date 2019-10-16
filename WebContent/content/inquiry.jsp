@@ -53,7 +53,7 @@
 	<div id="content">
 	<c:choose>
 		<c:when test="${not empty list}">
-			<c:forEach var="vo" items=${list}>
+			<c:forEach var="vo" items="${list}">
 				
 			</c:forEach>
 		</c:when>
