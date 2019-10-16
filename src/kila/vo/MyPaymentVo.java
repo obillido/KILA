@@ -3,19 +3,27 @@ package kila.vo;
 import java.sql.Date;
 
 public class MyPaymentVo {
+	private int paynum;
 	private String pname;
 	private int cnt;
 	private Date paydate;
 	private String paymethod;
 	private String status;
 	public MyPaymentVo() {}
-	public MyPaymentVo(String pname, int cnt, Date paydate, String paymethod, String status) {
+	public MyPaymentVo(int paynum, String pname, int cnt, Date paydate, String paymethod, String status) {
 		super();
+		this.paynum = paynum;
 		this.pname = pname;
 		this.cnt = cnt;
 		this.paydate = paydate;
 		this.paymethod = paymethod;
 		this.status = status;
+	}
+	public int getPaynum() {
+		return paynum;
+	}
+	public void setPaynum(int paynum) {
+		this.paynum = paynum;
 	}
 	public String getPname() {
 		return pname;

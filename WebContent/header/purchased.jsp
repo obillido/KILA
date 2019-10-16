@@ -14,11 +14,10 @@
     #t4{width:50px;height:30px;}
     #t5{width:100px;height:30px;}
     #t6{width:50px;height:30px;}
-    #t7{width:50px;height:30px;}
     #t6 a{text-decoration:none;color:black;}
-    #t7 a{text-decoration:none;color:black;}
     #firstline{background-color:#C0FFFF}
     table{text-align:center;}
+    a{margin-top:10px;}
   
 </style>
 
@@ -33,18 +32,23 @@
          <th id="t3">결제일</th>
          <th id="t4">결제수단</th>
          <th id="t5">상태</th>
-         <th id="t6">주문취소</th>
-         <th id="t7">반품신청</th>
+         <th id="t6">환불관련</th>
       </tr>
       <c:forEach var="list" items="${info }">
          <tr>
-            <td id="t1">${list.pnum }</td>
+            <td id="t1">${list.pname }</td>
             <td id="t2">${list.cnt }</td>
             <td id="t3">${list.paydate }</td>
             <td id="t4">${list.paymethod }</td>
             <td id="t5">${list.status }</td>
-            <td id="t6"><a href="">주문취소</a></td>
-            <td id="t7"><a href="">반품신청</a></td>
+            <c:choose>
+               <c:when test="${list.status eq '배송준비' or list.status eq '배송중' or list.status eq '배송완료'}">
+                  <td id="t6"><a href="${pageContext.request.contextPath }/header/cancelOrder?paynum=${list.paynum}">환불요청</a></td>
+         	   </c:when>
+         	   <c:when test="${list.status eq '환불요청'}">
+         	      <td id="t6"><a href="${pageContext.request.contextPath }/header/returnOrder?paynum=${list.paynum}">환불요청취소</a></td>
+         	   </c:when>
+         	</c:choose>
          </tr>
       </c:forEach>
    </table>

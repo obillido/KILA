@@ -115,7 +115,7 @@ create table payment
     pnum references product(pnum),
     cnt number(10) not null,
     paydate date not null,
-    status number(1) default 1,
+    status number(2) default 1,
     paymethod varchar2(30)
 );
 create sequence payment_seq;
@@ -124,9 +124,12 @@ create sequence payment_seq;
 -- 3 : 배송완료
 -- 4 : 구매확정
 -- 5 : 배송전취소
--- 6 : 환불요청
+-- 6 : 환불요청   X
 -- 7 : 환불완료
 -- 8 : 장바구니
+-- 11 : 배송준비중 환불요청
+-- 12 : 배송중 환불요청
+-- 13 : 배송완료중 환불요청
 
 
 create table review

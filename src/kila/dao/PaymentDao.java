@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
-import kila.vo.BuyerVo;
-import kila.vo.ColorVo;
-import kila.vo.MyPaymentVo;
+
 import kila.vo.PaymentVo;
 
 public class PaymentDao {
@@ -60,11 +58,11 @@ public class PaymentDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
-	public PaymentVo getInfo(String bid) {
+	public ArrayList<PaymentVo> getInfo(String bid) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		PaymentVo vo=null;
+		ArrayList<PaymentVo> list=new ArrayList<PaymentVo>();
 		try {
 			con=JdbcUtil.getConn();
 			String sql="select * from payment where bid=?";
@@ -79,10 +77,11 @@ public class PaymentDao {
 				int status=rs.getInt("status");
 				String paymethod=rs.getString("paymethod");
 				if(status!=8) {
-					vo=new PaymentVo(paynum,bid,pnum,cnt,paydate,status,paymethod);
+					PaymentVo vo=new PaymentVo(paynum,bid,pnum,cnt,paydate,status,paymethod);
+					list.add(vo);
 				}
 			}
-			return vo;
+			return list;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
@@ -117,6 +116,38 @@ public class PaymentDao {
 			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	public int cancelOrder(int paynum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();			
+			String sql="update payment set status=status+10 where paynum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,paynum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
+	public int returnOrder(int paynum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="update payment set status=status-10 where paynum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,paynum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
 		}
 	}
 }
