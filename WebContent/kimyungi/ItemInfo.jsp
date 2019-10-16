@@ -146,8 +146,8 @@
 
 
 
-</div>
-
 	
 <jsp:include page="/content/inquiry.jsp"/>
+</div>
+
 	

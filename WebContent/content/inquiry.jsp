@@ -2,10 +2,21 @@
     pageEncoding="UTF-8"%>
 <style type="text/css">
 	#inquiry{
-		margin:0px;
+		text-align:center;
 		margin-top:100px;
-		width:100%;
 		float:left;
+		width:800px;
+	}
+	#selectOption{
+		text-align:left;
+	}
+	#selectOption select{
+		height:25px;
+	}
+	#selectOption input[type=checkbox]{
+		display:inline-block;
+		height:50px;
+		
 	}
 
 </style>
@@ -13,6 +24,7 @@
 <div id="inquiry">
 	<h1>문의하기</h1>
 	<br><br>
+	<div style="text-align:left;">
 	<div id="selectOption">
 		<select name="answerType">
 			<option value="0">전체답변</option>
@@ -27,11 +39,9 @@
 			<option value="4">기타</option>
 		</select>
 		<input type="checkbox" name="chkMyInquiry" value="only"> 내 문의글만 보기
-		
-		<div style="float:right;">
-			<input type="button" value="문의하기" name="inquiryButton">
-		</div>
+		<input type="button" value="문의하기" name="inquiryButton">
 	</div>
+	<hr>
 </div>
 
 
