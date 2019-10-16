@@ -1,6 +1,7 @@
 package kila.vo;
 
 public class CartVo {
+	private int paynum;
 	private String savefilename;
 	private String pcode;
 	private String pname;
@@ -9,8 +10,10 @@ public class CartVo {
 	private int cnt;
 	private int price;
 	public CartVo() {}
-	public CartVo(String savefilename, String pcode, String pname, String color, String psize, int cnt, int price) {
+	public CartVo(int paynum, String savefilename, String pcode, String pname, String color, String psize, int cnt,
+			int price) {
 		super();
+		this.paynum = paynum;
 		this.savefilename = savefilename;
 		this.pcode = pcode;
 		this.pname = pname;
@@ -18,6 +21,12 @@ public class CartVo {
 		this.psize = psize;
 		this.cnt = cnt;
 		this.price = price;
+	}
+	public int getPaynum() {
+		return paynum;
+	}
+	public void setPaynum(int paynum) {
+		this.paynum = paynum;
 	}
 	public String getSavefilename() {
 		return savefilename;

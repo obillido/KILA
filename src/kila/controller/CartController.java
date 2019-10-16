@@ -25,9 +25,16 @@ public class CartController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String cmd=req.getParameter("cmd");
-		if(cmd!=null && cmd.equals("insert")) {
+		if(cmd==null) {
+			HttpSession session=req.getSession(); 
+			String id=(String)session.getAttribute("id");
+			ArrayList<CartVo> list=CartDao.getInstance().list(id);
+			req.setAttribute("list", list);
+			req.setAttribute("cpage", "/kimyungi/cartview.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		}else if(cmd.equals("insert")) {
 			insert(req,resp);
-		}else if(cmd!=null && cmd.equals("delete")) {
+		}else if(cmd.equals("delete")) {
 			delete(req,resp);
 		}
 	}
@@ -55,20 +62,13 @@ public class CartController extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		HttpSession session=req.getSession(); 
 		String id=(String)session.getAttribute("id");
-		int colnum=Integer.parseInt(req.getParameter("scolnum"));
-		int psize=Integer.parseInt(req.getParameter("spsize"));
-		int cnt = Integer.parseInt(req.getParameter("pcnt"));
-		PaymentDao dao=PaymentDao.getInstance();
-		CartDao dao2=CartDao.getInstance();
-		int pnum=dao.getProductnum(colnum);
-		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 8, null);
-		int n=dao.insert(vo);
+		int paynum=Integer.parseInt(req.getParameter("paynum"));
+		CartDao dao=CartDao.getInstance();
+		int n=dao.delete(paynum);
 		if(n>0) {
-			ArrayList<CartVo> list=dao2.list(id);
-			req.setAttribute("list", list);
-			req.getRequestDispatcher("/kimyungi/cartview.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath()+"/kila/cart");
 		}else {
-			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath()+"/layout.jsp");
 		}
 	}
 }

@@ -31,14 +31,30 @@ public class CartDao {
 			rs=pstmt.executeQuery();
 			ArrayList<CartVo> list=new ArrayList<CartVo>(); 
 			while(rs.next()) {
-				list.add(new CartVo(rs.getString("savefilename"),rs.getString("pcode"), rs.getString("pname"), rs.getString("color"), rs.getString("psize"), rs.getInt("cnt"), rs.getInt("price")));
+				list.add(new CartVo(rs.getInt("paynum"),rs.getString("savefilename"),rs.getString("pcode"), rs.getString("pname"), rs.getString("color"), rs.getString("psize"), rs.getInt("cnt"), rs.getInt("price")));
 			}
 			return list;
 		}catch(SQLException se) {
-			System.out.println("ColorDAO:"+se.getMessage());
+			System.out.println("CartDAO:"+se.getMessage());
 			return null;
 		}finally {
 			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	public int delete(int paynum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="delete from payment where paynum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, paynum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println("CartDAO:"+se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt);
 		}
 	}
 }

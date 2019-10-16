@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<script type="text/javascript">
+	function deletecart(paynum){
+		location.href="cart?cmd=delete&paynum="+paynum;
+	}
+</script>
 <div style="text-align: center">
 <h2>SHOPPING BAG</h2>
 <h5>* 카트에 담긴 상품은 품절시 관리자에 의해 삭제될 수 있습니다. 주의하세요!</h5>
@@ -13,7 +18,7 @@
 	<c:forEach var="li" items="${list }">
 	<tr>
 		<th><input type="checkbox"></th><th><div><img width="100px" style="float: left;" src="${pageContext.request.contextPath }/upload/${li.savefilename }"></div><br>KILA | ${li.pcode }<br>${li.pname }<br>${li.color }/${li.psize }</th>
-		<th>${li.cnt }</th><th>${li.price }</th><th>${li.price * li.cnt }</th><th><input type="button" style="width: 120px; height: 35px; background-color: black; color: white; margin-bottom: 10px;" value="주문하기"><br><input type="button" style="width: 120px; height: 35px; background-color: white;" value="삭제하기"></th>
+		<th>${li.cnt }</th><th>${li.price }</th><th>${li.price * li.cnt }</th><th><input type="button" style="width: 120px; height: 35px; background-color: black; color: white; margin-bottom: 10px;" value="주문하기"><br><input type="button" style="width: 120px; height: 35px; background-color: white;" onclick="deletecart(${li.paynum})" value="삭제하기"></th>
 	</tr>
 	</c:forEach>
 	<tr>
