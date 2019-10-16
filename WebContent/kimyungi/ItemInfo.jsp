@@ -93,6 +93,10 @@
  	<option value="1">★☆☆☆☆별로에요...</option>
  </select>
  <button type="button" style="background-color:pink; width: 200px" onclick="rinsert('${id}')"><img src="${pageContext.request.contextPath }/upload/pencil.png" width="30px" height="25px">리뷰등록하기</button>
+
+
+<jsp:include page="/content/inquiry.jsp"/>
+	
 <script type="text/javascript">
  function fnChkByte(obj, maxByte)
  {
