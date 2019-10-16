@@ -148,14 +148,19 @@ create table inquiry
 (
     inum number(10) primary key,
     id references member(id),
-    colnum references product(colnum),
+    colnum references color(colnum),
+    inqtype number(1),
     title varchar2(100),
     content varchar2(1000),
     ref number(10),
     regdate date
 );
 create sequence inquiry_seq;
-
+-- inqtype 문의타입
+-- 1 : 사이즈
+-- 2 : 배송
+-- 3 : 재입고
+-- 4 : 기타
 
 
 

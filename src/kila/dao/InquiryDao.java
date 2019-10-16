@@ -31,7 +31,8 @@ public class InquiryDao {
 				list.add(new InquiryVo(
 						rs.getInt("inum"), 
 						rs.getString("id"), 
-						colnum, 
+						rs.getInt("colnum"), 
+						rs.getInt("inqtype"), 
 						rs.getString("title"), 
 						rs.getString("content"), 
 						rs.getInt("ref"), 
