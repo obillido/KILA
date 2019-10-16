@@ -17,6 +17,7 @@ public class ProductInfoDao {
 	public static ProductInfoDao getInstance() {
 		return instance;
 	}
+	
 	public ArrayList<ItemInfoSizeVo> productInfoSize(int colnum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -44,10 +45,13 @@ public class ProductInfoDao {
 	
 
 	
-	public ArrayList<ProductInfoVo> getListC(int startRow, int endRow, String category, int order){
+	public ArrayList<ProductInfoVo> getListC(int startRow, int endRow, String category, int order, String colorVal, String sizeVal, String priceVal, String div){
 		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
+		PreparedStatement pstmt1=null;
+		PreparedStatement pstmt2=null;
+		ResultSet rs1=null;
+		ResultSet rs2=null;
+		ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
 		try {
 			con=JdbcUtil.getConn();
 			String cwhere="";
@@ -69,40 +73,96 @@ public class ProductInfoDao {
 			default: System.out.println("ProductInfoDao:getListC:???");break;
 			}
 			
+			String colorwhere="";
+			if(colorVal!=null && !colorVal.equals("")) {
+				String[] colors=colorVal.split(div);
+				for(int i=0; i<colors.length; i++) {
+					if(i==0) colorwhere=" and (";
+					else colorwhere+=" or ";
+					colorwhere+=" color.color='"+colors[i]+"' ";
+					if(i==colors.length-1) colorwhere+=") ";
+				}
+			}
+			String sizewhere="";
+			if(sizeVal!=null && !sizeVal.equals("")) {
+				String[] sizes=sizeVal.split(div);
+				for(int i=0; i<sizes.length; i++) {
+					if(i==0) sizewhere=" and (";
+					else sizewhere+=" or ";
+					sizewhere+=" product.psize="+sizes[i]+" ";
+					if(i==sizes.length-1) sizewhere+=") ";
+				}
+			}
+			String pricewhere="";
+			String[] price=priceVal.split(div);
+			if(!price[0].equals("null") && !price[0].equals("")) {
+				pricewhere+=" and price>"+price[0]+" ";
+			}
+			if(!price[1].equals("null") && !price[1].equals("")) {
+				pricewhere+=" and price<"+price[1]+" ";
+			}
+			
+			
+			
 			if(category.equals("all") || category==null || category.equals("")) cwhere="";
-			String sql="select * from "+
+			String sql= "select * from "+
 						"(select aa.*,rownum rnum " +
-						"from (select distinct pn.pcode, cname, pname, price, color.colnum, color, savefilename " + oselect +
-					   "from product_name pn, color, product " + otable +
-					   "where product.icnt>0 and pn.pcode=color.pcode "+cwhere+ owhere +
-					   "order by "+orderby+", color) aa " +
-					   ") where rnum between ? and ?";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			rs=pstmt.executeQuery();
-			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
-			while(rs.next()) {
+						"from (select distinct pn.pcode, cname, pname, price, color.colnum, color, savefilename, scnt " + oselect +
+						"from product_name pn, color, product, (select colnum cl, sum(icnt) scnt from product group by colnum) cc" + otable +
+						"where scnt>0 and pn.pcode=color.pcode and cc.cl=color.colnum "+cwhere+owhere+colorwhere+sizewhere+pricewhere+
+						"order by "+orderby+", color) aa " +
+						") where rnum between ? and ?";
+			pstmt1=con.prepareStatement(sql);
+			pstmt1.setInt(1, startRow);
+			pstmt1.setInt(2, endRow);
+			rs1=pstmt1.executeQuery();
+			while(rs1.next()) {
 				list.add(new ProductInfoVo(
-						rs.getString("pcode"), 
-						rs.getString("cname"), 
-						rs.getString("pname"), 
-						rs.getInt("price"), 
-						rs.getInt("colnum"),
-						rs.getString("color"),
-						rs.getString("savefilename")));
+						rs1.getString("pcode"), 
+						rs1.getString("cname"), 
+						rs1.getString("pname"), 
+						rs1.getInt("price"), 
+						rs1.getInt("colnum"),
+						rs1.getString("color"),
+						rs1.getString("savefilename")));
+				startRow++;
+			}
+			if(startRow!=endRow) {
+				sql="select * from "+
+					"(select aa.*,rownum rnum " +
+					"from (select distinct pn.pcode, cname, pname, price, color.colnum, color, savefilename, scnt " + oselect +
+					"from product_name pn, color, product, (select colnum cl, sum(icnt) scnt from product group by colnum) cc" + otable +
+					"where scnt=0 and pn.pcode=color.pcode and cc.cl=color.colnum "+cwhere+owhere+colorwhere+sizewhere+pricewhere+
+					"order by "+orderby+", color) aa " +
+					") where rnum between ? and ?";
+				pstmt2=con.prepareStatement(sql);
+				pstmt2.setInt(1, startRow);
+				pstmt2.setInt(2, endRow);
+				rs2=pstmt2.executeQuery();
+				while(rs2.next()) {
+					list.add(new ProductInfoVo(
+							rs2.getString("pcode"), 
+							rs2.getString("cname"), 
+							rs2.getString("pname"), 
+							rs2.getInt("price"), 
+							rs2.getInt("colnum"),
+							rs2.getString("color"),
+							rs2.getString("savefilename")));
+				}
 			}
 			return list;
 		}catch(SQLException se) {
-			System.out.println("ProductInfoDAO:getListC"+se.getMessage());
+			System.out.println("ProductInfoDAO:getListC:"+se.getMessage());
 			return null;
 		}finally {
-			JdbcUtil.close(con,pstmt,rs);
+			JdbcUtil.close(rs2);
+			JdbcUtil.close(pstmt2);
+			JdbcUtil.close(con,pstmt1,rs1);
 		}
 	}
 	
 	
-	public int getCount(String category) {
+	public int getCount(String category, String colorVal, String sizeVal, String priceVal, String div) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -110,9 +170,41 @@ public class ProductInfoDao {
 			con=JdbcUtil.getConn();
 			String cwhere="";
 			if(!category.equals("all")) cwhere="and cname='"+category+"' ";
-			String sql="select count(*) cnt " + 
-					   "from product_name pn, color " + 
-					   "where pn.pcode=color.pcode "+cwhere;
+
+			String colorwhere="";
+			if(colorVal!=null && !colorVal.equals("")) {
+				String[] colors=colorVal.split(div);
+				for(int i=0; i<colors.length; i++) {
+					if(i==0) colorwhere=" and (";
+					else colorwhere+=" or ";
+					colorwhere+=" color.color='"+colors[i]+"' ";
+					if(i==colors.length-1) colorwhere+=") ";
+				}
+			}
+			String sizewhere="";
+			if(sizeVal!=null && !sizeVal.equals("")) {
+				String[] sizes=sizeVal.split(div);
+				for(int i=0; i<sizes.length; i++) {
+					if(i==0) sizewhere=" and (";
+					else sizewhere+=" or ";
+					sizewhere+=" product.psize="+sizes[i]+" ";
+					if(i==sizes.length-1) sizewhere+=") ";
+				}
+			}
+			String pricewhere="";
+			String[] price=priceVal.split(div);
+			if(!price[0].equals("null") && !price[0].equals("")) {
+				pricewhere+=" and price>"+price[0]+" ";
+			}
+			if(!price[1].equals("null") && !price[1].equals("")) {
+				pricewhere+=" and price<"+price[1]+" ";
+			}
+			
+			
+			String sql="select count(*) cnt from\r\n" + 
+					"(select distinct pn.pcode, pname, color\r\n" + 
+					"from product_name pn, color, product\r\n" + 
+					"where pn.pcode=color.pcode "+cwhere+colorwhere+sizewhere+pricewhere+")";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {

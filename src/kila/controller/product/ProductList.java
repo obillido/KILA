@@ -27,6 +27,40 @@ public class ProductList extends HttpServlet{
 			order=Integer.parseInt(torder);
 		}
 
+		String div="/";
+		String colorVal=req.getParameter("colorVal");
+		if(colorVal==null) {
+			String[] colors=req.getParameterValues("color");
+			if(colors==null || colors.length==0) {
+				colorVal="";
+			}else{
+				colorVal=colors[0];
+				for(int i=1; i<colors.length; i++) {
+					colorVal+=div+colors[i];
+				}
+			}
+		}
+		String sizeVal=req.getParameter("sizeVal");
+		if(sizeVal==null) {
+			String[] psizes=req.getParameterValues("psize");
+			if(psizes==null || psizes.length==0) {
+				sizeVal="";
+			}else {
+				sizeVal=psizes[0];
+				for(int i=1; i<psizes.length; i++) {
+					sizeVal+=div+psizes[i];
+				}
+			}
+		}
+		String priceVal=req.getParameter("priceVal");
+		if(priceVal==null) {
+			String pr1=req.getParameter("price1");
+			String pr2=req.getParameter("price2");
+			priceVal=pr1+div+pr2;
+		}
+
+		
+
 		String spageNum=req.getParameter("pageNum");
 		int pageNum=1;
 		if(spageNum!=null) {
@@ -36,7 +70,7 @@ public class ProductList extends HttpServlet{
 		int startRow=endRow-7;
 		
 		ProductInfoDao dao=ProductInfoDao.getInstance();
-		int pageCount=(int)Math.ceil(dao.getCount(category)/8.);
+		int pageCount=(int)Math.ceil(dao.getCount(category,colorVal,sizeVal,priceVal, div)/8.);
 		int startPageNum=(pageNum-1)/5*5+1;
 		int endPageNum=startPageNum+4;
 		if(endPageNum>pageCount) {
@@ -44,24 +78,7 @@ public class ProductList extends HttpServlet{
 		}
 		
 		
-		String[] colors=req.getParameterValues("color");
-		String colorVal=req.getParameter("colorVal");
-		if(colorVal!=null) {
-			colors=colorVal.split("%");
-		}
-		String[] psizes=req.getParameterValues("psize");
-		String sizeVal=req.getParameter("sizeVal");
-		if(sizeVal!=null) {
-			psizes=sizeVal.split("%");
-		}
-		String[] priceRange=req.getParameterValues("price");
-		String priceVal=req.getParameter("priceVal");
-		if(priceVal!=null) {
-			priceRange=priceVal.split("%");
-		}
-		
-		
-		ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order);
+		ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order,colorVal,sizeVal,priceVal,div);
 		
 		Point pr=dao.getPriceRange(category);
 		
@@ -74,6 +91,10 @@ public class ProductList extends HttpServlet{
 		req.setAttribute("list", list);
 		req.setAttribute("minPrice", pr.x);
 		req.setAttribute("maxPrice", pr.y);
-		req.getRequestDispatcher("/layout.jsp?cpage=/content/productList/productList.jsp").forward(req, resp);
+		req.setAttribute("colorVal", colorVal);
+		req.setAttribute("sizeVal", sizeVal);
+		req.setAttribute("priceVal", priceVal);
+		req.setAttribute("cpage", "/content/productList/productList.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

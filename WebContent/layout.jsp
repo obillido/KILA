@@ -13,7 +13,7 @@
 </head>
 <body>
 <%
-	String cpage=request.getParameter("cpage");
+	String cpage=(String)request.getAttribute("cpage");
 	if(cpage==null) cpage="main.jsp";
 %>
 <div id="wrap">

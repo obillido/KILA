@@ -128,7 +128,6 @@
 <c:set var="cp" value="${pageContext.request.contextPath}"/>
 <c:set var="cplist" value="${pageContext.request.contextPath}/product/list"/>
 
-
 <div id="content">
 
 	<div id="categoryList">
@@ -195,7 +194,7 @@
 	
 
 
-
+	<c:set var="cpsearch" value="${pageContext.request.contextPath}/product/list?category=${category}&colorVal=${colorVal}&sizeVal=${sizeVal}&sizeVal=${sizeVal}"/>
 
 	<div id="productList">
 		<h1>상품목록</h1>
@@ -203,28 +202,28 @@
 		<div id="order">
 		<c:choose>
 			<c:when test="${empty order || order==1}">
-				<a href="${cplist}?category=${category}&order=1" style="text-decoration:underline;">판매순</a>
-				<a href="${cplist}?category=${category}&order=2">신상품순</a>
-				<a href="${cplist}?category=${category}&order=3">낮은가격순</a>
-				<a href="${cplist}?category=${category}&order=4">높은가격순</a>
+				<a href="${cpsearch}&order=1" style="text-decoration:underline;">판매순</a>
+				<a href="${cpsearch}&order=2">신상품순</a>
+				<a href="${cpsearch}&order=3">낮은가격순</a>
+				<a href="${cpsearch}&order=4">높은가격순</a>
 			</c:when>
 			<c:when test="${order==2}">
-				<a href="${cplist}?category=${category}&order=1">판매순</a>
-				<a href="${cplist}?category=${category}&order=2" style="text-decoration:underline;">신상품순</a>
-				<a href="${cplist}?category=${category}&order=3">낮은가격순</a>
-				<a href="${cplist}?category=${category}&order=4">높은가격순</a>
+				<a href="${cpsearch}&order=1">판매순</a>
+				<a href="${cpsearch}&order=2" style="text-decoration:underline;">신상품순</a>
+				<a href="${cpsearch}&order=3">낮은가격순</a>
+				<a href="${cpsearch}&order=4">높은가격순</a>
 			</c:when>
 			<c:when test="${order==3}">
-				<a href="${cplist}?category=${category}&order=1">판매순</a>
-				<a href="${cplist}?category=${category}&order=2">신상품순</a>
-				<a href="${cplist}?category=${category}&order=3" style="text-decoration:underline;">낮은가격순</a>
-				<a href="${cplist}?category=${category}&order=4">높은가격순</a>
+				<a href="${cpsearch}&order=1">판매순</a>
+				<a href="${cpsearch}&order=2">신상품순</a>
+				<a href="${cpsearch}&order=3" style="text-decoration:underline;">낮은가격순</a>
+				<a href="${cpsearch}&order=4">높은가격순</a>
 			</c:when>
 			<c:when test="${order==4}">
-				<a href="${cplist}?category=${category}&order=1">판매순</a>
-				<a href="${cplist}?category=${category}&order=2">신상품순</a>
-				<a href="${cplist}?category=${category}&order=3">낮은가격순</a>
-				<a href="${cplist}?category=${category}&order=4" style="text-decoration:underline;">높은가격순</a>
+				<a href="${cpsearch}&order=1">판매순</a>
+				<a href="${cpsearch}&order=2">신상품순</a>
+				<a href="${cpsearch}&order=3">낮은가격순</a>
+				<a href="${cpsearch}&order=4" style="text-decoration:underline;">높은가격순</a>
 			</c:when>
 		</c:choose>
 		</div>
@@ -232,15 +231,38 @@
 		
 		
 		
+		<%
+			String colorVal=(String)request.getAttribute("colorVal");
+			String[] cchk={"BLACK","WHITE","RED","GREEN"};	
+			System.out.println(colorVal);
+			if(colorVal!=null){
+				String[] colors=colorVal.split("/");
+				for(int i=0; i<colors.length; i++){
+					System.out.println(colors[i]);
+					for(int j=0; j<cchk.length; j++){
+						if(colors[i].equals(cchk[j])){
+							cchk[j]="checked";
+							break;
+						}
+					}
+				}
+			}
+			for(int j=0; j<cchk.length; j++){
+				if(!cchk[j].equals("checked")){
+					cchk[j]="unchecked";
+				}
+			}
+		%>
+		
 		<input type="button" id="search" value="검색조건" onclick="displaySearchWindow()">	
 			<form method="post" action="${cplist}">
 				<div id="searchWindow" >
 					<label for="color">색상</label>
 					<span><input type="checkbox" id="all_color" onclick="selectAll('color')"> ALL</span>
-					<span><input type="checkbox" name="color" value="BLACK"> BLACK</span>
-					<span><input type="checkbox" name="color" value="WHITE"> WHITE</span>
-					<span><input type="checkbox" name="color" value="RED"> RED</span>
-					<span><input type="checkbox" name="color" value="GREEN"> GREEN</span>
+					<span><input type="checkbox" <%=cchk[0]%> name="color" value="BLACK"> BLACK</span>
+					<span><input type="checkbox" <%=cchk[1]%> name="color" value="WHITE"> WHITE</span>
+					<span><input type="checkbox" <%=cchk[2]%> name="color" value="RED"> RED</span>
+					<span><input type="checkbox" <%=cchk[3]%> name="color" value="GREEN"> GREEN</span>
 					<hr>
 					<label for="psize">사이즈</label>
 					<span><input type="checkbox" id="all_psize" onclick="selectAll('psize')"> ALL</span>
@@ -251,15 +273,13 @@
 					<span><input type="checkbox" name="psize" value="110"> 110</span>
 					<hr>
 					<label for="price range">가격범위</label>
-					<input type="text" name="price" value="${minPrice}" onkeyup="checkRange()">
+					<input type="text" name="price1" value="${minPrice}" onkeyup="checkRange()">
 					 ~ 
-					<input type="text" name="price" value="${maxPrice}" onkeyup="checkRange()">
+					<input type="text" name="price2" value="${maxPrice}" onkeyup="checkRange()">
 		
 					<hr>
 					<div name="circle" class="circle1"></div>
 					<div name="circle" class="circle2"></div>
-					
-					
 		
 					<div id="button">
 						<input type="submit" value="검색하기">
@@ -301,27 +321,27 @@
 		
 		
 		
-		<c:set var="cpco" value="${cplist}?category=${category}&order=${order}"/>
+		<c:set var="cpcso" value="${cpsearch}&order=${order}"/>
 		
 		<div id="paging">
 		<c:if test="${not empty pageCount}">
 			<c:if test="${startPageNum!=1}">
-				<a href="${cpco}&pageNum=${startPageNum-1}">이전</a>
+				<a href="${cpcso}&pageNum=${startPageNum-1}">이전</a>
 			</c:if>
 		
 			<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
 				<c:choose>
 					<c:when test="${pageNum==i}">
-						<a href="${cpco}&pageNum=${i}" style="color:red;">[${i}]</a>
+						<a href="${cpcso}&pageNum=${i}" style="color:red;">[${i}]</a>
 					</c:when>
 					<c:otherwise>
-						<a href="${cpco}&pageNum=${i}">[${i}]</a>
+						<a href="${cpcso}&pageNum=${i}">[${i}]</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 		
 			<c:if test="${endPageNum!=pageCount}">
-				<a href="${cpco}&pageNum=${endPageNum+1}">다음</a>
+				<a href="${cpcso}&pageNum=${endPageNum+1}">다음</a>
 			</c:if>
 		
 		</c:if>
