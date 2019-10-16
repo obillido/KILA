@@ -257,7 +257,6 @@
 			if(sizeVal!=null){
 				String[] sizes=sizeVal.split("/");
 				for(int i=0; i<sizes.length; i++){
-					System.out.println(sizes[i]);
 					for(int j=0; j<schk.length; j++){
 						if(sizes[i].equals(schk[j])){
 							schk[j]="checked";
@@ -271,6 +270,9 @@
 					schk[j]="unchecked";
 				}
 			}
+			
+			String priceVal=(String)request.getAttribute("priceVal");
+			String[] pchk=priceVal.split("/");
 		%>
 		
 		<input type="button" id="search" value="검색조건" onclick="displaySearchWindow()">	
@@ -292,9 +294,9 @@
 					<span><input type="checkbox" <%=schk[4]%> name="psize" value="110"> 110</span>
 					<hr>
 					<label for="price range">가격범위</label>
-					<input type="text" name="price1" value="${minPrice}" onkeyup="checkRange()">
+					<input type="text" name="price1" value="<%=pchk[0]%>" onkeyup="checkRange()">
 					 ~ 
-					<input type="text" name="price2" value="${maxPrice}" onkeyup="checkRange()">
+					<input type="text" name="price2" value="<%=pchk[1]%>" onkeyup="checkRange()">
 		
 					<hr>
 					<div name="circle" class="circle1"></div>

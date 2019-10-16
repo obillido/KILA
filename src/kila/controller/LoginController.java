@@ -27,7 +27,8 @@ public class LoginController extends HttpServlet{
 		BuyerDao bd=new BuyerDao();
 		int status=bd.getStatus(id);
 		if(status==3) {
-			req.getRequestDispatcher("/header/loginFail.jsp").forward(req,resp);
+			req.setAttribute("cpage", "/header/loginFail.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 			return;
 		}
 		
@@ -38,10 +39,12 @@ public class LoginController extends HttpServlet{
 			session.setAttribute("id",id);
 			session.setAttribute("pwd",pwd);
 			session.setAttribute("type",type);
-			resp.sendRedirect(req.getContextPath() + "/layout.jsp");
+			req.setAttribute("cpage", "/main.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		}else { 
 			req.setAttribute("errMsg","아이디 또는 비밀번호가 맞지 않습니다.");
-			req.getRequestDispatcher("/header/login.jsp").forward(req,resp);
+			req.setAttribute("cpage", "/header/login.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		}
 	}
 }

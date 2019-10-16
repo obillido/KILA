@@ -10,15 +10,15 @@
     #h{margin-bottom:20px;}
 </style>
 
-<c:set var="cp" value="${pageContext.request.contextPath}/layout.jsp?cpage="/>
+<c:set var="cp" value="${pageContext.request.contextPath}"/>
 
 <div id="div">
    <h1 id="h">Admin Page</h1>
    <ul>
-      <li><a href="${pageContext.request.contextPath}/product/productRegi">상품등록</a></li>
-      <li><a href="${pageContext.request.contextPath}/product/list">상품목록</a></li>
+      <li><a href="${cp}/product/productRegi">상품등록</a></li>
+      <li><a href="${cp}/product/list">상품목록</a></li>
       <li><a href="">결제목록</a></li>
-      <li><a href="${cp}/header/registerEvent.jsp">이벤트작성하기</a></li>
+      <li><a href="${cp}/header/registerEvent">이벤트작성하기</a></li>
       <li><a href="${cp}/home">홈으로</a></li>
    </ul>
 </div>

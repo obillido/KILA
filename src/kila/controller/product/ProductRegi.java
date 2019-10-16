@@ -18,7 +18,8 @@ import kila.dao.ProductDao;
 public class ProductRegi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect(req.getContextPath()+"/layout.jsp?cpage=/admin/productRegi.jsp");
+		req.setAttribute("cpage", "/admin/productRegi.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -61,7 +62,8 @@ public class ProductRegi extends HttpServlet{
 			resp.sendRedirect(req.getContextPath()+"/product/list");
 		}else {
 			req.setAttribute("msg", "등록실패");
-			req.getRequestDispatcher("/admin/productRegi.jsp").forward(req, resp);
+			req.setAttribute("cpage", "/admin/productRegi.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		}
 	}
 }

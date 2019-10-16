@@ -89,8 +89,6 @@ public class ProductList extends HttpServlet{
 		req.setAttribute("endPageNum", endPageNum);
 		req.setAttribute("order",order);
 		req.setAttribute("list", list);
-		req.setAttribute("minPrice", pr.x);
-		req.setAttribute("maxPrice", pr.y);
 		req.setAttribute("colorVal", colorVal);
 		req.setAttribute("sizeVal", sizeVal);
 		req.setAttribute("priceVal", priceVal);

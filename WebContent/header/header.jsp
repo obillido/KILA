@@ -118,15 +118,15 @@
    }
 </script>
 
-<c:set var="cp" value="${pageContext.request.contextPath}"/>
-<c:set var="cpl" value="${pageContext.request.contextPath}/layout.jsp?cpage="/>
 
+
+<c:set var="cp" value="${pageContext.request.contextPath}"/>
 
 <div id="header">
 
 	<div id="homelogo">
 		<div id="event"></div>
-		<a href="${pageContext.request.contextPath }/home"><img src="${cp}/header/KilaLogo.png"></a>
+		<a href="${cp}/home"><img src="${cp}/header/KilaLogo.png"></a>
 		<div id="right">
 		<ul>
 		   <li><a href="${cp}/header/join">회원가입</a></li>
@@ -135,10 +135,10 @@
 		         <li><a href="${cp}/header/logout">로그아웃</a></li>
 		         <c:choose>
 		            <c:when test="${sessionScope.id=='admin'}">
-		               <li><a href="${cpl}/header/adminpage.jsp">관리자페이지</a></li>
+		               <li><a href="${cp}/header/adminpage">관리자페이지</a></li>
 		            </c:when>
 		            <c:otherwise>
-		               <li><a href="${cpl}/header/mypage.jsp">마이페이지</a></li>
+		               <li><a href="${cp}/header/mypage.jsp">마이페이지</a></li>
 		            </c:otherwise>
 		         </c:choose>
 		      </c:when>
@@ -159,7 +159,7 @@
 	      <li onmouseover="showProduct()" onmouseup="noProduct()">PRODUCT</li>
 	      <li><a href="" style="color:#B90000;">NEW</a></li>
 	      <li><a href="" style="color:#B90000;">BEST</a></li>
-	      <li><a href="${cp}/header/eventList.jsp" style="color:#00008C;">EVENT</a></li>
+	      <li><a href="${cp}/header/eventlist" style="color:#00008C;">EVENT</a></li>
 	   </ul>
 	</div>
 	<div id="product">
