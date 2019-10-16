@@ -10,13 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kila.dao.BuyerDao;
 import kila.dao.CartDao;
-import kila.dao.ItemInfoDao;
 import kila.dao.PaymentDao;
-import kila.vo.BuyerVo;
 import kila.vo.CartVo;
-import kila.vo.ItemInfoVo;
 import kila.vo.PaymentVo;
 
 @WebServlet("/kila/cart")
@@ -36,6 +32,8 @@ public class CartController extends HttpServlet{
 			insert(req,resp);
 		}else if(cmd.equals("delete")) {
 			delete(req,resp);
+		}else if(cmd.equals("spayment")) {
+			spayment(req,resp);
 		}
 	}
 	protected void insert(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,8 +54,6 @@ public class CartController extends HttpServlet{
 	}
 	protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		HttpSession session=req.getSession(); 
-		String id=(String)session.getAttribute("id");
 		int paynum=Integer.parseInt(req.getParameter("paynum"));
 		CartDao dao=CartDao.getInstance();
 		int n=dao.delete(paynum);
@@ -66,5 +62,12 @@ public class CartController extends HttpServlet{
 		}else {
 			resp.sendRedirect(req.getContextPath()+"/layout.jsp");
 		}
+	}
+	protected void spayment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		HttpSession session=req.getSession();
+		int paynum=Integer.parseInt(req.getParameter("paynum"));
+		session.setAttribute("paynum", paynum);
+		resp.sendRedirect(req.getContextPath()+"/kila/cart2");
 	}
 }

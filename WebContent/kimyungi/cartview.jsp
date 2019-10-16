@@ -6,6 +6,9 @@
 	function deletecart(paynum){
 		location.href="cart?cmd=delete&paynum="+paynum;
 	}
+	function paymentcart(paynum){
+		location.href="cart?cmd=spayment&paynum="+paynum;
+	}
 </script>
 <div style="text-align: center">
 <h2>SHOPPING BAG</h2>
@@ -18,7 +21,7 @@
 	<c:forEach var="li" items="${list }">
 	<tr>
 		<th><input type="checkbox"></th><th><div><img width="100px" style="float: left;" src="${pageContext.request.contextPath }/upload/${li.savefilename }"></div><br>KILA | ${li.pcode }<br>${li.pname }<br>${li.color }/${li.psize }</th>
-		<th>${li.cnt }</th><th>${li.price }</th><th>${li.price * li.cnt }</th><th><input type="button" style="width: 120px; height: 35px; background-color: black; color: white; margin-bottom: 10px;" value="주문하기"><br><input type="button" style="width: 120px; height: 35px; background-color: white;" onclick="deletecart(${li.paynum})" value="삭제하기"></th>
+		<th>${li.cnt }</th><th>${li.price }</th><th>${li.price * li.cnt }</th><th><input type="button" style="width: 120px; height: 35px; background-color: black; color: white; margin-bottom: 10px;" onclick="paymentcart(${li.paynum})" value="주문하기"><br><input type="button" style="width: 120px; height: 35px; background-color: white;" onclick="deletecart(${li.paynum})" value="삭제하기"></th>
 	</tr>
 	</c:forEach>
 	<tr>
