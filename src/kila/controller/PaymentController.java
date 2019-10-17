@@ -28,6 +28,7 @@ public class PaymentController extends HttpServlet{
 		if(cmd.equals("insert")) {
 			int colnum=Integer.parseInt(req.getParameter("scolnum"));
 			int psize=Integer.parseInt(req.getParameter("spsize"));
+			System.out.println(psize);
 			int cnt=Integer.parseInt(req.getParameter("pcnt"));
 			HttpSession session=req.getSession(); 
 			String id=(String)session.getAttribute("id");

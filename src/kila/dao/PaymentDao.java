@@ -17,15 +17,16 @@ public class PaymentDao {
 	public static PaymentDao getInstance() {
 		return instance;
 	}
-	public int getProductnum(int colnum) {
+	public int getProductnum(int colnum,int psize) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select * from product where colnum=?";
+			String sql="select * from product where colnum=? and psize=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1,colnum);
+			pstmt.setInt(2, psize);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt("pnum");

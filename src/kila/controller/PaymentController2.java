@@ -20,8 +20,9 @@ public class PaymentController2 extends HttpServlet{
 		HttpSession session=req.getSession(); 
 		String id=(String)session.getAttribute("id");
 		int colnum = Integer.parseInt(req.getParameter("colnum"));
+		int psize= Integer.parseInt(req.getParameter("psize"));
 		PaymentDao dao=PaymentDao.getInstance();
-		int pnum=dao.getProductnum(colnum);
+		int pnum=dao.getProductnum(colnum,psize);
 		int cnt = Integer.parseInt(req.getParameter("cnt"));
 		String paymethod = req.getParameter("paymethod");
 		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 1, paymethod);

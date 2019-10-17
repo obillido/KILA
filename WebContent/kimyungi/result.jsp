@@ -85,6 +85,7 @@
 	<form method="post" action="${pageContext.request.contextPath }/kila/payment2" onsubmit="return checkyo()">
 	<input type="hidden" name="cnt" value=${cnt }>
 	<input type="hidden" name="colnum" value=${vo.colnum }>
+	<input type="hidden" name="psize" value=${psize }>
 	<input type="radio" name="paymethod" value="네이버페이" onclick="cancle(this)"><b>네이버페이</b> <input type="radio" name="paymethod" value="신용카드" onclick="cancle(this)"><b>신용카드</b> <input type="radio" name="paymethod" value="무통장입금(가상계좌)" onclick="cancle(this)"><b>무통장입금(가상계좌)</b> <input type="radio" name="paymethod" value="무통장입금(에스크로)" onclick="cancle(this)"><b>무통장입금(에스크로)</b> <input type="radio" name="paymethod" value="실시간계좌이체" onclick="cancle(this)"><b>실시간계좌이체</b> <input type="radio" name="paymethod" value="PAYCO" onclick="cancle(this)"><b>PAYCO</b> <input type="radio" name="paymethod" value="스마일페이" onclick="cancle(this)"><b>스마일페이</b> <input type="radio" name="paymethod" value="카카오페이" onclick="cancle(this)"> <b>카카오페이</b>
 	<br><br>
 	<div>
