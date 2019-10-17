@@ -47,10 +47,8 @@ public class ProductInfoDao {
 	
 	public ArrayList<ProductInfoVo> getList(int startRow, int endRow, String category, int order, String colorVal, String sizeVal, String priceVal, String div){
 		Connection con=null;
-		PreparedStatement pstmt1=null;
-		PreparedStatement pstmt2=null;
-		ResultSet rs1=null;
-		ResultSet rs2=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
 		ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
 		try {
 			con=JdbcUtil.getConn();
@@ -62,7 +60,14 @@ public class ProductInfoDao {
 			String orderby=" ";
 			String oselect=" ";
 			switch(order) {
-			case 1: orderby=" pcode "; break; // 나중에 수정히기 : 판매순
+			case 1: otable=" ,(select color.colnum, sum(cnt) pscnt from color, " + 
+						"(select colnum, payment.cnt from product,payment " + 
+						"where payment.status=4 and product.pnum=payment.pnum) pp " + 
+						"where pp.colnum=color.colnum " + 
+						"group by color.colnum) pay ";
+					owhere=" and pay.colnum=color.colnum ";
+					oselect=", pscnt ";
+					orderby=" pscnt desc"; break;
 			case 2: otable=", (select pnum, min(regdate) mr from product_reg group by pnum) pr ";
 					owhere=" and product.colnum=color.colnum and pr.pnum=product.pnum ";
 					oselect=", mr ";
@@ -103,52 +108,85 @@ public class ProductInfoDao {
 			}
 			
 			
-			
 			if(category.equals("all") || category==null || category.equals("")) cwhere="";
+			
+			
 			String sql= "select * from "+
 						"(select aa.*,rownum rnum " +
 						"from (select distinct pn.pcode, cname, pname, price, color.colnum, color, savefilename, scnt " + oselect +
-						"from product_name pn, color, product, (select colnum cl, sum(icnt) scnt from product group by colnum) cc" + otable +
-						"where scnt>0 and pn.pcode=color.pcode and cc.cl=color.colnum "+cwhere+owhere+colorwhere+sizewhere+pricewhere+
+						"from product_name pn, color, product, (select colnum, sum(icnt) scnt from product group by colnum) cc " + otable +
+						"where scnt>0 and pn.pcode=color.pcode and cc.colnum=color.colnum "+cwhere+owhere+colorwhere+sizewhere+pricewhere+
 						"order by "+orderby+", color) aa " +
 						") where rnum between ? and ?";
-			System.out.println(sql);
-			pstmt1=con.prepareStatement(sql);
-			pstmt1.setInt(1, startRow);
-			pstmt1.setInt(2, endRow);
-			rs1=pstmt1.executeQuery();
-			while(rs1.next()) {
+			System.out.println("1:"+sql);
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
 				list.add(new ProductInfoVo(
-						rs1.getString("pcode"), 
-						rs1.getString("cname"), 
-						rs1.getString("pname"), 
-						rs1.getInt("price"), 
-						rs1.getInt("colnum"),
-						rs1.getString("color"),
-						rs1.getString("savefilename")));
+						rs.getString("pcode"), 
+						rs.getString("cname"), 
+						rs.getString("pname"), 
+						rs.getInt("price"), 
+						rs.getInt("colnum"),
+						rs.getString("color"),
+						rs.getString("savefilename"),
+						1));
 				startRow++;
 			}
+
 			if(startRow!=endRow) {
+				JdbcUtil.close(pstmt,rs);
+				sql= "select * from "+
+						"(select aa.*,rownum rnum " +
+						"from (select distinct pn.pcode, cname, pname, price, color.colnum, color, savefilename, scnt " +
+						"from product_name pn, color, product, (select colnum, sum(icnt) scnt from product group by colnum) cc " + 
+						"where scnt>0 and pn.pcode=color.pcode and cc.colnum=color.colnum "+cwhere+colorwhere+sizewhere+pricewhere+
+						"order by  color) aa " +
+						") where rnum between ? and ?";
+				System.out.println("2:"+sql);
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					list.add(new ProductInfoVo(
+							rs.getString("pcode"), 
+							rs.getString("cname"), 
+							rs.getString("pname"), 
+							rs.getInt("price"), 
+							rs.getInt("colnum"),
+							rs.getString("color"),
+							rs.getString("savefilename"),
+							1));
+					startRow++;
+				}
+			}
+			if(startRow!=endRow) {
+				JdbcUtil.close(pstmt,rs);
 				sql="select * from "+
 					"(select aa.*,rownum rnum " +
 					"from (select distinct pn.pcode, cname, pname, price, color.colnum, color, savefilename, scnt " + oselect +
-					"from product_name pn, color, product, (select colnum cl, sum(icnt) scnt from product group by colnum) cc" + otable +
+					"from product_name pn, color, product, (select colnum cl, sum(icnt) scnt from product group by colnum) cc " + otable +
 					"where scnt=0 and pn.pcode=color.pcode and cc.cl=color.colnum "+cwhere+owhere+colorwhere+sizewhere+pricewhere+
 					"order by "+orderby+", color) aa " +
 					") where rnum between ? and ?";
-				pstmt2=con.prepareStatement(sql);
-				pstmt2.setInt(1, startRow);
-				pstmt2.setInt(2, endRow);
-				rs2=pstmt2.executeQuery();
-				while(rs2.next()) {
+				System.out.println("3:"+sql);
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
 					list.add(new ProductInfoVo(
-							rs2.getString("pcode"), 
-							rs2.getString("cname"), 
-							rs2.getString("pname"), 
-							rs2.getInt("price"), 
-							rs2.getInt("colnum"),
-							rs2.getString("color"),
-							rs2.getString("savefilename")));
+							rs.getString("pcode"), 
+							rs.getString("cname"), 
+							rs.getString("pname"), 
+							rs.getInt("price"), 
+							rs.getInt("colnum"),
+							rs.getString("color"),
+							rs.getString("savefilename"),
+							0));
 				}
 			}
 			return list;
@@ -156,13 +194,11 @@ public class ProductInfoDao {
 			System.out.println("ProductInfoDAO:getListC:"+se.getMessage());
 			return null;
 		}finally {
-			JdbcUtil.close(rs2);
-			JdbcUtil.close(pstmt2);
-			JdbcUtil.close(con,pstmt1,rs1);
+			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
-	
-	
+
+
 	public int getCount(String category, String colorVal, String sizeVal, String priceVal, String div) {
 		Connection con=null;
 		PreparedStatement pstmt=null;

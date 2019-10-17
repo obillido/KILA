@@ -46,6 +46,16 @@ public class JdbcUtil {
 			System.out.println(s.getMessage());
 		}
 	}
+	
+	public static void close(PreparedStatement stmt, ResultSet rs) {
+		try {	
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+		}catch(SQLException s) {
+			System.out.println(s.getMessage());
+		}
+	}
+	
 	public static void close(Connection con) {
 		try {	
 			if(con!=null) con.close();

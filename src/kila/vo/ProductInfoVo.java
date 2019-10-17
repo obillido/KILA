@@ -10,10 +10,11 @@ public class ProductInfoVo {
 	private String savefilename;
 	private String psize;
 	private int icnt;
+	private int soldout;
 	
 	public ProductInfoVo() {}
 
-	public ProductInfoVo(String pcode, String cname, String pname, int price, int colnum, String color, String savefilename) {
+	public ProductInfoVo(String pcode, String cname, String pname, int price, int colnum, String color, String savefilename, int soldout) {
 		this.pcode = pcode;
 		this.cname = cname;
 		this.pname = pname;
@@ -21,6 +22,7 @@ public class ProductInfoVo {
 		this.colnum = colnum;
 		this.color = color;
 		this.savefilename = savefilename;
+		this.soldout = soldout;
 	}
 	
 	public ProductInfoVo(String pcode, String cname, 
@@ -117,6 +119,14 @@ public class ProductInfoVo {
 
 	public void setIcnt(int icnt) {
 		this.icnt = icnt;
+	}
+
+	public int getSoldout() {
+		return soldout;
+	}
+
+	public void setSoldout(int soldout) {
+		this.soldout = soldout;
 	}
 	
 }
