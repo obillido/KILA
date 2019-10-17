@@ -116,6 +116,14 @@
 	   var product=document.getElementById("product");
 	   product.style.display="none";
    }
+   function cartcancle(id){
+	   if(id==""){
+		   alert("로그인을 하셔야 이용이 가능합니다. 로그인 페이지로 이동합니다.");
+		   location.href="/KILA/header/login";
+	   }else{
+		   location.href="/KILA/kila/cart";
+	   }
+   }
 </script>
 
 
@@ -146,7 +154,7 @@
 		         <li><a href="${cp}/header/login">로그인</a></li>
 		      </c:otherwise>
 		   </c:choose>
-			<li><a href="${cp}/kila/cart">장바구니</a></li>
+			<li><a href="javascript:cartcancle('${sessionScope.id }')">장바구니</a></li>
 		</ul>
 		</div>
 	</div>

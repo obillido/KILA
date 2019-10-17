@@ -91,6 +91,31 @@ public class CartDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
+	public int cpayment2(String[] paynum,String paymethod) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="";
+			if(paynum==null) {
+				return -1;
+			}else {
+				sql="update payment set status=1,paymethod=? where paynum=" + paynum[0];
+				if(paynum.length>1) {
+					for(int i=1;i<paynum.length;i++)
+					sql += " or paynum=" + paynum[i];
+				}
+			}
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, paymethod);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println("CartDAO:"+se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt);
+		}
+	}
 	public int delete2(String[] paynum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -119,7 +144,6 @@ public class CartDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		System.out.println(paynum.length);
 		try {
 			con=JdbcUtil.getConn();
 			String sql="";
@@ -163,9 +187,6 @@ public class CartDao {
 			ArrayList<CartVo> list=new ArrayList<CartVo>();
 			while(rs.next()) {
 				tot+=rs.getInt(2)*rs.getInt(3);
-				System.out.println(rs.getInt(1));
-				System.out.println(rs.getInt(2));
-				System.out.println(rs.getInt(3));
 			}
 			return tot;
 		}catch(SQLException se) {

@@ -85,8 +85,10 @@
 	<h2>결제방법</h2>
 	<hr style="border:solid 1px;">
 	<form method="post" action="${pageContext.request.contextPath }/kila/payment" onsubmit="return checkyo()">
-	<input type="hidden" name="paynum" value=${vo.paynum }>
-	<input type="hidden" name="cmd" value="cart">
+	<c:forEach var="li" items="${list }">
+	<input type="hidden" name="paynum" value=${li.paynum }>
+	</c:forEach>
+	<input type="hidden" name="cmd" value="cart2">
 	<input type="radio" name="paymethod" value="네이버페이" onclick="cancle(this)"><b>네이버페이</b> <input type="radio" name="paymethod" value="신용카드" onclick="cancle(this)"><b>신용카드</b> <input type="radio" name="paymethod" value="무통장입금(가상계좌)" onclick="cancle(this)"><b>무통장입금(가상계좌)</b> <input type="radio" name="paymethod" value="무통장입금(에스크로)" onclick="cancle(this)"><b>무통장입금(에스크로)</b> <input type="radio" name="paymethod" value="실시간계좌이체" onclick="cancle(this)"><b>실시간계좌이체</b> <input type="radio" name="paymethod" value="PAYCO" onclick="cancle(this)"><b>PAYCO</b> <input type="radio" name="paymethod" value="스마일페이" onclick="cancle(this)"><b>스마일페이</b> <input type="radio" name="paymethod" value="카카오페이" onclick="cancle(this)"> <b>카카오페이</b>
 	<br><br>
 	<div>

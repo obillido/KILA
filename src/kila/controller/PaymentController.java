@@ -51,6 +51,18 @@ public class PaymentController extends HttpServlet{
 			}else {
 				req.getRequestDispatcher("/kimyungi/result3.jsp").forward(req, resp);
 			}
+		}else if(cmd.equals("cart2")) {
+			String[] paynum=req.getParameterValues("paynum");
+			String paymethod = req.getParameter("paymethod");
+			System.out.println(paymethod);
+			System.out.println(paynum.length);
+			CartDao dao=CartDao.getInstance();
+			int n=dao.cpayment2(paynum, paymethod);
+			if(n>0) {
+				resp.sendRedirect(req.getContextPath()+"/layout.jsp");
+			}else {
+				req.getRequestDispatcher("/kimyungi/result2.jsp").forward(req, resp);
+			}
 		}
 	}
 }
