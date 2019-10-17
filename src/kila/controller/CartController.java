@@ -48,8 +48,9 @@ public class CartController extends HttpServlet{
 		String id=(String)session.getAttribute("id");
 		int colnum=Integer.parseInt(req.getParameter("scolnum"));
 		int cnt = Integer.parseInt(req.getParameter("pcnt"));
+		int psize = Integer.parseInt(req.getParameter("spsize"));
 		PaymentDao dao=PaymentDao.getInstance();
-		int pnum=dao.getProductnum(colnum);
+		int pnum=dao.getProductnum(colnum,psize);
 		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 8, null);
 		int n=dao.insert(vo);
 		if(n>0) {
