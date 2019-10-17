@@ -1,7 +1,6 @@
 drop sequence event_seq;
 drop table event;
 
-drop sequence inquiry_seq;
 drop table inquiry;
 
 drop sequence review_seq;

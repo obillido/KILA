@@ -31,16 +31,20 @@ public class InquiryReg extends HttpServlet{
 		HttpSession session=req.getSession();
 		String id=(String)session.getAttribute("id");
 		String type=(String)session.getAttribute("type");
-		System.out.println(req.getParameter("colnum"));
 		int colnum=Integer.parseInt(req.getParameter("colnum"));
 		int inqtype=Integer.parseInt(req.getParameter("inqtype"));
 		String title=req.getParameter("title");
 		String content=req.getParameter("content");
-		int ref=1;
-		if(type.equals("A")) ref=2; 
-		int n=InquiryDao.getInstance().insert(new InquiryVo(0, id, colnum, inqtype, title, content, ref, null));
+		InquiryVo vo=new InquiryVo();
+		InquiryDao idao=InquiryDao.getInstance();
+		int inum=idao.getMaxInum()+1;
+		int lev=1;
+		if(type.equals("A")) {
+			lev=2;
+			inum=Integer.parseInt(req.getParameter("inum"));
+		}
+		int n=idao.insert(new InquiryVo(inum, lev, id, colnum, inqtype, title, content, null));
 		req.setAttribute("colnum", colnum);
 		req.getRequestDispatcher("/iteminfo").forward(req, resp);
-		resp.sendRedirect(req.getContextPath()+"/layout.jsp");
 	}
 }

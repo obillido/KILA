@@ -30,5 +30,6 @@ public class ItmeInfoController extends HttpServlet{
 		req.setAttribute("inqList", inqList);
 		req.setAttribute("cpage", "/kimyungi/ItemInfo.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
+		
 	}
 }

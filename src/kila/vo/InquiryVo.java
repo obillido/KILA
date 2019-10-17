@@ -4,23 +4,23 @@ import java.sql.Date;
 
 public class InquiryVo {
 	private int inum;
+	private int lev;
 	private String id;
 	private int colnum;
 	private int inqtype;
 	private String title;
 	private String content;
-	private int ref;
 	private Date regdate;
 	
 	public InquiryVo() {}
-	public InquiryVo(int inum, String id, int colnum, int inqtype, String title, String content, int ref, Date regdate) {
+	public InquiryVo(int inum, int lev, String id, int colnum, int inqtype, String title, String content, Date regdate) {
 		this.inum = inum;
+		this.lev = lev;
 		this.id = id;
 		this.colnum = colnum;
 		this.inqtype = inqtype;
 		this.title = title;
 		this.content = content;
-		this.ref = ref;
 		this.regdate = regdate;
 	}
 
@@ -30,6 +30,14 @@ public class InquiryVo {
 
 	public void setInum(int inum) {
 		this.inum = inum;
+	}
+
+	public int getLev() {
+		return lev;
+	}
+
+	public void setLev(int lev) {
+		this.lev = lev;
 	}
 
 	public String getId() {
@@ -68,14 +76,6 @@ public class InquiryVo {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public int getRef() {
-		return ref;
-	}
-
-	public void setRef(int ref) {
-		this.ref = ref;
 	}
 
 	public Date getRegdate() {

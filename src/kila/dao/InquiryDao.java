@@ -22,7 +22,7 @@ public class InquiryDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select inum, rpad(substr(id,0,4),length(id),'*') pid, colnum, inqtype, title, content, ref, regdate  from inquiry where colnum=?";
+			String sql="select inum, lev, rpad(substr(id,0,4),length(id),'*') pid, colnum, inqtype, title, content, regdate  from inquiry where colnum=? and lev=1";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();
@@ -30,17 +30,17 @@ public class InquiryDao {
 			while(rs.next()) {
 				list.add(new InquiryVo(
 						rs.getInt("inum"), 
+						rs.getInt("lev"),
 						rs.getString("pid"), 
 						rs.getInt("colnum"), 
 						rs.getInt("inqtype"), 
 						rs.getString("title"), 
 						rs.getString("content"), 
-						rs.getInt("ref"), 
 						rs.getDate("regdate")));
 			}
 			return list;
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("InquiryDao:getList:"+se.getMessage());
 			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
@@ -48,22 +48,22 @@ public class InquiryDao {
 	}
 	
 	
-	public int getMaxRef() {
+	public int getMaxInum() {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select max(ref) maxRef from inquiry";
+			String sql="select max(inum) maxInum from inquiry";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				return rs.getInt("maxRef");
+				return rs.getInt("maxInum");
 			}else {
 				return 0;
 			}
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("InquiryDao:getMaxInum:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
@@ -75,19 +75,18 @@ public class InquiryDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="insert into inquiry values(inquiry_seq.nextval,?,?,?,?,?,?,sysdate)";
+			String sql="insert into inquiry values(?,?,?,?,?,?,?,sysdate)";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, vo.getId());
-			pstmt.setInt(2, vo.getColnum());
-			pstmt.setInt(3, vo.getInqtype());
-			pstmt.setString(4, vo.getTitle());
-			pstmt.setString(5, vo.getContent());
-			int ref=vo.getRef();
-			if(ref==1) ref=getMaxRef();
-			pstmt.setInt(6, ref);
+			pstmt.setInt(1, vo.getInum());
+			pstmt.setInt(2, vo.getLev());
+			pstmt.setString(3, vo.getId());
+			pstmt.setInt(4, vo.getColnum());
+			pstmt.setInt(5, vo.getInqtype());
+			pstmt.setString(6, vo.getTitle());
+			pstmt.setString(7, vo.getContent());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			System.out.println("InquiryDao:insert:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);

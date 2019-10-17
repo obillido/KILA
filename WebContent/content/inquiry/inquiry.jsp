@@ -85,10 +85,10 @@
 	<c:choose>
 		<c:when test="${not empty inqList}">
 			<c:forEach var="vo" items="${inqList}">
-				<div name="contentList" onclick="showInqContent(${vo.ref})">
+				<div id="contentList${vo.inum}" onclick="showInqContent(${vo.inum})">
 					<c:choose>
-						<c:when test="${vo.ref=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
-						<c:when test="${vo.ref=='2'}"><span class="state" style="color:red;">완료</span></c:when>
+						<c:when test="${vo.lev=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
+						<c:when test="${vo.lev=='2'}"><span class="state" style="color:red;">완료</span></c:when>
 					</c:choose>
 					<span class="inqtype">
 						<c:choose>
@@ -127,16 +127,24 @@
 	}
 	
 	var inqxhr=null;
-	function showInqContent(){
+	var iNum;
+	function showInqContent(inum){
+		iNum=inum;
 		inqxhr=new XMLHttpRequest();
 		inqxhr.onreadystatechange=callInquiryContent;
-		inqxhr.open('get','inquiryContent.jsp?',true);
+		inqxhr.open('get','inquiryContent.jsp?inum='+inum,true);
 		inqxhr.send();
 	}
 	function callInquiryContent(){
 		if(inqxhr.readyState==4 && inqxhr.status==200){
 			var data=inqxhr.responseXML;
+			var cl=document.getElementById("contentList"+iNum);
+			var content=data.getElementsByTagName("content");
 			
+			var div=document.createElement("div");
+			div.innerHTML=content;
+			div.className="inquiryContent";
+			cl.appendChild(div);
 		}
 	}
 
