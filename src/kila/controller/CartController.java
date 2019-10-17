@@ -34,6 +34,8 @@ public class CartController extends HttpServlet{
 			delete(req,resp);
 		}else if(cmd.equals("spayment")) {
 			spayment(req,resp);
+		}else if(cmd.equals("cartaction")) {
+			cartaction(req,resp);
 		}
 	}
 	protected void insert(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -69,5 +71,16 @@ public class CartController extends HttpServlet{
 		int paynum=Integer.parseInt(req.getParameter("paynum"));
 		session.setAttribute("paynum", paynum);
 		resp.sendRedirect(req.getContextPath()+"/kila/cart2");
+	}
+	protected void cartaction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		String[] paynum=(req.getParameterValues("paynum"));
+		CartDao dao=CartDao.getInstance();
+		int n=dao.delete2(paynum);
+		if(n>0) {
+			resp.sendRedirect(req.getContextPath()+"/kila/cart");
+		}else {
+			resp.sendRedirect(req.getContextPath()+"/layout.jsp");
+		}
 	}
 }

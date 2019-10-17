@@ -27,7 +27,7 @@ public class PaymentController2 extends HttpServlet{
 		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 1, paymethod);
 		int n=dao.insert(vo);
 		if(n>0) {
-			req.getRequestDispatcher("/kimyungi/result2.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath()+"/layout.jsp");
 		}else {
 			req.getRequestDispatcher("/kimyungi/result.jsp").forward(req, resp);
 		}

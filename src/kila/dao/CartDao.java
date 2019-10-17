@@ -91,4 +91,28 @@ public class CartDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
+	public int delete2(String[] paynum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="";
+			if(paynum==null) {
+				return -1;
+			}else {
+				sql="delete from payment where paynum=" + paynum[0];
+				if(paynum.length>1) {
+					for(int i=1;i<paynum.length;i++)
+					sql += " or paynum=" + paynum[i];
+				}
+			}
+			pstmt=con.prepareStatement(sql);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println("CartDAO:"+se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt);
+		}
+	}
 }
