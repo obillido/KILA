@@ -47,7 +47,7 @@ public class PaymentController extends HttpServlet{
 			CartDao dao=CartDao.getInstance();
 			int n=dao.cpayment(paynum, paymethod);
 			if(n>0) {
-				resp.sendRedirect(req.getContextPath()+"/layout.jsp");
+				resp.sendRedirect(req.getContextPath()+"/header/purchased");
 			}else {
 				req.getRequestDispatcher("/kimyungi/result3.jsp").forward(req, resp);
 			}
@@ -59,7 +59,7 @@ public class PaymentController extends HttpServlet{
 			CartDao dao=CartDao.getInstance();
 			int n=dao.cpayment2(paynum, paymethod);
 			if(n>0) {
-				resp.sendRedirect(req.getContextPath()+"/layout.jsp");
+				resp.sendRedirect(req.getContextPath()+"/header/purchased");
 			}else {
 				req.getRequestDispatcher("/kimyungi/result2.jsp").forward(req, resp);
 			}
