@@ -22,7 +22,7 @@ public class InquiryReg extends HttpServlet{
 		req.setAttribute("colnum", colnum);
 		req.setAttribute("pname", info[0]);
 		req.setAttribute("color", info[1]);
-		req.setAttribute("cpage", "/content/inquiryReg.jsp");
+		req.setAttribute("cpage", "/content/inquiry/inquiryReg.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	@Override
@@ -39,11 +39,8 @@ public class InquiryReg extends HttpServlet{
 		int ref=1;
 		if(type.equals("A")) ref=2; 
 		int n=InquiryDao.getInstance().insert(new InquiryVo(0, id, colnum, inqtype, title, content, ref, null));
-		if(n>0) {
-			resp.sendRedirect(req.getContextPath()+"/layout.jsp");
-		}else {
-			resp.sendRedirect(req.getContextPath()+"/layout.jsp");
-		}
-		
+		req.setAttribute("colnum", colnum);
+		req.getRequestDispatcher("/iteminfo").forward(req, resp);
+		resp.sendRedirect(req.getContextPath()+"/layout.jsp");
 	}
 }

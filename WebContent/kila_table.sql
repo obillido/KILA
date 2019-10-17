@@ -149,14 +149,15 @@ create sequence review_seq;
 
 create table inquiry
 (
-    inum number(10) primary key,
+    inum number(10),
+    lev number(10),
     id references member(id),
     colnum references color(colnum),
     inqtype number(1),
     title varchar2(100),
     content varchar2(1000),
-    ref number(10),
-    regdate date
+    regdate date,
+    primary key(inum,lev)
 );
 create sequence inquiry_seq;
 -- inqtype 문의타입
