@@ -146,7 +146,7 @@
 		               <li><a href="${cp}/header/adminpage">관리자페이지</a></li>
 		            </c:when>
 		            <c:otherwise>
-		               <li><a href="${cp}/header/mypage.jsp">마이페이지</a></li>
+		               <li><a href="${cp}/header/mypage">마이페이지</a></li>
 		            </c:otherwise>
 		         </c:choose>
 		      </c:when>

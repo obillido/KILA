@@ -24,7 +24,8 @@ public class UpdateController extends HttpServlet{
 		BuyerDao dao=new BuyerDao();
 		BuyerVo vo=dao.getInfo(id);
 		req.setAttribute("info",vo);
-		req.getRequestDispatcher("/header/update.jsp").forward(req,resp);
+		req.setAttribute("cpage", "/header/update.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,10 +44,11 @@ public class UpdateController extends HttpServlet{
 		int n2=dao2.update(vo2);
 		if(n>0 && n2>0) {
 			req.setAttribute("code","회원수정성공");
-			req.getRequestDispatcher("/header/updateSuccess.jsp").forward(req,resp);
+			req.setAttribute("cpage", "/header/updateSuccess.jsp");
 		}else {
 			req.setAttribute("code","회원수정실패");
-			req.getRequestDispatcher("/header/updateFail.jsp").forward(req,resp);
+			req.setAttribute("cpage", "/header/updateFail.jsp");
 		}
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

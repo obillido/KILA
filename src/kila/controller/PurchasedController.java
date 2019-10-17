@@ -88,7 +88,8 @@ public class PurchasedController extends HttpServlet{
 		
 		req.setAttribute("tot",tot);
 		req.setAttribute("info",list);
-		req.setAttribute("rank",rank);		
-		req.getRequestDispatcher("/header/purchased.jsp").forward(req,resp);
+		req.setAttribute("rank",rank);	
+		req.setAttribute("cpage", "/header/purchased.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 	}
 }
