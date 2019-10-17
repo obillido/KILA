@@ -22,7 +22,9 @@ public class InquiryDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select inum, lev, rpad(substr(id,0,4),length(id),'*') pid, colnum, inqtype, title, content, regdate  from inquiry where colnum=? and lev=1";
+			String sql="select inum, lev, rpad(substr(id,0,4),length(id),'*') pid, colnum, inqtype, title, content, regdate "
+					+ "from inquiry where colnum=? and lev=1 "
+					+ "order by inum desc";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();
@@ -92,4 +94,36 @@ public class InquiryDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
+	
+	public ArrayList<InquiryVo> getInfo(int inum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			con=JdbcUtil.getConn();
+			String sql="select * from inquiry where inum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,inum);
+			rs=pstmt.executeQuery();
+			ArrayList<InquiryVo> list=new ArrayList<InquiryVo>();
+			while(rs.next()){
+				list.add(new InquiryVo(
+						inum, 
+						rs.getInt("lev"), 
+						rs.getString("id"), 
+						rs.getInt("colnum"), 
+						rs.getInt("inqtype"), 
+						rs.getString("title"), 
+						rs.getString("content"), 
+						rs.getDate("regdate")));
+			}
+			return list;
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return null;
+		}finally{
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
 }

@@ -57,6 +57,11 @@
 		text-align:right;
 	}
 
+
+	.cList{
+		width:1000px;
+		border:1px solid red;
+	}
 </style>
 
 <div id="inquiry">
@@ -85,7 +90,7 @@
 	<c:choose>
 		<c:when test="${not empty inqList}">
 			<c:forEach var="vo" items="${inqList}">
-				<div id="contentList${vo.inum}" onclick="showInqContent(${vo.inum})">
+				<div id="contentList${vo.inum}" class="cList" onclick="showInqContent(${vo.inum})">
 					<c:choose>
 						<c:when test="${vo.lev=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
 						<c:when test="${vo.lev=='2'}"><span class="state" style="color:red;">완료</span></c:when>
@@ -131,20 +136,22 @@
 	function showInqContent(inum){
 		iNum=inum;
 		inqxhr=new XMLHttpRequest();
-		inqxhr.onreadystatechange=callInquiryContent;
-		inqxhr.open('get','inquiryContent.jsp?inum='+inum,true);
+		inqxhr.onreadystatechange=showInqContentOk;
+		inqxhr.open('get','productInfo/inquiry/content?inum='+inum,true);
 		inqxhr.send();
 	}
-	function callInquiryContent(){
+	function showInqContentOk(){
 		if(inqxhr.readyState==4 && inqxhr.status==200){
 			var data=inqxhr.responseXML;
-			var cl=document.getElementById("contentList"+iNum);
-			var content=data.getElementsByTagName("content");
+			var contentList=document.getElementById("contentList"+iNum);
+			var json=JSON.parse(data)[0];
 			
-			var div=document.createElement("div");
-			div.innerHTML=content;
-			div.className="inquiryContent";
-			cl.appendChild(div);
+			for(var i=0; i<json.length; i++){
+				var div=document.createElement("div");
+				div.innerHTML=json[i].content+"<br><hr>";
+				div.className="inqContent";
+				contentList.appendChild(div);
+			}
 		}
 	}
 

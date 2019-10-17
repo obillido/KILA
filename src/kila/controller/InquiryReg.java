@@ -44,7 +44,6 @@ public class InquiryReg extends HttpServlet{
 			inum=Integer.parseInt(req.getParameter("inum"));
 		}
 		int n=idao.insert(new InquiryVo(inum, lev, id, colnum, inqtype, title, content, null));
-		req.setAttribute("colnum", colnum);
-		req.getRequestDispatcher("/iteminfo").forward(req, resp);
+		resp.sendRedirect(req.getContextPath()+"/iteminfo?colnum="+colnum);
 	}
 }
