@@ -32,7 +32,7 @@
 	}
 	#inquiryList span{
 		font-size:20px;
-		margin:10px 5px;
+		margin:15px 2px;
 	}
 
 	.state{
@@ -45,22 +45,23 @@
 	}
 	.title{
 		display:inline-block;
-		width:400px; 
+		width:440px; 
 	}
 	.name{
 		display:inline-block;
-		width:120px;
+		width:130px;
 	}
 	.regdate{
 		display:inline-block;
 		width:150px;
 		text-align:right;
+		maring-right:0px;
+		padding-right:0px;
 	}
 
 
 	.cList{
 		width:1000px;
-		border:1px solid red;
 	}
 </style>
 
@@ -142,15 +143,29 @@
 	}
 	function showInqContentOk(){
 		if(inqxhr.readyState==4 && inqxhr.status==200){
-			var data=inqxhr.responseXML;
+			var data=inqxhr.responseText;
 			var contentList=document.getElementById("contentList"+iNum);
 			var json=JSON.parse(data)[0];
-			
-			for(var i=0; i<json.length; i++){
-				var div=document.createElement("div");
-				div.innerHTML=json[i].content+"<br><hr>";
-				div.className="inqContent";
-				contentList.appendChild(div);
+			var child=contentList.childNodes;
+			if(child.length<12){
+				for(var i=0; i<json.length; i++){
+					var div=document.createElement("div");
+					var str="";
+					if(i==0){
+						str="<hr><img src='/KILA/images/물음표.PNG'>"
+							+"<div class='content'>"+json[i].content+"</div>";
+					}else{
+						str="<hr><img src='/images/느낌표.PNG'>"
+							+"<div class='content'>"
+							+ json[i].regdate +"<br>"
+							+ json[i].content +"</div>"
+					}
+					div.innerHTML=str;
+					div.className="inqContent";
+					contentList.appendChild(div);
+				}
+			}else{
+				contentList.removeChild(contentList.lastChild);
 			}
 		}
 	}

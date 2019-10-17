@@ -28,6 +28,5 @@ public class InquiryContent extends HttpServlet{
 		resp.setContentType("text/plain;charset=utf-8");
 		PrintWriter pw=resp.getWriter();
 		pw.print(arr.toString());
-		System.out.println(arr.toString());
 	}
 }
