@@ -85,7 +85,7 @@
 	<c:choose>
 		<c:when test="${not empty inqList}">
 			<c:forEach var="vo" items="${inqList}">
-				<div name="contentList" onclick="showInqContent()">
+				<div name="contentList" onclick="showInqContent(${vo.ref})">
 					<c:choose>
 						<c:when test="${vo.ref=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
 						<c:when test="${vo.ref=='2'}"><span class="state" style="color:red;">완료</span></c:when>
@@ -130,7 +130,7 @@
 	function showInqContent(){
 		inqxhr=new XMLHttpRequest();
 		inqxhr.onreadystatechange=callInquiryContent;
-		inqxhr.open('get','',true);
+		inqxhr.open('get','inquiryContent.jsp?',true);
 		inqxhr.send();
 	}
 	function callInquiryContent(){

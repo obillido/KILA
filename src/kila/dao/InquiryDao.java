@@ -47,6 +47,29 @@ public class InquiryDao {
 		}
 	}
 	
+	
+	public int getMaxRef() {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select max(ref) maxRef from inquiry";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("maxRef");
+			}else {
+				return 0;
+			}
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	
 	public int insert(InquiryVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -59,7 +82,9 @@ public class InquiryDao {
 			pstmt.setInt(3, vo.getInqtype());
 			pstmt.setString(4, vo.getTitle());
 			pstmt.setString(5, vo.getContent());
-			pstmt.setInt(6, vo.getRef());
+			int ref=vo.getRef();
+			if(ref==1) ref=getMaxRef();
+			pstmt.setInt(6, ref);
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
