@@ -164,8 +164,8 @@
 	<div id="category">
 	   <ul>
 	      <li onmouseover="showProduct()" onmouseup="noProduct()">PRODUCT</li>
-	      <li><a href="" style="color:#B90000;">NEW</a></li>
-	      <li><a href="" style="color:#B90000;">BEST</a></li>
+	      <li><a href="${cp}/product/new" style="color:#B90000;">NEW</a></li>
+	      <li><a href="${cp}/product/best" style="color:#B90000;">BEST</a></li>
 	      <li><a href="${cp}/header/eventlist" style="color:#00008C;">EVENT</a></li>
 	   </ul>
 	</div>
