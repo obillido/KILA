@@ -46,11 +46,11 @@
             <td id="t6">${list.paymethod }</td>
             <td id="t7">${list.status }</td>
             <c:choose>
-         	   <c:when test="${list.status==7}">
+         	   <c:when test="${list.status=='7'}">
          	      <td id="t8">환불완료</td>
          	   </c:when>
-         	   <c:when test="${list.status!=7}">
-         	      <td id="t8"><a href="${pageContext.request.contextPath }/header/confirmOrder?paynum=${list.paynum}">환불요청 접수하기</a></td>
+         	   <c:when test="${list.status!='7'}">
+         	      <td id="t8"><a href="${pageContext.request.contextPath }/header/confirmRefund?paynum=${list.paynum}">환불요청 접수하기</a></td>
          	   </c:when>
          	</c:choose>
          </tr>

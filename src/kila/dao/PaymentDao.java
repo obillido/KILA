@@ -173,7 +173,7 @@ public class PaymentDao {
 		ArrayList<PaymentVo> list=new ArrayList<PaymentVo>();
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select * from payment where status>=11";
+			String sql="select * from payment where status>=11 or status=7";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -193,6 +193,21 @@ public class PaymentDao {
 			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
+		}
+	}public int confirmRefund(int paynum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="update payment set status=7 where paynum=? and status>=11";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,paynum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
 		}
 	}
 }
