@@ -133,6 +133,7 @@
 <div style="text-align: center; display: inline-block;">
 <br>
 <br>
+<br>
 <div>
 <div style="width: 400px;height: 500px; float: left;">
 <img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="width: 350px;height: 400px" onmouseover="zoomup()" onmouseout="zoomdown()">
