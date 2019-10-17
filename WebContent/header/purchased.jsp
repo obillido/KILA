@@ -5,7 +5,7 @@
 
 <style type="text/css">
     *{margin:0px;padding:0px;}
-    #div{padding:200px 0px 0px 350px;}
+    #div{padding:200px 0px 0px 600px;}
     #div h2{text-align:center;margin-right:350px;}
     #div hr{margin-right:325px;}
     #t1{width:200px;height:30px;}

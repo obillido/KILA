@@ -210,4 +210,119 @@ public class PaymentDao {
 			JdbcUtil.close(con,pstmt,null);
 		}
 	}
+	public int getPrice(int pnum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select price " + 
+					   "from product_name " + 
+					   "where pcode=(select pcode " + 
+					   "             from color " + 
+					   "             where colnum=(select colnum from product where pnum=?)" + 
+					   "             )";
+				
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,pnum);
+			rs=pstmt.executeQuery();
+			int price=0;
+			if(rs.next()) {
+				price=rs.getInt("price");
+			}
+			return price;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return 0;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	public ArrayList<PaymentVo> getAll(){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<PaymentVo> list=new ArrayList<PaymentVo>();
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from payment";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				int paynum=rs.getInt("paynum");
+				String bid=rs.getString("bid");
+				int pnum=rs.getInt("pnum");
+				int cnt=rs.getInt("cnt");
+				Date paydate=rs.getDate("paydate");
+				int status=rs.getInt("status");
+				String paymethod=rs.getString("paymethod");
+				if(status==4) {
+					PaymentVo vo=new PaymentVo(paynum,bid,pnum,cnt,paydate,status,paymethod);
+					list.add(vo);
+				}
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	public ArrayList<PaymentVo> getPeriodRev(String startdate,String enddate) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<PaymentVo> list=new ArrayList<PaymentVo>();
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from payment where paydate between to_date(?,'YYMMDD') and to_date(?,'YYMMDD')";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,startdate);
+			pstmt.setString(2,enddate);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				int paynum=rs.getInt("paynum");
+				String bid=rs.getString("bid");
+				int pnum=rs.getInt("pnum");
+				int cnt=rs.getInt("cnt");
+				Date paydate=rs.getDate("paydate");
+				int status=rs.getInt("status");
+				String paymethod=rs.getString("paymethod");
+				if(status==4) {
+					PaymentVo vo=new PaymentVo(paynum,bid,pnum,cnt,paydate,status,paymethod);
+					list.add(vo);
+				}
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	public int getCnt(int pnum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select cnt from payment where status=4 and pnum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,pnum);
+			rs=pstmt.executeQuery();
+			int cntSum=0;
+			while(rs.next()) {
+				int cnt=rs.getInt("cnt");
+				cntSum+=cnt;
+			}
+			return cntSum;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return 0;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
 }
