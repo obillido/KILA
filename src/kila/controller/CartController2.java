@@ -19,6 +19,8 @@ public class CartController2 extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		String cmd=req.getParameter("cmd");
+		if(cmd==null) {
 		HttpSession session=req.getSession();
 		int paynum=Integer.parseInt(String.valueOf(session.getAttribute("paynum")));
 		String id=(String)session.getAttribute("id");
@@ -29,5 +31,15 @@ public class CartController2 extends HttpServlet{
 		req.setAttribute("vo", vo);
 		req.setAttribute("vo2", vo2);
 		req.getRequestDispatcher("/kimyungi/result3.jsp").forward(req, resp);
+		}else if(cmd.equals("cartaction")){
+			String[] paynum=(req.getParameterValues("paynum"));
+			CartDao dao=CartDao.getInstance();
+			int n=dao.delete2(paynum);
+			if(n>0) {
+				resp.sendRedirect(req.getContextPath()+"/kila/cart");
+			}else {
+				resp.sendRedirect(req.getContextPath()+"/layout.jsp");
+			}
+		}
 	}
 }

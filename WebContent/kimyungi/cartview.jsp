@@ -25,8 +25,7 @@
 <div style="text-align: center">
 <h2>SHOPPING BAG</h2>
 <h5>* 카트에 담긴 상품은 품절시 관리자에 의해 삭제될 수 있습니다. 주의하세요!</h5>
-<form method="post" action="${pageContext.request.contextPath }/kila/cart">
-<input type="hidden" name="cmd" value="cartaction">
+<form method="post" action="${pageContext.request.contextPath }/kila/cart?cmd=cartaction">
 <table style="display: inline-block;">
 	<tr style="background-color: skyblue;">
 		<th width="40"></th><th width="300">상품정보</th><th width="120">수량</th>
@@ -44,6 +43,6 @@
 		<h1 style="display: inline-block;">총 결제금액:</h1> <input type="text" id="hap" value=0 readonly="readonly" style="font-size: 30px; width: 120px; color: red; border: hidden; background-color: skyblue;"></th>
 	</tr>
 </table><br><br>
-	<input type="submit" style="width: 150px; height: 50px; background-color: red; color: white; margin-right: 20px" value="선택상품삭제" ><input type="button" style="width: 150px; height: 50px; background-color: black; color: white; margin-right: 20px" value="선택상품구매"><input type="button" style="width: 150px; height: 50px; background-color: white; color: black;" onclick="gohome()" value="쇼핑계속하기">
+	<input type="submit" style="width: 150px; height: 50px; background-color: red; color: white; margin-right: 20px" value="선택상품삭제" ><input type="submit" style="width: 150px; height: 50px; background-color: black; color: white; margin-right: 20px" value="선택상품구매" formaction="${pageContext.request.contextPath }/kila/cart?cmd=cartaction2"><input type="button" style="width: 150px; height: 50px; background-color: white; color: black;" onclick="gohome()" value="쇼핑계속하기">
 	</form>
 </div>
