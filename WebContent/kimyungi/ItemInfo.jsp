@@ -140,7 +140,7 @@
 
 
 	
-<jsp:include page="/content/inquiry.jsp"/>
+<jsp:include page="/content/inquiry/inquiry.jsp"/>
 </div>
 
 	

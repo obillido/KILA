@@ -26,34 +26,35 @@
 		margin-bottom:10px;
 	}
 	
+	
 	#inquiryList{
-		text-align:center;
+		text-align:left;
 	}
-	
-	
-	#contentList span{
-		display:inline-block;
-		font-size:30px;
+	#inquiryList span{
+		font-size:20px;
+		margin:10px 5px;
 	}
+
 	.state{
 		display:inline-block;
 		width:100px;
 	}
 	.inqtype{
 		display:inline-block;
-		width:100px;
+		width:130px;
 	}
 	.title{
 		display:inline-block;
-		width:200px; 
+		width:400px; 
 	}
 	.name{
 		display:inline-block;
-		width:100px;
+		width:120px;
 	}
 	.regdate{
 		display:inline-block;
-		width:100px;
+		width:150px;
+		text-align:right;
 	}
 
 </style>
@@ -84,7 +85,7 @@
 	<c:choose>
 		<c:when test="${not empty inqList}">
 			<c:forEach var="vo" items="${inqList}">
-				<div name="contentList">
+				<div name="contentList" onclick="showInqContent()">
 					<c:choose>
 						<c:when test="${vo.ref=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
 						<c:when test="${vo.ref=='2'}"><span class="state" style="color:red;">완료</span></c:when>
@@ -101,6 +102,7 @@
 					<span class="name">${vo.id}</span>
 					<span class="regdate">${vo.regdate}</span>
 				</div>
+				<hr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
@@ -121,6 +123,20 @@
 			alert("로그인 후 이용가능합니다.");
 		}else{
 			location.href="/KILA/inquiry/registration?colnum="+colnum;
+		}
+	}
+	
+	var inqxhr=null;
+	function showInqContent(){
+		inqxhr=new XMLHttpRequest();
+		inqxhr.onreadystatechange=callInquiryContent;
+		inqxhr.open('get','',true);
+		inqxhr.send();
+	}
+	function callInquiryContent(){
+		if(inqxhr.readyState==4 && inqxhr.status==200){
+			var data=inqxhr.responseXML;
+			
 		}
 	}
 

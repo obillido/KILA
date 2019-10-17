@@ -22,7 +22,7 @@ public class InquiryDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select * from inquiry where colnum=?";
+			String sql="select inum, rpad(substr(id,0,4),length(id),'*') pid, colnum, inqtype, title, content, ref, regdate  from inquiry where colnum=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();
@@ -30,7 +30,7 @@ public class InquiryDao {
 			while(rs.next()) {
 				list.add(new InquiryVo(
 						rs.getInt("inum"), 
-						rs.getString("id"), 
+						rs.getString("pid"), 
 						rs.getInt("colnum"), 
 						rs.getInt("inqtype"), 
 						rs.getString("title"), 
