@@ -1,5 +1,6 @@
 package kila.dao;
 
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -8,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
-
 import kila.vo.PaymentVo;
 
 public class PaymentDao {
@@ -166,16 +166,24 @@ public class PaymentDao {
 			JdbcUtil.close(con,pstmt,null);
 		}
 	}
-	public ArrayList<PaymentVo> getRefundList() {
+
+	public ArrayList<PaymentVo> getRefundList(int startRow,int endRow){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		ArrayList<PaymentVo> list=new ArrayList<PaymentVo>();
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select * from payment where status>=11 or status=7";
+			String sql="select * from(" + 
+				    "   select aa.*,rownum rnum from(" + 
+					"      select * from payment where status>=11 or status=7 order by paynum desc" + 
+					"   ) aa" + 
+					")where rnum>=? and rnum<=?";
 			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,startRow);
+			pstmt.setInt(2,endRow);
 			rs=pstmt.executeQuery();
+			
 			while(rs.next()) {
 				int paynum=rs.getInt("paynum");
 				String bid=rs.getString("bid");
@@ -194,7 +202,9 @@ public class PaymentDao {
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
 		}
-	}public int confirmRefund(int paynum) {
+	}
+	
+	public int confirmRefund(int paynum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
@@ -323,6 +333,27 @@ public class PaymentDao {
 			return 0;
 		}finally {
 			JdbcUtil.close(con,pstmt,null);
+		}
+	}
+	public int getRefundCnt() { //전체 환불요청건의 갯수 구하기
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select nvl(count(*),0) cnt from payment where status=7 or status>=11";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				int cnt=rs.getInt(1);
+				return cnt;
+			}
+			return 0;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
 }
