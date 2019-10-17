@@ -4,6 +4,7 @@
 <style type="text/css">    
     *{margin:0px;padding:0px;}
     #div{padding:200px 0px 0px 350px;}
+    #div2{padding:200px 0px 0px 900px;}
     #div h2{text-align:center;margin-right:350px;}
     #div hr{margin-right:325px;}
     #t1{width:30px;height:30px;}
@@ -56,4 +57,34 @@
          </tr>
       </c:forEach>
    </table>
+</div>
+
+
+<div id="div2">
+   <c:choose>
+	   <c:when test="${startPageNum>5 }">
+		   <a href="${cp }/header/refundPaging?pageNum=${startPageNum-1 }&field=${field}&keyword=${keyword}">[이전]</a>
+	   </c:when>
+	   <c:otherwise>
+		    이전
+	   </c:otherwise>
+   </c:choose>
+   <c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+      <c:choose>
+         <c:when test="${pageNum==i }">
+            <a href="${cp }/header/refundPaging?pageNum=${i}&field=${field}&keyword=${keyword}"><span style="color:red;">[${i }]</span></a>
+         </c:when>
+         <c:otherwise>
+            <a href="${cp }/header/refundPaging?pageNum=${i}&field=${field}&keyword=${keyword}"><span style="color:black;">[${i }]</span></a>
+         </c:otherwise>
+      </c:choose>
+   </c:forEach>
+   <c:choose>
+	   <c:when test="${endPageNum<pageCount}">
+		   <a href="${cp }/header/refundPaging?pageNum=${endPageNum+1 }&field=${field}&keyword=${keyword}">[다음]</a>
+	   </c:when>
+	   <c:otherwise>
+		   다음
+	   </c:otherwise>
+   </c:choose>
 </div>

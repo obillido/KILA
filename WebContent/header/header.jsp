@@ -146,8 +146,6 @@
 		         <li><a href="${cp}/header/login">로그인</a></li>
 		      </c:otherwise>
 		   </c:choose>
-		   <li><a href="${cp}/header/center">고객센터</a></li>
-		   <li><a href="${cp}/header/shopping">주문배송</a></li>
 			<li><a href="${cp}/kila/cart">장바구니</a></li>
 		</ul>
 		</div>
