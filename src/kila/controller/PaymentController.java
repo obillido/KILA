@@ -25,18 +25,7 @@ public class PaymentController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String cmd=req.getParameter("cmd");
-		if(cmd.equals("cart")) {
-			int paynum=Integer.parseInt(req.getParameter("paynum"));
-			String paymethod = req.getParameter("paymethod");
-			System.out.println(paymethod);
-			CartDao dao=CartDao.getInstance();
-			int n=dao.cpayment(paynum, paymethod);
-			if(n>0) {
-				resp.sendRedirect(req.getContextPath()+"/layout.jsp");
-			}else {
-				req.getRequestDispatcher("/kimyungi/result3.jsp").forward(req, resp);
-			}
-		}else {
+		if(cmd.equals("insert")) {
 			int colnum=Integer.parseInt(req.getParameter("scolnum"));
 			int psize=Integer.parseInt(req.getParameter("spsize"));
 			int cnt=Integer.parseInt(req.getParameter("pcnt"));
@@ -51,6 +40,17 @@ public class PaymentController extends HttpServlet{
 			req.setAttribute("psize",psize);
 			req.setAttribute("cnt", cnt);
 			req.getRequestDispatcher("/kimyungi/result.jsp").forward(req,resp);
+		}else if(cmd.equals("cart")) {
+			int paynum=Integer.parseInt(req.getParameter("paynum"));
+			String paymethod = req.getParameter("paymethod");
+			System.out.println(paymethod);
+			CartDao dao=CartDao.getInstance();
+			int n=dao.cpayment(paynum, paymethod);
+			if(n>0) {
+				resp.sendRedirect(req.getContextPath()+"/layout.jsp");
+			}else {
+				req.getRequestDispatcher("/kimyungi/result3.jsp").forward(req, resp);
+			}
 		}
 	}
 }
