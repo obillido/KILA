@@ -19,6 +19,7 @@ public class EventDetailController extends HttpServlet{
 		EventDao dao=new EventDao();
 		EventVo vo=dao.detail(num);
 		req.setAttribute("vo",vo);
-		req.getRequestDispatcher("/header/eventDetail.jsp").forward(req,resp);
+		req.setAttribute("cpage", "/header/eventDetail.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 	}
 }

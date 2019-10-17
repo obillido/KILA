@@ -3,13 +3,12 @@
 
 <style type="text/css">
     *{margin:0px;padding:0px;}
-    #footer{#aaaaaa;padding:620px 0px 0px 450px;}
+    #footer{#aaaaaa;clear: both; text-align:center;margin-top:100px;}
     #footer li{list-style:none;display:inline-block;
                margin-right:10px;color:#a0a0a0;font-size:0.8em;font-family:Verdana,"고딕";}
-    #u2{margin-left:150px;}
-    #u3{margin-left:200px;}
-    #u4{color:#282828;margin-left:250px;}   
-    #a{margin-right:510px;}
+    #u2{margin-left:10px;}
+    #u3{margin-left:20px;}
+    #u4{color:#282828;margin-left:30px;}   
 </style>
 
 <div id="footer">
