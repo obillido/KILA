@@ -29,6 +29,8 @@
 	
 	#inquiryList{
 		text-align:left;
+		width:100%;
+		min-width:1000px;
 	}
 	#inquiryList span{
 		font-size:20px;
@@ -61,7 +63,48 @@
 
 
 	.cList{
+		width:100%;
+	}
+	
+	.inqContent{
 		width:1000px;
+		min-height:80px;
+		background-color:#f0f0f0;
+		border:1px solid #d3d3d3;
+		overflow:auto;
+	}
+	.inqContent img{
+		display:inline-block;
+		width:40px;
+		margin:20px 50px 20px 20px;
+		float:left;
+	}
+	.content{
+		float:left;
+		display:inline-block;
+		width:850px;
+		margin:10px;
+		line-height:30px;
+	}
+	.inqContent input[type=button]{
+		width:100px; height:35px;
+		font-size:15px;
+	}
+
+	.replyForm{
+		text-align:center;
+	}
+	.replyForm textarea{
+		margin-top:30px;
+		width:600px;
+		height:250px;
+		font-size:15px;
+	}
+	.replyForm input[type=submit]{
+		width:100px; height:35px;
+		font-size:15px;
+		margin-right:30px;
+		margin-bottom:10px;
 	}
 </style>
 
@@ -91,24 +134,27 @@
 	<c:choose>
 		<c:when test="${not empty inqList}">
 			<c:forEach var="vo" items="${inqList}">
-				<div id="contentList${vo.inum}" class="cList" onclick="showInqContent(${vo.inum})">
-					<c:choose>
-						<c:when test="${vo.lev=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
-						<c:when test="${vo.lev=='2'}"><span class="state" style="color:red;">완료</span></c:when>
-					</c:choose>
-					<span class="inqtype">
+				<div id="contentList${vo.inum}" class="cList">
+					<div  onclick="showInqContent(${vo.inum},'${type}')">
 						<c:choose>
-							<c:when test="${vo.inqtype=='1'}">사이즈</c:when>
-							<c:when test="${vo.inqtype=='2'}">배송</c:when>
-							<c:when test="${vo.inqtype=='3'}">재입고</c:when>
-							<c:when test="${vo.inqtype=='4'}">기타</c:when>
+							<c:when test="${vo.lev=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
+							<c:when test="${vo.lev=='2'}"><span class="state" style="color:red;">완료</span></c:when>
 						</c:choose>
-					</span>
-					<span class="title">${vo.title}</span>
-					<span class="name">${vo.id}</span>
-					<span class="regdate">${vo.regdate}</span>
+						<span class="inqtype">
+							<c:choose>
+								<c:when test="${vo.inqtype=='1'}">사이즈</c:when>
+								<c:when test="${vo.inqtype=='2'}">배송</c:when>
+								<c:when test="${vo.inqtype=='3'}">재입고</c:when>
+								<c:when test="${vo.inqtype=='4'}">기타</c:when>
+							</c:choose>
+						</span>
+						<span class="title">${vo.title}</span>
+						<span class="name">${vo.id}</span>
+						<span class="regdate">${vo.regdate}</span>
+					</div>
 				</div>
 				<hr>
+				<div style="clear:both;"></div>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
@@ -132,10 +178,14 @@
 		}
 	}
 	
+
+	
+	
 	var inqxhr=null;
-	var iNum;
-	function showInqContent(inum){
+	var iNum, mtype;
+	function showInqContent(inum,type){
 		iNum=inum;
+		mtype=type;
 		inqxhr=new XMLHttpRequest();
 		inqxhr.onreadystatechange=showInqContentOk;
 		inqxhr.open('get','productInfo/inquiry/content?inum='+inum,true);
@@ -147,15 +197,19 @@
 			var contentList=document.getElementById("contentList"+iNum);
 			var json=JSON.parse(data)[0];
 			var child=contentList.childNodes;
-			if(child.length<12){
+			if(child.length<4){
 				for(var i=0; i<json.length; i++){
 					var div=document.createElement("div");
 					var str="";
 					if(i==0){
-						str="<hr><img src='/KILA/images/물음표.PNG'>"
-							+"<div class='content'>"+json[i].content+"</div>";
+						str="<img src='/KILA/images/questionmark.png'>"
+							+"<div class='content'>"+json[i].content+"<br>";
+						if(mtype=="A" && json.length==1){
+							str+="<div style='text-align:right'><input type='button' value='답글달기' onclick='showReplyForm("+iNum+")'></div>";
+						}
+						str+="</div>";
 					}else{
-						str="<hr><img src='/images/느낌표.PNG'>"
+						str+="<img src='/KILA/images/exclamationmark.png'>"
 							+"<div class='content'>"
 							+ json[i].regdate +"<br>"
 							+ json[i].content +"</div>"
@@ -165,12 +219,47 @@
 					contentList.appendChild(div);
 				}
 			}else{
-				contentList.removeChild(contentList.lastChild);
+				while(contentList.childNodes.length>=3){
+					contentList.removeChild(contentList.lastChild);
+				}
 			}
 		}
 	}
-
+	
+	
+	
+	function Request(){
+		var requestParam ="";
+		this.getParameter = function(param){
+			var url = unescape(location.href);
+			var paramArr = (url.substring(url.indexOf("?")+1,url.length)).split("&");
+			for(var i = 0 ; i < paramArr.length ; i++){
+				var temp = paramArr[i].split("="); //파라미터 변수명을 담음
+				if(temp[0].toUpperCase() == param.toUpperCase()){
+					requestParam = paramArr[i].split("=")[1];
+					break;
+				}
+			}
+		return requestParam;
+		}
+	}
+	
+	
+	function showReplyForm(inum){
+		var contentList=document.getElementById("contentList"+inum);
+		var child=contentList.childNodes;
+		if(child.length<5){
+			var request=new Request();
+			var colnum=request.getParameter("colnum");
+			var div=document.createElement("div");
+			div.innerHTML="<form method='post' action='/KILA/inquiry/registration'><textarea name='content'></textarea><br>"
+						+"<input type='hidden' name='inum' value='"+inum+"'>"
+						+"<input type='hidden' name='colnum' value='"+colnum+"'>"
+						+"<div style='text-align:right;'><input type='submit' value='답변완료'></div></form>";
+			div.className="replyForm";
+			contentList.appendChild(div);
+		}
+	}
 </script>
-
 
 

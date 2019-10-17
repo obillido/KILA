@@ -22,8 +22,10 @@ public class InquiryDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select inum, lev, rpad(substr(id,0,4),length(id),'*') pid, colnum, inqtype, title, content, regdate "
-					+ "from inquiry where colnum=? and lev=1 "
+			
+			String sql="select inquiry.inum, ml, rpad(substr(id,0,4),length(id),'*') pid, colnum, inqtype, title, content, regdate " 
+					+ "from inquiry, (select inum, max(lev) ml from inquiry group by inum) ii "
+					+ "where colnum=? and inquiry.inum=ii.inum and inquiry.lev=1 "
 					+ "order by inum desc";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
@@ -32,7 +34,7 @@ public class InquiryDao {
 			while(rs.next()) {
 				list.add(new InquiryVo(
 						rs.getInt("inum"), 
-						rs.getInt("lev"),
+						rs.getInt("ml"),
 						rs.getString("pid"), 
 						rs.getInt("colnum"), 
 						rs.getInt("inqtype"), 
