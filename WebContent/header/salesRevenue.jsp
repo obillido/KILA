@@ -12,16 +12,17 @@ function getTotRev(){
 	var span=document.getElementById("getTotRev");
 	span.innerHTML="총 매출은 " + ${tot} + "입니다.";
 }
+
+
 window.onload=function(){
+	if(${tot3!=null}){     
+	var span=document.getElementById("getProductRev");
+	span.innerHTML="설정한 상품별 매출은 " + ${tot3} + "입니다.";
+	}
+	
 	if(${tot2!=null}){
 	var span=document.getElementById("getPeriodRev");
 	span.innerHTML="설정한 기간별 매출은 " + ${tot2} + "입니다.";
-	}
-}
-window.onload=function(){
-	if(${tot3!=null}){
-	var span=document.getElementById("getProductRev");
-	span.innerHTML="설정한 상품별 매출은 " + ${tot3} + "입니다.";
 	}
 }
 </script>

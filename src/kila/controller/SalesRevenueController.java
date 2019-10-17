@@ -67,6 +67,7 @@ public class SalesRevenueController extends HttpServlet{
 			sum2=price*cnt;
 			tot2+=sum2;	
 		}
+		
     	req.setAttribute("tot2",tot2);
 		req.setAttribute("cpage", "/header/salesRevenue.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req,resp);

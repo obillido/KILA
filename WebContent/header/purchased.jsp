@@ -8,11 +8,12 @@
     #div{padding:200px 0px 0px 600px;}
     #div h2{text-align:center;margin-right:350px;}
     #div hr{margin-right:325px;}
-    #t1{width:200px;height:30px;}
+    #div h4{margin-right:200px;}
+    #t1{width:100px;height:30px;}
     #t2{width:30px;height:30px;}
     #t3{width:40px;height:30px;}
     #t4{width:40px;height:30px;}
-    #t5{width:100px;height:30px;}
+    #t5{width:30px;height:30px;}
     #t6{width:50px;height:30px;}
     #t7{width:50px;height:30px;}
     #t6 a{text-decoration:none;color:black;}
@@ -25,7 +26,8 @@
 
 <div id="div">
    <hr>
-   <h2>[ 구매내역 ]</h2>
+   <h2>- [ ${rank} ] 회원님의 구매내역 -</h2>
+   <h4>총 구매금액은 ${tot} 입니다.</h4>
    <hr><br>
    <table border="2" width="80%">
       <tr id="firstline">

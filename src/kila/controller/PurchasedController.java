@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kila.dao.PaymentDao;
+import kila.dao.RankDao;
 import kila.vo.MyPaymentVo;
 import kila.vo.PaymentVo;
+import kila.vo.SetRankVo;
 
 @WebServlet("/header/purchased")
 public class PurchasedController extends HttpServlet{
@@ -57,7 +59,36 @@ public class PurchasedController extends HttpServlet{
 			mpv=new MyPaymentVo(paynum, pname, cnt, paydate, paymethod, str);
 			list.add(mpv);
 		}
+		
+		RankDao rdao=new RankDao();
+		ArrayList<SetRankVo> rlist=rdao.getInfo(id);
+		int cnt=0;
+		int price=0;
+		int cntByprice=0;
+		int tot=0;
+		for(int i=0;i<rlist.size();i++) {
+			int pnum=rlist.get(i).getPnum();
+			cnt=rlist.get(i).getCnt();
+			price=dao.getPrice(pnum);
+			cntByprice=cnt*price;
+			tot+=cntByprice;
+		}
+		String rank=null;
+		if(tot>=0 && tot<200000) {
+			rank="Welcome";
+		}else if(tot>=200000 && tot<500000) {
+			rank="Silver";
+		}else if(tot>=500000 && tot<1000000) {
+			rank="Gold";
+		}else if(tot>=1000000 && tot<2000000) {
+			rank="VIP";
+		}else if(tot>=2000000 && tot<100000000) {
+			rank="VVIP";
+		}
+		
+		req.setAttribute("tot",tot);
 		req.setAttribute("info",list);
+		req.setAttribute("rank",rank);		
 		req.getRequestDispatcher("/header/purchased.jsp").forward(req,resp);
 	}
 }
