@@ -45,7 +45,7 @@ public class ProductInfoDao {
 	
 
 	
-	public ArrayList<ProductInfoVo> getListC(int startRow, int endRow, String category, int order, String colorVal, String sizeVal, String priceVal, String div){
+	public ArrayList<ProductInfoVo> getList(int startRow, int endRow, String category, int order, String colorVal, String sizeVal, String priceVal, String div){
 		Connection con=null;
 		PreparedStatement pstmt1=null;
 		PreparedStatement pstmt2=null;
@@ -112,6 +112,7 @@ public class ProductInfoDao {
 						"where scnt>0 and pn.pcode=color.pcode and cc.cl=color.colnum "+cwhere+owhere+colorwhere+sizewhere+pricewhere+
 						"order by "+orderby+", color) aa " +
 						") where rnum between ? and ?";
+			System.out.println(sql);
 			pstmt1=con.prepareStatement(sql);
 			pstmt1.setInt(1, startRow);
 			pstmt1.setInt(2, endRow);

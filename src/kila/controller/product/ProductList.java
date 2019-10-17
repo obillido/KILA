@@ -85,7 +85,7 @@ public class ProductList extends HttpServlet{
 		}
 		
 		
-		ArrayList<ProductInfoVo> list=dao.getListC(startRow,endRow,category,order,colorVal,sizeVal,priceVal,div);
+		ArrayList<ProductInfoVo> list=dao.getList(startRow,endRow,category,order,colorVal,sizeVal,priceVal,div);
 		
 		
 		req.setAttribute("category", category);

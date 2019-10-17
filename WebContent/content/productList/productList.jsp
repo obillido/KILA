@@ -6,7 +6,9 @@
 	#content{
 		width:100%;
 		min-width:1220px;
-		text-align:left;
+		text-align:center;
+		margin:0 auto;
+		align-items:center;
 	}
 	
 	#categoryList{
@@ -14,6 +16,7 @@
 		width:130px;
 		padding:10px 30px;
 		line-height:30px;
+		text-align:left;
 	}
 	#categoryList a{
 		padding-left:10px;
@@ -31,6 +34,7 @@
 	#productList{
 		float:left;
 		width:970px;
+		text-align:left;
 	}
 	
 	

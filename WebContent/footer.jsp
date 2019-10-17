@@ -3,7 +3,16 @@
 
 <style type="text/css">
     *{margin:0px;padding:0px;}
-    #footer{#aaaaaa;clear: both; text-align:center;margin-top:100px;}
+    #footer{
+    	#aaaaaa;
+    	clear: both; 
+    	text-align:center;
+    	margin-top:100px;
+    	min-width:1000px;
+    }
+    #footer hr{
+    	
+    }
     #footer li{list-style:none;display:inline-block;
                margin-right:10px;color:#a0a0a0;font-size:0.8em;font-family:Verdana,"고딕";}
     #u2{margin-left:10px;}
@@ -12,7 +21,7 @@
 </style>
 
 <div id="footer">
-    <hr id="a">
+	<hr>
 	<ul id="u1">
 	   <li>서울시 강동구 천호대로 1077 이스트센트럴타워 16층 휠라코리아(주)</li>  
 	   <li>대표이사 윤근창</li>
