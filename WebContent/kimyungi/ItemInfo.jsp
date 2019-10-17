@@ -38,12 +38,14 @@
 	}
 	function rinsert(id){
 		if(id==""){
-			alert("회원만 리뷰가 가능합니다.");
+			alert("회원만 리뷰가 가능합니다. 그러므로 로그인");
+			location.href="/KILA/header/login";
 		}
 	}
 	function logcheck(id){
 		if(id==""){
-			alert("로그인을 해주셔야 결제가 가능합니다.");
+			alert("회원만 구매 및 장바구니 이용이 가능합니다. 그러므로 로그인");
+			location.href="/KILA/header/login";
 			return false;
 		}else{
 			return true;
@@ -84,7 +86,7 @@
 </div>
 <div>
 <span style="font-size: 15px">REVIEW | 문의글 혹은 악의적인 비방글은 무통보 삭제된다는 점 유의해주세요^^</span><br>
-<textarea rows="10" cols="93"onKeyUp="javascript:fnChkByte(this,'500')" <%if(session.getAttribute("id")==null) {%> disabled="disabled"<%} %>></textarea>
+<textarea rows="10" cols="93"onKeyUp="javascript:fnChkByte(this,'500')" onkeypress="rinsert('${id}')" onclick="rinsert('${id}')"></textarea>
  <br><c:forEach begin="1" end="105">&nbsp</c:forEach><span id="byteInfo">0</span>/500bytes<br>
  <select style="width: 450px; height: 35px; font-size: 20px; display: inline-block;">
  	<option value="5">★★★★★아주 좋아요!</option>
