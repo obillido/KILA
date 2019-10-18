@@ -8,11 +8,12 @@
     	clear: both; 
     	text-align:center;
     	margin-top:100px;
-    	min-width:1000px;
+		width:100%;
     }
-    #footer hr{
-    	
-    }
+	#footer #inner{
+		display:inline-block;
+		width:1500px;
+	}
     #footer li{list-style:none;display:inline-block;
                margin-right:10px;color:#a0a0a0;font-size:0.8em;font-family:Verdana,"고딕";}
     #u2{margin-left:10px;}
@@ -21,6 +22,7 @@
 </style>
 
 <div id="footer">
+	<div id="inner">
 	<hr>
 	<ul id="u1">
 	   <li>서울시 강동구 천호대로 1077 이스트센트럴타워 16층 휠라코리아(주)</li>  
@@ -40,4 +42,5 @@
 	<ul id="u4">
 	   <li>COPYRIGHT C 2019. FILA KOREA. CO.,LTD. ALL RIGHTS RESERVED.</li>
 	</ul>
+	</div>
 </div>

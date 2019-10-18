@@ -20,6 +20,7 @@ public class ProductRegi extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cmd=req.getParameter("cmd");
 		if(cmd.equals("old")) {
+			
 			req.setAttribute("cpage", "/admin/productRegiAdd.jsp");
 		}else {
 			req.setAttribute("cpage", "/admin/productRegi.jsp");

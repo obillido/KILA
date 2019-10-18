@@ -5,15 +5,17 @@
 <style type="text/css">
 	#content{
 		width:100%;
-		min-width:1220px;
 		text-align:center;
-		margin:0 auto;
-		align-items:center;
+		margin-top:50px;		
+	}
+	#content #inner{
+		display:inline-block;
+		width:1200px;
 	}
 	
 	#categoryList{
 		float:left;
-		width:130px;
+		width:150px;
 		padding:10px 30px;
 		line-height:30px;
 		text-align:left;
@@ -69,7 +71,7 @@
 		float:left;
 		line-height:50px;
 		border:2px solid grey;
-		margin:10px 25px;
+		margin:15px 25px;
 	}
 	#searchWindow label{
 		display:inline-block;
@@ -143,7 +145,9 @@
 <c:set var="cplist" value="${pageContext.request.contextPath}/product/list"/>
 
 <div id="content">
-
+	<div id="inner">
+	
+	
 	<div id="categoryList">
 		<h1>카테고리</h1>
 		<br>
@@ -308,6 +312,9 @@
 	
 	</div>
 
+
+
+	</div>
 </div>
 
 
