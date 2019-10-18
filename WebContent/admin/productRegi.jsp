@@ -10,6 +10,7 @@
 <style type="text/css">
 	#content{
 		width:100%;
+		clear:both;text-align:center;
 	}
 
 	label{

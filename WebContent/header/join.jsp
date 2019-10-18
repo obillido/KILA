@@ -148,27 +148,30 @@ function signup(){
 
 <style type="text/css">
     *{margin:0px;padding:0px;}
-    #div{padding:200px 0px 0px 800px;}
-    #btn1{background-color:white;color:black;border:1px solid black;}
-    #btn2{background-color:white;color:black;margin-left:235px;margin-top:20px;border:1px solid black;}
+    #div{clear:both;margin-top:100px;}
+    #btn1{background-color:#5A5AFF;color:white;border:2px solid #CBFF75;height:30px;width:70px;}
+    #btn2{background-color:#5A5AFF;color:white;margin-left:1090px;margin-top:20px;border:2px solid #CBFF75;height:30px;width:70px;}
+    input[type=text]{width:200px;height:20px;background-color:#C8FFFF;}
+    input[type=password]{width:200px;height:20px;background-color:#C8FFFF;}
+    span[name=align]{width:150px;display:inline-block;margin-left:800px;}
 </style>
 
 <div id="div">
 <form method="post" action="${pageContext.request.contextPath }/header/join" onsubmit="signup()">
-   아이디 <input type="text" name="id" id="id">
+   <span name="align">아이디 </span><input type="text" name="id" id="id">
    <input type="button" value="중복검사" onclick="checkId()" id="btn1">
    <span id="checkId" style="color:red;font-size:12px"></span><br>
-   비밀번호 <input type="password" name="pwd" id="pwd" onkeyup="checkPwd()">
+   <span name="align">비밀번호 </span><input type="password" name="pwd" id="pwd" onkeyup="checkPwd()">
    <span id="checkPwd" style="color:red;font-size:12px"></span><br>
-   비밀번호 확인<input type="password" id="chkPwd" onkeyup="checkPwd2()">
+   <span name="align">비밀번호 확인 </span><input type="password" id="chkPwd" onkeyup="checkPwd2()">
    <span id="checkPwd2" style="color:red;font-size:12px"></span><br>
-   이름 <input type="text" name="name" id="name" onkeyup="checkName()">
+   <span name="align">이름 </span><input type="text" name="name" id="name" onkeyup="checkName()">
    <span id="checkName" style="color:red;font-size:12px"></span><br>
-   전화번호 <input type="text" name="phone" id="phone" onkeyup="checkPhone()">
+   <span name="align">전화번호 </span><input type="text" name="phone" id="phone" onkeyup="checkPhone()">
    <span id="checkPhone" style="color:red;font-size:12px"></span><br>
-   주소 <input type="text" name="addr" id="addr" onkeyup="checkAddr()">
+   <span name="align">주소 </span><input type="text" name="addr" id="addr" onkeyup="checkAddr()">
    <span id="checkAddr" style="color:red;font-size:12px"></span><br>
-   이메일 <input type="text" name="email" id="email" onkeyup="checkEmail()">
+   <span name="align">이메일 </span><input type="text" name="email" id="email" onkeyup="checkEmail()">
    <span id="checkEmail" style="color:red;font-size:12px"></span><br>
    <input type="submit" value="회원가입" id="btn2">
 </form>

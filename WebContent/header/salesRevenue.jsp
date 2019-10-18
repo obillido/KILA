@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<style type="text/css">
-   #div{margin-top:200px;}
-</style>
-
-
 <script type="text/javascript">
  
 function getTotRev(){
@@ -27,8 +22,18 @@ window.onload=function(){
 }
 </script>
 
+
+<style type="text/css">
+   #div{margin-top:100px;margin-left:700px;margin-right:700px;clear:both;text-align:center;height:400px;border:1px solid black;}
+   input[type=button]{background-color:#5A5AFF;color:white;border:2px solid #CBFF75;height:30px;width:120px;}
+   input[type=submit]{background-color:#5A5AFF;color:white;border:2px solid #CBFF75;height:30px;width:120px;}
+   input[type=text]{width:80px;height:20px;background-color:#C8FFFF;}
+</style>
+
+
 <div id="div">
 <div>
+   <br><br><br>
    <input type="button" value="총 매출 보기" onclick="getTotRev()">
    <span id="getTotRev" style="color:blue;font-size:14px"></span>
 </div>

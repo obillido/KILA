@@ -5,10 +5,10 @@
 
 <style type="text/css">
     *{margin:0px;padding:0px;}
-    #div{padding:200px 0px 0px 600px;}
-    #div h2{text-align:center;margin-right:350px;}
-    #div hr{margin-right:325px;}
-    #div h4{margin-right:200px;}
+    #div{clear:both;margin-left:300px;}
+    #div h2{text-align:center;margin-right:300px;}
+    #div hr{margin-right:330px;}
+    #div h4{margin-right:280px;text-align:center;}
     #t1{width:100px;height:30px;}
     #t2{width:30px;height:30px;}
     #t3{width:40px;height:30px;}
@@ -18,17 +18,18 @@
     #t7{width:50px;height:30px;}
     #t6 a{text-decoration:none;color:black;}
     #t7 a{text-decoration:none;color:black;}
-    #firstline{background-color:#C0FFFF}
+    #firstline{background-color:#D2FFD2;}
     table{text-align:center;}
     a{margin-top:10px;}
   
 </style>
 
 <div id="div">
+   <br><br>
    <hr>
-   <h2>- [ ${rank} ] 회원님의 구매내역 -</h2>
+   <h2>- [ ${rank} ] 회원님의 구매내역 -</h2><br>
    <h4>총 구매금액은 ${tot} 입니다.</h4>
-   <hr><br>
+   <hr><br><br>
    <table border="2" width="80%">
       <tr id="firstline">
          <th id="t1">주문한 상품명</th>
@@ -71,5 +72,4 @@
       </c:forEach>
    </table>
    <br>  
-   <a href="${pageContext.request.contextPath }/home">홈으로</a>
 </div>
