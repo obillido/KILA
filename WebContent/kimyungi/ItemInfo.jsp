@@ -75,19 +75,25 @@
 		sps.value=psize;
 	}
 	function rinsert(id){
+		var rev=document.getElementById("rev");
 		if(id==""){
 			alert("회원만 리뷰가 가능합니다. 그러므로 로그인!");
 			location.href="/KILA/header/login";
+		}else if(rev==null){
+			alert("구매한 상품만 리뷰가 가능합니다. 경고했습니다!");
 		}
 	}
 	function rinsert2(id,colnum){
+		var rev=document.getElementById("rev");
 		if(id==""){
 			alert("회원만 리뷰가 가능합니다. 그러므로 로그인으로 이동");
 			location.href="/KILA/header/login";
 			return false;
-		}else{
-			return true;
+		}else if(rev==null){
+			alert("구매한 상품만 리뷰가 가능합니다. 그러므로 로그인으로 이동");
+			return false;
 		}
+		return true;
 	}
 	function logcheck(id){
 		if(id==""){
@@ -189,7 +195,7 @@
 <form method="post" action="${pageContext.request.contextPath }/kila/review" onsubmit="return rinsert2('${id},${vo.colnum }')">
 <div style=" display: inline-block;">
 <c:if test="${not empty review}">
-작성하실 제품: <select name="review" style="width: 200px; height: 25px; display: inline-block;">
+작성하실 제품: <select name="review" id="rev" style="width: 200px; height: 25px; display: inline-block;">
 	<c:forEach var="re" items="${review}">
 	<option value="5">Color:${re.color }, Size:${re.size }</option>
 </c:forEach>
