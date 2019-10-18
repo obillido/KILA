@@ -31,6 +31,7 @@ public class ProductRegi extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String saveDirectory=req.getSession().getServletContext().getRealPath("/upload");
+		System.out.println(saveDirectory);
 		MultipartRequest mr=new MultipartRequest(
 				req, 
 				saveDirectory,

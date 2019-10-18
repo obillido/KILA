@@ -192,7 +192,7 @@
 </div>
 <div>
 <span style="font-size: 15px">REVIEW | 문의글 혹은 악의적인 비방글은 무통보 삭제된다는 점 유의해주세요^^</span>
-<form method="post" action="${pageContext.request.contextPath }/kila/review" onsubmit="return rinsert2('${id},${vo.colnum }')">
+<form method="post" action="${pageContext.request.contextPath }/kila/review" onsubmit="return rinsert2('${id},${vo.colnum }')" enctype="multipart/form-data">
 <div style=" display: inline-block;">
 <c:if test="${not empty review}">
 <br>
@@ -204,7 +204,7 @@
 </c:if>
 </div><br>
 <textarea name="content" rows="10" cols="93"onKeyUp="javascript:fnChkByte(this,'500')" onkeypress="rinsert('${id}')" onclick="rinsert('${id}')"></textarea>
- <br><input type="file"> <c:forEach begin="1" end="57">&nbsp</c:forEach><span id="byteInfo">0</span>/500bytes<br>
+ <br><input type="file" name="file1"> <c:forEach begin="1" end="57">&nbsp</c:forEach><span id="byteInfo">0</span>/500bytes<br>
  <select name="rpoint" style="width: 450px; height: 35px; font-size: 20px; display: inline-block;">
  	<option value="5">★★★★★아주 좋아요!</option>
  	<option value="4">★★★★☆맘에 들어요.</option>

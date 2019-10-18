@@ -14,10 +14,22 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 @WebServlet("/kila/review")
 public class ReviewController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String path=req.getSession().getServletContext().getRealPath("/upload");
+		System.out.println(path);
+		MultipartRequest mr=new MultipartRequest(
+					req,
+					path,
+					1024*1024*5,
+					"utf-8",
+					new DefaultFileRenamePolicy()
+				);
 		req.setCharacterEncoding("utf-8");
 		HttpSession session=req.getSession(); 
 		String id=(String)session.getAttribute("id");
