@@ -108,24 +108,25 @@
 	}
 </style>
 
+
 <div id="inquiry">
 	<h1>문의하기</h1>
 	<br><br>
 	<div style="text-align:left;">
 	<div id="selectOption">
-		<select name="answerType">
+		<select name="answerType" onchange="inqOption(${vo.colnum})">
 			<option value="0">전체답변</option>
 			<option value="1">답변대기</option>
 			<option value="2">답변완료</option>
 		</select>
-		<select name="inquiryType">
+		<select name="inquiryType" onchange="inqOption(${vo.colnum})">
 			<option value="0">전체</option>
 			<option value="1">사이즈</option>
 			<option value="2">배송</option>
 			<option value="3">재입고</option>
 			<option value="4">기타</option>
 		</select>
-		<input type="checkbox" name="chkMyInquiry" value="only"> 내 문의글만 보기
+		<input type="checkbox" id="cmi" onclick="checkMyInq(${id})"> 내 문의글만 보기
 		<input type="button" value="문의하기" name="inquiryButton" onclick="showInquiryReg('${id}',${vo.colnum})">
 	</div>
 	<hr>
@@ -260,6 +261,28 @@
 			contentList.appendChild(div);
 		}
 	}
+	
+	
+	function checkMyInq(id){
+		var cmi=document.getElementById("cmi");
+		if(id==null){
+			alert("로그인 후 이용가능합니다.");
+			cmi.checked=false;
+		}else{
+			
+			
+			
+		}
+	}
+	
+	function inqOption(colnum){
+		var at=document.getElementsByName("answerType")[0].value;
+		var it=document.getElementsByName("inquiryType")[0].value;
+		alert(at+","+it);
+		location.href="/KILA/iteminfo?colnum="+colnum"&at="+at+"&it="+it;
+	}
+	
+	
 </script>
 
 

@@ -30,11 +30,19 @@ public class ItmeInfoController extends HttpServlet{
 		ItemInfoVo vo=dao.productInfos(colnum);
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		ArrayList<ReviewIndexVo> review=ReviewDao.getInstance().getIndex(id, colnum);
-		ArrayList<InquiryVo> inqList=InquiryDao.getInstance().getList(colnum);
 		req.setAttribute("vo", vo);
 		req.setAttribute("list",list);
 		req.setAttribute("review", review);
+		
+		String att=req.getParameter("at");
+		int at=0,it=0;
+		if(att!=null && !att.equals("")) {
+			at=Integer.parseInt(att);
+			it=Integer.parseInt(req.getParameter("it"));
+		}
+		ArrayList<InquiryVo> inqList=InquiryDao.getInstance().getList(colnum, at, it);
 		req.setAttribute("inqList", inqList);
+		
 		req.setAttribute("cpage", "/kimyungi/ItemInfo.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		

@@ -16,7 +16,7 @@ public class InquiryDao {
 		return instance;
 	}
 	
-	public ArrayList<InquiryVo> getList(int colnum){
+	public ArrayList<InquiryVo> getList(int colnum, int at, int it){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
