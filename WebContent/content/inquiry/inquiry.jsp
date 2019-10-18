@@ -219,7 +219,7 @@
 					contentList.appendChild(div);
 				}
 			}else{
-				while(contentList.childNodes.length>=3){
+				while(contentList.childNodes.length>3){
 					contentList.removeChild(contentList.lastChild);
 				}
 			}

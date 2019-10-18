@@ -242,7 +242,6 @@
 			if(colorVal!=null){
 				String[] colors=colorVal.split("/");
 				for(int i=0; i<colors.length; i++){
-					System.out.println(colors[i]);
 					for(int j=0; j<cchk.length; j++){
 						if(colors[i].equals(cchk[j])){
 							cchk[j]="checked";
