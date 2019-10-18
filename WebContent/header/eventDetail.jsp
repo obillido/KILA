@@ -9,12 +9,13 @@
     #comments{background-color:white;}
     #commReg{margin-right:400px;}
     #hr{margin-right:400px;}
-    #commList{margin-left:150px;border:2px solid black;width:800px;text-align:left;}
+    #commList{margin-left:150px;border:2px solid black;width:800px;text-align:left;font-size:1.2em;background-color:#AAFA82;}
     #ecid{width:90px;height:30px;background-color:#C8FFFF;}
     #ecomments{width:360px;height:30px;background-color:#C8FFFF;}
     input[type=button]{background-color:#5A5AFF;color:white;border:2px solid #CBFF75;height:30px;width:70px;}
     #h2{margin-right:350px;font-weight:900;color:#2828CD;}
-    #commList label{margin-left:10px;display:inline-block; width:150px;}
+    #commList label{display:inline-block; width:200px;border:1px solid black;margin-right:20px;background-color:black;
+                    font-size:1.2em;font-weight:900;text-align:center;color:#AAFA82;}
 </style>
 
 <script type="text/javascript">
