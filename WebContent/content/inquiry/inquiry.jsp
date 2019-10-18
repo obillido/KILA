@@ -110,7 +110,7 @@
 
 
 <div id="inquiry">
-	<h1 name="inquiryTitle">문의하기</h1>
+	<h1>문의하기</h1>
 	<br><br>
 	<div style="text-align:left;">
 	<div id="selectOption">
@@ -278,10 +278,17 @@
 	function inqOption(colnum){
 		var at=document.getElementsByName("answerType")[0].value;
 		var it=document.getElementsByName("inquiryType")[0].value;
-		alert(at+","+it);
 		location.href="/KILA/iteminfo?colnum="+colnum+"&at="+at+"&it="+it;
 	}
 	
+	
+window.onload=function(){
+	var at=document.getElementsByName("answerType")[0].value;
+	var it=document.getElementsByName("inquiryType")[0].value;
+	
+	document.getElementById("inquiry").scrollIntoView();
+	
+}
 	
 </script>
 

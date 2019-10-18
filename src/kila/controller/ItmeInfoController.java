@@ -41,12 +41,10 @@ public class ItmeInfoController extends HttpServlet{
 			it=Integer.parseInt(req.getParameter("it"));
 			req.setAttribute("at", at);
 			req.setAttribute("it", it);
-			req.setAttribute("cpage", "/kimyungi/ItemInfo.jsp#inquiryTitle");
-		}else {
-			req.setAttribute("cpage", "/kimyungi/ItemInfo.jsp");
 		}
 		ArrayList<InquiryVo> inqList=InquiryDao.getInstance().getList(colnum, at, it);
 		req.setAttribute("inqList", inqList);
+		req.setAttribute("cpage", "/kimyungi/ItemInfo.jsp");
 		req.getRequestDispatcher("/layout.jsp#inquiryTitle").forward(req, resp);
 	}
 }
