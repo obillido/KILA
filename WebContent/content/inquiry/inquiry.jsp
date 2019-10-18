@@ -115,18 +115,18 @@
 	<div style="text-align:left;">
 	<div id="selectOption">
 		<select name="answerType" onchange="inqOption(${vo.colnum})">
-			<option value="0">전체답변</option>
-			<option value="1">답변대기</option>
-			<option value="2">답변완료</option>
+			<option value="0" <c:if test="${at==0}">selected</c:if>>전체답변</option>
+			<option value="1" <c:if test="${at==1}">selected</c:if>>답변대기</option>
+			<option value="2" <c:if test="${at==2}">selected</c:if>>답변완료</option>
 		</select>
 		<select name="inquiryType" onchange="inqOption(${vo.colnum})">
-			<option value="0">전체</option>
-			<option value="1">사이즈</option>
-			<option value="2">배송</option>
-			<option value="3">재입고</option>
-			<option value="4">기타</option>
+			<option value="0" <c:if test="${it==0}">selected</c:if>>전체</option>
+			<option value="1" <c:if test="${it==1}">selected</c:if>>사이즈</option>
+			<option value="2" <c:if test="${it==2}">selected</c:if>>배송</option>
+			<option value="3" <c:if test="${it==3}">selected</c:if>>재입고</option>
+			<option value="4" <c:if test="${it==4}">selected</c:if>>기타</option>
 		</select>
-		<input type="checkbox" id="cmi" onclick="checkMyInq(${id})"> 내 문의글만 보기
+		<input type="checkbox" id="cmi" onclick="checkMyInq('${id}',${vo.colnum})" <c:if test="${not empty cid}">checked</c:if>> 내 문의글만 보기
 		<input type="button" value="문의하기" name="inquiryButton" onclick="showInquiryReg('${id}',${vo.colnum})">
 	</div>
 	<hr>
@@ -263,15 +263,19 @@
 	}
 	
 	
-	function checkMyInq(id){
+	function checkMyInq(id,colnum){
 		var cmi=document.getElementById("cmi");
 		if(id==null){
 			alert("로그인 후 이용가능합니다.");
 			cmi.checked=false;
 		}else{
-			
-			
-			
+			var at=document.getElementsByName("answerType")[0].value;
+			var it=document.getElementsByName("inquiryType")[0].value;
+			if(cmi.checked==true){
+				location.href="/KILA/iteminfo?colnum="+colnum+"&at="+at+"&it="+it+"&cid="+id;
+			}else{
+				location.href="/KILA/iteminfo?colnum="+colnum+"&at="+at+"&it="+it;
+			}
 		}
 	}
 	
@@ -282,13 +286,18 @@
 	}
 	
 	
-window.onload=function(){
-	var at=document.getElementsByName("answerType")[0].value;
-	var it=document.getElementsByName("inquiryType")[0].value;
-	if(at!=null && it!=null)
-	document.getElementById("inquiry").scrollIntoView();
-	
-}
+	window.onload=function(){
+		var request=new Request();
+		var at=request.getParameter("at");
+		if(at!=null && at!=""){
+			document.getElementById("inquiry").scrollIntoView();
+		}
+		var cid=request.getParameter("cid");
+		if(cid!=null && cid!=""){
+			document.getElementById("inquiry").scrollIntoView();
+		}
+		
+	}
 	
 </script>
 

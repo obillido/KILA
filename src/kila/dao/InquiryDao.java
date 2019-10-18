@@ -16,17 +16,35 @@ public class InquiryDao {
 		return instance;
 	}
 	
-	public ArrayList<InquiryVo> getList(int colnum, int at, int it){
+	public ArrayList<InquiryVo> getList(int colnum, int at, int it, String id){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
+			String awhere="", iwhere="";
+			switch(at) {
+			case 1: awhere=" and ml=1 "; break;
+			case 2: awhere=" and ml=2 "; break;
+			default: iwhere="";
+			}
+			switch(it) {
+			case 1: iwhere=" and inqtype=1 "; break;
+			case 2: iwhere=" and inqtype=2 "; break;
+			case 3: iwhere=" and inqtype=3 "; break;
+			case 4: iwhere=" and inqtype=4 "; break;
+			default: iwhere="";
+			}
+			String idwhere="";
+			if(id!=null && !id.equals("")) {
+				idwhere=" and id='"+id+"' ";
+			}
 			
-			String sql="select inquiry.inum, ml, rpad(substr(id,0,4),length(id),'*') pid, colnum, inqtype, title, content, regdate " 
+			String sql="select inquiry.inum, ml, rpad(substr(id,0,4),length(id),'*') pid,id, colnum, inqtype, title, content, regdate " 
 					+ "from inquiry, (select inum, max(lev) ml from inquiry group by inum) ii "
-					+ "where colnum=? and inquiry.inum=ii.inum and inquiry.lev=1 "
+					+ "where colnum=? and inquiry.inum=ii.inum and inquiry.lev=1 "+awhere+iwhere+idwhere
 					+ "order by inum desc";
+			System.out.println(sql);
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();
