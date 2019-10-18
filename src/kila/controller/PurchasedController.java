@@ -60,6 +60,7 @@ public class PurchasedController extends HttpServlet{
 			list.add(mpv);
 		}
 		
+		//등급 설정
 		RankDao rdao=new RankDao();
 		ArrayList<SetRankVo> rlist=rdao.getInfo(id);
 		int cnt=0;

@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">    
     *{margin:0px;padding:0px;}
-    #div{padding:200px 0px 0px 350px;}
-    #div2{padding:30px 0px 0px 100px;}
+    #div{clear:both;text-align:center;margin-left:370px;}
+    #div2{clear:both;text-align:center;}
     #div h2{text-align:center;margin-right:350px;}
     #div hr{margin-right:325px;}
     #t1{width:30px;height:30px;}
@@ -16,17 +16,18 @@
     #t7{width:30px;height:30px;}
     #t8{width:100px;height:30px;}
     #t8 a{text-decoration:none;color:black;}
-    #firstline{background-color:#C0FFFF}
+    #firstline{background-color:#D2FFD2}
     table{text-align:center;}
     a{margin-top:10px;}
 </style>
 
 
 <div id="div">
+   <br><br><br>
    <hr>
    <h2>[ 환불요청건 리스트 ]</h2>
    <hr><br>
-   <table border="2" width="80%">
+   <table border="3" width="80%">
       <tr id="firstline">
          <th id="t1">주문번호</th>
          <th id="t2">주문자 아이디</th>
@@ -59,7 +60,7 @@
    </table>
 </div>
 
-
+<br>
 <div id="div2">
    <c:choose>
 	   <c:when test="${startPageNum>5 }">
