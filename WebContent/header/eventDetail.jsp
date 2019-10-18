@@ -9,11 +9,12 @@
     #comments{background-color:white;}
     #commReg{margin-right:400px;}
     #hr{margin-right:400px;}
-    #commList{margin-left:150px;border:2px solid black;width:800px;}
+    #commList{margin-left:150px;border:2px solid black;width:800px;text-align:left;}
     #ecid{width:90px;height:30px;background-color:#C8FFFF;}
     #ecomments{width:360px;height:30px;background-color:#C8FFFF;}
     input[type=button]{background-color:#5A5AFF;color:white;border:2px solid #CBFF75;height:30px;width:70px;}
     #h2{margin-right:350px;font-weight:900;color:#2828CD;}
+    #commList label{margin-left:10px;display:inline-block; width:150px;}
 </style>
 
 <script type="text/javascript">
@@ -34,7 +35,7 @@
 		   var list=JSON.parse(data)[0];
 		   var commList=document.getElementById("commList");
 		   for(var i=0;i<list.length;i++){
-			   var str=list[i].ecid + ": " +
+			   var str="<label>" + list[i].ecid + "</label>" +
 			           list[i].ecomments + "<hr>";
 			   var div=document.createElement("div");
 			   div.innerHTML=str;
