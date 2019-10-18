@@ -82,7 +82,7 @@
 	}
 	function rinsert2(id,colnum){
 		if(id==""){
-			alert("회원만 리뷰가 가능합니다. 그러므로 로그인으로 이동합니다.");
+			alert("회원만 리뷰가 가능합니다. 그러므로 로그인으로 이동");
 			location.href="/KILA/header/login";
 			return false;
 		}else{
