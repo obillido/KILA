@@ -90,7 +90,7 @@
 			location.href="/KILA/header/login";
 			return false;
 		}else if(rev==null){
-			alert("구매한 상품만 리뷰가 가능합니다. 포기하세요!");
+			alert("구매한 상품만 리뷰가 가능합니다. 포기하세요!!");
 			return false;
 		}
 		return true;
