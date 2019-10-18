@@ -151,6 +151,7 @@
 <div style="text-align: center; display: inline-block;">
 <br>
 <br>
+<br>
 <div style="left:100px">
 <div style="width: 400px;height: 500px; float: left;">
 <img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="position:static; width: 350px;height: 400px" onmouseover="zoomup()" onmouseout="zoomdown()">
@@ -187,13 +188,13 @@
 <span style="font-size: 15px">REVIEW | 문의글 혹은 악의적인 비방글은 무통보 삭제된다는 점 유의해주세요^^</span><br>
 <form method="post" action="${pageContext.request.contextPath }/kila/review" onsubmit="return rinsert2('${id},${vo.colnum }')">
 <div style=" display: inline-block;">
-작성하실 제품: <select name="review" style="width: 200px; height: 25px; display: inline-block;">
 <c:if test="${not empty review}">
+작성하실 제품: <select name="review" style="width: 200px; height: 25px; display: inline-block;">
 	<c:forEach var="re" items="${review}">
 	<option value="5">Color:${re.color }, Size:${re.size }</option>
 </c:forEach>
+</select><c:forEach begin="1" end="63">&nbsp</c:forEach>
 </c:if>
-</select>
 </div><br>
 <textarea name="content" rows="10" cols="93"onKeyUp="javascript:fnChkByte(this,'500')" onkeypress="rinsert('${id}')" onclick="rinsert('${id}')"></textarea>
  <br><input type="file"> <c:forEach begin="1" end="57">&nbsp</c:forEach><span id="byteInfo">0</span>/500bytes<br>
