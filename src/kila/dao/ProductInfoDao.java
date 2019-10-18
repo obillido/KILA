@@ -258,4 +258,36 @@ public class ProductInfoDao {
 		}
 	}
 	
+	public ArrayList<ProductInfoVo> getNewList(){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="";
+			pstmt=con.prepareStatement(sql);
+			
+			
+			rs=pstmt.executeQuery();
+			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
+			while(rs.next()) {
+				list.add(new ProductInfoVo(
+						rs.getString("pcode"), 
+						rs.getString("cname"), 
+						rs.getString("pname"), 
+						rs.getInt("price"), 
+						rs.getInt("colnum"),
+						rs.getString("color"),
+						rs.getString("savefilename"),
+						1));
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	
 }

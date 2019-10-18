@@ -28,6 +28,12 @@
 		text-decoration:underline;
 		text-underline-position:under;
 	}
+	#categoryList .active{
+		color:red;
+		text-decoration:underline;
+		text-underline-position:under;
+	}
+
 
 
 	
@@ -138,63 +144,12 @@
 	<div id="categoryList">
 		<h1>카테고리</h1>
 		<br>
-	<%
-		if(category==null || category.equals("all")){
-	%>
-		<a href="${cplist}?category=all" style="color:red; text-decoration:underline;">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("down_jacket")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket" style="color:red; text-decoration:underline;">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("jacket")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket" style="color:red; text-decoration:underline;">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("longsleeves")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves" style="color:red; text-decoration:underline;">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("shortsleeves")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves" style="color:red; text-decoration:underline;">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("pants")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants" style="color:red; text-decoration:underline;">바지</a><br>
-	<%
-		}
-	%>
+		<a href="${cplist}?category=all" class="<c:if test="${category eq 'all'}">active</c:if>">전체보기</a><br>
+		<a href="${cplist}?category=down_jacket" class="<c:if test="${category eq 'down_jacket'}">active</c:if>">다운자켓</a><br>
+		<a href="${cplist}?category=jacket" class="<c:if test="${category eq 'jacket'}">active</c:if>">자켓</a><br>
+		<a href="${cplist}?category=longsleeves" class="<c:if test="${category eq 'longsleeves'}">active</c:if>">긴팔티셔츠</a><br>
+		<a href="${cplist}?category=shortsleeves" class="<c:if test="${category eq 'shortsleeves'}">active</c:if>">반팔티셔츠</a><br>
+		<a href="${cplist}?category=pants" class="<c:if test="${category eq 'pants'}">active</c:if>">바지</a><br>
 	</div>
 	
 
