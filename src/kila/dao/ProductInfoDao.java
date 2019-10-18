@@ -272,10 +272,10 @@ public class ProductInfoDao {
 			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
 			while(rs.next()) {
 				list.add(new ProductInfoVo(
-						rs.getString("pcode"), 
-						rs.getString("cname"), 
+						null, 
+						null,
 						rs.getString("pname"), 
-						rs.getInt("price"), 
+						0,
 						rs.getInt("colnum"),
 						rs.getString("color"),
 						rs.getString("savefilename"),

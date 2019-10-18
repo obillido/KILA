@@ -51,7 +51,10 @@
 		color:grey;
 		text-decoration:none;
 	}
-	
+	#order .active{
+		text-decoration:underline;
+		text-underline-position:under;
+	}
 	
 	
 	#search{
@@ -160,35 +163,11 @@
 		<h1>상품목록</h1>
 		<br>
 		<div id="order">
-		<c:choose>
-			<c:when test="${empty order || order==1}">
-				<a href="${cpsearch}&order=1" style="text-decoration:underline;">판매순</a>
-				<a href="${cpsearch}&order=2">신상품순</a>
-				<a href="${cpsearch}&order=3">낮은가격순</a>
-				<a href="${cpsearch}&order=4">높은가격순</a>
-			</c:when>
-			<c:when test="${order==2}">
-				<a href="${cpsearch}&order=1">판매순</a>
-				<a href="${cpsearch}&order=2" style="text-decoration:underline;">신상품순</a>
-				<a href="${cpsearch}&order=3">낮은가격순</a>
-				<a href="${cpsearch}&order=4">높은가격순</a>
-			</c:when>
-			<c:when test="${order==3}">
-				<a href="${cpsearch}&order=1">판매순</a>
-				<a href="${cpsearch}&order=2">신상품순</a>
-				<a href="${cpsearch}&order=3" style="text-decoration:underline;">낮은가격순</a>
-				<a href="${cpsearch}&order=4">높은가격순</a>
-			</c:when>
-			<c:when test="${order==4}">
-				<a href="${cpsearch}&order=1">판매순</a>
-				<a href="${cpsearch}&order=2">신상품순</a>
-				<a href="${cpsearch}&order=3">낮은가격순</a>
-				<a href="${cpsearch}&order=4" style="text-decoration:underline;">높은가격순</a>
-			</c:when>
-		</c:choose>
+			<a href="${cpsearch}&order=1" class="<c:if test="${order==1}">active</c:if>">판매순</a>
+			<a href="${cpsearch}&order=2" class="<c:if test="${order==2}">active</c:if>">신상품순</a>
+			<a href="${cpsearch}&order=3" class="<c:if test="${order==3}">active</c:if>">낮은가격순</a>
+			<a href="${cpsearch}&order=4" class="<c:if test="${order==4}">active</c:if>">높은가격순</a>
 		</div>
-		
-		
 		
 		
 		<%
