@@ -55,8 +55,10 @@ public class ProductInfoDao {
 			String cwhere="";
 			if(!category.equals("all")) cwhere="and cname='"+category+"' ";
 
-			
 			String colorwhere="";
+			String sizewhere="";
+			String pricewhere="";
+			if(div!=null) {
 			if(colorVal!=null && !colorVal.equals("")) {
 				String[] colors=colorVal.split(div);
 				for(int i=0; i<colors.length; i++) {
@@ -66,7 +68,6 @@ public class ProductInfoDao {
 					if(i==colors.length-1) colorwhere+=") ";
 				}
 			}
-			String sizewhere="";
 			if(sizeVal!=null && !sizeVal.equals("")) {
 				String[] sizes=sizeVal.split(div);
 				int len=sizes.length;
@@ -77,7 +78,6 @@ public class ProductInfoDao {
 					if(i==len-1) sizewhere+=") ";
 				}
 			}
-			String pricewhere="";
 			String[] price=priceVal.split(div);
 			if(!price[0].equals("null") && !price[0].equals("")) {
 				pricewhere+=" and price>="+price[0]+" ";
@@ -85,7 +85,7 @@ public class ProductInfoDao {
 			if(!price[1].equals("null") && !price[1].equals("")) {
 				pricewhere+=" and price<="+price[1]+" ";
 			}
-			
+			}
 			
 			
 			String otable=" ";
