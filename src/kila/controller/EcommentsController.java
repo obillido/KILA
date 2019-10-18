@@ -49,6 +49,7 @@ public class EcommentsController extends HttpServlet{
 		EcommentsDao dao=EcommentsDao.getEcommentsDao();
 		int n=dao.insert(vo);
 		JSONObject json=new JSONObject();
+		
 		if(n>0) {
 			json.put("code","success");
 			json.put("ecid",ecid);
