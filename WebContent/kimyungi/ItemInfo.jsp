@@ -140,7 +140,7 @@
 <div style="width: 400px;height: 500px; position: relative; float: right;">
 <div id="zoom" class="img-zoom-result" style="width: 300px;height: 300px; position: absolute; z-index: 1">
 </div>
-<div style="width: 300px;height: 300px; position: absolute; background-color:white; z-index:2">
+<div style="width: 300px;height: 300px; position: absolute; background-color:white; z-index:2; text-align: left;">
 	<b>KILA|${vo.pcode }</b><br><hr><br>
    <h2>${vo.pname }</h2><br><hr><br>
    가격:<span style='color:red'>${vo.price }</span><br><br><hr><br>
