@@ -3,9 +3,11 @@
 
 <style type="text/css">
     *{margin:0px;padding:0px;}
-    #div{padding:200px 0px 0px 800px;}
-    #btn1{background-color:white;color:black;border:1px solid black;margin-top:10px;margin-left:310px;}
-    #btn2{background-color:white;color:black;border:1px solid black;margin-top:10px;}
+    #div{padding:150px 0px 0px 800px;}
+    #btn1{background-color:#5A5AFF;color:white;border:2px solid #CBFF75;margin-top:10px;margin-left:230px;height:30px;width:70px;}
+    #btn2{background-color:#5A5AFF;color:white;border:2px solid #CBFF75;margin-top:10px;height:30px;width:70px;}
+    input[name=title]{width:200px;height:20px;background-color:#C8FFFF;}
+    textarea[name=content]{background-color:#C8FFFF;}
 </style>
 
 <div id="div">
