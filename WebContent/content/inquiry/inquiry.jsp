@@ -285,7 +285,7 @@
 window.onload=function(){
 	var at=document.getElementsByName("answerType")[0].value;
 	var it=document.getElementsByName("inquiryType")[0].value;
-	
+	if(at!=null && it!=null)
 	document.getElementById("inquiry").scrollIntoView();
 	
 }
