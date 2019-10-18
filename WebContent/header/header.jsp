@@ -135,7 +135,7 @@
 
 	<div id="homelogo">
 		<div id="event"></div>
-		<a href="${cp}/home"><img src="${cp}/header/KilaLogo.png"></a>
+		<a href="${cp}/home"><img src="${cp}/header/NewKilaLogo.png"></a>
 		<div id="right">
 		<ul>
 		   <li><a href="${cp}/header/join">회원가입</a></li>
