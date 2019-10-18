@@ -175,7 +175,10 @@ create table event
     content varchar2(1000),
     orgfilename varchar2(100),
     savefilename varchar2(100),
-    filesize number(30)
+    filesize number(30),
+    ref number(10),
+    lev number(10),
+    step number(10)
 );
 create sequence event_seq;
 
