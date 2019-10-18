@@ -18,7 +18,13 @@ import kila.dao.ProductDao;
 public class ProductRegi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("cpage", "/admin/productRegi.jsp");
+		String cmd=req.getParameter("cmd");
+		if(cmd.equals("old")) {
+			
+			req.setAttribute("cpage", "/admin/productRegiAdd.jsp");
+		}else {
+			req.setAttribute("cpage", "/admin/productRegi.jsp");
+		}
 		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 	@Override

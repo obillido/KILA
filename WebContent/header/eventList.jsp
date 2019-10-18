@@ -6,11 +6,11 @@
 
 <style type="text/css">
     *{margin:0px;padding:0px;}
-    #div{padding:200px 0px 0px 400px;}
+    #div{padding:150px 0px 0px 400px;clear:both;text-align:center;}
 </style>
 
 <div id="div">
-<table border="1" width="1200" style="background-color:#EBFBFF;">
+<table border="1" width="1200" style="background-color:#FAFAA0;">
 <tr>
    <th>제목</th>
    <th>내용</th>

@@ -5,15 +5,17 @@
 <style type="text/css">
 	#content{
 		width:100%;
-		min-width:1220px;
 		text-align:center;
-		margin:0 auto;
-		align-items:center;
+		margin-top:50px;		
+	}
+	#content #inner{
+		display:inline-block;
+		width:1200px;
 	}
 	
 	#categoryList{
 		float:left;
-		width:130px;
+		width:150px;
 		padding:10px 30px;
 		line-height:30px;
 		text-align:left;
@@ -28,6 +30,12 @@
 		text-decoration:underline;
 		text-underline-position:under;
 	}
+	#categoryList .active{
+		color:red;
+		text-decoration:underline;
+		text-underline-position:under;
+	}
+
 
 
 	
@@ -45,7 +53,10 @@
 		color:grey;
 		text-decoration:none;
 	}
-	
+	#order .active{
+		text-decoration:underline;
+		text-underline-position:under;
+	}
 	
 	
 	#search{
@@ -60,7 +71,7 @@
 		float:left;
 		line-height:50px;
 		border:2px solid grey;
-		margin:10px 25px;
+		margin:15px 25px;
 	}
 	#searchWindow label{
 		display:inline-block;
@@ -134,67 +145,18 @@
 <c:set var="cplist" value="${pageContext.request.contextPath}/product/list"/>
 
 <div id="content">
-
+	<div id="inner">
+	
+	
 	<div id="categoryList">
 		<h1>카테고리</h1>
 		<br>
-	<%
-		if(category==null || category.equals("all")){
-	%>
-		<a href="${cplist}?category=all" style="color:red; text-decoration:underline;">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("down_jacket")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket" style="color:red; text-decoration:underline;">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("jacket")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket" style="color:red; text-decoration:underline;">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("longsleeves")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves" style="color:red; text-decoration:underline;">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("shortsleeves")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves" style="color:red; text-decoration:underline;">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants">바지</a><br>
-	<%
-		}else if(category.equals("pants")){
-	%>
-		<a href="${cplist}?category=all">전체보기</a><br>
-		<a href="${cplist}?category=down_jacket">다운자켓</a><br>
-		<a href="${cplist}?category=jacket">자켓</a><br>
-		<a href="${cplist}?category=longsleeves">긴팔티셔츠</a><br>
-		<a href="${cplist}?category=shortsleeves">반팔티셔츠</a><br>
-		<a href="${cplist}?category=pants" style="color:red; text-decoration:underline;">바지</a><br>
-	<%
-		}
-	%>
+		<a href="${cplist}?category=all" class="<c:if test="${category eq 'all'}">active</c:if>">전체보기</a><br>
+		<a href="${cplist}?category=down_jacket" class="<c:if test="${category eq 'down_jacket'}">active</c:if>">다운자켓</a><br>
+		<a href="${cplist}?category=jacket" class="<c:if test="${category eq 'jacket'}">active</c:if>">자켓</a><br>
+		<a href="${cplist}?category=longsleeves" class="<c:if test="${category eq 'longsleeves'}">active</c:if>">긴팔티셔츠</a><br>
+		<a href="${cplist}?category=shortsleeves" class="<c:if test="${category eq 'shortsleeves'}">active</c:if>">반팔티셔츠</a><br>
+		<a href="${cplist}?category=pants" class="<c:if test="${category eq 'pants'}">active</c:if>">바지</a><br>
 	</div>
 	
 
@@ -205,35 +167,11 @@
 		<h1>상품목록</h1>
 		<br>
 		<div id="order">
-		<c:choose>
-			<c:when test="${empty order || order==1}">
-				<a href="${cpsearch}&order=1" style="text-decoration:underline;">판매순</a>
-				<a href="${cpsearch}&order=2">신상품순</a>
-				<a href="${cpsearch}&order=3">낮은가격순</a>
-				<a href="${cpsearch}&order=4">높은가격순</a>
-			</c:when>
-			<c:when test="${order==2}">
-				<a href="${cpsearch}&order=1">판매순</a>
-				<a href="${cpsearch}&order=2" style="text-decoration:underline;">신상품순</a>
-				<a href="${cpsearch}&order=3">낮은가격순</a>
-				<a href="${cpsearch}&order=4">높은가격순</a>
-			</c:when>
-			<c:when test="${order==3}">
-				<a href="${cpsearch}&order=1">판매순</a>
-				<a href="${cpsearch}&order=2">신상품순</a>
-				<a href="${cpsearch}&order=3" style="text-decoration:underline;">낮은가격순</a>
-				<a href="${cpsearch}&order=4">높은가격순</a>
-			</c:when>
-			<c:when test="${order==4}">
-				<a href="${cpsearch}&order=1">판매순</a>
-				<a href="${cpsearch}&order=2">신상품순</a>
-				<a href="${cpsearch}&order=3">낮은가격순</a>
-				<a href="${cpsearch}&order=4" style="text-decoration:underline;">높은가격순</a>
-			</c:when>
-		</c:choose>
+			<a href="${cpsearch}&order=1" class="<c:if test="${order==1}">active</c:if>">판매순</a>
+			<a href="${cpsearch}&order=2" class="<c:if test="${order==2}">active</c:if>">신상품순</a>
+			<a href="${cpsearch}&order=3" class="<c:if test="${order==3}">active</c:if>">낮은가격순</a>
+			<a href="${cpsearch}&order=4" class="<c:if test="${order==4}">active</c:if>">높은가격순</a>
 		</div>
-		
-		
 		
 		
 		<%
@@ -374,6 +312,9 @@
 	
 	</div>
 
+
+
+	</div>
 </div>
 
 

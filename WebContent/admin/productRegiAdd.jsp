@@ -33,7 +33,7 @@
 <div id="ProductRegPage">
 	<div id="inner">
 	
-	<h1>새상품등록 <%=msg %></h1>
+	<h1>상품등록 <%=msg %></h1>
 	
 	<br><br>
 	
