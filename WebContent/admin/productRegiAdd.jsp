@@ -8,9 +8,16 @@
 
 
 <style type="text/css">
-	#content{
+	#ProductRegPage{
 		width:100%;
-		clear:both;text-align:center;
+		clear:both;
+		text-align:center;
+		margin:50px 0px;
+	}
+	#inner{
+		display:inline-block;
+		width:500px;
+		text-align:left;
 	}
 
 	label{
@@ -23,8 +30,8 @@
 </style>
 
 
-<div id="content">
-	<br><br>
+<div id="ProductRegPage">
+	<div id="inner">
 	
 	<h1>상품등록 <%=msg %></h1>
 	
@@ -72,6 +79,7 @@
 		<input type="submit" value="등록">
 	</form>
 
+	</div>
 </div>
 
 
