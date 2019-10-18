@@ -21,7 +21,7 @@ public class ReviewDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select c.color,pd.psize from payment pm,product pd,color c where pm.pnum=pd.pnum and pd.colnum=c.colnum and bid=? and status=4 and c.colnum=?";
+			String sql="select c.color,pd.psize,pm.paynum from payment pm,product pd,color c where pm.pnum=pd.pnum and pd.colnum=c.colnum and bid=? and status=4 and c.colnum=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, colnum);
@@ -30,7 +30,8 @@ public class ReviewDao {
 			while(rs.next()) {
 				System.out.println(rs.getString(1));
 				System.out.println(rs.getInt(2));
-				list.add(new ReviewIndexVo(rs.getString(1), rs.getInt(2)));
+				System.out.println(rs.getInt(3));
+				list.add(new ReviewIndexVo(rs.getString(1), rs.getInt(2), rs.getInt(3)));
 			}
 			return list;
 		}catch(SQLException se) {

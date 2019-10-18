@@ -90,7 +90,7 @@
 			location.href="/KILA/header/login";
 			return false;
 		}else if(rev==null){
-			alert("구매한 상품만 리뷰가 가능합니다. 포기하세요!!");
+			alert("구매한 상품만 리뷰가 가능합니다. 포기하세요!");
 			return false;
 		}
 		return true;
@@ -191,13 +191,14 @@
 </div>
 </div>
 <div>
-<span style="font-size: 15px">REVIEW | 문의글 혹은 악의적인 비방글은 무통보 삭제된다는 점 유의해주세요^^</span><br>
+<span style="font-size: 15px">REVIEW | 문의글 혹은 악의적인 비방글은 무통보 삭제된다는 점 유의해주세요^^</span>
 <form method="post" action="${pageContext.request.contextPath }/kila/review" onsubmit="return rinsert2('${id},${vo.colnum }')">
 <div style=" display: inline-block;">
 <c:if test="${not empty review}">
-작성하실 제품: <select name="review" id="rev" style="width: 200px; height: 25px; display: inline-block;">
+<br>
+작성하실 제품: <select name="paynum" id="rev" style="width: 200px; height: 25px; display: inline-block;">
 	<c:forEach var="re" items="${review}">
-	<option value="5">Color:${re.color }, Size:${re.size }</option>
+	<option value="${re.paynum }">Color:${re.color }, Size:${re.size }</option>
 </c:forEach>
 </select><c:forEach begin="1" end="63">&nbsp</c:forEach>
 </c:if>

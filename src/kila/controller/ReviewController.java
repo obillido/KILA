@@ -20,18 +20,16 @@ public class ReviewController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		HttpSession session=req.getSession(); 
-		String cmd=req.getParameter("cmd");
 		String id=(String)session.getAttribute("id");
-		String colnum=req.getParameter("colnum");
-		if(cmd!=null && cmd.equals("check")) {
-			check(req,resp);
-		}else if(cmd.equals("insert")) {
-			
-		}
 		String content=req.getParameter("content");
 		int rpoint=Integer.parseInt(req.getParameter("rpoint"));
+		int paynum=Integer.parseInt(req.getParameter("paynum"));
+		String savefilename=req.getParameter("savefilenum");
+		System.out.println(id);
 		System.out.println(content);
 		System.out.println(rpoint);
+		System.out.println(paynum);
+		System.out.println(savefilename);
 	}
 	protected void check(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
