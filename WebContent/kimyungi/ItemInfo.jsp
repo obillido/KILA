@@ -220,9 +220,9 @@ imageZoom("img1", "zoom");
 </div>
 
 
-
-	
+<div style="display: inline-block;">
 <jsp:include page="/content/inquiry/inquiry.jsp"/>
+</div>
 </div>
 
 	
