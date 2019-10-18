@@ -8,13 +8,15 @@
     textarea{background-color:#FFE65A;font-size:2em;}
     #comments{background-color:white;}
     #commReg{margin-right:400px;}
+    #hr{margin-right:400px;}
+    #commList{margin-left:150px;border:2px solid black;width:800px;}
     #ecid{width:90px;height:30px;background-color:#C8FFFF;}
     #ecomments{width:360px;height:30px;background-color:#C8FFFF;}
     input[type=button]{background-color:#5A5AFF;color:white;border:2px solid #CBFF75;height:30px;width:70px;}
+    #h2{margin-right:350px;font-weight:900;color:#2828CD;}
 </style>
 
 <script type="text/javascript">
-/*
    window.onload=function(){
 	   getList();
    };
@@ -22,7 +24,7 @@
    function getList(){
 	   xhrList=new XMLHttpRequest(); 
 	   xhrList.onreadystatechange=listOk;
-	   xhrList.open('get','ecomments?cmd=list&evnum=${vo.evnum}',true);
+	   xhrList.open('get','/KILA/ecomments?cmd=list&evnum=${vo.evnum}',true);
 	   xhrList.send();
    }
    function listOk(){
@@ -32,8 +34,8 @@
 		   var list=JSON.parse(data)[0];
 		   var commList=document.getElementById("commList");
 		   for(var i=0;i<list.length;i++){
-			   var str=list[i].ecid + "<br>" +
-			           list[i].ecomments + "<br>";
+			   var str=list[i].ecid + ": " +
+			           list[i].ecomments + "<hr>";
 			   var div=document.createElement("div");
 			   div.innerHTML=str;
 			   div.className="comm";
@@ -41,12 +43,12 @@
 		   }
 	   }
    }
-*/
+
    var xhrInsert=null;
    function insertComm(){
 	   xhrInsert=new XMLHttpRequest();
 	   xhrInsert.onreadystatechange=insertOk;
-	   xhrInsert.open('post','ecomments?cmd=insert',true);
+	   xhrInsert.open('post','/KILA/ecomments?cmd=insert',true);
 	   xhrInsert.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 	   var ecid=document.getElementById("ecid").value;
 	   var ecomments=document.getElementById("ecomments").value;
@@ -58,8 +60,7 @@
 		   var data=xhrInsert.responseText;
 		   var json=JSON.parse(data);
 		   if(json.code=='success'){
-			   document.getElementById("id").value="";
-			   document.getElementById("comments").value="";
+			   document.getElementById("ecomments").value="";
 			   getList();
 		   }else{
 			   alert("댓글 등록 실패");
@@ -94,13 +95,14 @@
 </table>
 
 <div><!-- 댓글 -->
-   <div id="commList"></div>
    <div id="commReg">
    <br><br>
         아이디 <input type="text" id="ecid" value="${sessionScope.id}" readonly>
         댓글 <input type="text" id="ecomments">
       <input type="button" value="등록" onclick="insertComm()">
-   </div>
+   </div><br><hr id="hr"><br>
+    <h2 id="h2">우리들의 아름다운 댓글공간! 예쁜 말만 골라 합시다*^-^*</h2><br>
+   <div id="commList"></div>
 </div>
 </div>
 
