@@ -133,13 +133,15 @@
 <div style="text-align: center; display: inline-block;">
 <br>
 <br>
-<div>
+<br>
+<div style="left:100px">
 <div style="width: 400px;height: 500px; float: left;">
-<img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="width: 350px;height: 400px" onmouseover="zoomup()" onmouseout="zoomdown()">
+<img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="position:static; width: 350px;height: 400px" onmouseover="zoomup()" onmouseout="zoomdown()">
 </div>
-<div id="zoom" class="img-zoom-result" style="right:31.6%; width: 300px;height: 300px; position: absolute; z-index: 1">
+<div style="width: 400px;height: 500px; position: relative; float: right;">
+<div id="zoom" class="img-zoom-result" style="width: 300px;height: 300px; position: absolute; z-index: 1">
 </div>
-<div style="float: right; width: 300px;height: 300px; position: relative; background-color:white; z-index:2">
+<div style="width: 300px;height: 300px; position: absolute; background-color:white; z-index:2">
 	<b>KILA|${vo.pcode }</b><br><hr><br>
    <h2>${vo.pname }</h2><br><hr><br>
    가격:<span style='color:red'>${vo.price }</span><br><br><hr><br>
@@ -160,6 +162,7 @@
    <input type="submit" value="CART" id="btn1" style="width: 145px; height: 40px" disabled="disabled" formaction="${pageContext.request.contextPath }/kila/cart">
    <input type="submit" value="BUY" id="btn2" style="width: 145px; height: 40px" disabled="disabled">
    </form>
+</div>
 </div>
 </div>
 </div>
