@@ -12,7 +12,7 @@
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
 	<x>0</x>
-	<y>0</y>
+	<y>55</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2019-08-27 16:32:37</creation_date>
-			<updated_date>2019-10-17 09:49:58</updated_date>
+			<updated_date>2019-10-18 12:26:59</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -939,7 +939,7 @@
 			</color>
 			<connections>
 			</connections>
-			<physical_name>users</physical_name>
+			<physical_name>member</physical_name>
 			<logical_name>회원</logical_name>
 			<description></description>
 			<constraint></constraint>
@@ -1070,7 +1070,7 @@
 			<connections>
 				<relation>
 					<id>0</id>
-					<source>4</source>
+					<source>5</source>
 					<target>1</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -1092,7 +1092,7 @@
 				</relation>
 				<relation>
 					<id>1</id>
-					<source>5</source>
+					<source>4</source>
 					<target>1</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -1189,7 +1189,7 @@
 				<normal_column>
 					<id>5</id>
 					<referenced_column>20</referenced_column>
-					<relation>0</relation>
+					<relation>1</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1223,7 +1223,7 @@
 				<normal_column>
 					<id>6</id>
 					<referenced_column>27</referenced_column>
-					<relation>1</relation>
+					<relation>0</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1321,7 +1321,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>38</word_id>
+					<word_id>35</word_id>
 					<id>9</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1581,7 +1581,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>9</word_id>
+					<word_id>8</word_id>
 					<id>15</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1770,7 +1770,7 @@
 			<connections>
 				<relation>
 					<id>2</id>
-					<source>2</source>
+					<source>0</source>
 					<target>4</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -1792,7 +1792,7 @@
 				</relation>
 				<relation>
 					<id>3</id>
-					<source>0</source>
+					<source>2</source>
 					<target>4</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -1813,7 +1813,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>customer</physical_name>
+			<physical_name>buyer</physical_name>
 			<logical_name>고객</logical_name>
 			<description></description>
 			<constraint></constraint>
@@ -1950,134 +1950,134 @@
 					<referenced_column>0</referenced_column>
 					<referenced_column>0</referenced_column>
 					<referenced_column>0</referenced_column>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
-					<relation>3</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
+					<relation>2</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2210,7 +2210,7 @@
 				<normal_column>
 					<id>24</id>
 					<referenced_column>10</referenced_column>
-					<relation>2</relation>
+					<relation>3</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2242,7 +2242,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>42</word_id>
+					<word_id>41</word_id>
 					<id>25</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2353,7 +2353,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>item</physical_name>
+			<physical_name>product</physical_name>
 			<logical_name>상품</logical_name>
 			<description></description>
 			<constraint></constraint>
@@ -2518,7 +2518,7 @@
 			<connections>
 				<relation>
 					<id>5</id>
-					<source>5</source>
+					<source>4</source>
 					<target>6</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -2540,7 +2540,7 @@
 				</relation>
 				<relation>
 					<id>6</id>
-					<source>4</source>
+					<source>5</source>
 					<target>6</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -2604,7 +2604,7 @@
 				<normal_column>
 					<id>32</id>
 					<referenced_column>20</referenced_column>
-					<relation>6</relation>
+					<relation>5</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2638,7 +2638,7 @@
 				<normal_column>
 					<id>33</id>
 					<referenced_column>27</referenced_column>
-					<relation>5</relation>
+					<relation>6</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2736,7 +2736,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>41</word_id>
+					<word_id>42</word_id>
 					<id>36</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2889,7 +2889,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>24</word_id>
+					<word_id>22</word_id>
 					<id>39</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2922,7 +2922,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>8</word_id>
+					<word_id>9</word_id>
 					<id>40</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2988,7 +2988,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>37</word_id>
+					<word_id>38</word_id>
 					<id>42</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3044,7 +3044,7 @@
 			</color>
 			<connections>
 			</connections>
-			<physical_name>itemName</physical_name>
+			<physical_name>product_name</physical_name>
 			<logical_name>상품명</logical_name>
 			<description></description>
 			<constraint></constraint>
@@ -3481,7 +3481,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>regItem</physical_name>
+			<physical_name>product_reg</physical_name>
 			<logical_name>상품등록</logical_name>
 			<description></description>
 			<constraint></constraint>
@@ -3489,7 +3489,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>22</word_id>
+					<word_id>24</word_id>
 					<id>53</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3589,7 +3589,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>35</word_id>
+					<word_id>37</word_id>
 					<id>56</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
