@@ -54,30 +54,7 @@ public class ProductInfoDao {
 			con=JdbcUtil.getConn();
 			String cwhere="";
 			if(!category.equals("all")) cwhere="and cname='"+category+"' ";
-			
-			String otable=" ";
-			String owhere=" ";
-			String orderby=" ";
-			String oselect=" ";
-			switch(order) {
-			case 1: otable=" ,(select color.colnum, sum(nvl(scnt,0)) pscnt from color, " + 
-							"(select * from product, " + 
-							"(select pnum, sum(cnt)scnt from payment where status=4 group by pnum) p1 " + 
-							"where product.pnum=p1.pnum(+)) p2 " + 
-							"where color.colnum=p2.colnum " + 
-							"group by color.colnum) pay ";
-					owhere=" and pay.colnum=color.colnum ";
-					oselect=", pscnt ";
-					orderby=" pscnt desc"; break;
-			case 2: otable=", (select pnum, min(regdate) mr from product_reg group by pnum) pr ";
-					owhere=" and product.colnum=color.colnum and pr.pnum=product.pnum ";
-					oselect=", mr ";
-					orderby="mr desc"; 
-					break;
-			case 3: orderby=" price asc "; break;
-			case 4: orderby=" price desc "; break;
-			default: System.out.println("ProductInfoDao:getListC:???");break;
-			}
+
 			
 			String colorwhere="";
 			if(colorVal!=null && !colorVal.equals("")) {
@@ -92,11 +69,12 @@ public class ProductInfoDao {
 			String sizewhere="";
 			if(sizeVal!=null && !sizeVal.equals("")) {
 				String[] sizes=sizeVal.split(div);
-				for(int i=0; i<sizes.length; i++) {
+				int len=sizes.length;
+				for(int i=0; i<len; i++) {
 					if(i==0) sizewhere=" and (";
 					else sizewhere+=" or ";
 					sizewhere+=" product.psize="+sizes[i]+" ";
-					if(i==sizes.length-1) sizewhere+=") ";
+					if(i==len-1) sizewhere+=") ";
 				}
 			}
 			String pricewhere="";
@@ -106,6 +84,33 @@ public class ProductInfoDao {
 			}
 			if(!price[1].equals("null") && !price[1].equals("")) {
 				pricewhere+=" and price<="+price[1]+" ";
+			}
+			
+			
+			
+			String otable=" ";
+			String owhere=" ";
+			String orderby=" ";
+			String oselect=" ";
+			switch(order) {
+			case 1: otable=" ,(select color.colnum, sum(nvl(scnt,0)) pscnt from color, " + 
+							"(select * from product, " + 
+							"(select pnum, sum(cnt)scnt from payment where status=4 group by pnum) p1 " + 
+							"where product.pnum=p1.pnum(+) "+sizewhere+" ) p2 " + 
+							"where color.colnum=p2.colnum " + 
+							"group by color.colnum) pay ";
+					sizewhere=" ";
+					owhere=" and pay.colnum=color.colnum ";
+					oselect=", pscnt ";
+					orderby=" pscnt desc"; break;
+			case 2: otable=", (select pnum, min(regdate) mr from product_reg group by pnum) pr ";
+					owhere=" and product.colnum=color.colnum and pr.pnum=product.pnum ";
+					oselect=", mr ";
+					orderby="mr desc"; 
+					break;
+			case 3: orderby=" price asc "; break;
+			case 4: orderby=" price desc "; break;
+			default: System.out.println("ProductInfoDao:getListC:이상한 order들어옴");break;
 			}
 			
 			
