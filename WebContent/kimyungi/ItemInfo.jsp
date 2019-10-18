@@ -76,7 +76,7 @@
 	}
 	function rinsert(id){
 		if(id==""){
-			alert("회원만 리뷰가 가능합니다. 그러므로 로그인");
+			alert("회원만 리뷰가 가능합니다. 그러므로 로그인!");
 			location.href="/KILA/header/login";
 		}
 	}
