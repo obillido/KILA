@@ -57,11 +57,12 @@
 		text-decoration:none;
 	}
 	#product{
-		width:150px; height:200px;
+		width:300px; height:200px;
 		text-align:center;
 		display:none;
+		float:center;
 	}
-	#product ul li{padding:10px;}
+	#product ul li{padding:30px;display:inline-block;}
 	#product ul li a{
 		text-decoration:none;
 		color:black;
@@ -170,6 +171,7 @@
 	   </ul>
 	</div>
 	<div id="product">
+	<br>
 	<ul>
 	   <li><a href="${cp}/product/list?category=all">전체보기</a></li>
 	   <li><a href="${cp}/product/list?category=down_jacket">다운자켓</a></li>
