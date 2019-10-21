@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,9 +31,28 @@ public class SearchProductController extends HttpServlet{
 			FinalSearchVo vo=new FinalSearchVo(pname, savefilename, colnum);
 			finallist.add(vo);
 		}
+		
 		req.setAttribute("info",finallist);
 		req.setAttribute("search",search);
 		req.setAttribute("cpage", "/header/search.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
+		
+		Cookie cook1=new Cookie("latest",search);
+		cook1.setPath("/");
+		cook1.setMaxAge(60*60*24);
+		resp.addCookie(cook1);
+	}
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Cookie[] cookies=req.getCookies();
+		if(cookies!=null) {
+			for(int i=0;i<cookies.length;i++) {
+				cookies[i].setMaxAge(0);
+				resp.addCookie(cookies[i]);
+				System.out.println(cookies[i]);
+				System.out.println();
+			}
+		}
 		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 	}
 }
