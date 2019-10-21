@@ -216,8 +216,35 @@
  </select>
  <button type="submit" style="background-color:pink; width: 200px"><img src="${pageContext.request.contextPath }/upload/pencil.png" width="30px" height="25px">리뷰등록하기</button>
 </form>
-<
-
+<div style="width: 700px; display: inline-block; text-align: left;">
+	<c:forEach var="rl" items="${rlist }">
+	<div style="float: left;">
+		<c:choose>
+			<c:when test="${rl.rpoint eq 5 }">
+				★★★★★ - 아주 좋아요!
+			</c:when>
+			<c:when test="${rl.rpoint eq 4 }">
+				★★★★☆ - 맘에 들어요.
+			</c:when>
+			<c:when test="${rl.rpoint eq 3 }">
+				★★★☆☆ - 보통이에요...
+			</c:when>
+			<c:when test="${rl.rpoint eq 2 }">
+				★★☆☆☆ - 그냥 그래요...
+			</c:when>
+			<c:when test="${rl.rpoint eq 1 }">
+				★☆☆☆☆ - 별로에요...
+			</c:when>
+		</c:choose><br>
+		<br>${rl.content }<br><hr><br>
+		<img src="${pageContext.request.contextPath }/upload/${rl.savefilename }">
+	</div>
+	<div style="float: right;">
+		${rl.id }<br>
+		${rl.regdate }<br>
+	</div>
+	</c:forEach>
+</div>
 
 <script type="text/javascript">
  function fnChkByte(obj, maxByte)

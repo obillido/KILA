@@ -37,7 +37,7 @@ public class ReviewDao {
 			}
 			return list;
 		}catch(SQLException se) {
-			System.out.println("ProductRegDAO:"+se.getMessage());
+			System.out.println("ReviewDAO:"+se.getMessage());
 			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt);
@@ -59,7 +59,7 @@ public class ReviewDao {
 			}
 			return false;
 		}catch(SQLException se) {
-			System.out.println("ProductRegDAO:"+se.getMessage());
+			System.out.println("ReviewDAO:"+se.getMessage());
 			return false;
 		}finally {
 			JdbcUtil.close(con,pstmt);
@@ -78,30 +78,31 @@ public class ReviewDao {
 			pstmt.setString(4, vo.getSavefilename());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
-			System.out.println("ProductRegDAO:"+se.getMessage());
+			System.out.println("ReviewDAO:"+se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
 	public ArrayList<ReviewListVo> list(int colnum){
+		System.out.println(colnum);
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select * from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=?";
+			String sql="select pv.rpoint,pv.content,pv.savefilename,pm.bid,pv.regdate,c.color,pd.psize from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();
 			ArrayList<ReviewListVo> list=new ArrayList<ReviewListVo>();
 			if(rs.next()) {
-				list.add(new ReviewListVo(rs.getInt("rpoint"),rs.getString("content"),rs.getString("savefilename"),rs.getString("bid"),rs.getDate("regdate"),rs.getString("color"),rs.getInt("size"));
+				list.add(new ReviewListVo(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getString(6),rs.getInt(7)));
 			}
-			return false;
+			return list;
 		}catch(SQLException se) {
-			System.out.println("ProductRegDAO:"+se.getMessage());
-			return false;
+			System.out.println("ReviewDAO:"+se.getMessage());
+			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt);
 		}

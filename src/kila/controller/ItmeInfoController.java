@@ -31,9 +31,12 @@ public class ItmeInfoController extends HttpServlet{
 		ItemInfoVo vo=dao.productInfos(colnum);
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		ArrayList<ReviewIndexVo> review=ReviewDao.getInstance().getIndex(id, colnum);
+		ArrayList<ReviewListVo> rlist=ReviewDao.getInstance().list(colnum);
 		req.setAttribute("vo", vo);
 		req.setAttribute("list",list);
 		req.setAttribute("review", review);
+		req.setAttribute("rlist", rlist);
+		System.out.println(rlist.size());
 		
 		String att=req.getParameter("at");
 		int at=0,it=0;
