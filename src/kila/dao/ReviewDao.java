@@ -109,4 +109,20 @@ public class ReviewDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
+	public int changeyo(int paynum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="update payment set status=6 where paynum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,paynum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
 }

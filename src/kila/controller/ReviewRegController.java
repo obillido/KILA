@@ -44,7 +44,12 @@ public class ReviewRegController extends HttpServlet{
 		ReviewDao dao=ReviewDao.getInstance();
 		int n=dao.insert(vo);
 		if(n>0) {
-			resp.sendRedirect(req.getContextPath()+"/iteminfo?colnum="+colnum);
+			int a=dao.changeyo(paynum);
+			if(n>0) {
+				resp.sendRedirect(req.getContextPath()+"/iteminfo?colnum="+colnum);
+			}else {
+			resp.sendRedirect(req.getContextPath()+"layout.jsp");
+			}
 		}else {
 			resp.sendRedirect(req.getContextPath()+"layout.jsp");
 		}

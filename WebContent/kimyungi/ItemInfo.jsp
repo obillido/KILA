@@ -152,10 +152,9 @@
 		var div=document.getElementById("zoom");
 		div.style.zIndex=1;
 	}
-	var sig=true;
 	function viewinfo(i){
 		var vi=document.getElementsByClassName("vi")[i];
-		if(sig==false){
+		if(vi.style.display=="none"){
 			vi.style.display="block";
 			sig=true;
 		}else{
