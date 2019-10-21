@@ -11,41 +11,43 @@
 <style type="text/css">
 
  
+form  {
+    margin: 60px 0 0 0 !important;
+ }
+ 
+.ui-slider .ui-btn-inner {
+    padding: 4px 0 0 0 !important;
+}
+ 
 .ui-slider-popup {
+    position: absolute !important;
     width: 64px;
     height: 64px;
     text-align: center;
     font-size: 36px;
+    padding-top: 14px;
     z-index: 100;
     opacity: 0.8;
 }
-
 </style>
 
 
 
+<head>
 <link rel="stylesheet" href="https://demos.jquerymobile.com/1.4.2/css/themes/default/jquery.mobile-1.4.2.min.css">  
 <script src="https://demos.jquerymobile.com/1.4.2/js/jquery.js"></script>
 <script src="https://demos.jquerymobile.com/1.4.2/js/jquery.mobile-1.4.2.min.js"></script>
+</head>
 
-
-<div data-role="rangeslider">
-	<input type="range" name="range" id="range-1a" step="1000" min="0" max="1000000" value="0" data-popup-enabled="true" data-show-value="true">
-	<input type="range" name="range" id="range-1b" step="1000" min="0" max="1000000" value="1000000" data-popup-enabled="true" data-show-value="true">
-</div>
-
-Filter by price interval: <b>¢æ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>¢æ 1000</b>
-
-<script type="text/javscript">
-	// With JQuery
-$("#ex2").slider({});
-
-// Without JQuery
-var slider = new Slider('#ex2', {});
-
-</script>
-
-
+<form>
+    <div data-role="rangeslider">
+        <input type="range" name="range-1a" id="range-1a" min="0" max="100" value="40" data-show-value="true">
+        <input type="range" name="range-1b" id="range-1b" min="0" max="100" value="80" data-show-value="true">
+    </div>
+</form>
+  
+  
+  
 
 </body>
 </html>

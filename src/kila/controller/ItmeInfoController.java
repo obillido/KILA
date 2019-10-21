@@ -31,16 +31,13 @@ public class ItmeInfoController extends HttpServlet{
 		ItemInfoVo vo=dao.productInfos(colnum);
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		ArrayList<ReviewIndexVo> review=ReviewDao.getInstance().getIndex(id, colnum);
-		ArrayList<ReviewListVo> rlist=ReviewDao.getInstance().get
 		req.setAttribute("vo", vo);
 		req.setAttribute("list",list);
 		req.setAttribute("review", review);
-		req.setAttribute("rlist", rlist);
 		
 		String att=req.getParameter("at");
 		int at=0,it=0;
 		String cid=req.getParameter("cid");
-		System.out.println(cid);
 		if(att!=null && !att.equals("")) {
 			at=Integer.parseInt(att);
 			it=Integer.parseInt(req.getParameter("it"));

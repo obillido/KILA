@@ -236,14 +236,10 @@
 					<span><input type="checkbox" <%=schk[4]%> name="psize" value="110"> 110</span>
 					<hr>
 					<label for="price range">가격범위</label>
-					<input type="text" name="price1" value="<%=pchk[0]%>" onkeyup="checkRange()">
+					<input type="text" name="price1" class="price" value="<%=pchk[0]%>" onkeyup="checkRange(this.value)">
 					 ~ 
-					<input type="text" name="price2" value="<%=pchk[1]%>" onkeyup="checkRange()">
-		
+					<input type="text" name="price2" class="price" value="<%=pchk[1]%>" onkeyup="checkRange(this.value)">
 					<hr>
-					<div name="circle" class="circle1"></div>
-					<div name="circle" class="circle2"></div>
-		
 					<div id="button">
 						<input type="submit" value="검색하기">
 						<input type="button" value="닫기" onclick="displaySearchWindow()">
@@ -345,5 +341,5 @@
 			}			
 		}
 	}
-	
+
 </script>

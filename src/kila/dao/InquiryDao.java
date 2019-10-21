@@ -44,7 +44,6 @@ public class InquiryDao {
 					+ "from inquiry, (select inum, max(lev) ml from inquiry group by inum) ii "
 					+ "where colnum=? and inquiry.inum=ii.inum and inquiry.lev=1 "+awhere+iwhere+idwhere
 					+ "order by inum desc";
-			System.out.println(sql);
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();

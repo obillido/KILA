@@ -215,11 +215,8 @@ public class ProductInfoDao {
 				pricewhere+=" and price<="+price[1]+" ";
 			}
 			
-			
-			String sql="select count(*) cnt from " + 
-					"(select distinct pn.pcode, pname, color " + 
-					"from product_name pn, color, product " + 
-					"where pn.pcode=color.pcode "+cwhere+colorwhere+sizewhere+pricewhere+")";
+			String sql="select count(*) cnt from product_name pn, color, product " + 
+					"where pn.pcode=color.pcode and color.colnum=product.colnum "+cwhere+colorwhere+sizewhere+pricewhere;
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
