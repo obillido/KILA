@@ -91,14 +91,16 @@ public class ReviewDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select pv.rpoint,pv.content,pv.savefilename,pm.bid,pv.regdate,c.color,pd.psize from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=?";
+			String sql="select pv.rpoint,pv.content,pv.savefilename,rpad(substr(pm.bid,0,4),length(pm.bid),'*') bid,pv.regdate,c.color,pd.psize from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();
 			ArrayList<ReviewListVo> list=new ArrayList<ReviewListVo>();
-			if(rs.next()) {
+			while(rs.next()) {
 				list.add(new ReviewListVo(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getString(6),rs.getInt(7)));
+				System.out.println(rs.getString(2));
 			}
+			System.out.println(list.size()+"a");
 			return list;
 		}catch(SQLException se) {
 			System.out.println("ReviewDAO:"+se.getMessage());

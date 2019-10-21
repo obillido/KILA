@@ -152,10 +152,20 @@
 		var div=document.getElementById("zoom");
 		div.style.zIndex=1;
 	}
+	var sig=true;
+	function viewinfo(i){
+		var vi=document.getElementsByClassName("vi")[i];
+		if(sig==false){
+			vi.style.display="block";
+			sig=true;
+		}else{
+			vi.style.display="none";
+			sig=false;	
+		}
+	}
 </script>
 <div style="text-align: center;">
 <div style="text-align: center; display: inline-block;">
-<br>
 <br>
 <br>
 <div style="left:100px">
@@ -222,15 +232,21 @@
  </select>
  <button type="submit" style="background-color:pink; width: 200px"><img src="${pageContext.request.contextPath }/upload/pencil.png" width="30px" height="25px">리뷰등록하기</button>
 </form>
-<div style="width: 700px; display: inline-block; text-align: left;">
+<br>
+	<c:set var="i" value="1"/>
+	<c:set var="sum" value="0"/>
 	<c:forEach var="rl" items="${rlist }">
+	<div>
+	<div style="width: 750px; display: inline-block; text-align: left;" onclick="viewinfo(${sum})">
+	<c:set var="sum" value="${sum+i }"/>
+	<hr><br>
 	<div style="float: left;">
 		<c:choose>
 			<c:when test="${rl.rpoint eq 5 }">
 				★★★★★ - 아주 좋아요!
 			</c:when>
 			<c:when test="${rl.rpoint eq 4 }">
-				★★★★☆ - 맘에 들어요.
+				★★★★☆ - 맘에 들어요!
 			</c:when>
 			<c:when test="${rl.rpoint eq 3 }">
 				★★★☆☆ - 보통이에요...
@@ -241,17 +257,30 @@
 			<c:when test="${rl.rpoint eq 1 }">
 				★☆☆☆☆ - 별로에요...
 			</c:when>
-		</c:choose><br>
-		<br>${rl.content }<br><hr><br>
-		<img src="${pageContext.request.contextPath }/upload/${rl.savefilename }">
+		</c:choose><br><br>
+		<div style="border: 2px solid grey; width: 500px; height: 80px; padding: 20px; display: none;" class="vi">
+			<h3>선택한 옵션</h3><br>
+			사이즈:${rl.size }<br>
+			컬러:${rl.color }<br>
+		</div>
+		<br><b>${rl.content }</b><br><br><br>
+		<img src="${pageContext.request.contextPath }/upload/${rl.savefilename }" style="width: 150px; height: 150px">
 	</div>
-	<div style="float: right;">
+	<div style="float: right; padding: 20px; width: 150px; height: 100%;">
+		<br>작성자<br>
 		${rl.id }<br>
+		<hr>
+		작성일<br>
 		${rl.regdate }<br>
+		<hr>
 	</div>
+	</div>
+	<div>
+	</div>
+	</div>
+	<br>
+	<br>
 	</c:forEach>
-</div>
-
 <script type="text/javascript">
  function fnChkByte(obj, maxByte)
  {
