@@ -267,7 +267,9 @@
 			컬러:${rl.color }<br>
 		</div>
 		<br><b>${rl.content }</b><br><br><br>
+		<c:if test="${not empty rl.savefilename}">
 		<img src="${pageContext.request.contextPath }/upload/${rl.savefilename }" style="width: 150px; height: 150px">
+		</c:if>
 	</div>
 	<div style="float: right; padding: 20px; width: 150px; height: 100%;">
 		<br>작성자<br>
