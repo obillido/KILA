@@ -100,31 +100,25 @@
 		blackground-color:blue;
 	}
 	
-	#searchWindow div[name=circle]{
-		display:inline-block;
-		width:30px; height:30px;
-		-webkit-border-radius:15px;
-		-moz-border-radius:15px;
-	}
-	.circle1{
-		background-color:#FE9A2E;
-	}
-	.circle2{
-		background-color:#01DFA5;
-	}
 	
 	
 	
-	
-	#list div[name=item]{
+	#list .item{
 		float:left;
 		width:220px; height:320px;
 		margin-right:20px;
 		margin-bottom:20px;
 	}
-	#list div[name=item] p{
+	#list .item p{
 		padding:2px 10px;
 		color:black;
+	}
+	#list .item .soldout{
+		float:right;
+		text-align:center;
+		width:100px;
+		background-color:red;
+		color:white;
 	}
 
 
@@ -258,11 +252,11 @@
 			<c:when test="${not empty list}">
 				<c:forEach var="vo" items="${list}">
 					<a href="${cp}/iteminfo?colnum=${vo.colnum}">
-					<div name="item">
+					<div class="item">
 						<img src="${cp}/upload/${vo.savefilename}" width="220">
 						<p>${vo.pname}</p>
 						<p>${vo.price}</p>
-						<p>${vo.color}</p>
+						<p>${vo.color}  <c:if test="${vo.soldout==0}"><span class="soldout">SOLD OUT</span></c:if></p>
 					</div>
 					</a>
 				</c:forEach>
