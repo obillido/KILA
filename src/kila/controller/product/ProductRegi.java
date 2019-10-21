@@ -43,11 +43,17 @@ public class ProductRegi extends HttpServlet{
 			int colnum=Integer.parseInt(req.getParameter("colnum"));
 			String[] size=req.getParameterValues("size");
 			int cnt=Integer.parseInt(req.getParameter("cnt"));
-			int[] psize=new int[size.length];
+			int nn=0;
 			for(int i=0; i<size.length; i++) {
-				psize[i]=Integer.parseInt(size[i]);
+				System.out.println((i+1)+":"+colnum+","+Integer.parseInt(size[i])+","+cnt);
+				int n=ProductDao.getInstance().update(colnum, Integer.parseInt(size[i]), cnt);
+				if(n<=0) nn++;
 			}
-			
+			if(nn<=0) {
+				resp.sendRedirect(req.getContextPath()+"/iteminfo?colnum="+colnum);
+			}else {
+				resp.sendRedirect(req.getContextPath()+"/layout.jsp");
+			}
 		}else {
 			String saveDirectory=req.getSession().getServletContext().getRealPath("/upload");
 			System.out.println(saveDirectory);

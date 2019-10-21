@@ -135,7 +135,17 @@ public class ProductDao {
 			pstmt.setInt(1, cnt);
 			pstmt.setInt(2, colnum);
 			pstmt.setInt(3, psize);
-			return pstmt.executeUpdate();
+			int n = pstmt.executeUpdate();
+			if(n<=0) {
+				JdbcUtil.close(pstmt);
+				sql="insert product values(product_seq.nextval,?,?,?)";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, colnum);
+				pstmt.setInt(2, psize);
+				pstmt.setInt(3, cnt);
+				return pstmt.executeUpdate();
+			}
+			return n;
 		}catch(SQLException se) {
 			System.out.println("ProductDAO:update:"+se.getMessage());
 			return -1;
