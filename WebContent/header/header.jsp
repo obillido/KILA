@@ -67,6 +67,7 @@
 		text-decoration:none;
 		color:black;
 	}
+	#searchbox{float:right;margin-right:50px;}
 </style>
 
 
@@ -169,6 +170,12 @@
 	      <li><a href="${cp}/product/best" style="color:#B90000;">BEST</a></li>
 	      <li><a href="${cp}/header/eventlist" style="color:#00008C;">EVENT</a></li>
 	   </ul>
+	</div>
+	<div id="searchbox">
+	   <form method="post" action="${cp}/header/search">
+	   <input type="text" name="search">
+	   <input type="submit" value="검색" width="15" height="15" style="background-color:white;">
+	   </form>
 	</div>
 	<div id="product">
 	<br>
