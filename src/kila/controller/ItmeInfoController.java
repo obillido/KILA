@@ -39,7 +39,6 @@ public class ItmeInfoController extends HttpServlet{
 		req.setAttribute("list",list);
 		req.setAttribute("review", review);
 		req.setAttribute("rlist", rlist);
-		System.out.println(rlist.size());
 		
 		String att=req.getParameter("at");
 		int at=0,it=0;
@@ -50,7 +49,24 @@ public class ItmeInfoController extends HttpServlet{
 			req.setAttribute("at", at);
 			req.setAttribute("it", it);
 		}
-		ArrayList<InquiryVo> inqList=InquiryDao.getInstance().getList(colnum, at, it, cid);
+		
+		InquiryDao idao=InquiryDao.getInstance();
+		String spageNumInq=req.getParameter("pageNumIn1");
+		int pageNumInq=1;
+		if(spageNumInq!=null) pageNumInq=Integer.parseInt(spageNumInq);
+		int endRowInq=pageNumInq*10;
+		int startRowInq=endRowInq-9;
+		int pageCountInq=(int)Math.ceil(idao.getCount(colnum)/10.);
+		int startPageNumInq=(pageNumInq-1)/5*5+1;
+		int endPageNumInq=startPageNumInq+4;
+		if(endPageNumInq>pageCountInq) {
+			endPageNumInq=pageCountInq;
+		}
+		ArrayList<InquiryVo> inqList=idao.getList(startRowInq, endRowInq, colnum, at, it, cid);
+		req.setAttribute("pageNumInq", pageNumInq);
+		req.setAttribute("startPageNumInq", startPageNumInq);
+		req.setAttribute("endPageNumInq", endPageNumInq);
+		req.setAttribute("pageCountInq", pageCountInq);
 		
 		req.setAttribute("type", type);
 		req.setAttribute("cid", cid);

@@ -113,57 +113,83 @@
 	<h1>문의하기</h1>
 	<br><br>
 	<div style="text-align:left;">
-	<div id="selectOption">
-		<select name="answerType" onchange="inqOption(${vo.colnum})">
-			<option value="0" <c:if test="${at==0}">selected</c:if>>전체답변</option>
-			<option value="1" <c:if test="${at==1}">selected</c:if>>답변대기</option>
-			<option value="2" <c:if test="${at==2}">selected</c:if>>답변완료</option>
-		</select>
-		<select name="inquiryType" onchange="inqOption(${vo.colnum})">
-			<option value="0" <c:if test="${it==0}">selected</c:if>>전체</option>
-			<option value="1" <c:if test="${it==1}">selected</c:if>>사이즈</option>
-			<option value="2" <c:if test="${it==2}">selected</c:if>>배송</option>
-			<option value="3" <c:if test="${it==3}">selected</c:if>>재입고</option>
-			<option value="4" <c:if test="${it==4}">selected</c:if>>기타</option>
-		</select>
-		<input type="checkbox" id="cmi" onclick="checkMyInq('${id}',${vo.colnum})" <c:if test="${not empty cid}">checked</c:if>> 내 문의글만 보기
-		<input type="button" value="문의하기" name="inquiryButton" onclick="showInquiryReg('${id}',${vo.colnum})">
-	</div>
-	<hr>
-	
-	<div id="inquiryList">
-	<c:choose>
-		<c:when test="${not empty inqList}">
-			<c:forEach var="vo" items="${inqList}">
-				<div id="contentList${vo.inum}" class="cList">
-					<div  onclick="showInqContent(${vo.inum},'${type}')">
-						<c:choose>
-							<c:when test="${vo.lev=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
-							<c:when test="${vo.lev=='2'}"><span class="state" style="color:red;">완료</span></c:when>
-						</c:choose>
-						<span class="inqtype">
+		<div id="selectOption">
+			<select name="answerType" onchange="inqOption(${vo.colnum})">
+				<option value="0" <c:if test="${at==0}">selected</c:if>>전체답변</option>
+				<option value="1" <c:if test="${at==1}">selected</c:if>>답변대기</option>
+				<option value="2" <c:if test="${at==2}">selected</c:if>>답변완료</option>
+			</select>
+			<select name="inquiryType" onchange="inqOption(${vo.colnum})">
+				<option value="0" <c:if test="${it==0}">selected</c:if>>전체</option>
+				<option value="1" <c:if test="${it==1}">selected</c:if>>사이즈</option>
+				<option value="2" <c:if test="${it==2}">selected</c:if>>배송</option>
+				<option value="3" <c:if test="${it==3}">selected</c:if>>재입고</option>
+				<option value="4" <c:if test="${it==4}">selected</c:if>>기타</option>
+			</select>
+			<input type="checkbox" id="cmi" onclick="checkMyInq('${id}',${vo.colnum})" <c:if test="${not empty cid}">checked</c:if>> 내 문의글만 보기
+			<input type="button" value="문의하기" name="inquiryButton" onclick="showInquiryReg('${id}',${vo.colnum})">
+		</div>
+		<hr>
+		
+		<div id="inquiryList">
+		<c:choose>
+			<c:when test="${not empty inqList}">
+				<c:forEach var="vo" items="${inqList}">
+					<div id="contentList${vo.inum}" class="cList">
+						<div  onclick="showInqContent(${vo.inum},'${type}')">
 							<c:choose>
-								<c:when test="${vo.inqtype=='1'}">사이즈</c:when>
-								<c:when test="${vo.inqtype=='2'}">배송</c:when>
-								<c:when test="${vo.inqtype=='3'}">재입고</c:when>
-								<c:when test="${vo.inqtype=='4'}">기타</c:when>
+								<c:when test="${vo.lev=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
+								<c:when test="${vo.lev=='2'}"><span class="state" style="color:red;">완료</span></c:when>
 							</c:choose>
-						</span>
-						<span class="title">${vo.title}</span>
-						<span class="name">${vo.id}</span>
-						<span class="regdate">${vo.regdate}</span>
+							<span class="inqtype">
+								<c:choose>
+									<c:when test="${vo.inqtype=='1'}">사이즈</c:when>
+									<c:when test="${vo.inqtype=='2'}">배송</c:when>
+									<c:when test="${vo.inqtype=='3'}">재입고</c:when>
+									<c:when test="${vo.inqtype=='4'}">기타</c:when>
+								</c:choose>
+							</span>
+							<span class="title">${vo.title}</span>
+							<span class="name">${vo.id}</span>
+							<span class="regdate">${vo.regdate}</span>
+						</div>
 					</div>
-				</div>
-				<hr>
-				<div style="clear:both;"></div>
-			</c:forEach>
-		</c:when>
-		<c:otherwise>
-			<p>작성된 상품 문의글이 없습니다.</p>
-		</c:otherwise>	
-	</c:choose>
+					<hr>
+					<div style="clear:both;"></div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<p>작성된 상품 문의글이 없습니다.</p>
+			</c:otherwise>	
+		</c:choose>
 	</div>
 	
+	<c:choose>
+	<c:when test="${vo.soldout>0}"><c:set var="cpcol" value="${pageContext.request.contextPath}/iteminfo?colnum=${vo.colnum}"/></c:when>
+	<c:otherwise><c:set var="cpcol" value="${pageContext.request.contextPath}/iteminfo?colnum=${vo.colnum}&soldout=soldout"/></c:otherwise>
+	</c:choose>
+	<div id="paging">
+		<c:if test="${not empty pageCountInq}">
+			<c:if test="${startPageNumInq!=1}">
+				<a href="${cpcol}&pageNumInq=${startPageNumInq-1}">이전</a>
+			</c:if>
+		
+			<c:forEach var="i" begin="${startPageNumInq}" end="${endPageNumInq}">
+				<c:choose>
+					<c:when test="${pageNumInq==i}">
+						<a href="${cpcol}&pageNumInq=${i}" style="color:red;">[${i}]</a>
+					</c:when>
+					<c:otherwise>
+						<a href="${cpcol}&pageNumInq=${i}">[${i}]</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		
+			<c:if test="${endPageNumInq!=pageCountInq}">
+				<a href="${cpcol}&pageNumInq=${endPageNumInq+1}">다음</a>
+			</c:if>
+		</c:if>
+	</div>
 </div>
 
 

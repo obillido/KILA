@@ -18,7 +18,10 @@ public class ProductBestList extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String category=req.getParameter("category");
 		if(category==null) category="all";
-		ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList(1, 100, category, 1, null, null, null, null);
+		String snum=req.getParameter("num");
+		int num=100;
+		if(snum!=null) num=Integer.parseInt(snum);
+		ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList(1, num, category, 1, null, null, null, null);
 		req.setAttribute("list", list);
 		req.setAttribute("category", category);
 		req.setAttribute("cpage", "/content/productList/bestList.jsp");

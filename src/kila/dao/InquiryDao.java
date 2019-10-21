@@ -16,7 +16,7 @@ public class InquiryDao {
 		return instance;
 	}
 	
-	public ArrayList<InquiryVo> getList(int colnum, int at, int it, String id){
+	public ArrayList<InquiryVo> getList(int startRowInq, int endRowInq, int colnum, int at, int it, String id){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -40,12 +40,16 @@ public class InquiryDao {
 				idwhere=" and id='"+id+"' ";
 			}
 			
-			String sql="select inquiry.inum, ml, rpad(substr(id,0,4),length(id),'*') pid,id, colnum, inqtype, title, content, regdate " 
+			String sql="select * from (select aa.*, rownum rnum from ("
+					+ "select inquiry.inum, ml, rpad(substr(id,0,4),length(id),'*') pid,id, colnum, inqtype, title, content, regdate " 
 					+ "from inquiry, (select inum, max(lev) ml from inquiry group by inum) ii "
 					+ "where colnum=? and inquiry.inum=ii.inum and inquiry.lev=1 "+awhere+iwhere+idwhere
-					+ "order by inum desc";
+					+ "order by inum desc"
+					+ ") aa) where rnum>=? and rnum<=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
+			pstmt.setInt(2, startRowInq);
+			pstmt.setInt(3, endRowInq);
 			rs=pstmt.executeQuery();
 			ArrayList<InquiryVo> list=new ArrayList<InquiryVo>();
 			while(rs.next()) {
@@ -138,11 +142,36 @@ public class InquiryDao {
 			}
 			return list;
 		}catch(SQLException se){
-			System.out.println(se.getMessage());
+			System.out.println("InquiryDao:getInfo:"+se.getMessage());
 			return null;
 		}finally{
 			JdbcUtil.close(con, pstmt, rs);
 		}
 	}
 	
+	
+	public int getCount(int colnum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select count(*) cnt" 
+					+ "from inquiry, (select inum, max(lev) ml from inquiry group by inum) ii "
+					+ "where colnum=? and inquiry.inum=ii.inum and inquiry.lev=1 ";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, colnum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("cnt");
+			}else {
+				return 0;
+			}
+		}catch(SQLException se) {
+			System.out.println("InquiryDao:getCount:"+se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
 }

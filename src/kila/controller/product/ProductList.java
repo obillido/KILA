@@ -2,6 +2,7 @@ package kila.controller.product;
 
 import java.awt.Point;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -86,8 +87,9 @@ public class ProductList extends HttpServlet{
 		
 		
 		ArrayList<ProductInfoVo> list=dao.getList(startRow,endRow,category,order,colorVal,sizeVal,priceVal,div);
+		DecimalFormat fmt=new DecimalFormat("###,###,###,###");
 		
-		
+		req.setAttribute("fmt", fmt);
 		req.setAttribute("category", category);
 		req.setAttribute("pageNum",pageNum);
 		req.setAttribute("pageCount",pageCount);

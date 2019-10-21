@@ -256,7 +256,7 @@
 					<div class="item">
 						<img src="${cp}/upload/${vo.savefilename}" width="220">
 						<p>${vo.pname}</p>
-						<p>${vo.price}</p>
+						<p>${fmt.format(vo.price)}</p>
 						<p>${vo.color}  <c:if test="${vo.soldout==0}"><span class="soldout">SOLD OUT</span></c:if></p>
 					</div>
 					</a>
@@ -278,27 +278,26 @@
 		<c:set var="cpcso" value="${cpsearch}&order=${order}"/>
 		
 		<div id="paging">
-		<c:if test="${not empty pageCount}">
-			<c:if test="${startPageNum!=1}">
-				<a href="${cpcso}&pageNum=${startPageNum-1}">이전</a>
+			<c:if test="${not empty pageCount}">
+				<c:if test="${startPageNum!=1}">
+					<a href="${cpcso}&pageNum=${startPageNum-1}">이전</a>
+				</c:if>
+			
+				<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
+					<c:choose>
+						<c:when test="${pageNum==i}">
+							<a href="${cpcso}&pageNum=${i}" style="color:red;">[${i}]</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${cpcso}&pageNum=${i}">[${i}]</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			
+				<c:if test="${endPageNum!=pageCount}">
+					<a href="${cpcso}&pageNum=${endPageNum+1}">다음</a>
+				</c:if>
 			</c:if>
-		
-			<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
-				<c:choose>
-					<c:when test="${pageNum==i}">
-						<a href="${cpcso}&pageNum=${i}" style="color:red;">[${i}]</a>
-					</c:when>
-					<c:otherwise>
-						<a href="${cpcso}&pageNum=${i}">[${i}]</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-		
-			<c:if test="${endPageNum!=pageCount}">
-				<a href="${cpcso}&pageNum=${endPageNum+1}">다음</a>
-			</c:if>
-		
-		</c:if>
 		</div>
 	
 	</div>
