@@ -67,7 +67,8 @@
 		text-decoration:none;
 		color:black;
 	}
-	#searchbox{float:right;margin-right:50px;}
+	#searchbox{float:right;margin-right:100px;}
+	#latest{display:none;}
 </style>
 
 
@@ -126,6 +127,11 @@
 		   location.href="/KILA/kila/cart";
 	   }
    }
+   
+   function showLatest(){
+	   var latest=document.getElementById("latest");
+	   latest.style.display="inline";
+   }
 </script>
 
 
@@ -173,9 +179,27 @@
 	</div>
 	<div id="searchbox">
 	   <form method="post" action="${cp}/header/search">
-	   <input type="text" name="search">
-	   <input type="submit" value="검색" width="15" height="15" style="background-color:white;">
+	      <input type="text" name="search" onclick="showLatest()">
+	      <input type="submit" value="검색" width="15" height="15" style="background-color:white;">
 	   </form>
+	   <div id="latest">
+	      <h4>[최근 검색어]</h4>
+	      <%
+	      Cookie[] cookies=request.getCookies();
+	      if(cookies!=null){
+	    	  for(Cookie cookie:cookies){
+	    		  String cookieName=cookie.getName();
+	    		  if(cookieName.startsWith("latest")){
+	    			  String cookieValue=cookie.getValue();
+	    			  %>
+	    			     <li><%=cookieValue %></li>
+	    			  <%
+	    		  }  
+	    	  }  
+	      }
+	      %> 
+	      <h4><a href="${cp}/header/search">검색어 전체삭제</a></h4>  
+	   </div>
 	</div>
 	<div id="product">
 	<br>
