@@ -19,8 +19,9 @@ import kila.vo.SetRankVo;
 
 @WebServlet("/header/purchased")
 public class PurchasedController extends HttpServlet{
+	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		HttpSession s=req.getSession();
 		String id=(String)s.getAttribute("id");

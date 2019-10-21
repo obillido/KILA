@@ -20,7 +20,7 @@ public class ConfirmOrderController extends HttpServlet{
 		if(n>0) {
 			resp.sendRedirect(req.getContextPath()+"/header/purchased");
 		}else {
-			
+			resp.sendRedirect(req.getContextPath()+"/layout.jsp");
 		}
 	}
 }

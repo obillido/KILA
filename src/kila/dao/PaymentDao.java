@@ -160,6 +160,7 @@ public class PaymentDao {
 		try {
 			con=JdbcUtil.getConn();
 			String sql="update payment set status=4 where paynum=? and status<=3";
+			System.out.println(sql);
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1,paynum);
 			return pstmt.executeUpdate();
@@ -367,9 +368,12 @@ public class PaymentDao {
 		PreparedStatement pstmt=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="update product set icnt=icnt-? where pnum=?";
+			String sql="";
+			if(cnt>0) sql="update product set icnt=icnt+? where pnum=?";
+			else      sql="update product set icnt=icnt-? where pnum=?"; 
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, cnt);
+			if(cnt>0) pstmt.setInt(1, cnt);
+			else      pstmt.setInt(1, -cnt);
 			pstmt.setInt(2, pnum);
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
