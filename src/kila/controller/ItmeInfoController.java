@@ -27,6 +27,7 @@ public class ItmeInfoController extends HttpServlet{
 		int colnum=Integer.parseInt(req.getParameter("colnum"));
 		HttpSession session=req.getSession(); 
 		String id=(String)session.getAttribute("id");
+		String type=(String)session.getAttribute("type");
 		ItemInfoDao dao=ItemInfoDao.getInstance();
 		ItemInfoVo vo=dao.productInfos(colnum);
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
@@ -48,6 +49,8 @@ public class ItmeInfoController extends HttpServlet{
 			req.setAttribute("it", it);
 		}
 		ArrayList<InquiryVo> inqList=InquiryDao.getInstance().getList(colnum, at, it, cid);
+		
+		req.setAttribute("type", type);
 		req.setAttribute("cid", cid);
 		req.setAttribute("inqList", inqList);
 		req.setAttribute("cpage", "/kimyungi/ItemInfo.jsp");

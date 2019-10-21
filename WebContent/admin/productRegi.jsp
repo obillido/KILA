@@ -38,7 +38,7 @@
 	<br><br>
 	
 	<form method="post" onsubmit="return check();"
-		action="${pageContext.request.contextPath}/product/productRegi"
+		action="${pageContext.request.contextPath}/product/productRegi?cmd=new"
 		enctype="multipart/form-data">
 		<label for="category">카테고리</label>
 		<select name="cname">
