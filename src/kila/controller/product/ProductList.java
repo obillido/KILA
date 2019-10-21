@@ -85,7 +85,6 @@ public class ProductList extends HttpServlet{
 			endPageNum=pageCount;
 		}
 		
-		
 		ArrayList<ProductInfoVo> list=dao.getList(startRow,endRow,category,order,colorVal,sizeVal,priceVal,div);
 		DecimalFormat fmt=new DecimalFormat("###,###,###,###");
 		
