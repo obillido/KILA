@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kila.dao.PaymentDao;
+import kila.vo.PaymentVo;
 
 @WebServlet("/header/cancelOrder")
 public class CancelOrderController extends HttpServlet{
@@ -18,9 +19,11 @@ public class CancelOrderController extends HttpServlet{
 		PaymentDao dao=PaymentDao.getInstance();
 		int n=dao.cancelOrder(paynum);
 		if(n>0) {
-			resp.sendRedirect(req.getContextPath()+"/header/purchased");
-		}else {
-			
+			PaymentVo vo=dao.getPaymentInfo(paynum);
+			if(dao.updateIcnt(vo.getPnum(), -vo.getCnt())>0){
+				resp.sendRedirect(req.getContextPath()+"/header/purchased");
+			}
 		}
+		resp.sendRedirect(req.getContextPath()+"/layout.jsp");
 	}
 }

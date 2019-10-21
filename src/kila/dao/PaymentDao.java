@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 import jdbc.JdbcUtil;
 import kila.vo.PaymentVo;
 
@@ -51,14 +53,7 @@ public class PaymentDao {
 			pstmt.setInt(3, vo.getCnt());
 			pstmt.setInt(4, vo.getStatus());
 			pstmt.setString(5, vo.getPaymethod());
-			int n = pstmt.executeUpdate();
-			JdbcUtil.close(pstmt);
-			sql="update product set icnt=icnt-? where pnum=?";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getCnt());
-			pstmt.setInt(2, vo.getPnum());
-			n += pstmt.executeUpdate();
-			return n;
+			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println("PaymentDAO:"+se.getMessage());
 			return -1;
@@ -126,6 +121,7 @@ public class PaymentDao {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	
 	public int cancelOrder(int paynum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -360,6 +356,54 @@ public class PaymentDao {
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	
+	
+	public int updateIcnt(int pnum, int cnt) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="update product set icnt=icnt-? where pnum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, cnt);
+			pstmt.setInt(2, pnum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt);
+		}
+	}
+	
+	public PaymentVo getPaymentInfo(int paynum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select bid, pnum, cnt, paydate, status, paymethod from payment where paynum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, paynum);
+			rs=pstmt.executeQuery();
+			PaymentVo vo=null;
+			if(rs.next()) {
+				vo=new PaymentVo(paynum, 
+						rs.getString("bid"), 
+						rs.getInt("pnum"),
+						rs.getInt("cnt"), 
+						rs.getDate("paydate"),
+						rs.getInt("status"),
+						rs.getString("paymethod"));
+			}
+			return vo;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
 		}finally {
 			JdbcUtil.close(con,pstmt,rs);
 		}

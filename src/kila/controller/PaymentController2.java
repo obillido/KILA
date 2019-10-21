@@ -27,10 +27,11 @@ public class PaymentController2 extends HttpServlet{
 		String paymethod = req.getParameter("paymethod");
 		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 1, paymethod);
 		int n=dao.insert(vo);
-		if(n>=2) {
-			resp.sendRedirect(req.getContextPath()+"/header/purchased");
-		}else {
-			req.getRequestDispatcher("/kimyungi/result.jsp").forward(req, resp);
+		if(n>0) {
+			if(dao.updateIcnt(vo.getPnum(), vo.getCnt())>0){
+				resp.sendRedirect(req.getContextPath()+"/header/purchased");
+			}
 		}
+		req.getRequestDispatcher("/kimyungi/result.jsp").forward(req, resp);
 	}
 }
