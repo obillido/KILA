@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import kila.vo.ReviewIndexVo;
+import kila.vo.ReviewVo;
 
 public class ReviewDao {
 	private static ReviewDao instance=new ReviewDao();
@@ -59,6 +60,25 @@ public class ReviewDao {
 		}catch(SQLException se) {
 			System.out.println("ProductRegDAO:"+se.getMessage());
 			return false;
+		}finally {
+			JdbcUtil.close(con,pstmt);
+		}
+	}
+	public int insert(ReviewVo vo) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="insert into review VALUES(review_seq.nextval,?,?,?,sysdate,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getPaynum());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setInt(3, vo.getRpoint());
+			pstmt.setString(4, vo.getSavefilename());
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println("ProductRegDAO:"+se.getMessage());
+			return -1;
 		}finally {
 			JdbcUtil.close(con,pstmt);
 		}

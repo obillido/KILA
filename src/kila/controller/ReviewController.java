@@ -17,13 +17,16 @@ import org.json.JSONObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import kila.dao.ReviewDao;
+import kila.vo.ReviewVo;
+
 @WebServlet("/kila/review")
 public class ReviewController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		String ReviewDirectory="/KILA/upload";
-		System.out.println(saveDirectory);
+		String ReviewDirectory="C:\\Users\\JHTA\\git\\KILA\\WebContent\\upload";
+		System.out.println(ReviewDirectory);
 		MultipartRequest mr=new MultipartRequest(
 				req, 
 				ReviewDirectory,
@@ -41,6 +44,10 @@ public class ReviewController extends HttpServlet{
 		System.out.println(rpoint);
 		System.out.println(paynum);
 		System.out.println(savefilename);
+		ReviewVo vo=new ReviewVo(0, paynum, content, rpoint, null, savefilename);
+		ReviewDao dao=ReviewDao.getInstance();
+		int n=dao.insert(vo);
+		
 	}
 	protected void check(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
