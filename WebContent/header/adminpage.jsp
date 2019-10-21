@@ -11,7 +11,6 @@
     }
     #inner{
     	display:inline-block;
-    	width:500px;
     	text-align:left;
     }
     #adminPage li{width:170px;height:25px;margin-bottom:20px;list-style:none;}
