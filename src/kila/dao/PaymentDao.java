@@ -73,7 +73,7 @@ public class PaymentDao {
 		ArrayList<PaymentVo> list=new ArrayList<PaymentVo>();
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select * from payment where bid=?";
+			String sql="select * from payment where bid=? order by paydate desc";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,bid);
 			rs=pstmt.executeQuery();

@@ -37,8 +37,8 @@
          <th id="t3">결제일</th>
          <th id="t4">결제수단</th>
          <th id="t5">상태</th>
-         <th id="t6">환불요청/취소</th>
          <th id="t7">구매확정</th>
+         <th id="t6">환불요청/취소</th>
          
       </tr>
       <c:forEach var="list" items="${info }">
@@ -48,23 +48,24 @@
             <td id="t3">${list.paydate }</td>
             <td id="t4">${list.paymethod }</td>
             <td id="t5">${list.status }</td>
-            
-            <c:choose>
-               <c:when test="${list.status eq '배송준비' or list.status eq '배송중' or list.status eq '배송완료'}">
-                  <td id="t6"><a href="${pageContext.request.contextPath }/header/cancelOrder?paynum=${list.paynum}">환불요청</a></td>
+          
+         	
+         	<c:choose>
+         	   <c:when test="${list.status eq '구매확정'}">
+         	      <td id="t7">구매확정취소불가</td>
+         	      <td id="t6">환불요청불가</td>
          	   </c:when>
-         	   <c:when test="${list.status eq '환불요청'}">
-         	      <td id="t6"><a href="${pageContext.request.contextPath }/header/returnOrder?paynum=${list.paynum}">환불요청취소</a></td>
+         	   <c:when test="${list.status ne '구매확정'}">
+         	      <td id="t7"><a href="${pageContext.request.contextPath }/header/confirmOrder?paynum=${list.paynum}">구매확정하기</a></td>
          	   </c:when>
          	</c:choose>
          	
          	<c:choose>
-         	   <c:when test="${list.status eq '구매확정'}">
-         	      <td id="t6">환불요청불가</td>
-         	      <td id="t7">구매확정취소불가</td>
+               <c:when test="${list.status eq '배송준비' or list.status eq '배송중' or list.status eq '배송완료'}">
+                  <td id="t7"><a href="${pageContext.request.contextPath }/header/cancelOrder?paynum=${list.paynum}">환불요청</a></td>
          	   </c:when>
-         	   <c:when test="${list.status ne '구매확정'}">
-         	      <td id="t7"><a href="${pageContext.request.contextPath }/header/confirmOrder?paynum=${list.paynum}">구매확정하기</a></td>
+         	   <c:when test="${list.status eq '환불요청'}">
+         	      <td id="t7"><a href="${pageContext.request.contextPath }/header/returnOrder?paynum=${list.paynum}">환불요청취소</a></td>
          	   </c:when>
          	</c:choose>
          	
