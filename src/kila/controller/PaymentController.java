@@ -15,9 +15,11 @@ import org.apache.catalina.startup.SetAllPropertiesRule;
 import kila.dao.BuyerDao;
 import kila.dao.CartDao;
 import kila.dao.ItemInfoDao;
+import kila.dao.PaymentDao;
 import kila.vo.BuyerVo;
 import kila.vo.ItemInfoSizeVo;
 import kila.vo.ItemInfoVo;
+import kila.vo.PaymentVo;
 
 @WebServlet("/kila/payment")
 public class PaymentController extends HttpServlet{
@@ -28,7 +30,6 @@ public class PaymentController extends HttpServlet{
 		if(cmd.equals("insert")) {
 			int colnum=Integer.parseInt(req.getParameter("scolnum"));
 			int psize=Integer.parseInt(req.getParameter("spsize"));
-			System.out.println(psize);
 			int cnt=Integer.parseInt(req.getParameter("pcnt"));
 			HttpSession session=req.getSession(); 
 			String id=(String)session.getAttribute("id");
@@ -44,7 +45,6 @@ public class PaymentController extends HttpServlet{
 		}else if(cmd.equals("cart")) {
 			int paynum=Integer.parseInt(req.getParameter("paynum"));
 			String paymethod = req.getParameter("paymethod");
-			System.out.println(paymethod);
 			CartDao dao=CartDao.getInstance();
 			int n=dao.cpayment(paynum, paymethod);
 			if(n>0) {
@@ -55,11 +55,18 @@ public class PaymentController extends HttpServlet{
 		}else if(cmd.equals("cart2")) {
 			String[] paynum=req.getParameterValues("paynum");
 			String paymethod = req.getParameter("paymethod");
-			System.out.println(paymethod);
-			System.out.println(paynum.length);
 			CartDao dao=CartDao.getInstance();
 			int n=dao.cpayment2(paynum, paymethod);
-			if(n>0) {
+			int n2=0;
+			PaymentDao pdao=PaymentDao.getInstance();
+			for(int i=0; i<paynum.length; i++) {
+				PaymentVo vo=pdao.getPaymentInfo(Integer.parseInt(paynum[i]));
+				n2+=pdao.updateIcnt(vo.getPnum(), -vo.getCnt());
+				if(n2<=0) {
+					n2+=-100;
+				}
+			}
+			if(n>0 && n2>0) {
 				resp.sendRedirect(req.getContextPath()+"/header/purchased");
 			}else {
 				req.getRequestDispatcher("/kimyungi/result2.jsp").forward(req, resp);

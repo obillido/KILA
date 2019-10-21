@@ -27,7 +27,7 @@ public class PaymentController2 extends HttpServlet{
 		String paymethod = req.getParameter("paymethod");
 		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 1, paymethod);
 		int n=dao.insert(vo);
-		int n2=dao.updateIcnt(vo.getPnum(), -vo.getCnt());
+		int n2=dao.updateIcnt(pnum, -cnt);
 		if(n>0 && n2>0) {
 			resp.sendRedirect(req.getContextPath()+"/header/purchased");
 		}else {
