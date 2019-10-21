@@ -165,6 +165,7 @@
 </script>
 <div style="text-align: center; margin-top:50px; min-width:1000px;">
 <div style="text-align: center; display: inline-block;">
+<div style="text-align: center; display: inline-block;">
 <br>
 <br>
 <div style="left:100px">
@@ -326,6 +327,7 @@ imageZoom("img1", "zoom");
 
 <div style="display: inline-block;">
 <jsp:include page="/content/inquiry/inquiry.jsp"/>
+</div>
 </div>
 </div>
 
