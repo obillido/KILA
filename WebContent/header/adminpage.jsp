@@ -26,7 +26,6 @@
 	   <h1 id="h">Admin Page</h1>
 	   <ul>
 	      <li><a href="${cp}/product/productRegi?cmd=new">새상품등록</a></li>
-	      <li><a href="${cp}/product/productRegi?cmd=old">기존상품재고추가</a></li>
 	      <li><a href="${cp}/header/registerEvent">이벤트작성하기</a></li>
 	      <li><a href="${cp}/header/refundList">환불요청목록</a></li>
 	      <li><a href="${cp}/header/salesRevenue">매출보기</a></li>
