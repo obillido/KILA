@@ -19,7 +19,7 @@ public class ReturnOrderController extends HttpServlet{
 		PaymentDao dao=PaymentDao.getInstance();
 		PaymentVo vo=dao.getPaymentInfo(paynum);
 		int n=dao.returnOrder(paynum);
-		int n2=dao.updateIcnt(vo.getPnum(), vo.getCnt());
+		int n2=dao.updateIcnt(vo.getPnum(), -vo.getCnt());
 		if(n>0 && n2>0) {
 			resp.sendRedirect(req.getContextPath()+"/header/purchased");
 		}else {
