@@ -21,22 +21,21 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class ReviewController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String path=req.getSession().getServletContext().getRealPath("/upload");
-		System.out.println(path);
-		MultipartRequest mr=new MultipartRequest(
-					req,
-					path,
-					1024*1024*5,
-					"utf-8",
-					new DefaultFileRenamePolicy()
-				);
 		req.setCharacterEncoding("utf-8");
+		String ReviewDirectory="/KILA/upload";
+		System.out.println(saveDirectory);
+		MultipartRequest mr=new MultipartRequest(
+				req, 
+				ReviewDirectory,
+				1024*1024*20, 
+				"utf-8",
+				new DefaultFileRenamePolicy());
 		HttpSession session=req.getSession(); 
 		String id=(String)session.getAttribute("id");
-		String content=req.getParameter("content");
-		int rpoint=Integer.parseInt(req.getParameter("rpoint"));
-		int paynum=Integer.parseInt(req.getParameter("paynum"));
-		String savefilename=req.getParameter("savefilenum");
+		String content=mr.getParameter("content");
+		int rpoint=Integer.parseInt(mr.getParameter("rpoint"));
+		int paynum=Integer.parseInt(mr.getParameter("paynum"));
+		String savefilename=mr.getFilesystemName("file1");
 		System.out.println(id);
 		System.out.println(content);
 		System.out.println(rpoint);
