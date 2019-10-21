@@ -63,7 +63,7 @@
          	</c:choose>
          	
          	<c:choose>
-         	   <c:when test="${list.status eq '구매확정'}">
+         	   <c:when test="${list.status eq '구매확정' or list.status eq '리뷰완료'}">
          	      <td id="t7"><span>구매확정취소불가</span></td>
          	   </c:when>
          	   <c:when test="${list.status eq '환불완료' or list.status eq '환불요청'}">

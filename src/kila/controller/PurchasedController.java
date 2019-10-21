@@ -50,6 +50,8 @@ public class PurchasedController extends HttpServlet{
 				str="구매확정";
 			}else if(sts==5){
 				str="배송전취소";
+			}else if(sts==6){
+				str="리뷰완료";
 			}else if(sts==11 || sts==12 || sts==13){
 				str="환불요청";
 			}else if(sts==7){
