@@ -251,7 +251,8 @@
 			<c:choose>
 			<c:when test="${not empty list}">
 				<c:forEach var="vo" items="${list}">
-					<a href="${cp}/iteminfo?colnum=${vo.colnum}">
+					<c:if test="${vo.soldout>0}"><a href="${cp}/iteminfo?colnum=${vo.colnum}"></c:if>
+					<c:if test="${vo.soldout==0}"><a href="${cp}/iteminfo?colnum=${vo.colnum}&soldout=soldout"></c:if>			
 					<div class="item">
 						<img src="${cp}/upload/${vo.savefilename}" width="220">
 						<p>${vo.pname}</p>

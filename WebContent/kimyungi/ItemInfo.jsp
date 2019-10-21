@@ -163,7 +163,7 @@
 		}
 	}
 </script>
-<div style="text-align: center;">
+<div style="text-align: center; margin-top:50px; min-width:1000px;">
 <div style="text-align: center; display: inline-block;">
 <br>
 <br>
@@ -192,8 +192,10 @@
    </div>
    <div style="text-align: center;"><br>
    <input type="button" value="-" id="btnminus" onclick="decreaseValue()"><input type="text" id="count" name="pcnt" value=1 readonly="readonly" style="border-style: none; text-align: center;"><input type="button" id="btnplus" value="+" onclick="IncreaseValue()"></div><br>
-   <input type="submit" value="CART" id="btn1" style="width: 145px; height: 40px" disabled="disabled" formaction="${pageContext.request.contextPath }/kila/cart">
-   <input type="submit" value="BUY" id="btn2" style="width: 145px; height: 40px" disabled="disabled">
+   <c:if test="${empty soldout}">
+	   <input type="submit" value="CART" id="btn1" style="width: 145px; height: 40px" disabled="disabled" formaction="${pageContext.request.contextPath }/kila/cart">
+	   <input type="submit" value="BUY" id="btn2" style="width: 145px; height: 40px" disabled="disabled">
+   </c:if>
    <c:if test="${type eq 'A'}">
    		<br><br>
    		<input type="button" value="재고 채우기" style="width:145px; height:40px;"
