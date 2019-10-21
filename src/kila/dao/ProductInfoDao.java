@@ -53,8 +53,8 @@ public class ProductInfoDao {
 		try {
 			con=JdbcUtil.getConn();
 			String cwhere="";
-			if(!category.equals("all")) cwhere="and cname='"+category+"' ";
-
+			if(category!=null && !category.equals("all")) cwhere="and cname='"+category+"' ";
+			
 			String colorwhere="";
 			String sizewhere="";
 			String pricewhere="";
@@ -103,8 +103,10 @@ public class ProductInfoDao {
 					owhere=" and pay.colnum=color.colnum ";
 					oselect=", pscnt ";
 					orderby=" pscnt desc"; break;
-			case 2: otable=", (select pnum, min(regdate) mr from product_reg group by pnum) pr ";
-					owhere=" and product.colnum=color.colnum and pr.pnum=product.pnum ";
+			case 2: otable=", (select colnum, min(mr) mr from product, " + 
+							"(select pnum, min(regdate) mr from product_reg group by pnum) pr " + 
+							"where pr.pnum=product.pnum group by colnum) pr ";
+					owhere="  and pr.colnum=color.colnum ";
 					oselect=", mr ";
 					orderby="mr desc"; 
 					break;
@@ -114,7 +116,7 @@ public class ProductInfoDao {
 			}
 			
 			
-			if(category.equals("all") || category==null || category.equals("")) cwhere="";
+			if(category==null || category.equals("all") || category.equals("")) cwhere="";
 			
 			
 			String sql= "select * from "+
@@ -182,7 +184,7 @@ public class ProductInfoDao {
 		try {
 			con=JdbcUtil.getConn();
 			String cwhere="";
-			if(!category.equals("all")) cwhere="and cname='"+category+"' ";
+			if(category!=null && !category.equals("all")) cwhere="and cname='"+category+"' ";
 
 			String colorwhere="";
 			if(colorVal!=null && !colorVal.equals("")) {
@@ -241,7 +243,7 @@ public class ProductInfoDao {
 		try {
 			con=JdbcUtil.getConn();
 			String cwhere="";
-			if(!category.equals("all")) cwhere=" where cname='"+category+"' ";
+			if(category!=null && !category.equals("all")) cwhere=" where cname='"+category+"' ";
 			String sql="select min(price) minP, max(price) maxP from product_name" + cwhere;
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
@@ -264,10 +266,15 @@ public class ProductInfoDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="";
+			String sql="select pname, color.colnum, color, price, savefilename, mr from product_name, color, " + 
+					"(select colnum, min(mr) mr from product, " + 
+					"(select pnum, min(regdate) mr from product_reg group by pnum) pr " + 
+					"where pr.pnum=product.pnum group by colnum) pr1 " + 
+					"where color.colnum=pr1.colnum and product_name.pcode=color.pcode and to_char(mr) in (select to_char(max(mr)) mr from " + 
+					"(select min(mr) mr from product, " + 
+					"(select pnum, min(regdate) mr from product_reg group by pnum) pr " + 
+					"where pr.pnum=product.pnum group by colnum  order by mr desc)) ";
 			pstmt=con.prepareStatement(sql);
-			
-			
 			rs=pstmt.executeQuery();
 			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
 			while(rs.next()) {
@@ -275,7 +282,7 @@ public class ProductInfoDao {
 						null, 
 						null,
 						rs.getString("pname"), 
-						0,
+						rs.getInt("price"),
 						rs.getInt("colnum"),
 						rs.getString("color"),
 						rs.getString("savefilename"),

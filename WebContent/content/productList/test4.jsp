@@ -34,6 +34,18 @@
 	<input type="range" name="range" id="range-1b" step="1000" min="0" max="1000000" value="1000000" data-popup-enabled="true" data-show-value="true">
 </div>
 
+Filter by price interval: <b>¢æ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>¢æ 1000</b>
+
+<script type="text/javscript">
+	// With JQuery
+$("#ex2").slider({});
+
+// Without JQuery
+var slider = new Slider('#ex2', {});
+
+</script>
+
+
 
 </body>
 </html>

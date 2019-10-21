@@ -12,14 +12,14 @@
 	}
 	#newList #inner{
 		display:inline-block;
-		width:1250px;
+		width:1200px;
 		margin-top:50px;
 	}
 
 	
 	.item{
 		float:left;
-		width:220px; height:350px;
+		width:370px; height:400px;
 		margin-left:20px;
 		margin-top:30px;
 		margin-bottom:20px;
@@ -29,11 +29,16 @@
 		color:black;
 	}
 	.item p{
-		padding:2px 10px;
 		color:black;
+		margin-left:20px;
 		text-align:left;
 	}
-
+	.item img:hover{
+		filter:brightness(50%);
+	}
+	.text{
+		border:1px solid black;
+	}
 </style>
 
 
@@ -43,7 +48,7 @@
 	<c:forEach var="vo" items="${list}">	
 		<div class="item">
 		<a href="${cp}/iteminfo?colnum=${vo.colnum}">
-			<img src="${cp}/upload/${vo.savefilename}" width="300">
+			<img src="${cp}/upload/${vo.savefilename}" width="350">
 			<p>${vo.pname}</p>
 			<p>${vo.color}</p>
 		</div>
