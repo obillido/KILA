@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import kila.dao.InquiryDao;
 import kila.dao.ItemInfoDao;
+import kila.dao.ProductDao;
 import kila.dao.ReviewDao;
 import kila.vo.InquiryVo;
 import kila.vo.ItemInfoSizeVo;
@@ -33,13 +34,14 @@ public class ItmeInfoController extends HttpServlet{
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		ArrayList<ReviewIndexVo> review=ReviewDao.getInstance().getIndex(id, colnum);
 		ArrayList<ReviewListVo> rlist=ReviewDao.getInstance().list(colnum);
-		String soldout=req.getParameter("soldout");
-		if(soldout!=null) req.setAttribute("soldout", soldout);
 		req.setAttribute("vo", vo);
 		req.setAttribute("list",list);
 		req.setAttribute("review", review);
 		req.setAttribute("rlist", rlist);
 		
+		
+		boolean bs=ProductDao.getInstance().isSoldout(colnum);
+		if(bs) req.setAttribute("soldout", "soldout");
 		String att=req.getParameter("at");
 		int at=0,it=0;
 		String cid=req.getParameter("cid");
@@ -51,7 +53,7 @@ public class ItmeInfoController extends HttpServlet{
 		}
 		
 		InquiryDao idao=InquiryDao.getInstance();
-		String spageNumInq=req.getParameter("pageNumIn1");
+		String spageNumInq=req.getParameter("pageNumInq");
 		int pageNumInq=1;
 		if(spageNumInq!=null) pageNumInq=Integer.parseInt(spageNumInq);
 		int endRowInq=pageNumInq*10;
@@ -67,11 +69,14 @@ public class ItmeInfoController extends HttpServlet{
 		req.setAttribute("startPageNumInq", startPageNumInq);
 		req.setAttribute("endPageNumInq", endPageNumInq);
 		req.setAttribute("pageCountInq", pageCountInq);
+		if(spageNumInq!=null || att!=null) {
+			req.setAttribute("inqPage", "inquiry");
+		}
 		
 		req.setAttribute("type", type);
 		req.setAttribute("cid", cid);
 		req.setAttribute("inqList", inqList);
 		req.setAttribute("cpage", "/kimyungi/ItemInfo.jsp");
-		req.getRequestDispatcher("/layout.jsp#inquiryTitle").forward(req, resp);
+		req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 	}
 }

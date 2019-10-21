@@ -198,17 +198,18 @@
 	   <input type="submit" value="BUY" id="btn2" style="width: 145px; height: 40px" disabled="disabled">
    </c:if>
    <c:if test="${type eq 'A'}">
-   		<br><br>
+ 
+		<br><br>
    		<input type="button" value="재고 채우기" style="width:145px; height:40px;"
    			onclick="location.href='${pageContext.request.contextPath}/product/productRegi?cmd=old&colnum=${vo.colnum}'">
    </c:if>
-   
    </form>
 </div>
 </div>
 </div>
 </div>
-<div>
+<div style="margin-top:50px;">
+<hr><br><br>
 <span style="font-size: 15px">REVIEW | 문의글 혹은 악의적인 비방글은 무통보 삭제된다는 점 유의해주세요^^</span>
 <form method="post" action="${pageContext.request.contextPath }/kila/reviewReg" onsubmit="return rinsert2('${id},${vo.colnum }')" enctype="multipart/form-data">
 <div style=" display: inline-block;">
@@ -325,7 +326,7 @@ imageZoom("img1", "zoom");
 </div>
 
 
-<div style="display: inline-block;">
+<div style="display: inline-block;" id="inquiryPage">
 <jsp:include page="/content/inquiry/inquiry.jsp"/>
 </div>
 </div>

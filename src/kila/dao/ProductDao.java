@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 import jdbc.JdbcUtil;
 import kila.vo.ColorVo;
 import kila.vo.ProductInfoVo;
@@ -154,4 +156,27 @@ public class ProductDao {
 		}
 	}
 	
+	
+	public boolean isSoldout(int colnum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from (select colnum, sum(icnt) scnt from product where colnum=? group by colnum) where scnt=0";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, colnum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return false;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
 }

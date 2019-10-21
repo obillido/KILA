@@ -106,7 +106,21 @@
 		margin-right:30px;
 		margin-bottom:10px;
 	}
+	
+	
+	
+	#inquiry #paging{
+		width:95%;
+		text-align:center;
+		font-size:30px;
+	}
+	#inquiry #paging a{
+		text-decoration:none;
+		color:black;
+	}
+	
 </style>
+
 
 
 <div id="inquiry">
@@ -132,63 +146,62 @@
 		<hr>
 		
 		<div id="inquiryList">
-		<c:choose>
-			<c:when test="${not empty inqList}">
-				<c:forEach var="vo" items="${inqList}">
-					<div id="contentList${vo.inum}" class="cList">
-						<div  onclick="showInqContent(${vo.inum},'${type}')">
-							<c:choose>
-								<c:when test="${vo.lev=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
-								<c:when test="${vo.lev=='2'}"><span class="state" style="color:red;">완료</span></c:when>
-							</c:choose>
-							<span class="inqtype">
+			<c:choose>
+				<c:when test="${not empty inqList}">
+					<c:forEach var="vo" items="${inqList}">
+						<div id="contentList${vo.inum}" class="cList">
+							<div  onclick="showInqContent(${vo.inum},'${type}')">
 								<c:choose>
-									<c:when test="${vo.inqtype=='1'}">사이즈</c:when>
-									<c:when test="${vo.inqtype=='2'}">배송</c:when>
-									<c:when test="${vo.inqtype=='3'}">재입고</c:when>
-									<c:when test="${vo.inqtype=='4'}">기타</c:when>
+									<c:when test="${vo.lev=='1'}"><span class="state" style="color:blue;">대기</span></c:when>
+									<c:when test="${vo.lev=='2'}"><span class="state" style="color:red;">완료</span></c:when>
 								</c:choose>
-							</span>
-							<span class="title">${vo.title}</span>
-							<span class="name">${vo.id}</span>
-							<span class="regdate">${vo.regdate}</span>
+								<span class="inqtype">
+									<c:choose>
+										<c:when test="${vo.inqtype=='1'}">사이즈</c:when>
+										<c:when test="${vo.inqtype=='2'}">배송</c:when>
+										<c:when test="${vo.inqtype=='3'}">재입고</c:when>
+										<c:when test="${vo.inqtype=='4'}">기타</c:when>
+									</c:choose>
+								</span>
+								<span class="title">${vo.title}</span>
+								<span class="name">${vo.id}</span>
+								<span class="regdate">${vo.regdate}</span>
+							</div>
 						</div>
-					</div>
-					<hr>
-					<div style="clear:both;"></div>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<p>작성된 상품 문의글이 없습니다.</p>
-			</c:otherwise>	
-		</c:choose>
-	</div>
+						<hr>
+						<div style="clear:both;"></div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<p>작성된 상품 문의글이 없습니다.</p>
+				</c:otherwise>	
+			</c:choose>
+		</div>
 	
-	<c:choose>
-	<c:when test="${vo.soldout>0}"><c:set var="cpcol" value="${pageContext.request.contextPath}/iteminfo?colnum=${vo.colnum}"/></c:when>
-	<c:otherwise><c:set var="cpcol" value="${pageContext.request.contextPath}/iteminfo?colnum=${vo.colnum}&soldout=soldout"/></c:otherwise>
-	</c:choose>
-	<div id="paging">
-		<c:if test="${not empty pageCountInq}">
-			<c:if test="${startPageNumInq!=1}">
-				<a href="${cpcol}&pageNumInq=${startPageNumInq-1}">이전</a>
+	
+		<c:set var="cpcol" value="${pageContext.request.contextPath}/iteminfo?colnum=${vo.colnum}"/>
+		<div id="paging">
+			<c:if test="${not empty pageCountInq}">
+				<c:if test="${startPageNumInq!=1}">
+					<a href="${cpcol}&pageNumInq=${startPageNumInq-1}">이전</a>
+				</c:if>
+			
+				<c:forEach var="i" begin="${startPageNumInq}" end="${endPageNumInq}">
+					<c:choose>
+						<c:when test="${pageNumInq==i}">
+							<a href="${cpcol}&pageNumInq=${i}" style="color:red;">[${i}]</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${cpcol}&pageNumInq=${i}">[${i}]</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			
+				<c:if test="${endPageNumInq!=pageCountInq}">
+					<a href="${cpcol}&pageNumInq=${endPageNumInq+1}">다음</a>
+				</c:if>
 			</c:if>
-		
-			<c:forEach var="i" begin="${startPageNumInq}" end="${endPageNumInq}">
-				<c:choose>
-					<c:when test="${pageNumInq==i}">
-						<a href="${cpcol}&pageNumInq=${i}" style="color:red;">[${i}]</a>
-					</c:when>
-					<c:otherwise>
-						<a href="${cpcol}&pageNumInq=${i}">[${i}]</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-		
-			<c:if test="${endPageNumInq!=pageCountInq}">
-				<a href="${cpcol}&pageNumInq=${endPageNumInq+1}">다음</a>
-			</c:if>
-		</c:if>
+		</div>
 	</div>
 </div>
 
@@ -196,7 +209,23 @@
 
 
 
+
+
+
+
+
+
 <script type="text/javascript">
+	window.onload=function(){
+		var req=new Request();
+		var inqPage=req.getParameter("inqPage");
+		if(inqPage=="inquiry"){
+			var i= document.getElementById("inquiry");
+	        i.scrollIntoView();
+		}
+	}
+
+
 	function showInquiryReg(id,colnum){
 		if(id==null){
 			alert("로그인 후 이용가능합니다.");
@@ -291,7 +320,7 @@
 	
 	function checkMyInq(id,colnum){
 		var cmi=document.getElementById("cmi");
-		if(id==null){
+		if(id==null || id==""){
 			alert("로그인 후 이용가능합니다.");
 			cmi.checked=false;
 		}else{

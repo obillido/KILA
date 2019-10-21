@@ -156,7 +156,7 @@ public class InquiryDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select count(*) cnt" 
+			String sql="select count(*) cnt " 
 					+ "from inquiry, (select inum, max(lev) ml from inquiry group by inum) ii "
 					+ "where colnum=? and inquiry.inum=ii.inum and inquiry.lev=1 ";
 			pstmt=con.prepareStatement(sql);
