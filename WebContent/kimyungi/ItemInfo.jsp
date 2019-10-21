@@ -192,7 +192,7 @@
 </div>
 <div>
 <span style="font-size: 15px">REVIEW | 문의글 혹은 악의적인 비방글은 무통보 삭제된다는 점 유의해주세요^^</span>
-<form method="post" action="${pageContext.request.contextPath }/kila/review" onsubmit="return rinsert2('${id},${vo.colnum }')" enctype="multipart/form-data">
+<form method="post" action="${pageContext.request.contextPath }/kila/reviewReg" onsubmit="return rinsert2('${id},${vo.colnum }')" enctype="multipart/form-data">
 <div style=" display: inline-block;">
 <c:if test="${not empty review}">
 <br>
@@ -203,6 +203,8 @@
 </select><c:forEach begin="1" end="63">&nbsp</c:forEach>
 </c:if>
 </div><br>
+<input type="hidden" name="colnum" value="${vo.colnum }">
+<input type="hidden" name="cmd" value="insert">
 <textarea name="content" rows="10" cols="93"onKeyUp="javascript:fnChkByte(this,'500')" onkeypress="rinsert('${id}')" onclick="rinsert('${id}')"></textarea>
  <br><input type="file" name="file1"> <c:forEach begin="1" end="57">&nbsp</c:forEach><span id="byteInfo">0</span>/500bytes<br>
  <select name="rpoint" style="width: 450px; height: 35px; font-size: 20px; display: inline-block;">
@@ -214,6 +216,7 @@
  </select>
  <button type="submit" style="background-color:pink; width: 200px"><img src="${pageContext.request.contextPath }/upload/pencil.png" width="30px" height="25px">리뷰등록하기</button>
 </form>
+<
 
 
 <script type="text/javascript">

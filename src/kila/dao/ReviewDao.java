@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
 import kila.vo.ReviewIndexVo;
+import kila.vo.ReviewListVo;
 import kila.vo.ReviewVo;
 
 public class ReviewDao {
@@ -79,6 +80,28 @@ public class ReviewDao {
 		}catch(SQLException se) {
 			System.out.println("ProductRegDAO:"+se.getMessage());
 			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt);
+		}
+	}
+	public ArrayList<ReviewListVo> list(int colnum){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, colnum);
+			rs=pstmt.executeQuery();
+			ArrayList<ReviewListVo> list=new ArrayList<ReviewListVo>();
+			if(rs.next()) {
+				list.add(new ReviewListVo(rs.getInt("rpoint"),rs.getString("content"),rs.getString("savefilename"),rs.getString("bid"),rs.getDate("regdate"),rs.getString("color"),rs.getInt("size"));
+			}
+			return false;
+		}catch(SQLException se) {
+			System.out.println("ProductRegDAO:"+se.getMessage());
+			return false;
 		}finally {
 			JdbcUtil.close(con,pstmt);
 		}
