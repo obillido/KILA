@@ -51,7 +51,14 @@ public class PaymentDao {
 			pstmt.setInt(3, vo.getCnt());
 			pstmt.setInt(4, vo.getStatus());
 			pstmt.setString(5, vo.getPaymethod());
-			return pstmt.executeUpdate();
+			int n = pstmt.executeUpdate();
+			JdbcUtil.close(pstmt);
+			sql="update product set icnt=icnt-? where pnum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getCnt());
+			pstmt.setInt(2, vo.getPnum());
+			n += pstmt.executeUpdate();
+			return n;
 		}catch(SQLException se) {
 			System.out.println("PaymentDAO:"+se.getMessage());
 			return -1;
