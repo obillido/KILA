@@ -26,6 +26,7 @@ public class ItmeInfoController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int colnum=Integer.parseInt(req.getParameter("colnum"));
+		String cmd=req.getParameter("cmd");
 		HttpSession session=req.getSession(); 
 		String id=(String)session.getAttribute("id");
 		String type=(String)session.getAttribute("type");
@@ -38,6 +39,7 @@ public class ItmeInfoController extends HttpServlet{
 		req.setAttribute("list",list);
 		req.setAttribute("review", review);
 		req.setAttribute("rlist", rlist);
+		req.setAttribute("cmd", cmd);
 		
 		
 		boolean bs=ProductDao.getInstance().isSoldout(colnum);

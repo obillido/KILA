@@ -236,6 +236,13 @@
  <button type="submit" style="background-color:pink; width: 200px"><img src="${pageContext.request.contextPath }/upload/pencil.png" width="30px" height="25px">리뷰등록하기</button>
 </form>
 <br>
+<div style="text-align: left;">
+<c:choose><c:when test="${cmd == 'list'}"><b>등록순</b></c:when><c:when test="${cmd =='list2' }"><b>평점순</b></c:when></c:choose>
+ 리뷰(${rlist.size() }) | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&cmd=list">등록순</a>
+| <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&cmd=list2">평점순</a>
+</div>
+<c:choose>
+	<c:when test="${not empty rlist}">
 	<c:set var="i" value="1"/>
 	<c:set var="sum" value="0"/>
 	<c:forEach var="rl" items="${rlist }">
@@ -267,9 +274,14 @@
 			컬러:${rl.color }<br>
 		</div>
 		<br><b>${rl.content }</b><br><br><br>
-		<c:if test="${not empty rl.savefilename}">
-		<img src="${pageContext.request.contextPath }/upload/${rl.savefilename }" style="width: 150px; height: 150px">
-		</c:if>
+		<c:choose>
+			<c:when test="${not empty rl.savefilename}">
+				<img src="${pageContext.request.contextPath }/upload/${rl.savefilename }" style="width: 150px; height: 150px">
+			</c:when>
+			<c:otherwise>
+				이미지가 없는 리뷰입니다.
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div style="float: right; padding: 20px; width: 150px; height: 100%;">
 		<br>작성자<br>
@@ -286,6 +298,14 @@
 	<br>
 	<br>
 	</c:forEach>
+	<hr style="width: 750px; display: inline-block;">
+	</c:when>
+	<c:otherwise>
+	<hr><br>
+		작성된 상품 리뷰가 없습니다. 첫번째 리뷰의 주인공이 되어주세요.<br><br>
+	<hr>
+	</c:otherwise>
+</c:choose>
 <script type="text/javascript">
  function fnChkByte(obj, maxByte)
  {
