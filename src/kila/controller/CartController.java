@@ -1,6 +1,7 @@
 package kila.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -28,8 +29,10 @@ public class CartController extends HttpServlet{
 			HttpSession session=req.getSession(); 
 			String id=(String)session.getAttribute("id");
 			ArrayList<CartVo> list=CartDao.getInstance().list(id);
+			DecimalFormat fmf=new DecimalFormat("#,###");
 			req.setAttribute("list", list);
 			req.setAttribute("cpage", "/kimyungi/cartview.jsp");
+			req.setAttribute("fmf", fmf);
 			req.getRequestDispatcher("/layout.jsp").forward(req, resp);
 		}else if(cmd.equals("insert")) {
 			insert(req,resp);
