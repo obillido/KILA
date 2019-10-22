@@ -240,8 +240,8 @@
 <br>
 <div style="text-align: left;">
 <c:choose><c:when test="${ch == 'rnum'}"><b>등록순</b></c:when><c:when test="${ch =='rpoint' }"><b>평점순</b></c:when></c:choose>
- 리뷰<c:if test="${not empty rlist.size()}">(${rlist.size() })</c:if> | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rnum">등록순</a>
-| <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rpoint">평점순</a>
+ 리뷰<c:if test="${not empty rlist.size()}">(${rlist.size() })</c:if> | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rnum" style="text-decoration: none;">등록순</a>
+| <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rpoint" style="text-decoration: none;">평점순</a>
 <hr>
 </div>
 <c:choose>
@@ -305,11 +305,11 @@
 		<c:choose>
 			<c:when test="${i==pageNum }">
 				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}&colnum=${vo.colnum }" style=" text-decoration: none;">
-				<b><span style='color:deepred; font-size: 40px; text-decoration: none;'>[${i }]</span></a></b>
+				<b><span style='color:deepred; font-size: 30px; text-decoration: none;'>[${i }]</span></a></b>
 			</c:when>
 			<c:otherwise>
 				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}&colnum=${vo.colnum }" style=" text-decoration: none;">
-				<b><span style='color:#999; font-size: 30px;'>[${i }]</span></a></b>
+				<b><span style='color:#999; font-size: 25px;'>[${i }]</span></a></b>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
