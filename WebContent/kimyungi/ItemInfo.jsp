@@ -171,8 +171,8 @@
 <br>
 <br>
 <div style="left:100px">
-<div style="width: 400px;height: 500px; float: left;">
-<img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="position:static; width: 350px;height: 400px" onmouseover="zoomup()" onmouseout="zoomdown()">
+<div style="width: 450px;height: 550px; float: left;">
+<img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="position:static; width: 400px;height: 450px" onmouseover="zoomup()" onmouseout="zoomdown()">
 </div>
 <div style="width: 400px;height: 500px; position: relative; float: right;">
 <div id="zoom" class="img-zoom-result" style="width: 300px;height: 300px; position: absolute; z-index: 1">
@@ -240,8 +240,8 @@
 <br>
 <div style="text-align: left;">
 <c:choose><c:when test="${ch == 'rnum'}"><b>등록순</b></c:when><c:when test="${ch =='rpoint' }"><b>평점순</b></c:when></c:choose>
- 리뷰<c:if test="${not empty rlist.size()}">(${rlist.size() })</c:if> | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rnum">등록순</a>
-| <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rpoint">평점순</a>
+ 리뷰<c:if test="${not empty rlist.size()}">(${rlist.size() })</c:if> | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rnum" style="text-decoration: none;">등록순</a>
+| <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rpoint" style="text-decoration: none;">평점순</a>
 <hr>
 </div>
 <c:choose>
@@ -305,11 +305,11 @@
 		<c:choose>
 			<c:when test="${i==pageNum }">
 				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}&colnum=${vo.colnum }" style=" text-decoration: none;">
-				<b><span style='color:deepred; font-size: 40px; text-decoration: none;'>[${i }]</span></a></b>
+				<b><span style='color:deepred; font-size: 30px; text-decoration: none;'>[${i }]</span></a></b>
 			</c:when>
 			<c:otherwise>
 				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}&colnum=${vo.colnum }" style=" text-decoration: none;">
-				<b><span style='color:#999; font-size: 30px;'>[${i }]</span></a></b>
+				<b><span style='color:#999; font-size: 25px;'>[${i }]</span></a></b>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
