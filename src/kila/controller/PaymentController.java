@@ -47,7 +47,10 @@ public class PaymentController extends HttpServlet{
 			String paymethod = req.getParameter("paymethod");
 			CartDao dao=CartDao.getInstance();
 			int n=dao.cpayment(paynum, paymethod);
-			if(n>0) {
+			PaymentDao pdao=PaymentDao.getInstance();
+			PaymentVo vo=pdao.getPaymentInfo(paynum);
+			int n2=pdao.updateIcnt(vo.getPnum(), -vo.getCnt());
+			if(n>0 && n2>0) {
 				resp.sendRedirect(req.getContextPath()+"/header/purchased");
 			}else {
 				req.getRequestDispatcher("/kimyungi/result3.jsp").forward(req, resp);
@@ -63,7 +66,7 @@ public class PaymentController extends HttpServlet{
 				PaymentVo vo=pdao.getPaymentInfo(Integer.parseInt(paynum[i]));
 				n2+=pdao.updateIcnt(vo.getPnum(), -vo.getCnt());
 				if(n2<=0) {
-					n2+=-100;
+					n2+=-10000;
 				}
 			}
 			if(n>0 && n2>0) {
