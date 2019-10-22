@@ -77,14 +77,7 @@
 	#searchbox input[type=text]{
 		width:200px; height:30px;
 	}
-	#searchbox input[type=submit]{
-		background-image:url('/images/magnifier.png');
-		background-repeat:no-repeat;
-		width:50px;
-		height:30px;
-		cursor:pointer;
-		outline:0;
-	}
+
 	#searchList .search .keyword{
 		display:inline-block;
 		width:200px;
@@ -153,6 +146,7 @@
 
 	var slistxhr=null;
 	function getSearchKeywordList(cmd, keyword){
+		alert("여기들어오나??");
 		slistxhr=new XMLHttpRequest();
 		slistxhr.onreadystatechange=searchListOk;
 		slistxhr.open('get','search?cmd='+cmd+'&keyword='+keyword,true);
@@ -166,7 +160,7 @@
 			removeSearchList();
 			for(var i=json.length-1; i>=0; i--){
 				var div=document.createElement("div");
-				div.innerHTML="<a href='javascript:getSearchKeywordList('search','"+json[i]+"')' class='keyword'>"+json[i]+"</a>"
+				div.innerHTML="<a href='${pageContext.request.contextPath}/search?cmd=search&keyword="+json[i]+"' class='keyword'>"+json[i]+"</a>"
 							+ "<a href='javascript:getSearchKeywordList('delete',"+json[i]+"')'>삭제</a>";
 				div.className="search";
 				searchList.appendChild(div);

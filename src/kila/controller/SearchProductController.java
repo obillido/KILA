@@ -39,7 +39,7 @@ public class SearchProductController extends HttpServlet{
 			req.setAttribute("fmt", fmt);
 			req.setAttribute("list",list);
 			req.setAttribute("keyword",keyword);
-			req.setAttribute("cpage", "/header/search.jsp");
+			req.setAttribute("cpage", "/content/productList/searchList.jsp");
 			req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 		}else {
 			if(cmd.equals("deleteAll")) {
