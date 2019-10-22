@@ -25,31 +25,34 @@ public class SearchProductController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String cmd=req.getParameter("cmd");
-		String search=req.getParameter("search");
+		String keyword=req.getParameter("keyword");
 		if(cmd.equals("search")) {
 			Cookie[] cookies=req.getCookies();
 			String cn="cookie"+cookies.length;
-			Cookie cookie=new Cookie(cn,search);
+			Cookie cookie=new Cookie(cn,keyword);
 			cookie.setPath("/");
 			cookie.setMaxAge(60*60*24*7);
 			resp.addCookie(cookie);
 			
-			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList(search);
+			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList(keyword);
 			DecimalFormat fmt=new DecimalFormat("###,###,###");
 			req.setAttribute("fmt", fmt);
 			req.setAttribute("list",list);
-			req.setAttribute("search",search);
+			req.setAttribute("keyword",keyword);
 			req.setAttribute("cpage", "/header/search.jsp");
 			req.getRequestDispatcher("/layout.jsp").forward(req,resp);
-		}else if(cmd.equals("deleteAll")) {
-			deleteAll(req,resp);
-		}else if(cmd.equals("delete")){
-			delete(req,resp,search);
-		}else if(cmd.equals("list")) {
-			Cookie[] cookies2=req.getCookies();
+		}else {
+			if(cmd.equals("deleteAll")) {
+				System.out.println("여기 들어오나..?");
+				deleteAll(req,resp);
+			}else if(cmd.equals("delete")){
+				delete(req,resp,keyword);
+			}
+			
+			Cookie[] cookies=req.getCookies();
 			ArrayList<String> slist=new ArrayList<String>();
-			if(cookies2!=null) {
-				for(Cookie cookie:cookies2) {
+			if(cookies!=null) {
+				for(Cookie cookie:cookies) {
 					String cookieValue=cookie.getValue();
 					slist.add(cookieValue);
 				}
@@ -78,12 +81,12 @@ public class SearchProductController extends HttpServlet{
 	}
 	
 	
-	public void delete(HttpServletRequest req, HttpServletResponse resp, String search) throws ServletException, IOException  {
+	public void delete(HttpServletRequest req, HttpServletResponse resp, String keyword) throws ServletException, IOException  {
 		Cookie[] cookies=req.getCookies();
 		if(cookies!=null) {
 			for(Cookie cookie:cookies) {
 				String cookieName=cookie.getName();
-				if(cookieName.equals(search)) {
+				if(cookieName.equals(keyword)) {
 					Cookie ck=new Cookie(cookieName,"");
 					ck.setPath("/");
 					ck.setMaxAge(0);

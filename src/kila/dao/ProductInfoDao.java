@@ -376,13 +376,13 @@ public class ProductInfoDao {
 	}
 	
 	
-	public ArrayList<ProductInfoVo> getList(String search){
+	public ArrayList<ProductInfoVo> getList(String keyword){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select cname, pname, price, color.* from product_name pn, color where pn.pcode=color.pcode and pname like '%" + search + "%'";
+			String sql="select cname, pname, price, color.* from product_name pn, color where pn.pcode=color.pcode and pname like '%" + keyword + "%'";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			ArrayList<ProductInfoVo> list=new ArrayList<ProductInfoVo>();
