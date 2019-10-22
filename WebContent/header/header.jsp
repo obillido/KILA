@@ -149,7 +149,7 @@
 			var searchList=document.getElementById("searchList");
 			for(var i=0; i<json.length; i++){
 				var div=document.createElement("div");
-				div.innerHTML="<a href='${pageContext.request.contextPath}/header/search'></a>";
+				div.innerHTML="<a href='${pageContext.request.contextPath}/header/search?cmd=search&search="+json[i]+"'>"+json[i]+"</a>";
 			}
 		}
 	}
