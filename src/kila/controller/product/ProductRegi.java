@@ -56,7 +56,6 @@ public class ProductRegi extends HttpServlet{
 			}
 		}else {
 			String saveDirectory=req.getSession().getServletContext().getRealPath("/upload");
-			System.out.println(saveDirectory);
 			MultipartRequest mr=new MultipartRequest(
 					req, 
 					saveDirectory,
