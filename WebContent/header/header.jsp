@@ -152,7 +152,8 @@
 			}
 		}
 	}
-		var latest=document.getElementById("latest");
+	function showLatestSearch(){
+		var latest=document.getElementById("searchList");
 		if( latest.style.display=="inline"){
 			latest.style.display="none";
 		}else{
@@ -206,7 +207,7 @@
 	</div>
 	<div id="searchbox">
 	   <form method="post" action="${cp}/header/search">
-	      <input type="text" name="search" onclick="showLatest()">
+	      <input type="text" name="search" onclick="showLatestSearch()">
 	      <input type="submit" value="검색" width="15" height="15" style="background-color:white;">
 	   </form>
 	   
