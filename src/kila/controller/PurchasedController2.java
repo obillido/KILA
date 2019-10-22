@@ -21,8 +21,6 @@ public class PurchasedController2 extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id=req.getParameter("id");
-		System.out.println(id);
-		
 		String spageNum=req.getParameter("pageNum");
 		int pageNum=1;
 		if(spageNum!=null) {
