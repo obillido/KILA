@@ -84,8 +84,7 @@ public class ReviewDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
-	public ArrayList<ReviewListVo> list(int colnum,String ch){
-		System.out.println(colnum);
+	public ArrayList<ReviewListVo> list(int colnum,String ch,int startRow,int endRow){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

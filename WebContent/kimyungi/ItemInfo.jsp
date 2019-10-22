@@ -66,6 +66,8 @@
 	function viewcnt(icnt,psize){
 		sig=true;
 		var cntsr=document.getElementById("cntsr");
+		var cnt=document.getElementById("count");
+		cnt.value=1;
 		document.getElementById("btn1").disabled = false;
 		btn2=document.getElementById("btn2").disabled = false;
 		cntsr.style.display="block";
@@ -238,7 +240,7 @@
 <br>
 <div style="text-align: left;">
 <c:choose><c:when test="${ch == 'rnum'}"><b>등록순</b></c:when><c:when test="${ch =='rpoint' }"><b>평점순</b></c:when></c:choose>
- 리뷰(${rlist.size() }) | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rnum">등록순</a>
+ 리뷰<c:if test="${not empty rlist.size()}">(${rlist.size() })</c:if> | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rnum">등록순</a>
 | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rpoint">평점순</a>
 <hr>
 </div>
@@ -298,6 +300,20 @@
 	<br>
 	<br>
 	</c:forEach>
+	<div>
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<c:choose>
+			<c:when test="${i==pageNum }">
+				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}">
+				<b><span style='color:darkblue'>[${i }]</span></a></b>
+			</c:when>
+			<c:otherwise>
+				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}">
+				<span style='color:#999'>[${i }]</span></a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+</div>
 	</c:when>
 	<c:otherwise>
 	<br>
