@@ -9,23 +9,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import kila.dao.BuyerDao;
 import kila.dao.PaymentDao;
 import kila.dao.RankDao;
 import kila.vo.MyPaymentVo;
 import kila.vo.PaymentVo;
 import kila.vo.SetRankVo;
 
-@WebServlet("/header/purchased")
-public class PurchasedController extends HttpServlet{
+@WebServlet("/header/purchased2")
+public class PurchasedController2 extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		
-		HttpSession s=req.getSession();
-		String id=(String)s.getAttribute("id");
+		String id=req.getParameter("id");
 		
 		String spageNum=req.getParameter("pageNum");
 		int pageNum=1;
@@ -92,25 +87,17 @@ public class PurchasedController extends HttpServlet{
 			cntByprice=cnt*price;
 			tot+=cntByprice;
 		}
-		
-		BuyerDao bdao=new BuyerDao();
-		
 		String rank=null;
 		if(tot>=0 && tot<200000) {
 			rank="Welcome";
-			bdao.updateRank(id, rank);
 		}else if(tot>=200000 && tot<500000) {
 			rank="Silver";
-			bdao.updateRank(id, rank);
 		}else if(tot>=500000 && tot<1000000) {
 			rank="Gold";
-			bdao.updateRank(id, rank);
 		}else if(tot>=1000000 && tot<2000000) {
 			rank="VIP";
-			bdao.updateRank(id, rank);
 		}else if(tot>=2000000 && tot<100000000) {
 			rank="VVIP";
-			bdao.updateRank(id, rank);
 		}
 				
 		req.setAttribute("info",list);
@@ -122,8 +109,8 @@ public class PurchasedController extends HttpServlet{
 		req.setAttribute("startPageNum",startPageNum);
 		req.setAttribute("endPageNum",endPageNum);
 		req.setAttribute("pageNum",pageNum);
-	    req.setAttribute("cpage", "/header/purchased.jsp");
-		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 		
+	    req.setAttribute("cpage", "/header/purchased2.jsp");
+		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 	}
 }

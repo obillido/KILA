@@ -49,14 +49,13 @@
             <td id="t3">${list.paydate }</td>
             <td id="t4">${list.paymethod }</td>
             <td id="t5">${list.status }</td>
-          
          		
          	<c:choose>
                <c:when test="${list.status eq '배송준비' or list.status eq '배송중' or list.status eq '배송완료'}">
-                  <td id="t6"><a href="${pageContext.request.contextPath }/header/cancelOrder?paynum=${list.paynum}">환불요청</a></td>
+                  <td id="t6">환불요청</td>
          	   </c:when>
          	   <c:when test="${list.status eq '환불요청'}">
-         	      <td id="t6"><a href="${pageContext.request.contextPath }/header/returnOrder?paynum=${list.paynum}">환불요청취소</a></td>
+         	      <td id="t6">환불요청취소</td>
          	   </c:when>
          	   <c:otherwise>
          	   	  <td id="t6"><span>환불요청불가</span></td>
@@ -71,7 +70,7 @@
          	      <td id="t7"><span>구매확정불가</span></td>
          	   </c:when>
          	   <c:otherwise>
-         	      <td id="t7"><a href="${pageContext.request.contextPath }/header/confirmOrder?paynum=${list.paynum}">구매확정하기</a></td>
+         	      <td id="t7">구매확정하기</td>
          	   </c:otherwise>
          	</c:choose>
          
@@ -85,7 +84,7 @@
 <div id="div2">
    <c:choose>
 	   <c:when test="${startPageNum>5 }">
-		   <a href="${pageContext.request.contextPath }/header/purchased?pageNum=${startPageNum-1 }">[이전]</a>
+		   <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${startPageNum-1 }">[이전]</a>
 	   </c:when>
 	   <c:otherwise>
 		    이전
@@ -94,16 +93,16 @@
    <c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
       <c:choose>
          <c:when test="${pageNum==i }">
-            <a href="${pageContext.request.contextPath }/header/purchased?pageNum=${i}"><span style="color:red;">[${i }]</span></a>
+            <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${i}"><span style="color:red;">[${i }]</span></a>
          </c:when>
          <c:otherwise>
-            <a href="${pageContext.request.contextPath }/header/purchased?pageNum=${i}"><span style="color:black;">[${i }]</span></a>
+            <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${i}"><span style="color:black;">[${i }]</span></a>
          </c:otherwise>
       </c:choose>
    </c:forEach>
    <c:choose>
 	   <c:when test="${endPageNum<pageCount}">
-		   <a href="${pageContext.request.contextPath }/header/purchased?pageNum=${endPageNum+1 }">[다음]</a>
+		   <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${endPageNum+1 }">[다음]</a>
 	   </c:when>
 	   <c:otherwise>
 		   다음
