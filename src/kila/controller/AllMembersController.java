@@ -26,7 +26,7 @@ public class AllMembersController extends HttpServlet{
 		
 		BuyerDao dao=new BuyerDao();
 		ArrayList<BuyerVo> list=dao.getAllMembers(startRow, endRow);
-		int pageCount=(int)Math.ceil(dao.getMembersCnt());
+		int pageCount=(int)Math.ceil(dao.getMembersCnt()/5.0);
 		int startPageNum=(pageNum-1)/5*5+1;
 		int endPageNum=startPageNum+4;
 		if(endPageNum>pageCount) {

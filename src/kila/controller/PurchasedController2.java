@@ -35,7 +35,7 @@ public class PurchasedController2 extends HttpServlet{
 		ArrayList<MyPaymentVo> list=new ArrayList<MyPaymentVo>();
 		
 		ArrayList<PaymentVo> al=dao.getInfo(id,startRow,endRow);
-		int pageCount=(int)Math.ceil(dao.getPurchasedCnt(id));
+		int pageCount=(int)Math.ceil(dao.getPurchasedCnt(id)/5.0);
 		int startPageNum=(pageNum-1)/5*5+1;
 		int endPageNum=startPageNum+4;
 		if(endPageNum>pageCount) {
