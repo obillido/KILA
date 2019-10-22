@@ -274,7 +274,7 @@
 				★★★★★ - 아주 좋아요!
 			</c:when>
 			<c:when test="${rl.rpoint eq 4 }">
-				★★★★☆ - 맘에 들어요!
+				★★★★☆ - 맘에 들어요.
 			</c:when>
 			<c:when test="${rl.rpoint eq 3 }">
 				★★★☆☆ - 보통이에요...
