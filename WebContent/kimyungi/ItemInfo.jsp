@@ -250,7 +250,7 @@
 	<div>
 	<div style="width: 750px; display: inline-block; text-align: left;" onclick="viewinfo(${sum})">
 	<c:set var="sum" value="${sum+i }"/>
-	<hr><br>
+	<br>
 	<div style="float: left; width: 500px">
 		<c:choose>
 			<c:when test="${rl.rpoint eq 5 }">
@@ -293,13 +293,11 @@
 		<hr>
 	</div>
 	</div>
-	<div>
 	</div>
-	</div>
+	<hr style="width: 750px; display: inline-block;">
 	<br>
 	<br>
 	</c:forEach>
-	<hr style="width: 750px; display: inline-block;">
 	</c:when>
 	<c:otherwise>
 	<br>
