@@ -49,6 +49,7 @@ public class SearchProductController extends HttpServlet{
 	}
 
 	
+	
 	public void deleteAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
 		Cookie[] cookies1=req.getCookies();
 		if(cookies1!=null) {
