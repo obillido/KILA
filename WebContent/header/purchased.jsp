@@ -8,6 +8,7 @@
     #purchaseList{margin-top:50px; width:100%; text-align:center;}
     #purchaseList #inner{display:inline-block;}
     #purchaseList #inner table{min-width:1000px;}
+    #div2{clear:both;text-align:center;}
     #t1{width:100px;height:30px;}
     #t2{width:30px;height:30px;}
     #t3{width:40px;height:30px;}
@@ -79,4 +80,33 @@
    </table>
    <br>  
    </div>
+</div>
+<br>
+<div id="div2">
+   <c:choose>
+	   <c:when test="${startPageNum>5 }">
+		   <a href="${pageContext.request.contextPath }/header/refundList?pageNum=${startPageNum-1 }">[이전]</a>
+	   </c:when>
+	   <c:otherwise>
+		    이전
+	   </c:otherwise>
+   </c:choose>
+   <c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+      <c:choose>
+         <c:when test="${pageNum==i }">
+            <a href="${pageContext.request.contextPath }/header/purchased?pageNum=${i}"><span style="color:red;">[${i }]</span></a>
+         </c:when>
+         <c:otherwise>
+            <a href="${pageContext.request.contextPath }/header/purchased?pageNum=${i}"><span style="color:black;">[${i }]</span></a>
+         </c:otherwise>
+      </c:choose>
+   </c:forEach>
+   <c:choose>
+	   <c:when test="${endPageNum<pageCount}">
+		   <a href="${pageContext.request.contextPath }/header/purchased?pageNum=${endPageNum+1 }">[다음]</a>
+	   </c:when>
+	   <c:otherwise>
+		   다음
+	   </c:otherwise>
+   </c:choose>
 </div>
