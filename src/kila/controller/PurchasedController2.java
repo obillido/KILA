@@ -21,6 +21,7 @@ public class PurchasedController2 extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id=req.getParameter("id");
+		System.out.println(id);
 		
 		String spageNum=req.getParameter("pageNum");
 		int pageNum=1;
@@ -109,6 +110,7 @@ public class PurchasedController2 extends HttpServlet{
 		req.setAttribute("startPageNum",startPageNum);
 		req.setAttribute("endPageNum",endPageNum);
 		req.setAttribute("pageNum",pageNum);
+		req.setAttribute("id",id);
 		
 	    req.setAttribute("cpage", "/header/purchased2.jsp");
 		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
