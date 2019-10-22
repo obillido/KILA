@@ -5,6 +5,14 @@
 
 <style type="text/css">
    *{margin:0px;padding:0px;}
+   #searchList{
+   		width:100%;
+		text-align:center;
+   }
+   #searchList #inner{
+   		display:inline-block;
+   		width:1100px;
+   }
    .item{
 		float:left;
 		width:250px; height:350px;
@@ -14,7 +22,6 @@
 	}
    h2{text-align:center;}
    .item p{
-		padding:10px;
 		color:black;
 		text-align:center;
 	}
@@ -25,10 +32,18 @@
 <h2>- 검색어로( ${search} ) 검색한 결과 -</h2>
 <br><hr><br><br>
 
-
-<c:forEach var="finallist" items="${info }">
+<div id="searchList">
+<div id="inner">
+<c:forEach var="vo" items="${list}">
    <div class="item">
-      <p><a href="${cp}/iteminfo?colnum=${finallist.colnum}"><img src="${cp }/upload/${finallist.savefilename}" width="250"></a>
-      <br>${finallist.pname }</p>
+      <p>
+	      <a href="${cp}/iteminfo?colnum=${vo.colnum}">
+	      	<img src="${cp }/upload/${vo.savefilename}" width="250">
+	      </a>
+     	 <p>${fmt.format(vo.price)}</p>
+     	 <p>${vo.pname}</p>
+      </p>
    </div>
 </c:forEach>
+</div>
+</div>
