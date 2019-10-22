@@ -237,9 +237,10 @@
 </form>
 <br>
 <div style="text-align: left;">
-<c:choose><c:when test="${cmd == 'list'}"><b>등록순</b></c:when><c:when test="${cmd =='list2' }"><b>평점순</b></c:when></c:choose>
- 리뷰(${rlist.size() }) | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&cmd=list">등록순</a>
-| <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&cmd=list2">평점순</a>
+<c:choose><c:when test="${ch == 'rnum'}"><b>등록순</b></c:when><c:when test="${ch =='rpoint' }"><b>평점순</b></c:when></c:choose>
+ 리뷰(${rlist.size() }) | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rnum">등록순</a>
+| <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rpoint">평점순</a>
+<hr>
 </div>
 <c:choose>
 	<c:when test="${not empty rlist}">
@@ -301,9 +302,8 @@
 	<hr style="width: 750px; display: inline-block;">
 	</c:when>
 	<c:otherwise>
-	<hr><br>
-		작성된 상품 리뷰가 없습니다. 첫번째 리뷰의 주인공이 되어주세요.<br><br>
-	<hr>
+	<br>
+		<div style="text-align: left;">작성된 상품 리뷰가 없습니다. 첫번째 리뷰의 주인공이 되어주세요.<br><br></div>
 	</c:otherwise>
 </c:choose>
 <script type="text/javascript">

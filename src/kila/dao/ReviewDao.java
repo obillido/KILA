@@ -84,23 +84,23 @@ public class ReviewDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
-	public ArrayList<ReviewListVo> list(int colnum){
+	public ArrayList<ReviewListVo> list(int colnum,String ch){
 		System.out.println(colnum);
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select pv.rpoint,pv.content,pv.savefilename,rpad(substr(pm.bid,0,4),length(pm.bid),'*') bid,pv.regdate,c.color,pd.psize from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=?";
+			String sql="select pv.rpoint,pv.content,pv.savefilename,rpad(substr(pm.bid,0,4),length(pm.bid),'*') bid,pv.regdate,c.color,pd.psize from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=? order by "+ch+" DESC";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();
 			ArrayList<ReviewListVo> list=new ArrayList<ReviewListVo>();
 			while(rs.next()) {
 				list.add(new ReviewListVo(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getString(6),rs.getInt(7)));
+				System.out.println(rs.getInt(1));
 				System.out.println(rs.getString(2));
 			}
-			System.out.println(list.size()+"a");
 			return list;
 		}catch(SQLException se) {
 			System.out.println("ReviewDAO:"+se.getMessage());
