@@ -19,7 +19,7 @@ import kila.vo.FinalSearchVo;
 import kila.vo.ProductInfoVo;
 import kila.vo.SearchProductVo;
 
-@WebServlet("/header/search")
+@WebServlet("/search")
 public class SearchProductController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,8 +43,22 @@ public class SearchProductController extends HttpServlet{
 			req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 		}else if(cmd.equals("deleteAll")) {
 			deleteAll(req,resp);
-		}else{
+		}else if(cmd.equals("delete")){
 			delete(req,resp,search);
+		}else if(cmd.equals("list")) {
+			Cookie[] cookies2=req.getCookies();
+			ArrayList<String> slist=new ArrayList<String>();
+			if(cookies2!=null) {
+				for(Cookie cookie:cookies2) {
+					String cookieValue=cookie.getValue();
+					slist.add(cookieValue);
+				}
+			}
+			JSONArray arr=new JSONArray();
+			arr.put(slist);
+			resp.setContentType("text/plain;charset=utf-8");
+			PrintWriter pw=resp.getWriter();
+			pw.print(arr.toString());
 		}
 	}
 
@@ -61,19 +75,6 @@ public class SearchProductController extends HttpServlet{
 				resp.addCookie(ck);
 			}
 		}
-		Cookie[] cookies2=req.getCookies();
-		ArrayList<String> slist=new ArrayList<String>();
-		if(cookies2!=null) {
-			for(Cookie cookie:cookies2) {
-				String cookieValue=cookie.getValue();
-				slist.add(cookieValue);
-			}
-		}
-		JSONArray arr=new JSONArray();
-		arr.put(slist);
-		resp.setContentType("text/plain;charset=utf-8");
-		PrintWriter pw=resp.getWriter();
-		pw.print(arr.toString());
 	}
 	
 	
@@ -90,19 +91,6 @@ public class SearchProductController extends HttpServlet{
 				}
 			}
 		}
-		
-		Cookie[] cookies2=req.getCookies();
-		ArrayList<String> slist=new ArrayList<String>();
-		if(cookies2!=null) {
-			for(Cookie cookie:cookies2) {
-				String cookieValue=cookie.getValue();
-				slist.add(cookieValue);
-			}
-		}
-		JSONArray arr=new JSONArray();
-		arr.put(slist);
-		resp.setContentType("text/plain;charset=utf-8");
-		PrintWriter pw=resp.getWriter();
-		pw.print(arr.toString());
+
 	}
 }
