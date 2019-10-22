@@ -246,7 +246,7 @@
 <br>
 <div style="text-align: left;">
 <c:choose><c:when test="${ch == 'rnum'}"><b>등록순</b></c:when><c:when test="${ch =='rpoint' }"><b>평점순</b></c:when></c:choose>
- 리뷰<c:if test="${not empty rlist.size()}">(${rlist.size() })</c:if> | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rnum" style="text-decoration: none;">등록순</a>
+ 리뷰<c:if test="${not empty cnt}">(${cnt })</c:if> | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rnum" style="text-decoration: none;">등록순</a>
 | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rpoint" style="text-decoration: none;">평점순</a>
 <hr>
 </div>

@@ -45,7 +45,8 @@ public class ItmeInfoController extends HttpServlet{
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		ArrayList<ReviewIndexVo> review=ReviewDao.getInstance().getIndex(id, colnum);
 		ArrayList<ReviewListVo> rlist=ReviewDao.getInstance().list(colnum,ch,startRow, endRow);
-		int pageCount=(int)Math.ceil(ReviewDao.getInstance().getCount(ch,colnum)/5.0);
+		int cnt=ReviewDao.getInstance().getCount(ch,colnum);
+		int pageCount=(int)Math.ceil(cnt/5.0);
 		int startPage=(pageNum-1)/5*5+1;
 		int endPage=startPage+4;
 		if(endPage>pageCount) {
@@ -59,6 +60,7 @@ public class ItmeInfoController extends HttpServlet{
 		req.setAttribute("review", review);
 		req.setAttribute("rlist", rlist);
 		req.setAttribute("ch", ch);
+		req.setAttribute("cnt", cnt);
 		
 		
 		boolean bs=ProductDao.getInstance().isSoldout(colnum);
