@@ -90,9 +90,17 @@ public class ReviewDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select pv.rpoint,pv.content,pv.savefilename,rpad(substr(pm.bid,0,4),length(pm.bid),'*') bid,pv.regdate,c.color,pd.psize from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=? order by "+ch+" DESC";
+			String sql="select * from" + 		
+					"    (" + 
+					"        select aa.*,rownum rnum from" + 
+					"        (" + 
+					"            select pv.rpoint,pv.content,pv.savefilename,rpad(substr(pm.bid,0,4),length(pm.bid),'*') bid,pv.regdate,c.color,pd.psize from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=? order by "+ch+" DESC" + 
+					"        )aa" + 
+					")where rnum>=? and  rnum<=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
+			pstmt.setInt(2,startRow);
+			pstmt.setInt(3,endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<ReviewListVo> list=new ArrayList<ReviewListVo>();
 			while(rs.next()) {
@@ -123,5 +131,28 @@ public class ReviewDao {
 		}finally {
 			JdbcUtil.close(con,pstmt,null);
 		}
+	}
+	public int getCount(String ch,int colnum) {//전체 글의 갯수 구하기
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select NVL(count(*),0) from review r,payment pm,product p where r.paynum=pm.paynum and pm.pnum=p.pnum and colnum=? order by "+ch;
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, colnum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				int cnt=rs.getInt(1);
+				System.out.println(cnt);
+				return cnt;
+			}
+			return 0;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}	
 	}
 }
