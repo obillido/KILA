@@ -171,8 +171,8 @@
 <br>
 <br>
 <div style="left:100px">
-<div style="width: 400px;height: 500px; float: left;">
-<img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="position:static; width: 350px;height: 400px" onmouseover="zoomup()" onmouseout="zoomdown()">
+<div style="width: 450px;height: 550px; float: left;">
+<img id="img1" src="${pageContext.request.contextPath }/upload/${vo.savefilename }" style="position:static; width: 400px;height: 450px" onmouseover="zoomup()" onmouseout="zoomdown()">
 </div>
 <div style="width: 400px;height: 500px; position: relative; float: right;">
 <div id="zoom" class="img-zoom-result" style="width: 300px;height: 300px; position: absolute; z-index: 1">
