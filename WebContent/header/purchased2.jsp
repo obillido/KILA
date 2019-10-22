@@ -93,7 +93,7 @@
    <c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
       <c:choose>
          <c:when test="${pageNum==i }">
-            <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${i}&id=${param.id}"><span style="color:red;">[${i }]</span></a>
+            <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${i}&id=${id}"><span style="color:red;">[${i }]</span></a>
          </c:when>
          <c:otherwise>
             <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${i}&id=${id}"><span style="color:black;">[${i }]</span></a>
