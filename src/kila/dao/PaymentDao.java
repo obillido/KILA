@@ -61,16 +61,22 @@ public class PaymentDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
-	public ArrayList<PaymentVo> getInfo(String bid) {
+	public ArrayList<PaymentVo> getInfo(String bid,int startRow,int endRow) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		ArrayList<PaymentVo> list=new ArrayList<PaymentVo>();
 		try {
-			con=JdbcUtil.getConn();
-			String sql="select * from payment where bid=? order by paydate desc";
+			con=JdbcUtil.getConn();			
+			String sql="select * from(" + 
+				       "   select aa.*,rownum rnum from(" + 
+					   "      select * from payment where bid=? order by paydate desc" + 
+					   "   ) aa" + 
+					   ")where rnum>=? and rnum<=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1,bid);
+			pstmt.setInt(2,startRow);
+			pstmt.setInt(3,endRow);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				int paynum=rs.getInt("paynum");
@@ -348,6 +354,28 @@ public class PaymentDao {
 			con=JdbcUtil.getConn();
 			String sql="select nvl(count(*),0) cnt from payment where status=7 or status>=11";
 			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				int cnt=rs.getInt(1);
+				return cnt;
+			}
+			return 0;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	public int getPurchasedCnt(String bid) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select nvl(count(*),0) cnt from payment where bid=? order by paydate desc";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,bid);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				int cnt=rs.getInt(1);
