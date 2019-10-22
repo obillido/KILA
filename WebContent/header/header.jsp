@@ -135,9 +135,6 @@
 	   event.innerHTML="<a href='${pageContext.request.contextPath}/header/eventDetail?num=" + json[i].evnum + "'>" + word[i] + "</a>";
 	   i++;
 	   }, 2000);
-   setTimeout(function(){
-	   clearInterval(interval);
-	  }, 20000);
    
    
    function showProduct(){
