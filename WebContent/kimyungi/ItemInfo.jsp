@@ -251,7 +251,7 @@
 	<div style="width: 750px; display: inline-block; text-align: left;" onclick="viewinfo(${sum})">
 	<c:set var="sum" value="${sum+i }"/>
 	<hr><br>
-	<div style="float: left;">
+	<div style="float: left; width: 500px">
 		<c:choose>
 			<c:when test="${rl.rpoint eq 5 }">
 				★★★★★ - 아주 좋아요!
