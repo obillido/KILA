@@ -18,7 +18,7 @@
 	var xhrList=null;
 	function pushCart(id){
 		if(id==""){
-			alert("회원만 장바구니 이용이 가능합니다. 그러므로 로그인으로 이동");
+			alert("회원만 장바구니 이용이 가능합니다! 그러므로 로그인으로 이동");
 			location.href="/KILA/header/login";
 		}else{
 		xhrList=new XMLHttpRequest();
