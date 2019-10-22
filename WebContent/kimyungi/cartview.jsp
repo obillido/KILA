@@ -31,7 +31,7 @@
 </script>
 <div style="text-align: center">
 <h2>SHOPPING BAG</h2>
-<h5>* 카트에 담긴 상품은 품절시 관리자에 의해 삭제될 수 있습니다. 주의하세요!</h5>
+<h5>* 카트에 담긴 상품은 품절시 관리자에 의해 삭제될 수 있습니다. 주의하세요!!</h5>
 <form method="post" action="${pageContext.request.contextPath }/kila/cart?cmd=cartaction">
 <table style="display: inline-block;">
 	<tr style="background-color: skyblue;">
