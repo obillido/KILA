@@ -28,9 +28,6 @@
 		var scolnum=document.getElementById("scolnum").value;
 		var spsize=document.getElementById("sps").value;
 		var pcnt=document.getElementById("count").value;
-		alert(scolnum);
-		alert(spsize);
-		alert(pcnt);
 		var param="scolnum="+ scolnum +"&spsize="+ spsize +"&pcnt="+ pcnt;
 		xhrList.send(param);
 		}
