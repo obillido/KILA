@@ -250,6 +250,15 @@
 | <a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&ch=rpoint" style="text-decoration: none;">평점순</a>
 <hr>
 </div>
+	<div style="width: 1010px; height: 50px;">
+		<ul style="list-style: none; float: left; ">
+			<li style="float: left; margin-right: 190px"><a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&rv=5" style="text-decoration: none;">5 Stars</a></li>
+			<li style="float: left; margin-right: 190px"><a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&rv=4" style="text-decoration: none;">4 Stars</a></li>
+			<li style="float: left; margin-right: 190px"><a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&rv=3" style="text-decoration: none;">3 Stars</a></li>
+			<li style="float: left; margin-right: 190px"><a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&rv=2" style="text-decoration: none;">2 Stars</a></li>
+			<li style="float: left;"><a href="${pageContext.request.contextPath }/iteminfo?colnum=${vo.colnum }&rv=1" style="text-decoration: none;">1 Stars</a></li>
+		</ul>
+	</div>
 <c:choose>
 	<c:when test="${not empty rlist}">
 	<c:set var="i" value="1"/>
@@ -310,11 +319,11 @@
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${i==pageNum }">
-				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}&colnum=${vo.colnum }" style=" text-decoration: none;">
+				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}&colnum=${vo.colnum }&rv=${rv}" style=" text-decoration: none;">
 				<b><span style='color:deepred; font-size: 30px; text-decoration: none;'>[${i }]</span></a></b>
 			</c:when>
 			<c:otherwise>
-				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}&colnum=${vo.colnum }" style=" text-decoration: none;">
+				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}&colnum=${vo.colnum }&rv=${rv}" style=" text-decoration: none;">
 				<b><span style='color:#999; font-size: 25px;'>[${i }]</span></a></b>
 			</c:otherwise>
 		</c:choose>

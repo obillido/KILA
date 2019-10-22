@@ -31,6 +31,7 @@ public class ItmeInfoController extends HttpServlet{
 		if(ch==null) {
 			ch="rnum";
 		}
+		String rv=req.getParameter("rv");
 		int pageNum=1;
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
@@ -44,8 +45,8 @@ public class ItmeInfoController extends HttpServlet{
 		ItemInfoVo vo=dao.productInfos(colnum);
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		ArrayList<ReviewIndexVo> review=ReviewDao.getInstance().getIndex(id, colnum);
-		ArrayList<ReviewListVo> rlist=ReviewDao.getInstance().list(colnum,ch,startRow, endRow);
-		int cnt=ReviewDao.getInstance().getCount(ch,colnum);
+		ArrayList<ReviewListVo> rlist=ReviewDao.getInstance().list(colnum,ch,startRow, endRow,rv);
+		int cnt=ReviewDao.getInstance().getCount(ch,colnum,rv);
 		int pageCount=(int)Math.ceil(cnt/5.0);
 		int startPage=(pageNum-1)/5*5+1;
 		int endPage=startPage+4;
@@ -61,7 +62,7 @@ public class ItmeInfoController extends HttpServlet{
 		req.setAttribute("rlist", rlist);
 		req.setAttribute("ch", ch);
 		req.setAttribute("cnt", cnt);
-		
+		req.setAttribute("rv", rv);
 		
 		boolean bs=ProductDao.getInstance().isSoldout(colnum);
 		if(bs) req.setAttribute("soldout", "soldout");

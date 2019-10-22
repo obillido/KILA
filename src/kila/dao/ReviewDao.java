@@ -84,7 +84,7 @@ public class ReviewDao {
 			JdbcUtil.close(con,pstmt);
 		}
 	}
-	public ArrayList<ReviewListVo> list(int colnum,String ch,int startRow,int endRow){
+	public ArrayList<ReviewListVo> list(int colnum,String ch,int startRow,int endRow,String rv){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -94,7 +94,11 @@ public class ReviewDao {
 					"    (" + 
 					"        select aa.*,rownum rnum from" + 
 					"        (" + 
-					"            select pv.rpoint,pv.content,pv.savefilename,rpad(substr(pm.bid,0,4),length(pm.bid),'*') bid,pv.regdate,c.color,pd.psize from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=? order by "+ch+" DESC" + 
+					"            select pv.rpoint,pv.content,pv.savefilename,rpad(substr(pm.bid,0,4),length(pm.bid),'*') bid,pv.regdate,c.color,pd.psize from payment pm,product pd,review pv,color c where pm.pnum=pd.pnum and pm.paynum=pv.paynum and c.colnum=pd.colnum and c.colnum=? ";
+			if(rv!=null) {
+					sql+="and rpoint=" + rv;
+			}
+					sql+="order by "+ch+" DESC" + 
 					"        )aa" + 
 					")where rnum>=? and  rnum<=?";
 			pstmt=con.prepareStatement(sql);
@@ -132,13 +136,17 @@ public class ReviewDao {
 			JdbcUtil.close(con,pstmt,null);
 		}
 	}
-	public int getCount(String ch,int colnum) {//전체 글의 갯수 구하기
+	public int getCount(String ch,int colnum,String rv) {//전체 글의 갯수 구하기
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select NVL(count(*),0) from review r,payment pm,product p where r.paynum=pm.paynum and pm.pnum=p.pnum and colnum=? order by "+ch;
+			String sql="select NVL(count(*),0) from review r,payment pm,product p where r.paynum=pm.paynum and pm.pnum=p.pnum and colnum=? ";
+			if(rv!=null) {
+				sql+= "and r.rpoint="+rv;
+			}
+			sql+= "order by "+ch;
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, colnum);
 			rs=pstmt.executeQuery();
