@@ -236,7 +236,7 @@
  <br><input type="file" name="file1"> <c:forEach begin="1" end="57">&nbsp</c:forEach><span id="byteInfo">0</span>/500bytes<br>
  <select name="rpoint" style="width: 450px; height: 35px; font-size: 20px; display: inline-block;">
  	<option value="5">★★★★★아주 좋아요!</option>
- 	<option value="4">★★★★☆맘에 들어요.</option>
+ 	<option value="4">★★★★☆맘에 들어요!</option>
  	<option value="3">★★★☆☆보통이에요...</option>
  	<option value="2">★★☆☆☆그냥 그래요...</option>
  	<option value="1">★☆☆☆☆별로에요...</option>
