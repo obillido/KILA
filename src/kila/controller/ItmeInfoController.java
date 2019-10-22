@@ -20,17 +20,25 @@ import kila.vo.ItemInfoVo;
 import kila.vo.ProductInfoVo;
 import kila.vo.ReviewIndexVo;
 import kila.vo.ReviewListVo;
+import test.vo.MyBoardVo;
 
 @WebServlet("/iteminfo")
 public class ItmeInfoController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		String spageNum=req.getParameter("pageNum");
 		int colnum=Integer.parseInt(req.getParameter("colnum"));
 		String ch=req.getParameter("ch");
 		if(ch==null) {
 			ch="rnum";
 		}
-		System.out.println(ch);
+		int pageNum=1;
+		if(spageNum!=null) {
+			pageNum=Integer.parseInt(spageNum);
+		}
+		int startRow=(pageNum-1)*5+1;
+		int endRow=startRow+4;
 		HttpSession session=req.getSession(); 
 		String id=(String)session.getAttribute("id");
 		String type=(String)session.getAttribute("type");
@@ -38,7 +46,7 @@ public class ItmeInfoController extends HttpServlet{
 		ItemInfoVo vo=dao.productInfos(colnum);
 		ArrayList<ItemInfoSizeVo> list=dao.productInfoSize(colnum);
 		ArrayList<ReviewIndexVo> review=ReviewDao.getInstance().getIndex(id, colnum);
-		ArrayList<ReviewListVo> rlist=ReviewDao.getInstance().list(colnum,ch);
+		ArrayList<ReviewListVo> rlist=ReviewDao.getInstance().list(colnum,ch,startRow, endRow);
 		req.setAttribute("vo", vo);
 		req.setAttribute("list",list);
 		req.setAttribute("review", review);

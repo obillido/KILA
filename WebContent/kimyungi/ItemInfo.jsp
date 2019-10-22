@@ -300,6 +300,20 @@
 	<br>
 	<br>
 	</c:forEach>
+	<div>
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<c:choose>
+			<c:when test="${i==pageNum }">
+				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}">
+				<b><span style='color:darkblue'>[${i }]</span></a></b>
+			</c:when>
+			<c:otherwise>
+				<a href="${pageContext.request.contextPath }/iteminfo?pageNum=${i}&ch=${ch}">
+				<span style='color:#999'>[${i }]</span></a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+</div>
 	</c:when>
 	<c:otherwise>
 	<br>
