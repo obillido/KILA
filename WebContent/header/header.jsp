@@ -73,6 +73,15 @@
 	
 	#searchbox{float:right;margin-right:50px;}
 	#searchList{display:none;}
+	
+	#searchbox input[type=text]{
+		width:200px; height:30px;
+	}
+
+	#searchList .search .keyword{
+		display:inline-block;
+		width:200px;
+	}
 </style>
 
 
@@ -136,31 +145,51 @@
    
 
 	var slistxhr=null;
-	function getSearchKeywordList(){
+	function getSearchKeywordList(cmd, keyword){
+		alert("여기들어오나??");
 		slistxhr=new XMLHttpRequest();
-		slistxhr=onreadystatechange=listOk;
-		slistxhr.open('get','header/search',true);
-		slsitxhr.send();
+		slistxhr.onreadystatechange=searchListOk;
+		slistxhr.open('get','search?cmd='+cmd+'&keyword='+keyword,true);
+		slistxhr.send();
 	}
-	function listOk(){
+	function searchListOk(){
 		if(slistxhr.readyState==4 && slistxhr.status==200){
 			var data=slistxhr.responseText;
 			var json=JSON.parse(data)[0];
 			var searchList=document.getElementById("searchList");
-			for(var i=0; i<json.length; i++){
+			removeSearchList();
+			for(var i=json.length-1; i>=0; i--){
 				var div=document.createElement("div");
-				div.innerHTML="<a href='${pageContext.request.contextPath}/header/search?cmd=search&search="+json[i]+"'>"+json[i]+"</a>";
+				div.innerHTML="<a href='${pageContext.request.contextPath}/search?cmd=search&keyword="+json[i]+"' class='keyword'>"+json[i]+"</a>"
+							+ "<a href='javascript:getSearchKeywordList('delete',"+json[i]+"')'>삭제</a>";
+				div.className="search";
+				searchList.appendChild(div);
 			}
+			var divl=document.createElement("div");
+			divl.innerHTML="<a href='javascript:getSearchKeywordList('deleteAll','')'>검색어 전체삭제</a>";
+			searchList.appendChild(divl);
 		}
 	}
+	
+	function removeSearchList(){
+		var searchList=document.getElementById("searchList");
+		var childs=searchList.childNodes;
+		for(var i=childs.length-1; i>=0; i--){
+			searchList.removeChild(childs.item(i));
+		}
+	}
+	
+	
 	function showLatestSearch(){
-		var latest=document.getElementById("searchList");
-		if( latest.style.display=="inline"){
-			latest.style.display="none";
+		var searchList=document.getElementById("searchList");
+		if(searchList.style.display=="inline"){
+			searchList.style.display="none";
 		}else{
-			latest.style.display="inline"
+			getSearchKeywordList('list','');
+			searchList.style.display="inline"
 		}
 	}
+	
 </script>
 
 
@@ -206,22 +235,27 @@
 	      <li><a href="${cp}/header/eventlist" style="color:#00008C;">EVENT</a></li>
 	   </ul>
 	</div>
+	
+	
+	
+	
+	
 	<div id="searchbox">
-	   <form method="post" action="${cp}/header/search">
-	      <input type="text" name="search" onclick="showLatestSearch()">
-	      <input type="submit" value="검색" width="15" height="15" style="background-color:white;">
-	   </form>
-	   
+		<form method="post" action="${pageContext.request.contextPath}/search?cmd=search">
+	     	 <input type="text" name="keyword" onclick="showLatestSearch();">
+		     <input type="submit" value="검색">
+	   	</form>
 	   
 	   <div id="searchList">
 	      <h4>[최근 검색어]</h4>
-	      <c:forEach var="sk" items="${slist}">
-	      	<li>${sk}</li>
-	      </c:forEach>
-	      
-	      <h4><a href="${cp}/header/search">검색어 전체삭제</a></h4>  
 	   </div>
 	</div>
+	
+	
+	
+	
+	
+	
 	<div id="product">
 	<br>
 	<ul>

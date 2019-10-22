@@ -19,32 +19,49 @@ import kila.vo.FinalSearchVo;
 import kila.vo.ProductInfoVo;
 import kila.vo.SearchProductVo;
 
-@WebServlet("/header/search")
+@WebServlet("/search")
 public class SearchProductController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String cmd=req.getParameter("cmd");
-		String search=req.getParameter("search");
+		String keyword=req.getParameter("keyword");
 		if(cmd.equals("search")) {
 			Cookie[] cookies=req.getCookies();
 			String cn="cookie"+cookies.length;
-			Cookie cookie=new Cookie(cn,search);
+			Cookie cookie=new Cookie(cn,keyword);
 			cookie.setPath("/");
 			cookie.setMaxAge(60*60*24*7);
 			resp.addCookie(cookie);
 			
-			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList(search);
+			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList(keyword);
 			DecimalFormat fmt=new DecimalFormat("###,###,###");
 			req.setAttribute("fmt", fmt);
 			req.setAttribute("list",list);
-			req.setAttribute("search",search);
-			req.setAttribute("cpage", "/header/search.jsp");
+			req.setAttribute("keyword",keyword);
+			req.setAttribute("cpage", "/content/productList/searchList.jsp");
 			req.getRequestDispatcher("/layout.jsp").forward(req,resp);
-		}else if(cmd.equals("deleteAll")) {
-			deleteAll(req,resp);
-		}else{
-			delete(req,resp,search);
+		}else {
+			if(cmd.equals("deleteAll")) {
+				System.out.println("여기 들어오나..?");
+				deleteAll(req,resp);
+			}else if(cmd.equals("delete")){
+				delete(req,resp,keyword);
+			}
+			
+			Cookie[] cookies=req.getCookies();
+			ArrayList<String> slist=new ArrayList<String>();
+			if(cookies!=null) {
+				for(Cookie cookie:cookies) {
+					String cookieValue=cookie.getValue();
+					slist.add(cookieValue);
+				}
+			}
+			JSONArray arr=new JSONArray();
+			arr.put(slist);
+			resp.setContentType("text/plain;charset=utf-8");
+			PrintWriter pw=resp.getWriter();
+			pw.print(arr.toString());
 		}
 	}
 
@@ -61,28 +78,15 @@ public class SearchProductController extends HttpServlet{
 				resp.addCookie(ck);
 			}
 		}
-		Cookie[] cookies2=req.getCookies();
-		ArrayList<String> slist=new ArrayList<String>();
-		if(cookies2!=null) {
-			for(Cookie cookie:cookies2) {
-				String cookieValue=cookie.getValue();
-				slist.add(cookieValue);
-			}
-		}
-		JSONArray arr=new JSONArray();
-		arr.put(slist);
-		resp.setContentType("text/plain;charset=utf-8");
-		PrintWriter pw=resp.getWriter();
-		pw.print(arr.toString());
 	}
 	
 	
-	public void delete(HttpServletRequest req, HttpServletResponse resp, String search) throws ServletException, IOException  {
+	public void delete(HttpServletRequest req, HttpServletResponse resp, String keyword) throws ServletException, IOException  {
 		Cookie[] cookies=req.getCookies();
 		if(cookies!=null) {
 			for(Cookie cookie:cookies) {
 				String cookieName=cookie.getName();
-				if(cookieName.equals(search)) {
+				if(cookieName.equals(keyword)) {
 					Cookie ck=new Cookie(cookieName,"");
 					ck.setPath("/");
 					ck.setMaxAge(0);
@@ -90,19 +94,6 @@ public class SearchProductController extends HttpServlet{
 				}
 			}
 		}
-		
-		Cookie[] cookies2=req.getCookies();
-		ArrayList<String> slist=new ArrayList<String>();
-		if(cookies2!=null) {
-			for(Cookie cookie:cookies2) {
-				String cookieValue=cookie.getValue();
-				slist.add(cookieValue);
-			}
-		}
-		JSONArray arr=new JSONArray();
-		arr.put(slist);
-		resp.setContentType("text/plain;charset=utf-8");
-		PrintWriter pw=resp.getWriter();
-		pw.print(arr.toString());
+
 	}
 }
