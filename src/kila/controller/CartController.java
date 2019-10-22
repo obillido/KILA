@@ -1,6 +1,7 @@
 package kila.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 
 import kila.dao.BuyerDao;
 import kila.dao.CartDao;
@@ -56,11 +59,15 @@ public class CartController extends HttpServlet{
 		int pnum=dao.getProductnum(colnum,psize);
 		PaymentVo vo=new PaymentVo(0, id, pnum, cnt, null, 8, null);
 		int n=dao.insert(vo);
+		resp.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw=resp.getWriter();
+		JSONObject json=new JSONObject();
 		if(n>0) {
-			resp.sendRedirect(req.getContextPath()+"/kila/cart");
+			json.put("code", "success");
 		}else {
-			resp.sendRedirect(req.getContextPath()+"/layout.jsp");
+			json.put("code", "fail");
 		}
+		pw.print(json);	
 	}
 	protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int paynum=Integer.parseInt(req.getParameter("paynum"));

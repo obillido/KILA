@@ -15,29 +15,38 @@
 
 </style>
 <script type="text/javascript">
-	var sig=false;
 	var xhrList=null;
-	function getList(){
+	function pushCart(id){
+		if(id==""){
+			alert("회원만 장바구니 이용이 가능합니다. 그러므로 로그인으로 이동");
+			location.href="/KILA/header/login";
+		}else{
 		xhrList=new XMLHttpRequest();
-		xhrList.onreadystatechange=listOk;
-		xhrList.open('get','/kila/review?colnum=${vo.colnum}&cmd=check',true );
-		xhrList.send();
+		xhrList.onreadystatechange=insertOk;
+		xhrList.open('post','kila/cart?cmd=insert',true);
+		xhrList.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+		var scolnum=document.getElementById("scolnum").value;
+		var spsize=document.getElementById("sps").value;
+		var pcnt=document.getElementById("count").value;
+		alert(scolnum);
+		alert(spsize);
+		alert(pcnt);
+		var param="scolnum="+ scolnum +"&spsize="+ spsize +"&pcnt="+ pcnt;
+		xhrList.send(param);
+		}
 	}
-	function listOk(){
+	function insertOk(){
 		if(xhrList.readyState==4 && xhrList.status==200){
-			removeComm();
 			var data=xhrList.responseText;
-			//[[{"comments":"bbbb","num":6,"mnum":1,"id":"bb"}]]	
-			var list=JSON.parse(data)[0];
-			var commList=document.getElementById("commList");
-			for(var i=0;i<list.length;i++){
-				var str="아이디:" + list[i].id +"<br>" +
-				        "내용:" + list[i].comments +"<br>"+
-				"<a href='javascript:delComm("+list[i].num+")'>삭제</a>";
-				var div=document.createElement("div");
-				div.innerHTML=str;
-				div.className="comm";
-				commList.appendChild(div);
+			var sig=JSON.parse(data);
+			if(sig.code=='success'){
+				if (confirm("장바구니에 담겨졌습니다. 장바구니로 이동하시겠습니까?") == true){
+					location.href="/KILA/kila/cart";
+				}else{ 
+				    return;
+				}
+			}else{
+				alert("오류가 생겨서 작업이 정상적으로 수행되지 않았습니다. 양해 부탁드립니다.")
 			}
 		}
 	}
@@ -99,7 +108,7 @@
 	}
 	function logcheck(id){
 		if(id==""){
-			alert("회원만 구매 및 장바구니 이용이 가능합니다. 그러므로 로그인");
+			alert("회원만 구매가 가능합니다. 그러므로 로그인");
 			location.href="/KILA/header/login";
 			return false;
 		}else{
@@ -187,7 +196,7 @@
    			</c:forEach>
    		<br><br><hr><br>
    <form method="post" action="${pageContext.request.contextPath }/kila/payment" onsubmit="return logcheck('${id}')">
-   <input type="hidden" name="scolnum" value=${vo.colnum }>
+   <input type="hidden" id="scolnum" name="scolnum" value=${vo.colnum }>
    <input type="hidden" name="cmd" value="insert">
    <div id=cntsr style="display: none;">
    재고:<input type="text" id="vcnt" readonly="readonly" style="border-style: none; font-size: 16px;width:30px">
@@ -196,7 +205,7 @@
    <div style="text-align: center;"><br>
    <input type="button" value="-" id="btnminus" onclick="decreaseValue()"><input type="text" id="count" name="pcnt" value=1 readonly="readonly" style="border-style: none; text-align: center;"><input type="button" id="btnplus" value="+" onclick="IncreaseValue()"></div><br>
    <c:if test="${empty soldout}">
-	   <input type="submit" value="CART" id="btn1" style="width: 145px; height: 40px" disabled="disabled" formaction="${pageContext.request.contextPath }/kila/cart">
+	   <input type="button" value="CART" id="btn1" style="width: 145px; height: 40px" disabled="disabled" onclick="pushCart('${id}')">
 	   <input type="submit" value="BUY" id="btn2" style="width: 145px; height: 40px" disabled="disabled">
    </c:if>
    <c:if test="${type eq 'A'}">
