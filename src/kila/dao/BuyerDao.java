@@ -97,4 +97,30 @@ public class BuyerDao {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	
+	public String findPwd(String id,String phone) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select m.pwd " + 
+					   "from member m,buyer b " + 
+					   "where m.id=b.cid and m.id=? and b.phone=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,id);
+			pstmt.setString(2,phone);
+			rs=pstmt.executeQuery();
+			String pwd=null;
+			if(rs.next()) {
+				pwd=rs.getString("pwd");
+			}
+			return pwd;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}	
+	}
 }
