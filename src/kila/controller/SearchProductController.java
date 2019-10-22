@@ -43,25 +43,24 @@ public class SearchProductController extends HttpServlet{
 			req.getRequestDispatcher("/layout.jsp").forward(req,resp);
 		}else {
 			if(cmd.equals("deleteAll")) {
-				System.out.println("여기 들어오나..?");
 				deleteAll(req,resp);
 			}else if(cmd.equals("delete")){
 				delete(req,resp,keyword);
-			}
-			
-			Cookie[] cookies=req.getCookies();
-			ArrayList<String> slist=new ArrayList<String>();
-			if(cookies!=null) {
-				for(Cookie cookie:cookies) {
-					String cookieValue=cookie.getValue();
-					slist.add(cookieValue);
+			}else {
+				Cookie[] cookies=req.getCookies();
+				ArrayList<String> slist=new ArrayList<String>();
+				if(cookies!=null) {
+					for(Cookie cookie:cookies) {
+						String cookieValue=cookie.getValue();
+						slist.add(cookieValue);
+					}
 				}
+				JSONArray arr=new JSONArray();
+				arr.put(slist);
+				resp.setContentType("text/plain;charset=utf-8");
+				PrintWriter pw=resp.getWriter();
+				pw.print(arr.toString());
 			}
-			JSONArray arr=new JSONArray();
-			arr.put(slist);
-			resp.setContentType("text/plain;charset=utf-8");
-			PrintWriter pw=resp.getWriter();
-			pw.print(arr.toString());
 		}
 	}
 
@@ -78,22 +77,36 @@ public class SearchProductController extends HttpServlet{
 				resp.addCookie(ck);
 			}
 		}
+		JSONArray arr=new JSONArray();
+		arr.put(new ArrayList<String>());
+		resp.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw=resp.getWriter();
+		pw.print(arr.toString());
 	}
 	
 	
 	public void delete(HttpServletRequest req, HttpServletResponse resp, String keyword) throws ServletException, IOException  {
+		ArrayList<String> slist=new ArrayList<String>();
 		Cookie[] cookies=req.getCookies();
 		if(cookies!=null) {
 			for(Cookie cookie:cookies) {
 				String cookieName=cookie.getName();
-				if(cookieName.equals(keyword)) {
+				String cookieValue=cookie.getValue();
+				if(cookieValue.equals(keyword)) {
 					Cookie ck=new Cookie(cookieName,"");
 					ck.setPath("/");
 					ck.setMaxAge(0);
 					resp.addCookie(ck);
+				}else {
+					slist.add(cookieValue);
 				}
 			}
 		}
+		JSONArray arr=new JSONArray();
+		arr.put(slist);
+		resp.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw=resp.getWriter();
+		pw.print(arr.toString());
 
 	}
 }

@@ -71,16 +71,32 @@
 		color:black;
 	}
 	
-	#searchbox{float:right;margin-right:50px;}
-	#searchList{display:none;}
 	
+	
+	#searchbox{float:right;margin-right:50px;}
 	#searchbox input[type=text]{
 		width:200px; height:30px;
 	}
-
+	
+	#searchList{
+		display:none;
+	}
 	#searchList .search .keyword{
 		display:inline-block;
 		width:200px;
+	}
+	#searchList h4{
+		margin-top:10px;
+		margin-bottom:10px;
+	}
+	#searchList .deleteAllButton{
+		display:inline-block;
+		width:100px; height:40px;
+		margin-top:20px;
+	}
+	#searchList a{
+		text-decoration:none;
+		color:black;
 	}
 </style>
 
@@ -146,7 +162,6 @@
 
 	var slistxhr=null;
 	function getSearchKeywordList(cmd, keyword){
-		alert("여기들어오나??");
 		slistxhr=new XMLHttpRequest();
 		slistxhr.onreadystatechange=searchListOk;
 		slistxhr.open('get','search?cmd='+cmd+'&keyword='+keyword,true);
@@ -158,16 +173,21 @@
 			var json=JSON.parse(data)[0];
 			var searchList=document.getElementById("searchList");
 			removeSearchList();
-			for(var i=json.length-1; i>=0; i--){
+			
+			var div1=document.createElement("div");
+			div1.innerHTML="<h4>최근검색어</h4>";
+			searchList.appendChild(div1);
+			for(var i=json.length-1; i>0; i--){
 				var div=document.createElement("div");
 				div.innerHTML="<a href='${pageContext.request.contextPath}/search?cmd=search&keyword="+json[i]+"' class='keyword'>"+json[i]+"</a>"
-							+ "<a href='javascript:getSearchKeywordList('delete',"+json[i]+"')'>삭제</a>";
+							+ "<a href=\"javascript:getSearchKeywordList('delete','"+json[i]+"')\">삭제</a>";
 				div.className="search";
 				searchList.appendChild(div);
 			}
-			var divl=document.createElement("div");
-			divl.innerHTML="<a href='javascript:getSearchKeywordList('deleteAll','')'>검색어 전체삭제</a>";
-			searchList.appendChild(divl);
+			var div2=document.createElement("div");
+			div2.innerHTML="<button type='button' onclick=\"javascript:getSearchKeywordList('deleteAll','')\">전체삭제</button>";
+			div2.className="deleteAllButton";
+			searchList.appendChild(div2);
 		}
 	}
 	

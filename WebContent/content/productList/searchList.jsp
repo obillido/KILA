@@ -5,37 +5,36 @@
 
 <style type="text/css">
 	*{margin:0px;padding:0px;}
-	#searchList{
+	#searchProductList{
 		width:100%;
 		text-align:center;
 		margin-top:70px;
-		border:1px solid black;
 	}
-	#searchList #inner{
+	#searchProductList #inner{
 		display:inline-block;
 		width:1100px;
 	}
-	#searchList h1{
+	#searchProductList h1{
 		margin-top:15px;
 		text-align:center;
 		height:60px;
 	}
-	#searchList .item{
+	#searchProductList .item{
 		float:left;
 		width:250px; height:350px;
-		margin-left:20px;
+		margin-left:25px;
 		margin-top:30px;
 		margin-bottom:20px;
 	}
-	#searchList .item p{
+	#searchProductList .item p{
+		margin-left:5px;
 		color:black;
-		text-align:center;
+		text-align:left;
 	}
 </style>
 
 
-${list.size()}
-<div id="searchList">
+<div id="searchProductList">
 	<div id="inner">
 		<hr> <h1>"${keyword}" 검색결과</h1> <hr>
 		<c:forEach var="vo" items="${list}">
@@ -43,8 +42,9 @@ ${list.size()}
 				<a href="${cp}/iteminfo?colnum=${vo.colnum}">
 					<img src="${cp }/upload/${vo.savefilename}" width="250">
 				</a>
-				<p>${fmt.format(vo.price)}</p>
 				<p>${vo.pname}</p>
+				<p>${fmt.format(vo.price)}</p>
+				<p>${vo.color}</p>
 			</div>
 		</c:forEach>
 	</div>
