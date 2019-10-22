@@ -17,10 +17,8 @@ import kila.dao.ReviewDao;
 import kila.vo.InquiryVo;
 import kila.vo.ItemInfoSizeVo;
 import kila.vo.ItemInfoVo;
-import kila.vo.ProductInfoVo;
 import kila.vo.ReviewIndexVo;
 import kila.vo.ReviewListVo;
-import test.vo.MyBoardVo;
 
 @WebServlet("/iteminfo")
 public class ItmeInfoController extends HttpServlet{
