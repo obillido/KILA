@@ -7,6 +7,10 @@
 <style type="text/css">
    *{box-sizing:border-box;}
    *{margin:0px;padding:0px;}
+
+	#main{
+		margin-top:100px;
+	}
    img{vertical-align:middle;}
    body{font-family: Verdana, sans-serif; margin:0}
   
@@ -104,27 +108,27 @@ window.onload=function(){
 </script>
 
 
-
-<div class="slideshow-container">
-<%
-EventDao dao=new EventDao();
-ArrayList<EventVo> list=dao.list();
-for(EventVo ev:list){
-%>
-   <div class="mySlides fade" name="sl">
-      <div class="numbertext"></div>
-      <a href="${pageContext.request.contextPath }/header/eventDetail?num=<%=ev.getEvnum()%>">
-      <img src="${pageContext.request.contextPath }/eventUploaded/<%=ev.getOrgfilename() %>" style="width:100%;height:500px;">
-      </a>
-      <div class="text"><%=ev.getContent() %></div>
-   </div> 
-<%
-}
-%>
-<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-<a class="next" onclick="plusSlides(1)">&#10095;</a>
+<div id="main">
+	<div class="slideshow-container">
+	<%
+	EventDao dao=new EventDao();
+	ArrayList<EventVo> list=dao.list();
+	for(EventVo ev:list){
+	%>
+	   <div class="mySlides fade" name="sl">
+	      <div class="numbertext"></div>
+	      <a href="${pageContext.request.contextPath }/header/eventDetail?num=<%=ev.getEvnum()%>">
+	      <img src="${pageContext.request.contextPath }/eventUploaded/<%=ev.getOrgfilename() %>" style="width:100%;height:500px;">
+	      </a>
+	      <div class="text"><%=ev.getContent() %></div>
+	   </div> 
+	<%
+	}
+	%>
+	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	<a class="next" onclick="plusSlides(1)">&#10095;</a>
+	</div>
 </div>
-
 
 
 

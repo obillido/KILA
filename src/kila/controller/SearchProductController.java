@@ -1,6 +1,8 @@
 package kila.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,49 +12,97 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kila.dao.SearchDao;
+import org.json.JSONArray;
+
+import kila.dao.ProductInfoDao;
 import kila.vo.FinalSearchVo;
+import kila.vo.ProductInfoVo;
 import kila.vo.SearchProductVo;
 
 @WebServlet("/header/search")
 public class SearchProductController extends HttpServlet{
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		String cmd=req.getParameter("cmd");
 		String search=req.getParameter("search");
-		SearchDao dao=new SearchDao();
-		ArrayList<SearchProductVo> list=dao.searchProduct(search);
-		
-		ArrayList<FinalSearchVo> finallist=new ArrayList<FinalSearchVo>();
-		for(int i=0;i<list.size();i++) {
-			String pname=list.get(i).getPname();
-			int colnum=list.get(i).getColnum();
-			String savefilename=dao.getImage(colnum);
-			FinalSearchVo vo=new FinalSearchVo(pname, savefilename, colnum);
-			finallist.add(vo);
+		if(cmd.equals("search")) {
+			Cookie[] cookies=req.getCookies();
+			String cn="cookie"+cookies.length;
+			Cookie cookie=new Cookie(cn,search);
+			cookie.setPath("/");
+			cookie.setMaxAge(60*60*24*7);
+			resp.addCookie(cookie);
+			
+			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList(search);
+			DecimalFormat fmt=new DecimalFormat("###,###,###");
+			req.setAttribute("fmt", fmt);
+			req.setAttribute("list",list);
+			req.setAttribute("search",search);
+			req.setAttribute("cpage", "/header/search.jsp");
+			req.getRequestDispatcher("/layout.jsp").forward(req,resp);
+		}else if(cmd.equals("deleteAll")) {
+			deleteAll(req,resp);
+		}else{
+			delete(req,resp,search);
 		}
-		
-		req.setAttribute("info",finallist);
-		req.setAttribute("search",search);
-		req.setAttribute("cpage", "/header/search.jsp");
-		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
-		
-		Cookie cook1=new Cookie("latest",search);
-		cook1.setPath("/");
-		cook1.setMaxAge(60*60*24);
-		resp.addCookie(cook1);
 	}
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Cookie[] cookies=req.getCookies();
-		if(cookies!=null) {
-			for(int i=0;i<cookies.length;i++) {
-				cookies[i].setMaxAge(0);
-				resp.addCookie(cookies[i]);
-				System.out.println(cookies[i]);
-				System.out.println();
+
+	
+	
+	public void deleteAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+		Cookie[] cookies1=req.getCookies();
+		if(cookies1!=null) {
+			for(Cookie cookie:cookies1) {
+				String cookieName=cookie.getName();
+				Cookie ck=new Cookie(cookieName,"");
+				ck.setPath("/");
+				ck.setMaxAge(0);
+				resp.addCookie(ck);
 			}
 		}
-		req.getRequestDispatcher("/layout.jsp").forward(req,resp);
+		Cookie[] cookies2=req.getCookies();
+		ArrayList<String> slist=new ArrayList<String>();
+		if(cookies2!=null) {
+			for(Cookie cookie:cookies2) {
+				String cookieValue=cookie.getValue();
+				slist.add(cookieValue);
+			}
+		}
+		JSONArray arr=new JSONArray();
+		arr.put(slist);
+		resp.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw=resp.getWriter();
+		pw.print(arr.toString());
+	}
+	
+	
+	public void delete(HttpServletRequest req, HttpServletResponse resp, String search) throws ServletException, IOException  {
+		Cookie[] cookies=req.getCookies();
+		if(cookies!=null) {
+			for(Cookie cookie:cookies) {
+				String cookieName=cookie.getName();
+				if(cookieName.equals(search)) {
+					Cookie ck=new Cookie(cookieName,"");
+					ck.setPath("/");
+					ck.setMaxAge(0);
+					resp.addCookie(ck);
+				}
+			}
+		}
+		
+		Cookie[] cookies2=req.getCookies();
+		ArrayList<String> slist=new ArrayList<String>();
+		if(cookies2!=null) {
+			for(Cookie cookie:cookies2) {
+				String cookieValue=cookie.getValue();
+				slist.add(cookieValue);
+			}
+		}
+		JSONArray arr=new JSONArray();
+		arr.put(slist);
+		resp.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw=resp.getWriter();
+		pw.print(arr.toString());
 	}
 }

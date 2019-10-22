@@ -4,6 +4,9 @@
 
 <style type="text/css">
 	*{margin:0px;padding:0px;}
+	#header{
+		min-width:1300px;
+	}
 	#homelogo{
 		width:100%;
 		height:100px;
@@ -67,8 +70,9 @@
 		text-decoration:none;
 		color:black;
 	}
-	#searchbox{float:right;margin-right:100px;}
-	#latest{display:none;}
+	
+	#searchbox{float:right;margin-right:50px;}
+	#searchList{display:none;}
 </style>
 
 
@@ -98,6 +102,7 @@
 		   event.innerHTML="<a href='${pageContext.request.contextPath}/header/eventDetail?num=" + json[0].evnum + "'>" + word[0] + "</a>";
 	   }
    }
+   
    var i=0;	
    var interval=setInterval(function(){	
 	   if(i>=json.length){
@@ -128,10 +133,32 @@
 	   }
    }
    
-   function showLatest(){
-	   var latest=document.getElementById("latest");
-	   latest.style.display="inline";
-   }
+
+	var slistxhr=null;
+	function getSearchKeywordList(){
+		slistxhr=new XMLHttpRequest();
+		slistxhr=onreadystatechange=listOk;
+		slistxhr.open('get','header/search',true);
+		slsitxhr.send();
+	}
+	function listOk(){
+		if(slistxhr.readyState==4 && slistxhr.status==200){
+			var data=slistxhr.responseText;
+			var json=JSON.parse(data)[0];
+			var searchList=document.getElementById("searchList");
+			for(var i=0; i<json.length; i++){
+				var div=document.createElement("div");
+				div.innerHTML="<a href='${pageContext.request.contextPath}/header/search'></a>";
+			}
+		}
+	}
+		var latest=document.getElementById("latest");
+		if( latest.style.display=="inline"){
+			latest.style.display="none";
+		}else{
+			latest.style.display="inline"
+		}
+	}
 </script>
 
 
@@ -182,22 +209,14 @@
 	      <input type="text" name="search" onclick="showLatest()">
 	      <input type="submit" value="검색" width="15" height="15" style="background-color:white;">
 	   </form>
-	   <div id="latest">
+	   
+	   
+	   <div id="searchList">
 	      <h4>[최근 검색어]</h4>
-	      <%
-	      Cookie[] cookies=request.getCookies();
-	      if(cookies!=null){
-	    	  for(Cookie cookie:cookies){
-	    		  String cookieName=cookie.getName();
-	    		  if(cookieName.startsWith("latest")){
-	    			  String cookieValue=cookie.getValue();
-	    			  %>
-	    			     <li><%=cookieValue %></li>
-	    			  <%
-	    		  }  
-	    	  }  
-	      }
-	      %> 
+	      <c:forEach var="sk" items="${slist}">
+	      	<li>${sk}</li>
+	      </c:forEach>
+	      
 	      <h4><a href="${cp}/header/search">검색어 전체삭제</a></h4>  
 	   </div>
 	</div>
