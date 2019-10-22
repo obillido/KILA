@@ -84,7 +84,7 @@
 <div id="div2">
    <c:choose>
 	   <c:when test="${startPageNum>5 }">
-		   <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${startPageNum-1 }">[이전]</a>
+		   <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${startPageNum-1 }&id=${id}">[이전]</a>
 	   </c:when>
 	   <c:otherwise>
 		    이전
@@ -102,7 +102,7 @@
    </c:forEach>
    <c:choose>
 	   <c:when test="${endPageNum<pageCount}">
-		   <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${endPageNum+1 }">[다음]</a>
+		   <a href="${pageContext.request.contextPath }/header/purchased2?pageNum=${endPageNum+1 }&id=${id}">[다음]</a>
 	   </c:when>
 	   <c:otherwise>
 		   다음
