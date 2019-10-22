@@ -28,8 +28,19 @@ public class SearchProductController extends HttpServlet{
 		String keyword=req.getParameter("keyword");
 		if(cmd.equals("search")) {
 			Cookie[] cookies=req.getCookies();
-			String cn="cookie"+cookies.length;
-			Cookie cookie=new Cookie(cn,keyword);
+			if(cookies!=null) {
+				for(Cookie cookie:cookies) {
+					String cookieName=cookie.getName();
+					String cookieValue=cookie.getValue();
+					if(cookieValue.equals(keyword)) {
+						Cookie ck=new Cookie(cookieName,"");
+						ck.setPath("/");
+						ck.setMaxAge(0);
+						resp.addCookie(ck);
+					}
+				}
+			}
+			Cookie cookie=new Cookie(keyword,keyword);
 			cookie.setPath("/");
 			cookie.setMaxAge(60*60*24*7);
 			resp.addCookie(cookie);

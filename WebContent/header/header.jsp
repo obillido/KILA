@@ -257,13 +257,11 @@
 	
 	<div id="searchbox">
 		<form method="post" action="${pageContext.request.contextPath}/search?cmd=search">
-	     	 <input type="text" name="keyword" onclick="showLatestSearch();">
+	     	 <input type="text" name="keyword" onclick="showLatestSearch();" autocomplete="off">
 		     <input type="submit" value="검색">
 	   	</form>
 	   
-	   <div id="searchList">
-	      <h4>[최근 검색어]</h4>
-	   </div>
+	   <div id="searchList"></div>
 	</div>
 	
 	
