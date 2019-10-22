@@ -79,7 +79,7 @@ public class ItmeInfoController extends HttpServlet{
 		if(spageNumInq!=null) pageNumInq=Integer.parseInt(spageNumInq);
 		int endRowInq=pageNumInq*10;
 		int startRowInq=endRowInq-9;
-		int pageCountInq=(int)Math.ceil(idao.getCount(colnum)/10.);
+		int pageCountInq=(int)Math.ceil(idao.getCount(colnum,at,it,cid)/10.);
 		int startPageNumInq=(pageNumInq-1)/5*5+1;
 		int endPageNumInq=startPageNumInq+4;
 		if(endPageNumInq>pageCountInq) {
