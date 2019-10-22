@@ -108,12 +108,10 @@
    var word=null;
    var event=null;
    var json=null;
-   window.onload=function(){
 	   xhr=new XMLHttpRequest();
 	   xhr.onreadystatechange=callback;
 	   xhr.open('get','${pageContext.request.contextPath}/header/eventdata.jsp',true);
 	   xhr.send();
-   }
    function callback(){
 	   if(xhr.readyState==4 && xhr.status==200){
 		   word=new Array();
