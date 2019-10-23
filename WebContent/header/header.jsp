@@ -158,14 +158,16 @@
    }
    
 
-	var status="";
+	var status="on";
 	var slistxhr=null;
 	function getSearchKeywordList(cmd, keyword){
+		//if(status!="off" || (cmd=="deleteAlways" && keyword=="on"){
 			slistxhr=new XMLHttpRequest();
 			slistxhr.onreadystatechange=searchListOk;
 			slistxhr.open('get','search?cmd='+cmd+'&keyword='+keyword,true);
 			slistxhr.send();
 			if(status=="tran") status="off";
+		//}
 	}
 	function searchListOk(){
 		if(slistxhr.readyState==4 && slistxhr.status==200){
@@ -173,6 +175,7 @@
 			var json=JSON.parse(data)[0];
 			var searchList=document.getElementById("searchList");
 			removeSearchList();
+			//if(json[0]=="on"){
 				var div1=document.createElement("div");
 				div1.innerHTML="<h4>최근검색어</h4>";
 				searchList.appendChild(div1);
@@ -187,17 +190,26 @@
 				div2.innerHTML="<button type='button' onclick=\"javascript:getSearchKeywordList('deleteAll','')\" class='button1'>전체삭제</button>"
 						 	 + "<button type='button' onclick=\"javascript:switchStatus()\" class='button2'>검색어 저장 끄기</button>";
 				searchList.appendChild(div2);
+			/* }else{
+				var div1=document.createElement("div");
+				div1.innerHTML="<h4>최근검색어</h4>";
+				searchList.appendChild(div1);
+				var div2=document.createElement("div");
+				div2.innerHTML="<button type='button' onclick=\"javascript:switchStatus()\" class='button2'>검색어 저장 켜기</button>";
+				searchList.appendChild(div2);
+			} */
 		}
 	}
 	
 	function switchStatus(){
 		if(status=="on"){
 			status="off";
-			getSearchKeywordList('deleteAlways','off');
+			
 		}else{
-			status="on";
-			getSearchKeywordList('deleteAlways','on');
+			status="off";
 		}
+		getSearchKeywordList('deleteAll','');
+		getSearchKeywordList('deleteAlways','');
 	}
 	
 	function removeSearchList(){

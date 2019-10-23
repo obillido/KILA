@@ -2,6 +2,8 @@ package kila.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.sun.xml.internal.fastinfoset.Encoder;
 
 import kila.dao.ProductInfoDao;
 import kila.vo.FinalSearchVo;
@@ -33,6 +37,7 @@ public class SearchProductController extends HttpServlet{
 				for(Cookie cookie:cookies) {
 					String cookieName=cookie.getName();
 					String cookieValue=cookie.getValue();
+					cookieName=URLDecoder.decode(cookieName,"utf-8");
 					if(cookieValue.equals(keyword)) {
 						Cookie ck=new Cookie(cookieName,"");
 						ck.setPath("/");
@@ -44,7 +49,7 @@ public class SearchProductController extends HttpServlet{
 			Cookie cookie=null;
 			if(keyword==null) keyword="";
 			if(keyword.equals("")) cookie=new Cookie("all",keyword);
-			else cookie=new Cookie(keyword,keyword);
+			else cookie=new Cookie(URLEncoder.encode(keyword, "utf-8"),keyword);
 			cookie.setPath("/");
 			cookie.setMaxAge(60*60*24*7);
 			resp.addCookie(cookie);
