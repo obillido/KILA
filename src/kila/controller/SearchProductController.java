@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import kila.dao.ProductInfoDao;
 import kila.vo.FinalSearchVo;
@@ -40,11 +41,13 @@ public class SearchProductController extends HttpServlet{
 					}
 				}
 			}
-			Cookie cookie=new Cookie(keyword,keyword);
+			Cookie cookie=null;
+			if(keyword==null) keyword="";
+			if(keyword.equals("")) cookie=new Cookie("all",keyword);
+			else cookie=new Cookie(keyword,keyword);
 			cookie.setPath("/");
 			cookie.setMaxAge(60*60*24*7);
 			resp.addCookie(cookie);
-			
 			ArrayList<ProductInfoVo> list=ProductInfoDao.getInstance().getList(keyword);
 			DecimalFormat fmt=new DecimalFormat("###,###,###");
 			req.setAttribute("fmt", fmt);
@@ -57,6 +60,8 @@ public class SearchProductController extends HttpServlet{
 				deleteAll(req,resp);
 			}else if(cmd.equals("delete")){
 				delete(req,resp,keyword);
+			}else if(cmd.equals("deleteAlways")){
+				deleteAlways(req,resp);
 			}else {
 				Cookie[] cookies=req.getCookies();
 				ArrayList<String> slist=new ArrayList<String>();
@@ -64,6 +69,13 @@ public class SearchProductController extends HttpServlet{
 					for(Cookie cookie:cookies) {
 						String cookieValue=cookie.getValue();
 						slist.add(cookieValue);
+						String cookieName=cookie.getName();
+						if(cookieName.equals("JSESSIONID")) {
+							if(!cookie.getValue().equals("off")) {
+								Cookie ck=new Cookie(cookieName,"on");
+								resp.addCookie(ck);
+							}
+						}
 					}
 				}
 				JSONArray arr=new JSONArray();
@@ -74,18 +86,46 @@ public class SearchProductController extends HttpServlet{
 			}
 		}
 	}
-
 	
+	public void deleteAlways(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+		Cookie[] cookies1=req.getCookies();
+		if(cookies1!=null) {
+			for(Cookie cookie:cookies1) {
+				String cookieName=cookie.getName();
+				if(!cookieName.equals("JSESSIONID")) {
+					Cookie ck=new Cookie(cookieName,"");
+					ck.setPath("/");
+					ck.setMaxAge(0);
+					resp.addCookie(ck);
+				}else {
+					Cookie ck=null;
+					if(cookie.getValue().equals("on")) {
+						ck=new Cookie(cookieName,"off");
+					}else {
+						ck=new Cookie(cookieName,"on");
+					}
+					resp.addCookie(ck);
+				}
+			}
+		}
+		JSONArray arr=new JSONArray();
+		arr.put(new ArrayList<String>());
+		resp.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw=resp.getWriter();
+		pw.print(arr.toString());
+	}
 	
 	public void deleteAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
 		Cookie[] cookies1=req.getCookies();
 		if(cookies1!=null) {
 			for(Cookie cookie:cookies1) {
 				String cookieName=cookie.getName();
-				Cookie ck=new Cookie(cookieName,"");
-				ck.setPath("/");
-				ck.setMaxAge(0);
-				resp.addCookie(ck);
+				if(!cookieName.equals("JSESSIONID")) {
+					Cookie ck=new Cookie(cookieName,"");
+					ck.setPath("/");
+					ck.setMaxAge(0);
+					resp.addCookie(ck);
+				}
 			}
 		}
 		JSONArray arr=new JSONArray();

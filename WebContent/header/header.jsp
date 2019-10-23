@@ -89,10 +89,13 @@
 		margin-top:10px;
 		margin-bottom:10px;
 	}
-	#searchList .deleteAllButton{
-		display:inline-block;
-		width:100px; height:40px;
-		margin-top:20px;
+	#searchList .button1{
+		width:70px; height:30px;
+		margin:10px 10px;
+	}
+	#searchList .button2{
+		width:130px; height:30px;
+		margin:10px 10px;
 	}
 	#searchList a{
 		text-decoration:none;
@@ -155,12 +158,14 @@
    }
    
 
+	var status="";
 	var slistxhr=null;
 	function getSearchKeywordList(cmd, keyword){
-		slistxhr=new XMLHttpRequest();
-		slistxhr.onreadystatechange=searchListOk;
-		slistxhr.open('get','search?cmd='+cmd+'&keyword='+keyword,true);
-		slistxhr.send();
+			slistxhr=new XMLHttpRequest();
+			slistxhr.onreadystatechange=searchListOk;
+			slistxhr.open('get','search?cmd='+cmd+'&keyword='+keyword,true);
+			slistxhr.send();
+			if(status=="tran") status="off";
 	}
 	function searchListOk(){
 		if(slistxhr.readyState==4 && slistxhr.status==200){
@@ -168,21 +173,30 @@
 			var json=JSON.parse(data)[0];
 			var searchList=document.getElementById("searchList");
 			removeSearchList();
-			
-			var div1=document.createElement("div");
-			div1.innerHTML="<h4>최근검색어</h4>";
-			searchList.appendChild(div1);
-			for(var i=json.length-1; i>0; i--){
-				var div=document.createElement("div");
-				div.innerHTML="<a href='${pageContext.request.contextPath}/search?cmd=search&keyword="+json[i]+"' class='keyword'>"+json[i]+"</a>"
-							+ "<a href=\"javascript:getSearchKeywordList('delete','"+json[i]+"')\">삭제</a>";
-				div.className="search";
-				searchList.appendChild(div);
-			}
-			var div2=document.createElement("div");
-			div2.innerHTML="<button type='button' onclick=\"javascript:getSearchKeywordList('deleteAll','')\">전체삭제</button>";
-			div2.className="deleteAllButton";
-			searchList.appendChild(div2);
+				var div1=document.createElement("div");
+				div1.innerHTML="<h4>최근검색어</h4>";
+				searchList.appendChild(div1);
+				for(var i=json.length-1; i>0; i--){
+					var div=document.createElement("div");
+					div.innerHTML="<a href='${pageContext.request.contextPath}/search?cmd=search&keyword="+json[i]+"' class='keyword'>"+json[i]+"</a>"
+								+ "<a href=\"javascript:getSearchKeywordList('delete','"+json[i]+"')\">삭제</a>";
+					div.className="search";
+					searchList.appendChild(div);
+				}
+				var div2=document.createElement("div");
+				div2.innerHTML="<button type='button' onclick=\"javascript:getSearchKeywordList('deleteAll','')\" class='button1'>전체삭제</button>"
+						 	 + "<button type='button' onclick=\"javascript:switchStatus()\" class='button2'>검색어 저장 끄기</button>";
+				searchList.appendChild(div2);
+		}
+	}
+	
+	function switchStatus(){
+		if(status=="on"){
+			status="off";
+			getSearchKeywordList('deleteAlways','off');
+		}else{
+			status="on";
+			getSearchKeywordList('deleteAlways','on');
 		}
 	}
 	

@@ -45,6 +45,7 @@
 <div id="newList">
 	<div id="inner">
 	<h1>New</h1>
+	<c:if test="${not empty list}">
 	<c:forEach var="vo" items="${list}">	
 		<div class="item">
 		<a href="${cp}/iteminfo?colnum=${vo.colnum}">
@@ -54,6 +55,7 @@
 		</div>
 		</a>
 	</c:forEach>
+	</c:if>
 	</div>
 </div>
 
